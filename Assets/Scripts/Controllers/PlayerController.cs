@@ -1,8 +1,6 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
-using UnityEngine.Serialization;
 
 namespace Controllers
 {
@@ -20,19 +18,20 @@ namespace Controllers
     
         [Space]
         public bool canMove = true;
-        [SerializeField] private float moveSpeed = 10;
+        [SerializeField] private float moveSpeed = 300;
         
         [Space]
         public bool canCrouch = true;
-        [SerializeField] private float crouchSpeed = 5;
+        [SerializeField] private float crouchSpeed = 150;
     
         [Space]
         public bool canSprint = true;
-        [SerializeField] private float sprintSpeed = 20;
+        [SerializeField] private float sprintSpeed = 600;
         
         [Space]
         public bool canDash = true;
-        [SerializeField] private float dashForce = 10;
+        [SerializeField] private float dashSpeed = 1000;
+        [SerializeField] private float dashTime = 1;
         
         [Space]
         public bool canJump = true;
@@ -55,10 +54,12 @@ namespace Controllers
 
         private bool scheduleSprint;
         private bool useCrouchSpeed;
+         private float _dashTime = 0;
         
         private Vector2 _cameraRotation = Vector2.zero;
         
         private Rigidbody rb;
+        private RaycastHit hit;
         public PlayerControl Control { get; private set; }
 
         private void Awake()
@@ -101,9 +102,7 @@ namespace Controllers
             if (!canDash) return;
             if (obj.interaction is not TapInteraction) return;
             Debug.Log("Dash!");
-            var dir = Control.Movement.Move.ReadValue<Vector2>() * (dashForce * Time.fixedDeltaTime);
-            var shift = transform.right * dir.x + transform.forward * dir.y;
-            rb.AddForce(shift, ForceMode.VelocityChange);
+            _dashTime = dashTime;
         }
         
         private void OnCrouch(InputAction.CallbackContext obj)
@@ -155,27 +154,37 @@ namespace Controllers
             if (canMove)
             {
                 var speed = isSprinting && canSprint ? sprintSpeed : moveSpeed;
+                speed = Mathf.Lerp(speed, dashSpeed, Mathf.Max(0, _dashTime / dashTime));
                 speed = useCrouchSpeed && canCrouch ? crouchSpeed : speed;
                 var dir = Control.Movement.Move.ReadValue<Vector2>() * (speed * Time.fixedDeltaTime);
-                var shift = transform.right * dir.x + transform.forward * dir.y;
-                rb.MovePosition(rb.position + shift);
+                var vel = transform.right * dir.x + transform.forward * dir.y;
+                vel.x -= rb.velocity.x;
+                vel.z -= rb.velocity.z;
+                rb.AddForce(vel, ForceMode.VelocityChange);
+                _dashTime -= Time.fixedDeltaTime;
             }
 
             if(cameraCanMove)
             {
                 var mousePos = Control.Camera.Move.ReadValue<Vector2>();
-
                 if (!lockCameraX)
+                {
+                    _cameraRotation.x = rotateCameraX ? 
+                        camera.transform.localEulerAngles.y : transform.localEulerAngles.y;
+
                     if (invertCameraX)
                         _cameraRotation.x -= mouseSensitivity * mousePos.x;
                     else
                         _cameraRotation.x += mouseSensitivity * mousePos.x;
-                
+                }
+
                 if (!lockCameraY)
+                {
                     if (invertCameraY)
                         _cameraRotation.y += mouseSensitivity * mousePos.y;
                     else
                         _cameraRotation.y -= mouseSensitivity * mousePos.y;
+                }
 
                 _cameraRotation.y = Mathf.Clamp(_cameraRotation.y, -maxLookAngle, maxLookAngle);
 
@@ -212,7 +221,7 @@ namespace Controllers
         {
             var origin = new Vector3(transform.position.x, transform.position.y - transform.localScale.y * .7f, transform.position.z);
             var direction = transform.TransformDirection(Vector3.down);
-            const float distance = 0.5f;
+            const float distance = 0.7f;
 
             if (Physics.Raycast(origin, direction, out _, distance, int.MaxValue, QueryTriggerInteraction.Ignore))
             {
