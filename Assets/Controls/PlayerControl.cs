@@ -196,6 +196,42 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Main Hand Action"",
+                    ""type"": ""Button"",
+                    ""id"": ""14b6e42b-c070-4205-8c97-b547cf84cb1c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Main Hand Addtitonal Action"",
+                    ""type"": ""Button"",
+                    ""id"": ""d73ed0da-a834-4591-b732-6c0e28cfb044"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Second Hand Action"",
+                    ""type"": ""Button"",
+                    ""id"": ""f08c7640-98fb-472f-8d53-e1fc7b2f50a1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Second Hand Addtitonal Action"",
+                    ""type"": ""Button"",
+                    ""id"": ""aad4b98a-0e83-49a4-9048-f1ebf266425e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -218,6 +254,50 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
                     ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ff00cd4e-c83f-4b1d-952f-8beac08a5f29"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Tap"",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Main Hand Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6593e66a-dd92-4c7d-90ef-c51e716e3806"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Main Hand Addtitonal Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dcc72e0b-8c98-48d7-aa30-95e08c7f1f5b"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Second Hand Addtitonal Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32447e96-ffb2-4f75-8794-7112efc98049"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Tap"",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Second Hand Action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -326,6 +406,10 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
         m_Interaction_Inventory = m_Interaction.FindAction("Inventory", throwIfNotFound: true);
         m_Interaction_Use = m_Interaction.FindAction("Use", throwIfNotFound: true);
+        m_Interaction_MainHandAction = m_Interaction.FindAction("Main Hand Action", throwIfNotFound: true);
+        m_Interaction_MainHandAddtitonalAction = m_Interaction.FindAction("Main Hand Addtitonal Action", throwIfNotFound: true);
+        m_Interaction_SecondHandAction = m_Interaction.FindAction("Second Hand Action", throwIfNotFound: true);
+        m_Interaction_SecondHandAddtitonalAction = m_Interaction.FindAction("Second Hand Addtitonal Action", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Move = m_Camera.FindAction("Move", throwIfNotFound: true);
@@ -470,12 +554,20 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private List<IInteractionActions> m_InteractionActionsCallbackInterfaces = new List<IInteractionActions>();
     private readonly InputAction m_Interaction_Inventory;
     private readonly InputAction m_Interaction_Use;
+    private readonly InputAction m_Interaction_MainHandAction;
+    private readonly InputAction m_Interaction_MainHandAddtitonalAction;
+    private readonly InputAction m_Interaction_SecondHandAction;
+    private readonly InputAction m_Interaction_SecondHandAddtitonalAction;
     public struct InteractionActions
     {
         private @PlayerControl m_Wrapper;
         public InteractionActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
         public InputAction @Inventory => m_Wrapper.m_Interaction_Inventory;
         public InputAction @Use => m_Wrapper.m_Interaction_Use;
+        public InputAction @MainHandAction => m_Wrapper.m_Interaction_MainHandAction;
+        public InputAction @MainHandAddtitonalAction => m_Wrapper.m_Interaction_MainHandAddtitonalAction;
+        public InputAction @SecondHandAction => m_Wrapper.m_Interaction_SecondHandAction;
+        public InputAction @SecondHandAddtitonalAction => m_Wrapper.m_Interaction_SecondHandAddtitonalAction;
         public InputActionMap Get() { return m_Wrapper.m_Interaction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -491,6 +583,18 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Use.started += instance.OnUse;
             @Use.performed += instance.OnUse;
             @Use.canceled += instance.OnUse;
+            @MainHandAction.started += instance.OnMainHandAction;
+            @MainHandAction.performed += instance.OnMainHandAction;
+            @MainHandAction.canceled += instance.OnMainHandAction;
+            @MainHandAddtitonalAction.started += instance.OnMainHandAddtitonalAction;
+            @MainHandAddtitonalAction.performed += instance.OnMainHandAddtitonalAction;
+            @MainHandAddtitonalAction.canceled += instance.OnMainHandAddtitonalAction;
+            @SecondHandAction.started += instance.OnSecondHandAction;
+            @SecondHandAction.performed += instance.OnSecondHandAction;
+            @SecondHandAction.canceled += instance.OnSecondHandAction;
+            @SecondHandAddtitonalAction.started += instance.OnSecondHandAddtitonalAction;
+            @SecondHandAddtitonalAction.performed += instance.OnSecondHandAddtitonalAction;
+            @SecondHandAddtitonalAction.canceled += instance.OnSecondHandAddtitonalAction;
         }
 
         private void UnregisterCallbacks(IInteractionActions instance)
@@ -501,6 +605,18 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Use.started -= instance.OnUse;
             @Use.performed -= instance.OnUse;
             @Use.canceled -= instance.OnUse;
+            @MainHandAction.started -= instance.OnMainHandAction;
+            @MainHandAction.performed -= instance.OnMainHandAction;
+            @MainHandAction.canceled -= instance.OnMainHandAction;
+            @MainHandAddtitonalAction.started -= instance.OnMainHandAddtitonalAction;
+            @MainHandAddtitonalAction.performed -= instance.OnMainHandAddtitonalAction;
+            @MainHandAddtitonalAction.canceled -= instance.OnMainHandAddtitonalAction;
+            @SecondHandAction.started -= instance.OnSecondHandAction;
+            @SecondHandAction.performed -= instance.OnSecondHandAction;
+            @SecondHandAction.canceled -= instance.OnSecondHandAction;
+            @SecondHandAddtitonalAction.started -= instance.OnSecondHandAddtitonalAction;
+            @SecondHandAddtitonalAction.performed -= instance.OnSecondHandAddtitonalAction;
+            @SecondHandAddtitonalAction.canceled -= instance.OnSecondHandAddtitonalAction;
         }
 
         public void RemoveCallbacks(IInteractionActions instance)
@@ -585,6 +701,10 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     {
         void OnInventory(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
+        void OnMainHandAction(InputAction.CallbackContext context);
+        void OnMainHandAddtitonalAction(InputAction.CallbackContext context);
+        void OnSecondHandAction(InputAction.CallbackContext context);
+        void OnSecondHandAddtitonalAction(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {
