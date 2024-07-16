@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityHFSM;
@@ -9,11 +9,15 @@ namespace AI
     {
         [SerializeField] protected EnemyCoordinationController controller;
         [SerializeField] protected NavMeshAgent agent;
+        public GameObject Target;
         private StateMachine fsm;
+        protected StateMachine FSM => fsm;
 
         [SerializeField] private float targetUpdateRate = 1;
+
+        public float TargetUpdateRate => targetUpdateRate;
         
-        private void Start()
+        protected virtual void Start()
         {
             controller.Add(this);
             fsm = InitStateMachine();
@@ -27,6 +31,10 @@ namespace AI
         private void UpdateNavigationTarget()
         {
             fsm.OnLogic();
+            Debug.DrawRay(transform.position, transform.forward * 3, Color.yellow, TargetUpdateRate);
         }
+
+        public abstract void Notify(HashSet<EnemyAI> enemyAis, string type);
+
     }
 }

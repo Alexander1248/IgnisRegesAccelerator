@@ -5,7 +5,10 @@ namespace AI
 {
     public class EnemyCoordinationController : MonoBehaviour
     {
+        [SerializeField] private GameObject[] targets;
         private BVH<EnemyAI> Enemies = new();
+
+        public GameObject[] Targets => targets;
 
         public void Add(EnemyAI enemy)
         {
