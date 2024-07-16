@@ -210,6 +210,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Use Heal",
+                    "type": "Button",
+                    "id": "6cff6fbc-2a41-4ef6-812f-d6f83a1bacc5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -276,6 +285,17 @@
                     "processors": "",
                     "groups": "Mouse and Keyboard",
                     "action": "Second Hand Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c9b803f2-acb0-4a39-b8e3-699edb662702",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "Use Heal",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
