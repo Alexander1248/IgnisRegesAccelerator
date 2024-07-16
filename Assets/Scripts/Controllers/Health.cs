@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Health : MonoBehaviour
@@ -24,14 +23,15 @@ public class Health : MonoBehaviour
 
     [SerializeField] private MilkShake.ShakePreset preset;
 
-    [SerializeField] private bool player;
-
     [SerializeField] private ParticleSystem blood;
 
+
+    private bool player;
 
     private void Start()
     {
         hp = maxHP;
+        player = gameObject.CompareTag("Player");
     }
     
     void Heal()
@@ -59,7 +59,9 @@ public class Health : MonoBehaviour
             if (!player){
                 blood.transform.LookAt(direction);
             }
-            else blood.transform.forward = Camera.main.transform.forward;
+            else if (Camera.main != null) 
+                blood.transform.forward = Camera.main.transform.forward;
+
             blood.Play();
         }
 

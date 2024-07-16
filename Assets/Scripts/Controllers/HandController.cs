@@ -41,24 +41,30 @@ namespace Controllers
         public bool SetMainHand(Items.Weapon weapon)
         {
             if (weapon.IsTwoHanded && secondHand) return false;
-            if (mainHandObj) Destroy(mainHandObj);
+            ClearMainHand();
             mainHand = Instantiate(weapon);
             mainHandObj = Instantiate(weapon.Prefab, mainHandAnchor);
+            if (mainHand) mainHand.OnEquip(gameObject,mainHandObj);
             return true;
         }
 
         public void ClearMainHand()
         {
             if (mainHandObj) Destroy(mainHandObj);
-            if (mainHand) Destroy(mainHand);
+            if (mainHand)
+            {
+                mainHand.OnRelease(gameObject,mainHandObj);
+                Destroy(mainHand);
+            }
             mainHand = null;
         }
         public bool SetSecondHand(Items.Weapon weapon)
         {
             if (weapon.IsTwoHanded && mainHand) return false;
-            if (secondHandObj) Destroy(secondHandObj);
+            ClearSecondHand();
             secondHand = Instantiate(weapon);
             secondHandObj = Instantiate(weapon.Prefab, secondHandAnchor);
+            if (secondHand) secondHand.OnEquip(gameObject,secondHandObj);
             return true;
         }
         public void ClearSecondHand()
