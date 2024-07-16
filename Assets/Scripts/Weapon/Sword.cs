@@ -11,12 +11,17 @@ namespace Weapon
     {
         [SerializeField] private float damageCurveThickness;
         [SerializeField] private float damage = 10;
+        [SerializeField] private float delay = 1;
+        
+        
         private RaycastHit[] hits;
         private HashSet<GameObject> objects;
         private CatmullRomSpline damageCurve;
+        private float _time;
 
         public override void OnEquip(GameObject user, GameObject weapon)
         {
+            _time = Time.realtimeSinceStartup - delay;
             hits = new RaycastHit[16];
             objects = new HashSet<GameObject>();
             damageCurve = weapon.GetComponentInChildren<CatmullRomSpline>();
@@ -33,7 +38,7 @@ namespace Weapon
 
         public override void Action(GameObject user, GameObject weapon)
         {
-
+            if (Time.realtimeSinceStartup - _time < delay) return;
             objects.Clear();
             for (var i = 0; i < damageCurve.Count; i++)
             {
@@ -68,6 +73,7 @@ namespace Weapon
                 if (obj.TryGetComponent(out HealthUpdater updater))
                     updater.DealDamage(damage, user.transform.forward, 0);
             }
+            _time = Time.realtimeSinceStartup;
         }
 
         public override void AdditionalActionPerformed(GameObject user, GameObject weapon)
