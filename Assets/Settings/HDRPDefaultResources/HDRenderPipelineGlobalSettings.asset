@@ -191,8 +191,9 @@ MonoBehaviour:
       - m_Center: {x: NaN, y: NaN, z: NaN}
         m_Extent: {x: NaN, y: NaN, z: NaN}
     hasProbeVolumes:
-      m_Keys: []
-      m_Values: 
+      m_Keys:
+      - 8b9fd52298df8584290ef262faea2e86
+      m_Values: 00
   m_Version: 10
   m_ShaderStrippingSetting:
     m_Version: 0
