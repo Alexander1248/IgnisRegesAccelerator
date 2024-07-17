@@ -232,6 +232,15 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Use Heal"",
+                    ""type"": ""Button"",
+                    ""id"": ""6cff6fbc-2a41-4ef6-812f-d6f83a1bacc5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -298,6 +307,17 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
                     ""action"": ""Second Hand Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9b803f2-acb0-4a39-b8e3-699edb662702"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Use Heal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -410,6 +430,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_Interaction_MainHandAddtitonalAction = m_Interaction.FindAction("Main Hand Addtitonal Action", throwIfNotFound: true);
         m_Interaction_SecondHandAction = m_Interaction.FindAction("Second Hand Action", throwIfNotFound: true);
         m_Interaction_SecondHandAddtitonalAction = m_Interaction.FindAction("Second Hand Addtitonal Action", throwIfNotFound: true);
+        m_Interaction_UseHeal = m_Interaction.FindAction("Use Heal", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Move = m_Camera.FindAction("Move", throwIfNotFound: true);
@@ -558,6 +579,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_Interaction_MainHandAddtitonalAction;
     private readonly InputAction m_Interaction_SecondHandAction;
     private readonly InputAction m_Interaction_SecondHandAddtitonalAction;
+    private readonly InputAction m_Interaction_UseHeal;
     public struct InteractionActions
     {
         private @PlayerControl m_Wrapper;
@@ -568,6 +590,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         public InputAction @MainHandAddtitonalAction => m_Wrapper.m_Interaction_MainHandAddtitonalAction;
         public InputAction @SecondHandAction => m_Wrapper.m_Interaction_SecondHandAction;
         public InputAction @SecondHandAddtitonalAction => m_Wrapper.m_Interaction_SecondHandAddtitonalAction;
+        public InputAction @UseHeal => m_Wrapper.m_Interaction_UseHeal;
         public InputActionMap Get() { return m_Wrapper.m_Interaction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -595,6 +618,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @SecondHandAddtitonalAction.started += instance.OnSecondHandAddtitonalAction;
             @SecondHandAddtitonalAction.performed += instance.OnSecondHandAddtitonalAction;
             @SecondHandAddtitonalAction.canceled += instance.OnSecondHandAddtitonalAction;
+            @UseHeal.started += instance.OnUseHeal;
+            @UseHeal.performed += instance.OnUseHeal;
+            @UseHeal.canceled += instance.OnUseHeal;
         }
 
         private void UnregisterCallbacks(IInteractionActions instance)
@@ -617,6 +643,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @SecondHandAddtitonalAction.started -= instance.OnSecondHandAddtitonalAction;
             @SecondHandAddtitonalAction.performed -= instance.OnSecondHandAddtitonalAction;
             @SecondHandAddtitonalAction.canceled -= instance.OnSecondHandAddtitonalAction;
+            @UseHeal.started -= instance.OnUseHeal;
+            @UseHeal.performed -= instance.OnUseHeal;
+            @UseHeal.canceled -= instance.OnUseHeal;
         }
 
         public void RemoveCallbacks(IInteractionActions instance)
@@ -705,6 +734,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         void OnMainHandAddtitonalAction(InputAction.CallbackContext context);
         void OnSecondHandAction(InputAction.CallbackContext context);
         void OnSecondHandAddtitonalAction(InputAction.CallbackContext context);
+        void OnUseHeal(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {
