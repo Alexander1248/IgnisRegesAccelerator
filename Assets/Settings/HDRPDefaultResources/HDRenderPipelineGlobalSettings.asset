@@ -162,8 +162,8 @@ MonoBehaviour:
   lensAttenuationMode: 0
   colorGradingSpace: 0
   m_ObsoleteDiffusionProfileSettingsList:
-  - {fileID: 11400000, guid: 48e911a1e337b44e2b85dbc65b47a594, type: 2}
-  - {fileID: 11400000, guid: 879ffae44eefa4412bb327928f1a96dd, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   specularFade: 0
   rendererListCulling: 0
   DLSSProjectId: 000000
@@ -177,22 +177,30 @@ MonoBehaviour:
     sceneToBakingSet:
       m_Keys:
       - 8b9fd52298df8584290ef262faea2e86
+      - c32a6ebfdd0687843bd24f6394a5ff48
       m_Values:
       - {fileID: 11400000, guid: 064c28d2e3b56f342baa80126bb04b2a, type: 2}
+      - {fileID: 11400000, guid: 443b993c43d373246959c76f3b7d63b3, type: 2}
     bakingSets:
     - {fileID: 11400000, guid: 064c28d2e3b56f342baa80126bb04b2a, type: 2}
+    - {fileID: 11400000, guid: 443b993c43d373246959c76f3b7d63b3, type: 2}
     sceneBounds:
       m_Keys:
       - 02ee0ef543f103941a79012015060d8c
       - 8b9fd52298df8584290ef262faea2e86
+      - c32a6ebfdd0687843bd24f6394a5ff48
       m_Values:
       - m_Center: {x: NaN, y: NaN, z: NaN}
         m_Extent: {x: NaN, y: NaN, z: NaN}
       - m_Center: {x: NaN, y: NaN, z: NaN}
         m_Extent: {x: NaN, y: NaN, z: NaN}
+      - m_Center: {x: 0, y: 0, z: 0}
+        m_Extent: {x: 81, y: 81, z: 81}
     hasProbeVolumes:
-      m_Keys: []
-      m_Values: 
+      m_Keys:
+      - 8b9fd52298df8584290ef262faea2e86
+      - c32a6ebfdd0687843bd24f6394a5ff48
+      m_Values: 0000
   m_Version: 10
   m_ShaderStrippingSetting:
     m_Version: 0
