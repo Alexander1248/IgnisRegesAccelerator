@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
+using Controllers;
 using Interactable;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Interactables
 {
     public class PlayerInteract : MonoBehaviour
     {
-        // TODO: Rewrite 
-        
+        [SerializeField] private PlayerController controller;
         [SerializeField] private Camera cam;
         [SerializeField] private LayerMask layerMask;
 
@@ -32,14 +33,16 @@ namespace Interactables
         [SerializeField] private string localePlayerPref;
         [SerializeField] private string defaultLocale;
 
-        void Start()
+        private void Start()
         {
             InvokeRepeating(nameof(Raycasting), 0.1f, 0.1f);
+            controller.Control.Interaction.Use.performed += Interact;
         }
 
-        private void Update()
+        private void Interact(InputAction.CallbackContext context)
         {
-            if (_idxInteract != -1 && Input.GetKeyDown(_interactable.TipButton)) InteractObj();
+            if (_idxInteract == -1) return;
+            InteractObj();
         }
 
         private RaycastHit _hit;
@@ -82,7 +85,8 @@ namespace Interactables
                 _interactable = obj.GetComponent<IInteractable>();
                 _interactable.Selected();
             
-                ShowTip(_interactable.TipButton.ToString(),_interactable.TipName.GetLocalizedString());
+                // ShowTip(_interactable.Action.ToDisplayString(), 
+                //     _interactable.TipName.GetLocalizedString());
             }
             else if (Vector3.Distance(transform.position, obj.transform.position) > distInteract)
             {

@@ -1,6 +1,8 @@
 ﻿using Interactable;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Localization;
+using UnityEngine.Serialization;
 
 namespace Interactables
 {
@@ -19,10 +21,8 @@ namespace Interactables
 
         [SerializeField] private string lockedMessage = "LOCKED";
 
-        [SerializeField] private KeyCode tipButton;
         [SerializeField] private LocalizedString tipName;
         [SerializeField] private MeshRenderer[] meshesOutline;
-        public KeyCode TipButton => tipButton;
         public LocalizedString TipName => tipName;
         public MeshRenderer[] MeshesOutline => meshesOutline;
 
