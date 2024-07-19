@@ -30,8 +30,6 @@ namespace Interactables
         [SerializeField] private TMP_Text textTipTip;
 
         [SerializeField] private TMP_Text textLook;
-        [SerializeField] private string localePlayerPref;
-        [SerializeField] private string defaultLocale;
 
         private void Start()
         {
@@ -85,8 +83,8 @@ namespace Interactables
                 _interactable = obj.GetComponent<IInteractable>();
                 _interactable.Selected();
             
-                // ShowTip(_interactable.Action.ToDisplayString(), 
-                //     _interactable.TipName.GetLocalizedString());
+                ShowTip(controller.Control.Interaction.Use.GetBindingDisplayString(), 
+                    _interactable.TipName.GetLocalizedString());
             }
             else if (Vector3.Distance(transform.position, obj.transform.position) > distInteract)
             {

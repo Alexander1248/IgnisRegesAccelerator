@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5087166552684907102}
   m_Layer: 0
   m_Name: Cube.001
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +32,8 @@ Transform:
   m_LocalPosition: {x: 0.57928354, y: 1.6017412, z: -1}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1530027674295476278}
   m_Father: {fileID: 7305886919877687200}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &2668247985616235891
@@ -120,19 +121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d5bf8ce20f4314941c1bb65623b92e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorForwardRotation: {x: -0.70710677, y: 0, z: 0, w: -0.70710677}
   animator: {fileID: 0}
   doorObj: {fileID: 7839588649318644761}
   locked: 0
   lockedMessage: LOCKED
-  action:
-    m_Name: Action
-    m_Id: cb4d1801-bc55-46d1-b76f-a8eb4edefc43
-    m_Path: 
-    m_Interactions: 
-    m_Processors: 
-    m_Groups: 
-    m_Action: 
-    m_Flags: 0
   tipName:
     m_TableReference:
       m_TableCollectionName: GUID:fe14867a5582c984eb6cb4250fb337cd
@@ -182,7 +175,6 @@ Transform:
   - {fileID: 3992518757671346325}
   - {fileID: 855706253549321059}
   - {fileID: 7839588649318644761}
-  - {fileID: 1530027674295476278}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &6290867545421064231
@@ -199,7 +191,7 @@ GameObject:
   - component: {fileID: 4012560347763595497}
   m_Layer: 0
   m_Name: Cube.003
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -212,12 +204,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6290867545421064231}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.57928354, y: 1.6017412, z: -1}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalRotation: {x: -0.00000008940697, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7305886919877687200}
+  m_Father: {fileID: 7839588649318644761}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &874930227021282260
 MeshFilter:
