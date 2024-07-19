@@ -51,8 +51,8 @@ Material:
     - _AlphaSrcBlend: 1
     - _BlendMode: 0
     - _ConservativeDepthOffsetEnable: 0
-    - _CullMode: 2
-    - _CullModeForward: 2
+    - _CullMode: 1
+    - _CullModeForward: 1
     - _DepthOffsetEnable: 0
     - _DoubleSidedEnable: 0
     - _DoubleSidedGIMode: 0
@@ -64,7 +64,7 @@ Material:
     - _ExcludeFromTUAndAA: 0
     - _MaterialID: 1
     - _MaterialTypeMask: 2
-    - _OpaqueCullMode: 2
+    - _OpaqueCullMode: 1
     - _PerPixelSorting: 0
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -88,7 +88,7 @@ Material:
     - _SupportDecals: 1
     - _SurfaceType: 0
     - _Thiccness: 0.001
-    - _Thickness: 0.1
+    - _Thickness: 0.01
     - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
@@ -104,7 +104,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 0}
-    - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
+    - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

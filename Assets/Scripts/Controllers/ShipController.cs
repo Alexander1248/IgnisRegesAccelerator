@@ -4,13 +4,6 @@ namespace Controllers
 {
     public class ShipController : MonoBehaviour
     {
-        void Start()
-        {
-        
-        }
-        void Update()
-        {
-        
-        }
+        // TODO: Ship controlling system
     }
 }
