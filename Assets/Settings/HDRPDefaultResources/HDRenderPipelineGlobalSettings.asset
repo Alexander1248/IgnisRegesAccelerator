@@ -178,18 +178,21 @@ MonoBehaviour:
       m_Keys:
       - 8b9fd52298df8584290ef262faea2e86
       - c32a6ebfdd0687843bd24f6394a5ff48
+      - e054478bcf4c4774393b57694f02c8ef
       - b5c2c7894cd7662498d36ad84e3a67da
       - 52e4b96e9c8bb7d40ad793bcd3aed134
       - 48fc8fa27b0334640b81baef8d02f6b1
       m_Values:
       - {fileID: 11400000, guid: 064c28d2e3b56f342baa80126bb04b2a, type: 2}
       - {fileID: 11400000, guid: 443b993c43d373246959c76f3b7d63b3, type: 2}
+      - {fileID: 11400000, guid: 8b2a584469feb6c4faf75145c2fe1776, type: 2}
       - {fileID: 11400000, guid: d5dbbcc0f196c224493afb748ed91299, type: 2}
       - {fileID: 11400000, guid: 4d779f516b74fda4aa2a23d2ef2acb66, type: 2}
       - {fileID: 11400000, guid: 67a2ed1f05ba8874ea16303ae1c8dfde, type: 2}
     bakingSets:
     - {fileID: 11400000, guid: 064c28d2e3b56f342baa80126bb04b2a, type: 2}
     - {fileID: 11400000, guid: 443b993c43d373246959c76f3b7d63b3, type: 2}
+    - {fileID: 11400000, guid: 8b2a584469feb6c4faf75145c2fe1776, type: 2}
     - {fileID: 11400000, guid: d5dbbcc0f196c224493afb748ed91299, type: 2}
     - {fileID: 11400000, guid: 4d779f516b74fda4aa2a23d2ef2acb66, type: 2}
     - {fileID: 11400000, guid: 67a2ed1f05ba8874ea16303ae1c8dfde, type: 2}
