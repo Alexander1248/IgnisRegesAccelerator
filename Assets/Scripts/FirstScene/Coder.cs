@@ -50,16 +50,16 @@ public class Coder : MonoBehaviour
     void Update(){
         if (codeEntered) return;
 
-        if (Input.GetKeyUp(KeyCode.W)) buttonUD(true);
-        else if (Input.GetKeyUp(KeyCode.S)) buttonUD(false);
-
-        if (Input.GetKeyUp(KeyCode.D)) moveArrow(true);
-        else if (Input.GetKeyUp(KeyCode.A)) moveArrow(false);
+        // if (Input.GetKeyUp(KeyCode.W)) buttonUD(true);
+        // else if (Input.GetKeyUp(KeyCode.S)) buttonUD(false);
+        //
+        // if (Input.GetKeyUp(KeyCode.D)) moveArrow(true);
+        // else if (Input.GetKeyUp(KeyCode.A)) moveArrow(false);
 
         arrow.localPosition = Vector3.MoveTowards(arrow.localPosition, arrowPoints[currentScreen], 10 * Time.deltaTime);
     }
 
-    void moveArrow(bool toRight){
+    public void moveArrow(bool toRight){
         if (toRight) currentScreen++;
         else currentScreen--;
 
@@ -71,7 +71,7 @@ public class Coder : MonoBehaviour
         
     }
 
-    void buttonUD(bool isUp){
+    public void buttonUD(bool isUp){
         if (!updownAnims[isUp ? 0 : 1].enabled) updownAnims[isUp ? 0 : 1].enabled = true;
         else updownAnims[isUp ? 0 : 1].CrossFade("PressUDButtonPC", 0.1f, -1, 0);
 
