@@ -175,6 +175,7 @@ Material:
     - _RenderQueueType: 5
     - _RequireSplitLighting: 0
     - _RotationMultiplier: 1000
+    - _SCALE: 1
     - _ScaleMultiplier: 2.41
     - _ScaleNoise: 0.25
     - _Smoothness: 0

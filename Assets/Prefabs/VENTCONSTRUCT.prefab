@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1465546236398026294
 Transform:
@@ -108,10 +108,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7031887178888096989, guid: b1534ed630c0b024d972c1f9866ec543,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7580737611070224188, guid: b1534ed630c0b024d972c1f9866ec543,
         type: 3}
       propertyPath: m_Name
       value: VENTILIATION (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7580737611070224188, guid: b1534ed630c0b024d972c1f9866ec543,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -197,10 +207,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 7031887178888096989, guid: b1534ed630c0b024d972c1f9866ec543,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7580737611070224188, guid: b1534ed630c0b024d972c1f9866ec543,
         type: 3}
       propertyPath: m_Name
       value: VENTILIATION (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7580737611070224188, guid: b1534ed630c0b024d972c1f9866ec543,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -286,10 +306,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 7031887178888096989, guid: b1534ed630c0b024d972c1f9866ec543,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7580737611070224188, guid: b1534ed630c0b024d972c1f9866ec543,
         type: 3}
       propertyPath: m_Name
       value: VENTILIATION (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7580737611070224188, guid: b1534ed630c0b024d972c1f9866ec543,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -375,10 +405,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7031887178888096989, guid: b1534ed630c0b024d972c1f9866ec543,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7580737611070224188, guid: b1534ed630c0b024d972c1f9866ec543,
         type: 3}
       propertyPath: m_Name
       value: VENTILIATION
+      objectReference: {fileID: 0}
+    - target: {fileID: 7580737611070224188, guid: b1534ed630c0b024d972c1f9866ec543,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
