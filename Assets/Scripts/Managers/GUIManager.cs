@@ -11,6 +11,7 @@ namespace Managers
 {
     public class GUIManager : MonoBehaviour
     {
+        [SerializeField] private HandController handController;
         [SerializeField] private PlayerController playerController;
         [SerializeField] private QuestManager questManager;
         [SerializeField] private Inventory inventory;
@@ -33,11 +34,14 @@ namespace Managers
         [SerializeField] private GameObject journal;
         [SerializeField] private GameObject journalContent;
         [SerializeField] private TMP_Text questName;
+        [SerializeField] private TMP_Text questTask;
         [SerializeField] private TMP_Text questText;
         [SerializeField] private GameObject questPrefab;
         [SerializeField] private GameObject divider;
+        [SerializeField] private Button select;
 
         private int selectedQuestIndex;
+        private QuestItem selectedQuestItem;
         private Dictionary<Quest, GameObject> quests = new();
         private Dictionary<Quest, GameObject> completed = new();
         
@@ -52,17 +56,23 @@ namespace Managers
             {
                 if (journal.activeSelf)
                 {
+                    handController.MainHandActive(true);
+                    handController.SecondHandActive(true);
+                    playerController.UnlockPlayer();
                     playerController.LockCursor();
-                    hud.SetActive(true);
                     
+                    hud.SetActive(true);
                     journal.SetActive(false);
                     inventoryGUI.SetActive(false);
                 }
                 else
                 {
+                    handController.MainHandActive(false);
+                    handController.SecondHandActive(false);
+                    playerController.LockPlayer();
                     playerController.UnlockCursor();
-                    journal.SetActive(true);
                     
+                    journal.SetActive(true);
                     hud.SetActive(false);
                     inventoryGUI.SetActive(false);
                 }
@@ -71,17 +81,23 @@ namespace Managers
             {
                 if (inventoryGUI.activeSelf)
                 {
+                    handController.MainHandActive(true);
+                    handController.SecondHandActive(true);
+                    playerController.UnlockPlayer();
                     playerController.LockCursor();
-                    hud.SetActive(true);
                     
+                    hud.SetActive(true);
                     journal.SetActive(false);
                     inventoryGUI.SetActive(false);
                 }
                 else
                 {
+                    handController.MainHandActive(false);
+                    handController.SecondHandActive(false);
+                    playerController.LockPlayer();
                     playerController.UnlockCursor();
-                    inventoryGUI.SetActive(true);
                     
+                    inventoryGUI.SetActive(true);
                     journal.SetActive(false);
                     hud.SetActive(false);
                 }
@@ -92,16 +108,30 @@ namespace Managers
         {
             var obj = Instantiate(questPrefab, journalContent.transform);
             var item = obj.GetComponent<QuestItem>();
-            item.index = quests.Count;
             item.quest = quest;
             item.selected.AddListener(Select);
             quests.Add(quest, obj);
             UpdateLayout();
         }
 
-        private void Select(int index)
+        private void Select(Quest quest)
         {
-            selectedQuestIndex = index;
+            if (selectedQuestItem) selectedQuestItem.Deselect();
+            if (questManager.IsCompleted(quest))
+            {
+                selectedQuestIndex = -1;
+                select.enabled = false;
+                selectedQuestItem = completed[quest].GetComponent<QuestItem>();
+            }
+            else
+            {
+                selectedQuestIndex = questManager.Find(quest);
+                select.enabled = true;
+                selectedQuestItem = quests[quest].GetComponent<QuestItem>();
+            }
+            questName.text = quest.Name.GetLocalizedString();
+            questTask.text = quest.Task.GetLocalizedString();
+            questText.text = quest.Description.GetLocalizedString();
         }
         
         public void AbortQuest(Quest quest)

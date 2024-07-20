@@ -62,6 +62,24 @@ namespace Player
         private RaycastHit hit;
         public PlayerControl Control { get; private set; }
 
+        public void LockPlayer()
+        {
+            canMove = false;
+            canCrouch = false;
+            canJump = false;
+            canDash = false;
+            canSprint = false;
+            cameraCanMove = false;
+        }
+        public void UnlockPlayer()
+        {
+            canMove = true;
+            canCrouch = true;
+            canJump = true;
+            canDash = true;
+            canSprint = true;
+            cameraCanMove = true;
+        }
         public void LockCursor()
         {
             Cursor.visible = false;

@@ -12,12 +12,20 @@ namespace Player
         
         [SerializeField] private Items.Weapon mainHand;
         [SerializeField] private Items.Weapon secondHand;
-        
-        private GameObject mainHandObj;
-        private bool mainHandAdditionalPerformed;
-        private GameObject secondHandObj;
-        private bool secondHandAdditionalPerformed;
 
+        private GameObject _mainHandObj;
+        private bool _mainHandAdditionalPerformed;
+        private GameObject _secondHandObj;
+        private bool _secondHandAdditionalPerformed;
+
+        public void MainHandActive(bool active)
+        {
+            _mainHandObj.SetActive(active);
+        }
+        public void SecondHandActive(bool active)
+        {
+            _secondHandObj.SetActive(active);
+        }
         private void Start()
         {
             controller.Control.Interaction.MainHandAction.performed += OnMainHandActionPerformed;
@@ -43,17 +51,17 @@ namespace Player
             if (weapon.IsTwoHanded && secondHand) return false;
             ClearMainHand();
             mainHand = Instantiate(weapon);
-            mainHandObj = Instantiate(weapon.Prefab, mainHandAnchor);
-            if (mainHand) mainHand.OnEquip(gameObject,mainHandObj);
+            _mainHandObj = Instantiate(weapon.Prefab, mainHandAnchor);
+            if (mainHand) mainHand.OnEquip(gameObject,_mainHandObj);
             return true;
         }
 
         public void ClearMainHand()
         {
-            if (mainHandObj) Destroy(mainHandObj);
+            if (_mainHandObj) Destroy(_mainHandObj);
             if (mainHand)
             {
-                mainHand.OnRelease(gameObject,mainHandObj);
+                mainHand.OnRelease(gameObject,_mainHandObj);
                 Destroy(mainHand);
             }
             mainHand = null;
@@ -63,13 +71,13 @@ namespace Player
             if (weapon.IsTwoHanded && mainHand) return false;
             ClearSecondHand();
             secondHand = Instantiate(weapon);
-            secondHandObj = Instantiate(weapon.Prefab, secondHandAnchor);
-            if (secondHand) secondHand.OnEquip(gameObject,secondHandObj);
+            _secondHandObj = Instantiate(weapon.Prefab, secondHandAnchor);
+            if (secondHand) secondHand.OnEquip(gameObject,_secondHandObj);
             return true;
         }
         public void ClearSecondHand()
         {
-            if (secondHandObj) Destroy(secondHandObj);
+            if (_secondHandObj) Destroy(_secondHandObj);
             if (secondHand) Destroy(secondHand);
             secondHand = null;
         }
@@ -78,21 +86,24 @@ namespace Player
         {
             if (!mainHand) return;
             if (obj.interaction is not TapInteraction) return;
-            mainHand.Action(gameObject,mainHandObj);
+            if (!_mainHandObj.activeInHierarchy) return;
+            mainHand.Action(gameObject,_mainHandObj);
         }
         private void OnMainHandAddtitonalActionPerformed(InputAction.CallbackContext obj)
         {
             if (!mainHand) return;
             if (obj.interaction is not HoldInteraction) return;
-            mainHand.AdditionalActionPerformed(gameObject,mainHandObj);
-            mainHandAdditionalPerformed = true;
+            if (!_mainHandObj.activeInHierarchy) return;
+            mainHand.AdditionalActionPerformed(gameObject,_mainHandObj);
+            _mainHandAdditionalPerformed = true;
         }
         private void OnMainHandAddtitonalActionCanceled(InputAction.CallbackContext obj)
         {
             if (!mainHand) return;
-            if (!mainHandAdditionalPerformed) return;
-            mainHand.AdditionalActionCanceled(gameObject,mainHandObj);
-            mainHandAdditionalPerformed = false;
+            if (!_mainHandAdditionalPerformed) return;
+            if (!_mainHandObj.activeInHierarchy) return;
+            mainHand.AdditionalActionCanceled(gameObject,_mainHandObj);
+            _mainHandAdditionalPerformed = false;
         }
 
         
@@ -100,21 +111,24 @@ namespace Player
         {
             if (!secondHand) return;
             if (obj.interaction is not TapInteraction) return;
-            secondHand.Action(gameObject,secondHandObj);
+            if (!_secondHandObj.activeInHierarchy) return;
+            secondHand.Action(gameObject,_secondHandObj);
         }
         private void OnSecondHandAddtitonalActionPerformed(InputAction.CallbackContext obj)
         {
             if (!secondHand) return;
             if (obj.interaction is not HoldInteraction) return;
-            secondHand.AdditionalActionPerformed(gameObject,secondHandObj);
-            secondHandAdditionalPerformed = true;
+            if (!_secondHandObj.activeInHierarchy) return;
+            secondHand.AdditionalActionPerformed(gameObject,_secondHandObj);
+            _secondHandAdditionalPerformed = true;
         }
         private void OnSecondHandAddtitonalActionCanceled(InputAction.CallbackContext obj)
         {
             if (!secondHand) return;
-            if (!secondHandAdditionalPerformed) return;
-            secondHand.AdditionalActionCanceled(gameObject,secondHandObj);
-            mainHandAdditionalPerformed = false;
+            if (!_secondHandAdditionalPerformed) return;
+            if (!_secondHandObj.activeInHierarchy) return;
+            secondHand.AdditionalActionCanceled(gameObject,_secondHandObj);
+            _mainHandAdditionalPerformed = false;
         }
     }
 }

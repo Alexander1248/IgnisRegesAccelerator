@@ -8,12 +8,12 @@ namespace Quests
 {
     public class QuestItem : MonoBehaviour
     {
-        [HideInInspector] public int index = -1;
         [HideInInspector] public Quest quest;
-        [HideInInspector] public UnityEvent<int> selected;
+        [HideInInspector] public UnityEvent<Quest> selected;
 
         [SerializeField] private TMP_Text questName;
         [SerializeField] private Image point;
+        [SerializeField] private Image background;
 
         public void Start()
         {
@@ -22,7 +22,12 @@ namespace Quests
         
         public void Select()
         {
-            selected.Invoke(index);
+            selected.Invoke(quest);
+            background.enabled = true;
+        }
+        public void Deselect()
+        {
+            background.enabled = false;
         }
     }
 }
