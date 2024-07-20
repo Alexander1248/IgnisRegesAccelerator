@@ -189,20 +189,20 @@ namespace Controllers
                 _cameraRotation.y = Mathf.Clamp(_cameraRotation.y, -maxLookAngle, maxLookAngle);
 
                 if (rotateCameraX) 
-                    camera.transform.localEulerAngles = new Vector3(_cameraRotation.y, _cameraRotation.x, 0);
+                    cameraTransform.transform.localEulerAngles = new Vector3(_cameraRotation.y, _cameraRotation.x, 0);
                 else
                 {
                     transform.localEulerAngles = new Vector3(0, _cameraRotation.x, 0);
-                    camera.transform.localEulerAngles = new Vector3(_cameraRotation.y, 0, 0);
+                    cameraTransform.transform.localEulerAngles = new Vector3(_cameraRotation.y, 0, 0);
                 }
                 
                 if (cameraDistance > 0)
                 {
-                    var vec = camera.transform.localRotation * Vector3.back;
-                    camera.transform.localPosition = vec * cameraDistance;
+                    var vec = cameraTransform.transform.localRotation * Vector3.back;
+                    cameraTransform.transform.localPosition = vec * cameraDistance;
                 }
                 else
-                    camera.transform.localPosition = Vector3.zero;
+                    cameraTransform.transform.localPosition = Vector3.zero;
                 
             }
 

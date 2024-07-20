@@ -1,0 +1,453 @@
+fileFormatVersion: 2
+guid: 1fa868d4260ed764e9be49aa649a605a
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TaskIcon
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 1431
+        width: 92
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f80dc180ffa84c4f971e2a65dd317d0
+      internalID: 1796956223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TasksLabel
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 1467
+        width: 339
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2e1db30bc998354587348750ad9e114
+      internalID: -1051387028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JournalLabel
+      rect:
+        serializedVersion: 2
+        x: 1373
+        y: 1432
+        width: 753
+        height: 113
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f980c45d7deeda44b6960c2d52b9b5f
+      internalID: 916867487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icon
+      rect:
+        serializedVersion: 2
+        x: 2311
+        y: 1431
+        width: 528
+        height: 148
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0702d89ff656d5d4695ec80e4f749b3f
+      internalID: 1231247605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TaskActive
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 1201
+        width: 601
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 314113ecacba1c9459c3d96ac56acf79
+      internalID: -1011933632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Divider
+      rect:
+        serializedVersion: 2
+        x: 1444
+        y: 1213
+        width: 566
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df28bbdce01973542b3ba72672d075fa
+      internalID: -1245156062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scroll
+      rect:
+        serializedVersion: 2
+        x: 2835
+        y: 778
+        width: 32
+        height: 527
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 435ecd133d6c8bb449df2799885a156c
+      internalID: 168113051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScrollCarette
+      rect:
+        serializedVersion: 2
+        x: 2914
+        y: 1048
+        width: 31
+        height: 125
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0c78bd7ca2108040b6b3c0cf1d51291
+      internalID: -1949591902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Point
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 1010
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f973f124898014428c13db3e365bc7b
+      internalID: -798021155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TextArea
+      rect:
+        serializedVersion: 2
+        x: 1329
+        y: 569
+        width: 837
+        height: 454
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f638b38ca3126149884e05b085c659d
+      internalID: -1010238658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 1c5f9563686f8cf4198b84e611d8bad0
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Divider: -1245156062
+      Icon: 1231247605
+      JournalLabel: 916867487
+      Journal_10: 1633117222
+      Journal_100: 1493671292
+      Journal_101: -596429503
+      Journal_102: 1584658813
+      Journal_11: 1502639341
+      Journal_12: -2095255274
+      Journal_13: 862277740
+      Journal_14: -567359146
+      Journal_15: -824311488
+      Journal_2: 518440055
+      Journal_22: -375626136
+      Journal_24: 1768376032
+      Journal_25: -1862147020
+      Journal_26: 1208764103
+      Journal_27: -430627831
+      Journal_28: -1126969744
+      Journal_29: 1478468584
+      Journal_3: -1352234166
+      Journal_30: -2052712745
+      Journal_31: 1187314132
+      Journal_32: 1509006184
+      Journal_33: -408887021
+      Journal_34: 1217191116
+      Journal_35: 358767518
+      Journal_36: 1289270696
+      Journal_37: -1085268497
+      Journal_38: -486638296
+      Journal_39: 1314296575
+      Journal_4: -741183314
+      Journal_40: -1232038001
+      Journal_41: 1616171655
+      Journal_42: -1449886360
+      Journal_43: -1407951756
+      Journal_44: 152558214
+      Journal_45: -1098963047
+      Journal_46: -1715991008
+      Journal_47: 780059539
+      Journal_48: -347135999
+      Journal_49: 1833498390
+      Journal_5: -1954413609
+      Journal_50: 1592125773
+      Journal_51: -538087533
+      Journal_52: 1124907037
+      Journal_53: -1460179876
+      Journal_54: 1435618646
+      Journal_55: 205763979
+      Journal_56: -1856469459
+      Journal_57: 934777
+      Journal_58: 1322671575
+      Journal_59: 1184464779
+      Journal_6: -117009830
+      Journal_60: 446707920
+      Journal_61: 1815095833
+      Journal_62: 78615929
+      Journal_63: -1876967029
+      Journal_64: 83215971
+      Journal_65: -818737375
+      Journal_66: 172077302
+      Journal_67: 1360798613
+      Journal_68: -257804220
+      Journal_69: -777291458
+      Journal_7: 2058792936
+      Journal_70: -800398119
+      Journal_71: -580030313
+      Journal_72: -2135223341
+      Journal_73: -970775657
+      Journal_74: -1479046668
+      Journal_75: 2009263430
+      Journal_76: 1067475956
+      Journal_77: 1156269598
+      Journal_78: -1753271233
+      Journal_79: -162763970
+      Journal_8: -500956059
+      Journal_80: -1225776794
+      Journal_81: 1201211187
+      Journal_82: 805846281
+      Journal_83: -97790483
+      Journal_84: 691005610
+      Journal_85: -1130800544
+      Journal_86: 798534944
+      Journal_87: 1846832828
+      Journal_88: -2029865651
+      Journal_89: -1798826303
+      Journal_90: -501821042
+      Journal_91: 2071960049
+      Journal_92: -1064397129
+      Journal_93: 758886749
+      Journal_94: -2144281078
+      Journal_95: -1477303016
+      Journal_96: -2116257810
+      Journal_97: -204420510
+      Journal_98: -1454173099
+      Journal_99: -737329490
+      Point: -798021155
+      Scroll: 168113051
+      ScrollCarette: -1949591902
+      TaskActive: -1011933632
+      TaskIcon: 1796956223
+      TasksLabel: -1051387028
+      TextArea: -1010238658
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
