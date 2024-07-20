@@ -1,8 +1,7 @@
-﻿using Interactables;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Localization;
 
-namespace Interactable
+namespace Player.Interactables
 {
     public interface IInteractable
     {

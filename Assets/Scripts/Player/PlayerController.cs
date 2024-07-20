@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 
-namespace Controllers
+namespace Player
 {
     
     public class PlayerController : MonoBehaviour

@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using Controllers;
-using Interactable;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Interactables
+namespace Player.Interactables
 {
     public class PlayerInteract : MonoBehaviour
     {

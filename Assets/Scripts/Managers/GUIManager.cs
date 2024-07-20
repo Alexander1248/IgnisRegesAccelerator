@@ -1,9 +1,10 @@
-﻿using System;
-using Controllers;
+﻿using System.Collections.Generic;
 using Items;
+using Player;
 using Quests;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Managers
@@ -11,6 +12,7 @@ namespace Managers
     public class GUIManager : MonoBehaviour
     {
         [SerializeField] private PlayerController playerController;
+        [SerializeField] private QuestManager questManager;
         [SerializeField] private Inventory inventory;
         
         // HUD
@@ -31,11 +33,42 @@ namespace Managers
         [SerializeField] private TMP_Text questName;
         [SerializeField] private TMP_Text questText;
         [SerializeField] private GameObject questPrefab;
+
+        private int selectedQuestIndex = -1;
+        private List<GameObject> quests = new();
+        private List<GameObject> completed = new();
         
         // Inventory
 
 
+        public void AddQuestToUI(Quest quest)
+        {
+            var obj = Instantiate(questPrefab);
+            var item = obj.GetComponent<QuestItem>();
+            item.index = quests.Count;
+            item.quest = quest;
+            item.selected.AddListener(Select);
+            quests.Add(obj);
+        }
 
+        private void Select(int index)
+        {
+            selectedQuestIndex = index;
+        }
+        
+        public void AbortQuest(Quest quest)
+        {
+            
+        }
+        public void CompleteQuest(Quest quest)
+        {
+            
+        }
+        
+        public void SetCurrentQuest()
+        {
+            questManager.Select(selectedQuestIndex);
+        }
         public void UpdateCurrentQuest(Quest quest)
         {
             if (quest == null)

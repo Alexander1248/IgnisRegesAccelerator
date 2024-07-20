@@ -1,11 +1,7 @@
-﻿using System;
-using Interactable;
-using UnityEngine;
-using UnityEngine.InputSystem;
+﻿using UnityEngine;
 using UnityEngine.Localization;
-using UnityEngine.Serialization;
 
-namespace Interactables
+namespace Player.Interactables
 {
     public class Door : MonoBehaviour, IInteractable
     {

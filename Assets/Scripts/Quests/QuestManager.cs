@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Quests;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Managers
+namespace Quests
 {
     public class QuestManager : MonoBehaviour
     {
@@ -31,7 +30,8 @@ namespace Managers
         }
         public void Select(int index)
         {
-            SelectedQuest = _quests[index];
+            if (index < 0 || index >= _quests.Count) SelectedQuest = null;
+            else SelectedQuest = _quests[index];
             onSelectedChanged.Invoke(SelectedQuest);
         }
         public void Abort(int index)

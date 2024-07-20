@@ -1,9 +1,8 @@
-﻿using Interactable;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Localization;
 
-namespace Interactables
+namespace Player.Interactables
 {
     public class WorldButton : MonoBehaviour, IInteractable
     {
