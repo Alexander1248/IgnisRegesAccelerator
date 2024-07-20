@@ -62,11 +62,19 @@ namespace Player
         private RaycastHit hit;
         public PlayerControl Control { get; private set; }
 
-        private void Awake()
+        public void LockCursor()
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            
+        }
+        public void UnlockCursor()
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        private void Awake()
+        {
+            LockCursor();
             rb = GetComponent<Rigidbody>();
             Control = new PlayerControl();
             Control.Movement.Jump.performed += OnJump;
@@ -77,10 +85,6 @@ namespace Player
             
             Control.Movement.Crouch.performed += OnCrouch;
             Control.Movement.Crouch.canceled += OnCrouchCanceled;
-        
-            Control.Interaction.Inventory.performed += OnInventoryStateChange;
-        
-            Control.Interaction.Use.performed += OnUse;
         }
 
         private void OnSprint(InputAction.CallbackContext obj)
@@ -129,24 +133,6 @@ namespace Player
             if (!canJump || !isGrounded) return;
             rb.AddForce(0f, jumpForce, 0f, ForceMode.VelocityChange);
             isGrounded = false;
-        }
-
-        private void OnInventoryStateChange(InputAction.CallbackContext obj)
-        {
-            // TODO: Inventory open/close logic (create by ui builder)
-        }
-    
-        private void OnUseStarted(InputAction.CallbackContext obj)
-        {
-            // TODO: Object use logic (after camera rotation)
-        }
-        private void OnUse(InputAction.CallbackContext obj)
-        {
-            // TODO: Object use logic (after camera rotation)
-        }
-        private void OnUseEnded(InputAction.CallbackContext obj)
-        {
-            // TODO: Object use logic (after camera rotation)
         }
 
         private void FixedUpdate()
