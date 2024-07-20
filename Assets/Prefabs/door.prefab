@@ -121,16 +121,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d5bf8ce20f4314941c1bb65623b92e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorForwardRotation: {x: -0.70710677, y: 0, z: 0, w: -0.70710677}
+  doorForwardRotation: {x: -0.70710677, y: 0, z: 0, w: 0.70710677}
   animator: {fileID: 0}
   doorObj: {fileID: 7839588649318644761}
   locked: 0
   lockedMessage: LOCKED
-  tipName:
+  openTip:
     m_TableReference:
       m_TableCollectionName: GUID:fe14867a5582c984eb6cb4250fb337cd
     m_TableEntryReference:
       m_KeyId: 11847626752
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  closeTip:
+    m_TableReference:
+      m_TableCollectionName: GUID:fe14867a5582c984eb6cb4250fb337cd
+    m_TableEntryReference:
+      m_KeyId: 49898352640
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
