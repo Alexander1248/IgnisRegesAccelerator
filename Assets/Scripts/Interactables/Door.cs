@@ -21,11 +21,11 @@ namespace Interactables
 
         private Transform _plr;
 
-        [SerializeField] private string lockedMessage = "LOCKED";
-
-        [SerializeField] private LocalizedString tipName;
+        [SerializeField] private float doorOpenAngle = 90;
+        [SerializeField] private LocalizedString openTip;
+        [SerializeField] private LocalizedString closeTip;
         [SerializeField] private MeshRenderer[] meshesOutline;
-        public LocalizedString TipName => tipName;
+        public LocalizedString TipName => _opened ? closeTip : openTip;
         public MeshRenderer[] MeshesOutline => meshesOutline;
 
         [SerializeField] private AudioSource audioSource;
@@ -69,8 +69,6 @@ namespace Interactables
                 audioSource.Play();
             }
 
-            _opened = !_opened;
-
             _startAngle = doorObj.localEulerAngles.y;
             var direction = (_plr.position - doorObj.position).normalized;
             var dotProduct = Vector3.Dot(direction, doorObj.rotation * doorForwardRotation * Vector3.forward);
@@ -79,11 +77,12 @@ namespace Interactables
             else
                 _endAngle = dotProduct switch
                 {
-                    >= 0 => -90,
-                    < 0 => 90,
+                    >= 0 => -doorOpenAngle,
+                    < 0 => doorOpenAngle,
                     _ => _endAngle
                 };
-
+            
+            _opened = !_opened;
             _t = 0.01f;
         }
 

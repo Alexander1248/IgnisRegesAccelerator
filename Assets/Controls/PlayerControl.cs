@@ -241,6 +241,15 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Journal"",
+                    ""type"": ""Button"",
+                    ""id"": ""07c17097-fb38-45a5-9456-4990085685d0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -318,6 +327,17 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
                     ""action"": ""Use Heal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ff109b7b-b927-4dde-a34e-ca6b48da6e5c"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Journal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -431,6 +451,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_Interaction_SecondHandAction = m_Interaction.FindAction("Second Hand Action", throwIfNotFound: true);
         m_Interaction_SecondHandAddtitonalAction = m_Interaction.FindAction("Second Hand Addtitonal Action", throwIfNotFound: true);
         m_Interaction_UseHeal = m_Interaction.FindAction("Use Heal", throwIfNotFound: true);
+        m_Interaction_Journal = m_Interaction.FindAction("Journal", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Move = m_Camera.FindAction("Move", throwIfNotFound: true);
@@ -580,6 +601,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_Interaction_SecondHandAction;
     private readonly InputAction m_Interaction_SecondHandAddtitonalAction;
     private readonly InputAction m_Interaction_UseHeal;
+    private readonly InputAction m_Interaction_Journal;
     public struct InteractionActions
     {
         private @PlayerControl m_Wrapper;
@@ -591,6 +613,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         public InputAction @SecondHandAction => m_Wrapper.m_Interaction_SecondHandAction;
         public InputAction @SecondHandAddtitonalAction => m_Wrapper.m_Interaction_SecondHandAddtitonalAction;
         public InputAction @UseHeal => m_Wrapper.m_Interaction_UseHeal;
+        public InputAction @Journal => m_Wrapper.m_Interaction_Journal;
         public InputActionMap Get() { return m_Wrapper.m_Interaction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -621,6 +644,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @UseHeal.started += instance.OnUseHeal;
             @UseHeal.performed += instance.OnUseHeal;
             @UseHeal.canceled += instance.OnUseHeal;
+            @Journal.started += instance.OnJournal;
+            @Journal.performed += instance.OnJournal;
+            @Journal.canceled += instance.OnJournal;
         }
 
         private void UnregisterCallbacks(IInteractionActions instance)
@@ -646,6 +672,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @UseHeal.started -= instance.OnUseHeal;
             @UseHeal.performed -= instance.OnUseHeal;
             @UseHeal.canceled -= instance.OnUseHeal;
+            @Journal.started -= instance.OnJournal;
+            @Journal.performed -= instance.OnJournal;
+            @Journal.canceled -= instance.OnJournal;
         }
 
         public void RemoveCallbacks(IInteractionActions instance)
@@ -735,6 +764,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         void OnSecondHandAction(InputAction.CallbackContext context);
         void OnSecondHandAddtitonalAction(InputAction.CallbackContext context);
         void OnUseHeal(InputAction.CallbackContext context);
+        void OnJournal(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {
