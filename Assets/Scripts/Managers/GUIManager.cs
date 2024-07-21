@@ -48,6 +48,7 @@ namespace Managers
         // Inventory
         [Space]
         [SerializeField] private GameObject inventoryGUI;
+        // [SerializeField] private GameObject inventoryGUI;
 
 
         private void Start()
