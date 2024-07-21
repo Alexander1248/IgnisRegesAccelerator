@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Controllers;
 using Math;
+using Player;
 using UnityEngine;
 
 namespace Weapon

@@ -30,6 +30,18 @@ MonoBehaviour:
     m_Localized: Go to level end
     m_Metadata:
       m_Items: []
+  - m_Id: 368362939772928
+    m_Localized: Test
+    m_Metadata:
+      m_Items: []
+  - m_Id: 368401351208960
+    m_Localized: 'Task '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 368433198559232
+    m_Localized: Description
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
