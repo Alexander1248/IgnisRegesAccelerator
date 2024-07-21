@@ -25,9 +25,17 @@ namespace Quests
             _quests.Add(quest);
             onQuestAdded.Invoke(quest);
             if (SelectedQuest != null) return;
+            
             SelectedQuest = quest;
             onSelectedChanged.Invoke(SelectedQuest);
         }
+
+        public void Add(Quest quest, out int index)
+        {
+            Add(quest);
+            index = _quests.Count - 1;
+        }
+        
         public void Select(int index)
         {
             if (index < 0 || index >= _quests.Count) SelectedQuest = null;
@@ -57,6 +65,14 @@ namespace Quests
             _quests.RemoveAt(index);
             onQuestCompleted.Invoke(quest);
         }
+        public void Complete(Quest quest)
+        {
+            Complete(Find(quest));
+        }
+        public void Abort(Quest quest)
+        {
+            Abort(Find(quest));
+        }
         public int Find(Quest quest)
         {
             return _quests.IndexOf(quest);
@@ -68,6 +84,15 @@ namespace Quests
         public bool IsCompleted(Quest quest)
         {
             return _completedQuests.Contains(quest);
+        }
+
+        public void RemoveCompleted(Quest quest)
+        {
+            _completedQuests.Remove(quest);
+        }
+        public void RemoveCompleted(Predicate<Quest> condition)
+        {
+            _completedQuests.RemoveWhere(condition);
         }
     }
 }

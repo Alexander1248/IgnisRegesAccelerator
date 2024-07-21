@@ -42,8 +42,8 @@ namespace Managers
 
         private int selectedQuestIndex;
         private QuestItem selectedQuestItem;
-        private Dictionary<Quest, GameObject> quests = new();
-        private Dictionary<Quest, GameObject> completed = new();
+        private readonly Dictionary<Quest, GameObject> quests = new();
+        private readonly Dictionary<Quest, GameObject> completed = new();
         
         // Inventory
         [Space]
@@ -75,6 +75,14 @@ namespace Managers
                     journal.SetActive(true);
                     hud.SetActive(false);
                     inventoryGUI.SetActive(false);
+                    if (selectedQuestItem) Select(selectedQuestItem.quest);
+                    else
+                    {
+                        select.gameObject.SetActive(false);
+                        questName.text = "";
+                        questTask.text = "";
+                        questText.text = "";
+                    }
                 }
             };
             playerController.Control.Interaction.Inventory.performed += _ =>
@@ -120,13 +128,13 @@ namespace Managers
             if (questManager.IsCompleted(quest))
             {
                 selectedQuestIndex = -1;
-                select.enabled = false;
+                select.gameObject.SetActive(false);
                 selectedQuestItem = completed[quest].GetComponent<QuestItem>();
             }
             else
             {
                 selectedQuestIndex = questManager.Find(quest);
-                select.enabled = true;
+                select.gameObject.SetActive(true);
                 selectedQuestItem = quests[quest].GetComponent<QuestItem>();
             }
             questName.text = quest.Name.GetLocalizedString();
@@ -136,12 +144,14 @@ namespace Managers
         
         public void AbortQuest(Quest quest)
         {
-            quests.Remove(quest);
+            if (!quests.Remove(quest, out var value)) return;
+            Destroy(value);
             UpdateLayout();
         }
         public void CompleteQuest(Quest quest)
         {
             if (!quests.Remove(quest, out var value)) return;
+            value.GetComponent<QuestItem>().Disable();
             completed.Add(quest, value);
             UpdateLayout();
         }
@@ -154,7 +164,7 @@ namespace Managers
             {
                 t = value.GetComponent<RectTransform>();
                 t.anchoredPosition = new Vector2(0, y);
-                y += t.sizeDelta.y;
+                y -= t.sizeDelta.y;
             }
 
             if (completed.Count == 0)
@@ -166,17 +176,17 @@ namespace Managers
             
             t = divider.GetComponent<RectTransform>();
             t.anchoredPosition = new Vector2(0, y);
-            y += t.sizeDelta.y;
+            y -= t.sizeDelta.y;
             
             foreach (var (_, value) in completed)
             {
                 t = value.GetComponent<RectTransform>();
                 t.anchoredPosition = new Vector2(0, y);
-                y += t.sizeDelta.y;
+                y -= t.sizeDelta.y;
             }
 
             t = journalContent.GetComponent<RectTransform>();
-            t.sizeDelta = new Vector2(t.sizeDelta.x, y);
+            t.sizeDelta = new Vector2(t.sizeDelta.x, -y);
         }
         
         public void SetCurrentQuest()

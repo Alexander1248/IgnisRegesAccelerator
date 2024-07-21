@@ -29,5 +29,21 @@ namespace Quests
         {
             background.enabled = false;
         }
+        public void Disable()
+        {
+            point.color = new Color(
+                point.color.r,
+                point.color.g,
+                point.color.b,
+                questName.color.a * 0.5f
+            );
+            
+            questName.color = new Color(
+                questName.color.r,
+                questName.color.g,
+                questName.color.b,
+                questName.color.a * 0.5f
+            );
+        }
     }
 }
