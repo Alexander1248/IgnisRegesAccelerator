@@ -196,7 +196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1328044727881402824
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2901,7 +2901,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6498378055491445389
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4298,6 +4298,12 @@ MonoBehaviour:
   divider: {fileID: 1072944172039409318}
   select: {fileID: 7010842555049192178}
   inventoryGUI: {fileID: 515356591183957079}
+  gridContents:
+  - {fileID: 1265627774734332737}
+  - {fileID: 1090439340558424592}
+  - {fileID: 7432094941998557165}
+  - {fileID: 3974566900171668806}
+  cell: {fileID: 5742193878097362120, guid: 3c0690ec7c2f8ac42a1f0b2f2bcd8d1a, type: 3}
 --- !u!1 &8503542523627399500
 GameObject:
   m_ObjectHideFlags: 0

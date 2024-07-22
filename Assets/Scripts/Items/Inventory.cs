@@ -1,31 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Items
 {
-    public class Inventory : MonoBehaviour
+    [Serializable]
+    public class Inventory
     {
         [SerializeField] private int width;
         [SerializeField] private int height;
-        private int[,] cells;
-        private Dictionary<int, Item> _items = new();
+        private readonly Dictionary<Vector2Int, Item> _items = new();
 
-        private void Awake()
-        {
-            cells = new int[width, height];
-        }
 
         public bool AddItem(int x, int y, Item item)
         {
             if (!item.CanBePlaced(this, x, y)) return false;
-            int id;
-            do
-            { 
-                id = Random.Range(1, int.MaxValue);
-            } while (_items.ContainsKey(id));
-            _items.Add(id, item);
-            item.Place(this, x, y, id);
+            _items[new Vector2Int(x, y)] = item;
             return true;
         }
         public bool AddItem(Item item)
@@ -37,35 +29,49 @@ namespace Items
             return false;
         }
 
-        public void RemoveItem(int x, int y)
+        public IEnumerable<Vector2Int> Find(Item item)
         {
-            var id = cells[x, y];
-            if (!_items.Remove(id, out var item)) return;
-            item.Remove(this, x, y, id);
+            return _items.Where(pair => pair.Value == item).Select(pair => pair.Key);
+        }
+
+        public Item RemoveItem(int x, int y)
+        {
+            foreach (var (key, value) in _items)
+                if (value.Intersects(key.x, key.y, x, y))
+                {
+                    _items.Remove(key);
+                    return value;
+                }
+
+            return null;
         }
 
         public Item GetItem(int x, int y)
         {
-            return _items.GetValueOrDefault(cells[x, y]);
+            foreach (var (key, value) in _items)
+                if (value.Intersects(key.x, key.y, x, y)) 
+                    return value;
+            return null;
         }
 
         public bool UseItem(int x, int y, GameObject player)
         {
-            return _items.TryGetValue(cells[x, y], out var item) 
-                   && item.Use(this, x, y, player);
+            var item = GetItem(x, y);
+            return item != null && item.Use(this, x, y, player);
         }
         
         public bool CellNotEmpty(int x, int y)
         {
-            return _items.ContainsKey(cells[x, y]);
+            if (x < 0 || x >= width) return true;
+            if (y < 0 || y >= height) return true;
+            foreach (var (key, value) in _items)
+                if (value.Intersects(key.x, key.y, x, y)) 
+                    return true;
+            return false;
         }
-        public int GetCell(int x, int y)
+        public void ClearCell(int x, int y)
         {
-            return cells[x, y];
-        }
-        public void SetCell(int x, int y, int id)
-        {
-            cells[x, y] = id;
+            _items.Remove(new Vector2Int(x, y));
         }
     }
 }

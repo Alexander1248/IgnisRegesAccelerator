@@ -19,22 +19,9 @@ namespace Items
         {
             return !shape.Any(points => inventory.CellNotEmpty(points.x + x, points.y + y));
         }
-        public void Place(Inventory inventory, int x, int y, int id)
+        public bool Intersects(int cx, int cy, int x, int y)
         {
-            foreach (var points in shape)
-                inventory.SetCell(points.x + x, points.y + y, id);
-        }
-        public void Remove(Inventory inventory, int x, int y, int id)
-        {
-
-            foreach (var anchor in shape)
-            {
-                if (shape.Any(points => 
-                        inventory.GetCell(points.x + anchor.x + x, points.y + anchor.y + y) != id)) continue;
-                foreach (var points in shape)
-                    inventory.SetCell(points.x + anchor.x + x, points.y + anchor.y + y, 0);
-                break;
-            }
+            return shape.Any(points => points.x + cx == x && points.y + cy == y);
         }
     }
 }
