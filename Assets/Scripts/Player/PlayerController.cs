@@ -19,7 +19,7 @@ namespace Player
         [Space]
         public bool canMove = true;
         [SerializeField] private float moveSpeed = 300;
-            
+
         [Space]
         private bool usingHeavyObj = false;
         [SerializeField] private float slowSpeed = 50;
@@ -150,31 +150,6 @@ namespace Player
             cameraTransform.parent = defaultCameraAnchor;
         }
 
-        private void OnJump(InputAction.CallbackContext obj)
-        {
-            if (!canJump || !isGrounded) return;
-            rb.AddForce(0f, jumpForce, 0f, ForceMode.VelocityChange);
-            isGrounded = false;
-        }
-
-        private void OnInventoryStateChange(InputAction.CallbackContext obj)
-        {
-            // TODO: Inventory open/close logic (create by ui builder)
-        }
-    
-        private void OnUseStarted(InputAction.CallbackContext obj)
-        {
-            // TODO: Object use logic (after camera rotation)
-        }
-        private void OnUse(InputAction.CallbackContext obj)
-        {
-            // TODO: Object use logic (after camera rotation)
-        }
-        private void OnUseEnded(InputAction.CallbackContext obj)
-        {
-            // TODO: Object use logic (after camera rotation)
-        }
-
         public void useCanon(){
             canSprint = false;
             canDash = false;
@@ -190,6 +165,13 @@ namespace Player
             canJump = true;
             usingHeavyObj = false;
             mouseSensitivity *= 3;
+        }
+
+        private void OnJump(InputAction.CallbackContext obj)
+        {
+            if (!canJump || !isGrounded) return;
+            rb.AddForce(0f, jumpForce, 0f, ForceMode.VelocityChange);
+            isGrounded = false;
         }
 
         private void FixedUpdate()
