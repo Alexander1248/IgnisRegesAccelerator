@@ -10948,7 +10948,8 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  meshesOutline: []
+  meshesOutline:
+  - {fileID: 396455303716575514}
   audioSource: {fileID: 0}
   references:
     version: 2
@@ -13020,7 +13021,8 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  meshesOutline: []
+  meshesOutline:
+  - {fileID: 8314504498568514843}
   audioSource: {fileID: 0}
   references:
     version: 2
@@ -13742,7 +13744,8 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  meshesOutline: []
+  meshesOutline:
+  - {fileID: 2062436441625371629}
   audioSource: {fileID: 0}
   references:
     version: 2

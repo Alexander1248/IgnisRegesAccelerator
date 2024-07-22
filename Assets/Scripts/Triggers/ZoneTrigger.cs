@@ -29,5 +29,14 @@ namespace Triggers
             exit.Invoke(other);
             if (other.gameObject.CompareTag("Player")) playerExit.Invoke();
         }
+
+        public void DestroyScript()
+        {
+            Destroy(this);
+        }
+        public void DestroyObject()
+        {
+            Destroy(gameObject);
+        }
     }
 }
