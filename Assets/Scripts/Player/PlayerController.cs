@@ -66,6 +66,10 @@ namespace Player
         private RaycastHit hit;
         public PlayerControl Control { get; private set; }
 
+        public Transform getCamAnchor(){
+            return defaultCameraAnchor;
+        }
+
         public void LockPlayer()
         {
             canMove = false;
@@ -165,6 +169,10 @@ namespace Player
             canJump = true;
             usingHeavyObj = false;
             mouseSensitivity *= 3;
+        }
+
+        public void ResetCamRotation(){
+            _cameraRotation = Vector3.zero;
         }
 
         private void OnJump(InputAction.CallbackContext obj)
