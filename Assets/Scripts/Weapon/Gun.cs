@@ -1,4 +1,4 @@
-﻿using Controllers;
+﻿using Player;
 using UnityEngine;
 using Weapon.Utils;
 

@@ -16,7 +16,22 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 6d8351ccf7ec04547ad4fcd36ffae1a5
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: fe14867a5582c984eb6cb4250fb337cd
+    m_Address: Assets/Localization/Tables/Interactions/Interactions Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 276648fc3c6ac3a40b1f73ee6d51b77d
+    m_Address: Assets/Localization/Tables/Quests/Quests Part 1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec83d4c0a89c13547a077df0ac8b6fc5
+    m_Address: Assets/Localization/Tables/UI/UI Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 089dd481bb7f09c4fb4d7199806d5bcb, type: 2}
   m_SchemaSet:
