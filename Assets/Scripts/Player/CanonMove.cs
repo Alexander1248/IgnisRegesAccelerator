@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Controllers;
+using Player;
 using UnityEngine;
 
 public class CanonMove : MonoBehaviour
