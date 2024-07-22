@@ -72,7 +72,7 @@ MonoBehaviour:
     m_Camera:
       bitDatas:
         data1: 72198260625768269
-        data2: 13799031439032811544
+        data2: 18410717388472287256
       lodBias: 1
       lodBiasMode: 0
       lodBiasQualityLevel: 0
@@ -200,14 +200,14 @@ MonoBehaviour:
         m_Extent: {x: NaN, y: NaN, z: NaN}
       - m_Center: {x: 0, y: 0, z: 0}
         m_Extent: {x: 81, y: 81, z: 81}
-      - m_Center: {x: 0, y: 0, z: 0}
-        m_Extent: {x: 81, y: 81, z: 81}
+      - m_Center: {x: 48.600002, y: 0, z: 24.3}
+        m_Extent: {x: 97.200005, y: 48.600002, z: 72.9}
     hasProbeVolumes:
       m_Keys:
       - 8b9fd52298df8584290ef262faea2e86
       - c32a6ebfdd0687843bd24f6394a5ff48
       - e054478bcf4c4774393b57694f02c8ef
-      m_Values: 000000
+      m_Values: 000001
   m_Version: 10
   m_ShaderStrippingSetting:
     m_Version: 0
