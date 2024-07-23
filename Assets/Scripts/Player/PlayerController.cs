@@ -20,6 +20,10 @@ namespace Player
         [Space]
         public bool canMove = true;
         [SerializeField] private float moveSpeed = 300;
+
+        [Space]
+        private bool usingHeavyObj = false;
+        [SerializeField] private float slowSpeed = 50;
         
         [Space]
         public bool canCrouch = true;
@@ -64,6 +68,10 @@ namespace Player
         private Rigidbody rb;
         private RaycastHit hit;
         public PlayerControl Control { get; private set; }
+
+        public Transform getCamAnchor(){
+            return defaultCameraAnchor;
+        }
 
         public void LockPlayer()
         {
@@ -150,6 +158,27 @@ namespace Player
             cameraTransform.parent = defaultCameraAnchor;
         }
 
+        public void useCanon(){
+            canSprint = false;
+            canDash = false;
+            canCrouch = false;
+            canJump = false;
+            usingHeavyObj = true;
+            mouseSensitivity /= 3;
+        }
+        public void releaseCanon(){
+            canSprint = true;
+            canDash = true;
+            canCrouch = true;
+            canJump = true;
+            usingHeavyObj = false;
+            mouseSensitivity *= 3;
+        }
+
+        public void ResetCamRotation(){
+            _cameraRotation = Vector3.zero;
+        }
+
         private void OnJump(InputAction.CallbackContext obj)
         {
             if (!canJump || !IsGrounded) return;
@@ -165,6 +194,7 @@ namespace Player
                                         && stamina.Use(sprintStaminaUsage * Time.fixedDeltaTime) ? sprintSpeed : moveSpeed;
                 speed = Mathf.Lerp(speed, dashSpeed, Mathf.Max(0, _dashTime / dashTime));
                 speed = useCrouchSpeed && canCrouch ? crouchSpeed : speed;
+                if (usingHeavyObj) speed = slowSpeed;
                 var dir = Control.Movement.Move.ReadValue<Vector2>() * (speed * Time.fixedDeltaTime);
                 var vel = transform.right * dir.x + transform.forward * dir.y;
                 vel.x -= rb.velocity.x;

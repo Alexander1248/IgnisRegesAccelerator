@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Player.Interactables;
 using UnityEngine;
 
 public class Coder : MonoBehaviour
@@ -25,6 +26,8 @@ public class Coder : MonoBehaviour
     [SerializeField] private Animator[] updownAnims;
     [SerializeField] private GameObject targetFound;
     private bool codeEntered;
+
+    [SerializeField] private FirstSceneManager firstSceneManager;
 
 
     void Start(){
@@ -114,5 +117,6 @@ public class Coder : MonoBehaviour
         targetFound.SetActive(true);
 
         // NEXT STAGE
+        firstSceneManager.WaitPlayerToExit();
     }
 }
