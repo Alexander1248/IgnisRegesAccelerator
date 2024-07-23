@@ -8,6 +8,7 @@ public class CanonMove : MonoBehaviour
     public Transform canon;
     public Transform canonMesh;
     [SerializeField] private PlayerController playerController;
+    private Transform player;
     [SerializeField] private float rotationSpeed;
     private bool attached;
 
@@ -23,6 +24,7 @@ public class CanonMove : MonoBehaviour
 
     void Start(){
         //AttachCanon();
+        player = playerController.transform;
     }
 
     public void AttachCanon(){
@@ -30,10 +32,15 @@ public class CanonMove : MonoBehaviour
         playerController.useCanon();
     }
 
+    public void ReleaseCanon(){
+        playerController.releaseCanon();
+        attached = false;
+    }
+
     void Update(){
         if (!attached) return;
-        canon.position = transform.position;
-        Vector3 newDirection = Vector3.RotateTowards(canon.forward, transform.forward, rotationSpeed * Time.deltaTime, 0.0f);
+        canon.position = player.position;
+        Vector3 newDirection = Vector3.RotateTowards(canon.forward, player.forward, rotationSpeed * Time.deltaTime, 0.0f);
         canon.rotation = Quaternion.LookRotation(newDirection);
 
         if (Input.GetMouseButtonDown(0) && readyToShoot){
@@ -41,8 +48,7 @@ public class CanonMove : MonoBehaviour
             Shoot();
         }
         if (Input.GetKeyDown(KeyCode.Escape)){
-            playerController.releaseCanon();
-            attached = false;
+            ReleaseCanon();
         }
     }
 
