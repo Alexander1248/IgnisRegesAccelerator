@@ -10,6 +10,8 @@ namespace Managers
         [SerializeField] private Inventory[] inventories;
 
         public int Count => inventories.Length;
+
+        public IEnumerable<KeyValuePair<Vector2Int, Item>> this[int index] => inventories[index].Enumerator;
         
         public bool UseItem(int id, int x, int y, GameObject player)
         {
@@ -36,6 +38,10 @@ namespace Managers
         public Item GetItem(int id, int x, int y)
         {
             return inventories[id].GetItem(x, y);
+        }
+        public Vector2Int? GetItemCenter(int id, int x, int y)
+        {
+            return inventories[id].GetItemCenter(x, y);
         }
         
         public IEnumerable<Vector2Int> Find(int id, Item item)

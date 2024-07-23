@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Items
 {
@@ -13,6 +12,7 @@ namespace Items
         [SerializeField] private int height;
         private readonly Dictionary<Vector2Int, Item> _items = new();
 
+        public IEnumerable<KeyValuePair<Vector2Int, Item>> Enumerator => _items;
 
         public bool AddItem(int x, int y, Item item)
         {
@@ -51,6 +51,13 @@ namespace Items
             foreach (var (key, value) in _items)
                 if (value.Intersects(key.x, key.y, x, y)) 
                     return value;
+            return null;
+        }
+        public Vector2Int? GetItemCenter(int x, int y)
+        {
+            foreach (var (key, value) in _items)
+                if (value.Intersects(key.x, key.y, x, y)) 
+                    return key;
             return null;
         }
 

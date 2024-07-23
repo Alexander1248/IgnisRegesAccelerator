@@ -50,9 +50,10 @@ namespace Managers
         [SerializeField] private GameObject inventoryGUI;
         [SerializeField] private RectTransform[] gridContents;
         [SerializeField] private RectTransform cell;
+        [SerializeField] private InventoryUpdater updater;
 
         private Item bufferedItem;
-        private GameObject bufferedObject;
+        private RectTransform bufferedObject;
         private int prevInv, prevIx, prevIy;
         private int inv, ix, iy;
         private bool inInv;
@@ -130,9 +131,10 @@ namespace Managers
                 prevInv = inv;
                 prevIx = ix;
                 prevIy = iy;
-                
-                // TODO: Get Buffered Object
-                bufferedObject = null;
+
+                var center = inventory.GetItemCenter(inv, ix, iy);
+                bufferedObject = center.HasValue ? gridContents[inv]
+                        .Find($"Inv_Item_{inv}_{center.Value.x}_{center.Value.y}") as RectTransform : null;
             };
             playerController.Control.Interaction.MoveItem.canceled += _ =>
             {
@@ -141,20 +143,24 @@ namespace Managers
                 {
                     if (inventory.AddItem(inv, ix, iy, bufferedItem))
                     {
-                        // TODO: Place Buffered Object
+                        bufferedObject.anchoredPosition = new Vector2(ix, iy) * cell.rect.size;
                     }
                     else
                     {
                         inventory.AddItem(prevInv, prevIx, prevIy, bufferedItem);
-                        // TODO: Place Buffered Object Back
+                        bufferedObject.anchoredPosition = new Vector2(prevIx, prevIy) * cell.rect.size;
                     }
                 }
                 else
                 {
                     bufferedItem = null;
-                    Destroy(bufferedObject);
+                    Destroy(bufferedObject.gameObject);
                 }
             };
+
+            updater.manager = inventory;
+            updater.gridContents = gridContents;
+            updater.cell = cell;
         }
         
         public void FixedUpdate()
@@ -173,8 +179,9 @@ namespace Managers
                 ix = (int) point.x;
                 iy = (int) point.y;
                 inInv = true;
-                Debug.Log($"[Inventory]: {inv} {ix} {iy}");
+                return;
             }
+            Debug.Log($"[Inventory]: {inInv} {inv} {ix} {iy}");
         }
 
         public void AddQuest(Quest quest)
