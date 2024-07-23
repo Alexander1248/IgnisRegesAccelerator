@@ -260,6 +260,7 @@ GameObject:
   - component: {fileID: 1927627620061193653}
   - component: {fileID: 3061245999218431476}
   - component: {fileID: 2001078202348643352}
+  - component: {fileID: 1727356865625101227}
   m_Layer: 0
   m_Name: GamePlayer
   m_TagString: Player
@@ -296,6 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8e593abd41156499e60fda0bd1f871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stamina: {fileID: 1727356865625101227}
   camera: {fileID: 2678185902090726075}
   cameraTransform: {fileID: 3876864631316890952}
   defaultVariant: {fileID: 711747212641910087}
@@ -308,9 +310,11 @@ MonoBehaviour:
   crouchSpeed: 150
   canSprint: 1
   sprintSpeed: 600
+  sprintStaminaUsage: 10
   canDash: 1
   dashSpeed: 1000
   dashTime: 1
+  dashStaminaUsage: 30
   canJump: 1
   jumpForce: 10
   cameraCanMove: 1
@@ -363,16 +367,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onSelectedChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Managers.GUIManager, Assembly-CSharp
+        m_MethodName: UpdateCurrentQuest
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onQuestAdded:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Managers.GUIManager, Assembly-CSharp
+        m_MethodName: AddQuest
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onQuestCompleted:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Managers.GUIManager, Assembly-CSharp
+        m_MethodName: CompleteQuest
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onQuestAborted:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Managers.GUIManager, Assembly-CSharp
+        m_MethodName: AbortQuest
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3061245999218431476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,7 +443,19 @@ MonoBehaviour:
       m_Calls: []
   onHealthChange:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Managers.GUIManager, Assembly-CSharp
+        m_MethodName: UpdateHP
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   rb: {fileID: 0}
   hp: 0
   amountRestore: 0
@@ -423,6 +487,38 @@ MonoBehaviour:
     height: 4
   - width: 3
     height: 2
+--- !u!114 &1727356865625101227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934029042782838079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc5adc780784d36a8e3fbb5954f964c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  max: 100
+  value: 0
+  onChange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Managers.GUIManager, Assembly-CSharp
+        m_MethodName: UpdateStamina
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  regenStartDelay: 10
+  regenCooldown: 0.1
+  regenAmount: 0.3
 --- !u!1 &1852024802003182290
 GameObject:
   m_ObjectHideFlags: 0

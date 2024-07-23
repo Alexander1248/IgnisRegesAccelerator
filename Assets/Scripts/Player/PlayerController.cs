@@ -7,6 +7,7 @@ namespace Player
     
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private Stamina stamina;
         [SerializeField] private Camera camera;
         [SerializeField] private Transform cameraTransform;
         
@@ -27,11 +28,13 @@ namespace Player
         [Space]
         public bool canSprint = true;
         [SerializeField] private float sprintSpeed = 600;
+        [SerializeField] private float sprintStaminaUsage = 1;
         
         [Space]
         public bool canDash = true;
         [SerializeField] private float dashSpeed = 1000;
         [SerializeField] private float dashTime = 1;
+        [SerializeField] private float dashStaminaUsage = 30;
         
         [Space]
         public bool canJump = true;
@@ -48,13 +51,13 @@ namespace Player
         [SerializeField] private float maxLookAngle = 60;
         public float cameraDistance;
         
-        public bool isGrounded { get; private set; }
-        public bool isSprinting { get; private set; }
-        public bool isCrouching { get; private set; }
+        public bool IsGrounded { get; private set; }
+        public bool IsSprinting { get; private set; }
+        public bool IsCrouching { get; private set; }
 
         private bool scheduleSprint;
         private bool useCrouchSpeed;
-         private float _dashTime = 0;
+        private float _dashTime;
         
         private Vector2 _cameraRotation = Vector2.zero;
         
@@ -124,14 +127,15 @@ namespace Player
             if (!canDash) return;
             if (obj.interaction is not TapInteraction) return;
             Debug.Log("Dash!");
-            _dashTime = dashTime;
+            if (stamina.Use(dashStaminaUsage))
+                _dashTime = dashTime;
         }
         
         private void OnCrouch(InputAction.CallbackContext obj)
         {
             if (!canCrouch) return;
             Debug.Log("Crouch Start!");
-            isCrouching = true;
+            IsCrouching = true;
             defaultVariant.SetActive(false);
             crouchVariant.SetActive(true);
             cameraTransform.parent = crouchCameraAnchor;
@@ -140,7 +144,7 @@ namespace Player
         {
             if (!canCrouch) return;
             Debug.Log("Crouch End!");
-            isCrouching = false;
+            IsCrouching = false;
             defaultVariant.SetActive(true);
             crouchVariant.SetActive(false);
             cameraTransform.parent = defaultCameraAnchor;
@@ -148,16 +152,17 @@ namespace Player
 
         private void OnJump(InputAction.CallbackContext obj)
         {
-            if (!canJump || !isGrounded) return;
+            if (!canJump || !IsGrounded) return;
             rb.AddForce(0f, jumpForce, 0f, ForceMode.VelocityChange);
-            isGrounded = false;
+            IsGrounded = false;
         }
 
         private void FixedUpdate()
         {
             if (canMove)
             {
-                var speed = isSprinting && canSprint ? sprintSpeed : moveSpeed;
+                var speed = IsSprinting && canSprint 
+                                        && stamina.Use(sprintStaminaUsage * Time.fixedDeltaTime) ? sprintSpeed : moveSpeed;
                 speed = Mathf.Lerp(speed, dashSpeed, Mathf.Max(0, _dashTime / dashTime));
                 speed = useCrouchSpeed && canCrouch ? crouchSpeed : speed;
                 var dir = Control.Movement.Move.ReadValue<Vector2>() * (speed * Time.fixedDeltaTime);
@@ -230,14 +235,19 @@ namespace Player
             if (Physics.Raycast(origin, direction, out _, distance, int.MaxValue, QueryTriggerInteraction.Ignore))
             {
                 Debug.DrawRay(origin, direction * distance, Color.red);
-                isGrounded = true;
-                isSprinting = scheduleSprint;
-                useCrouchSpeed = isCrouching;
+                IsGrounded = true;
+                IsSprinting = scheduleSprint;
+                useCrouchSpeed = IsCrouching;
             }
             else
             {
-                isGrounded = false;
+                IsGrounded = false;
             }
+        }
+
+        private void OnSprint()
+        {
+            stamina.Use(sprintStaminaUsage);
         }
     }
 }
