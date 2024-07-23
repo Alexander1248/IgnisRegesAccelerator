@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 038c32de9187b3b44be5d907eca6470d
+guid: 5502056cec835c94cb39f97ba3599070
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,11 +123,53 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HpContour
+      name: HpIcon
       rect:
         serializedVersion: 2
-        x: 35
-        y: 148
+        x: 239
+        y: 304
+        width: 140
+        height: 99
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b59417456639d6047bc29180e9a071f7
+      internalID: 258536820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StaminaIcon
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 315
+        width: 110
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a808ca5b9404f0438feabab2fee424c
+      internalID: 1227583800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HpOutline
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 205
         width: 562
         height: 44
       alignment: 0
@@ -137,18 +179,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b735fed2bafbcc04183dc9ec89e79665
-      internalID: -437999911
+      spriteID: b9ec12f93008cab478f5b54bbd49d72a
+      internalID: -1751949964
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: StaminaContour
+      name: StaminaOutline
       rect:
         serializedVersion: 2
-        x: 729
-        y: 148
+        x: 736
+        y: 205
         width: 393
         height: 44
       alignment: 0
@@ -158,8 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6fbd0ba4b85c2c14d9ce02c042711c29
-      internalID: -304696232
+      spriteID: 5c6bdbc9cadd9114d97685cd7b14858e
+      internalID: 321375219
       vertices: []
       indices: 
       edges: []
@@ -168,8 +210,8 @@ TextureImporter:
       name: HpBar
       rect:
         serializedVersion: 2
-        x: 40
-        y: 96
+        x: 47
+        y: 153
         width: 552
         height: 34
       alignment: 0
@@ -179,8 +221,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aac392035f0d5484baef8c9bb2d028c5
-      internalID: -34351253
+      spriteID: a6c934da116a66a4a80f6e158cd5a160
+      internalID: 1395559281
       vertices: []
       indices: 
       edges: []
@@ -189,8 +231,8 @@ TextureImporter:
       name: StaminaBar
       rect:
         serializedVersion: 2
-        x: 734
-        y: 96
+        x: 741
+        y: 153
         width: 383
         height: 34
       alignment: 0
@@ -200,8 +242,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63025f2cad2f98e42a38efe00d032b5b
-      internalID: 1891596782
+      spriteID: dc2a123c370244e42bddbc843fb70d05
+      internalID: -940199149
       vertices: []
       indices: 
       edges: []
@@ -210,8 +252,8 @@ TextureImporter:
       name: HpBack
       rect:
         serializedVersion: 2
-        x: 40
-        y: 35
+        x: 47
+        y: 92
         width: 552
         height: 34
       alignment: 0
@@ -221,8 +263,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e94f45b6e068d4c4a89eec190f7795bf
-      internalID: 386362250
+      spriteID: 8b293c96cf307264e9617a5cc30b5f28
+      internalID: 1019821438
       vertices: []
       indices: 
       edges: []
@@ -231,8 +273,8 @@ TextureImporter:
       name: StaminaBack
       rect:
         serializedVersion: 2
-        x: 734
-        y: 35
+        x: 741
+        y: 92
         width: 383
         height: 34
       alignment: 0
@@ -242,8 +284,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c2b5c55874e1b849a0537e51a4e447b
-      internalID: 1996013025
+      spriteID: 3559ddb5dd7ab8c4a9a2ace987d37045
+      internalID: 857806304
       vertices: []
       indices: 
       edges: []
@@ -251,7 +293,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 1929b5a5f4f6c2547994e5b5a02172af
+    spriteID: 1eea0b0a5dff8a34bb7ffb61726ec5a8
     internalID: 0
     vertices: []
     indices: 
@@ -259,12 +301,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HpBack: 386362250
-      HpBar: -34351253
-      HpContour: -437999911
-      StaminaBack: 1996013025
-      StaminaBar: 1891596782
-      StaminaContour: -304696232
+      BarsUpdated_0: -1480270528
+      BarsUpdated_2: -1496129774
+      HpBack: 1019821438
+      HpBar: 1395559281
+      HpIcon: 258536820
+      HpOutline: -1751949964
+      StaminaBack: 857806304
+      StaminaBar: -940199149
+      StaminaIcon: 1227583800
+      StaminaOutline: 321375219
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
