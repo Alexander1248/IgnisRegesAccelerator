@@ -44,11 +44,11 @@ public class Rat : MonoBehaviour
         }
         else if ((Vector3.Distance(RatParent.position, player.position) > radiusAttack || 
         Mathf.Abs(RatParent.position.y - player.position.y) > 2.5f) && iSeePlayer){
+            iSeePlayer = false;
+            CancelInvoke("tryAttck");
             if (!attacking && !jumping){
-                iSeePlayer = false;
                 jumping = false;
                 attacking = false;
-                CancelInvoke("tryAttck");
             }
         }
 
