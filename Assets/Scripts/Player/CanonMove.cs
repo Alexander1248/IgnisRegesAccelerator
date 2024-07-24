@@ -6,7 +6,6 @@ using UnityEngine;
 public class CanonMove : MonoBehaviour
 {
     public Transform canon;
-    public Transform canonMesh;
     [SerializeField] private PlayerController playerController;
     private Transform player;
     [SerializeField] private float rotationSpeed;
@@ -25,6 +24,7 @@ public class CanonMove : MonoBehaviour
     void Start(){
         //AttachCanon();
         player = playerController.transform;
+        resetYadro();
     }
 
     public void AttachCanon(){
