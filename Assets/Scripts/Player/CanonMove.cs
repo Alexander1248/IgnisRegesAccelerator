@@ -25,6 +25,7 @@ public class CanonMove : MonoBehaviour
     void Start(){
         //AttachCanon();
         player = playerController.transform;
+        resetYadro();
     }
 
     public void AttachCanon(){
