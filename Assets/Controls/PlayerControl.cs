@@ -259,6 +259,15 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Use Item"",
+                    ""type"": ""Button"",
+                    ""id"": ""a4b01388-97c8-4943-8876-574b7bf54d96"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -358,6 +367,17 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
                     ""action"": ""MoveItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cef34893-88dd-4eff-97d1-5f29b6135083"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Use Item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -473,6 +493,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_Interaction_UseHeal = m_Interaction.FindAction("Use Heal", throwIfNotFound: true);
         m_Interaction_Journal = m_Interaction.FindAction("Journal", throwIfNotFound: true);
         m_Interaction_MoveItem = m_Interaction.FindAction("MoveItem", throwIfNotFound: true);
+        m_Interaction_UseItem = m_Interaction.FindAction("Use Item", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Move = m_Camera.FindAction("Move", throwIfNotFound: true);
@@ -624,6 +645,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_Interaction_UseHeal;
     private readonly InputAction m_Interaction_Journal;
     private readonly InputAction m_Interaction_MoveItem;
+    private readonly InputAction m_Interaction_UseItem;
     public struct InteractionActions
     {
         private @PlayerControl m_Wrapper;
@@ -637,6 +659,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         public InputAction @UseHeal => m_Wrapper.m_Interaction_UseHeal;
         public InputAction @Journal => m_Wrapper.m_Interaction_Journal;
         public InputAction @MoveItem => m_Wrapper.m_Interaction_MoveItem;
+        public InputAction @UseItem => m_Wrapper.m_Interaction_UseItem;
         public InputActionMap Get() { return m_Wrapper.m_Interaction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -673,6 +696,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @MoveItem.started += instance.OnMoveItem;
             @MoveItem.performed += instance.OnMoveItem;
             @MoveItem.canceled += instance.OnMoveItem;
+            @UseItem.started += instance.OnUseItem;
+            @UseItem.performed += instance.OnUseItem;
+            @UseItem.canceled += instance.OnUseItem;
         }
 
         private void UnregisterCallbacks(IInteractionActions instance)
@@ -704,6 +730,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @MoveItem.started -= instance.OnMoveItem;
             @MoveItem.performed -= instance.OnMoveItem;
             @MoveItem.canceled -= instance.OnMoveItem;
+            @UseItem.started -= instance.OnUseItem;
+            @UseItem.performed -= instance.OnUseItem;
+            @UseItem.canceled -= instance.OnUseItem;
         }
 
         public void RemoveCallbacks(IInteractionActions instance)
@@ -795,6 +824,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         void OnUseHeal(InputAction.CallbackContext context);
         void OnJournal(InputAction.CallbackContext context);
         void OnMoveItem(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {
