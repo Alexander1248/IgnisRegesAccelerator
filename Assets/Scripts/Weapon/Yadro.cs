@@ -12,6 +12,7 @@ public class Yadro : MonoBehaviour
     public FirstSceneManager firstSceneManager;
     
     [SerializeField] private UnityEvent EventHit;
+    [SerializeField] private UnityEvent AdditionalEventHit;
 
     public void Activate(Vector3 yadroDirection) {
         transform.forward = yadroDirection;
@@ -34,6 +35,9 @@ public class Yadro : MonoBehaviour
     void OnTriggerEnter(Collider other){
         if (other.name == "HOLE"){
             EventHit.Invoke();
+        }
+        else if (other.name == "HITABLE"){
+            AdditionalEventHit.Invoke();
         }
     }
 }

@@ -6,7 +6,6 @@ using UnityEngine;
 public class CanonMove : MonoBehaviour
 {
     public Transform canon;
-    public Transform canonMesh;
     [SerializeField] private PlayerController playerController;
     private Transform player;
     [SerializeField] private float rotationSpeed;
