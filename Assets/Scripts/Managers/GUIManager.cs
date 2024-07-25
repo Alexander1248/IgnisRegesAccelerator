@@ -14,7 +14,7 @@ namespace Managers
         [SerializeField] private HandController handController;
         [SerializeField] private PlayerController playerController;
         [SerializeField] private QuestManager questManager;
-        [SerializeField] private Inventory inventory;
+        [SerializeField] private InventoryManager inventory;
         
         // HUD
         [Space]
@@ -48,7 +48,16 @@ namespace Managers
         // Inventory
         [Space]
         [SerializeField] private GameObject inventoryGUI;
+        [SerializeField] private RectTransform[] gridContents;
+        [SerializeField] private RectTransform cell;
+        [SerializeField] private InventoryUpdater updater;
 
+        private Item bufferedItem;
+        private RectTransform bufferedObject;
+        private int prevInv, prevIx, prevIy;
+        private int inv, ix, iy;
+        private bool inInv;
+        
 
         private void Start()
         {
@@ -110,6 +119,69 @@ namespace Managers
                     hud.SetActive(false);
                 }
             };
+
+            playerController.Control.Interaction.MoveItem.performed += _ =>
+            {
+                if (!inInv)
+                {
+                    bufferedItem = null;
+                    return;
+                }
+                bufferedItem = inventory.RemoveItem(inv, ix, iy);
+                prevInv = inv;
+                prevIx = ix;
+                prevIy = iy;
+
+                var center = inventory.GetItemCenter(inv, ix, iy);
+                bufferedObject = center.HasValue ? gridContents[inv]
+                        .Find($"Inv_Item_{inv}_{center.Value.x}_{center.Value.y}") as RectTransform : null;
+            };
+            playerController.Control.Interaction.MoveItem.canceled += _ =>
+            {
+                if (bufferedItem == null) return;
+                if (inInv)
+                {
+                    if (inventory.AddItem(inv, ix, iy, bufferedItem))
+                    {
+                        bufferedObject.anchoredPosition = new Vector2(ix, iy) * cell.rect.size;
+                    }
+                    else
+                    {
+                        inventory.AddItem(prevInv, prevIx, prevIy, bufferedItem);
+                        bufferedObject.anchoredPosition = new Vector2(prevIx, prevIy) * cell.rect.size;
+                    }
+                }
+                else
+                {
+                    bufferedItem = null;
+                    Destroy(bufferedObject.gameObject);
+                }
+            };
+
+            updater.manager = inventory;
+            updater.gridContents = gridContents;
+            updater.cell = cell;
+        }
+        
+        public void FixedUpdate()
+        {
+            if (!inventoryGUI.activeInHierarchy) return;
+            inInv = false;
+            var position = Input.mousePosition;
+            for (var i = 0; i < gridContents.Length; i++)
+            {
+                var rect = gridContents[i];
+                if (!RectTransformUtility.RectangleContainsScreenPoint(rect, position)) continue;
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(rect,
+                    position, Camera.current, out var localPoint);
+                var point = (localPoint + rect.rect.size * 0.5f) / cell.sizeDelta;
+                inv = i;
+                ix = (int) point.x;
+                iy = (int) point.y;
+                inInv = true;
+                return;
+            }
+            Debug.Log($"[Inventory]: {inInv} {inv} {ix} {iy}");
         }
 
         public void AddQuest(Quest quest)
