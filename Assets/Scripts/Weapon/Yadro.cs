@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Yadro : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class Yadro : MonoBehaviour
     private bool moveYadro;
     private Vector3 velocityYadro;
     public FirstSceneManager firstSceneManager;
+    
+    [SerializeField] private UnityEvent EventHit;
+    [SerializeField] private UnityEvent AdditionalEventHit;
 
     public void Activate(Vector3 yadroDirection) {
         transform.forward = yadroDirection;
@@ -29,9 +33,11 @@ public class Yadro : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other){
-        if (firstSceneManager == null) return;
         if (other.name == "HOLE"){
-            firstSceneManager.MegaShipGotHitted();
+            EventHit.Invoke();
+        }
+        else if (other.name == "HITABLE"){
+            AdditionalEventHit.Invoke();
         }
     }
 }

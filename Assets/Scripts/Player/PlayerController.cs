@@ -1,3 +1,4 @@
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -7,6 +8,7 @@ namespace Player
     
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private Stamina stamina;
         [SerializeField] private Camera camera;
         [SerializeField] private Transform cameraTransform;
         
@@ -15,6 +17,11 @@ namespace Player
         
         [SerializeField] private GameObject crouchVariant;
         [SerializeField] private Transform crouchCameraAnchor;
+
+        [SerializeField] private GameObject layVariant;
+        [SerializeField] private Transform layCameraAnchor;
+
+        [SerializeField] private float standHeight;
     
         [Space]
         public bool canMove = true;
@@ -27,15 +34,21 @@ namespace Player
         [Space]
         public bool canCrouch = true;
         [SerializeField] private float crouchSpeed = 150;
+
+        [Space]
+        public bool canLay = true;
+        [SerializeField] private float laySpeed = 50;
     
         [Space]
         public bool canSprint = true;
         [SerializeField] private float sprintSpeed = 600;
+        [SerializeField] private float sprintStaminaUsage = 1;
         
         [Space]
         public bool canDash = true;
         [SerializeField] private float dashSpeed = 1000;
         [SerializeField] private float dashTime = 1;
+        [SerializeField] private float dashStaminaUsage = 30;
         
         [Space]
         public bool canJump = true;
@@ -55,10 +68,12 @@ namespace Player
         public bool isGrounded { get; private set; }
         public bool isSprinting { get; private set; }
         public bool isCrouching { get; private set; }
+        public bool isLaying { get; private set; }
 
+        private bool wantToStand;
         private bool scheduleSprint;
         private bool useCrouchSpeed;
-         private float _dashTime = 0;
+        private float _dashTime;
         
         private Vector2 _cameraRotation = Vector2.zero;
         
@@ -66,11 +81,21 @@ namespace Player
         private RaycastHit hit;
         public PlayerControl Control { get; private set; }
 
+
+        [SerializeField] private Animator camAnimator;
+        [SerializeField] private AnimatorController animatorController;
+        [SerializeField] private float layingAnimKoeff;
+
+        public Transform getCamAnchor(){
+            return defaultCameraAnchor;
+        }
+
         public void LockPlayer()
         {
             canMove = false;
             canCrouch = false;
             canJump = false;
+            canLay = false;
             canDash = false;
             canSprint = false;
             cameraCanMove = false;
@@ -80,6 +105,7 @@ namespace Player
             canMove = true;
             canCrouch = true;
             canJump = true;
+            canLay = true;
             canDash = true;
             canSprint = true;
             cameraCanMove = true;
@@ -105,8 +131,8 @@ namespace Player
             Control.Movement.Sprint.canceled += OnSprintCanceled;
             Control.Movement.Dash.performed += OnDash;
             
-            Control.Movement.Crouch.performed += OnCrouch;
-            Control.Movement.Crouch.canceled += OnCrouchCanceled;
+            Control.Movement.Crouch.performed += OnLay;
+            Control.Movement.Crouch.canceled += OnLayCanceled;
         }
 
         private void OnSprint(InputAction.CallbackContext obj)
@@ -128,26 +154,80 @@ namespace Player
             if (!canDash) return;
             if (obj.interaction is not TapInteraction) return;
             Debug.Log("Dash!");
-            _dashTime = dashTime;
+            if (stamina.Use(dashStaminaUsage))
+                _dashTime = dashTime;
         }
         
         private void OnCrouch(InputAction.CallbackContext obj)
         {
             if (!canCrouch) return;
             Debug.Log("Crouch Start!");
+
+            wantToStand = false;
             isCrouching = true;
+
             defaultVariant.SetActive(false);
             crouchVariant.SetActive(true);
+            layVariant.SetActive(false);
             cameraTransform.parent = crouchCameraAnchor;
         }
         private void OnCrouchCanceled(InputAction.CallbackContext obj)
         {
             if (!canCrouch) return;
             Debug.Log("Crouch End!");
+            wantToStand = true;
+        }
+
+        void Stand(){
+            Debug.Log("Stand!");
+            wantToStand = false;
             isCrouching = false;
+            isLaying = false;
+
             defaultVariant.SetActive(true);
             crouchVariant.SetActive(false);
+            layVariant.SetActive(false);
             cameraTransform.parent = defaultCameraAnchor;
+
+            camAnimator.runtimeAnimatorController = null;
+            camAnimator.speed = 1;
+            cameraTransform.position = Vector3.zero;
+        }
+
+        private void OnLay(InputAction.CallbackContext obj)
+        {
+            _onLay();
+        }
+        void _onLay(){
+            if (!canLay) return;
+            Debug.Log("Lay Start!");
+            wantToStand = false;
+            isLaying = true;
+            defaultVariant.SetActive(false);
+            crouchVariant.SetActive(false);
+            layVariant.SetActive(true);
+            cameraTransform.parent = layCameraAnchor;
+            camAnimator.enabled = true;
+            camAnimator.runtimeAnimatorController = animatorController;
+            camAnimator.Play("LayingAnim", -1, 0);
+        }
+        private void OnLayCanceled(InputAction.CallbackContext obj)
+        {
+             _onLayCanceled();
+        }
+        void _onLayCanceled(){
+            if (!canLay) return;
+            Debug.Log("Lay End!");
+            wantToStand = true;
+        }
+
+        public void UseRailCanon(bool active){
+            canSprint = active;
+            canDash = active;
+            canCrouch = active;
+            canJump = active;
+            canMove = active;
+            canLay = active;
         }
 
         public void useCanon(){
@@ -155,6 +235,7 @@ namespace Player
             canDash = false;
             canCrouch = false;
             canJump = false;
+            canLay = false;
             usingHeavyObj = true;
             mouseSensitivity /= 3;
         }
@@ -163,8 +244,13 @@ namespace Player
             canDash = true;
             canCrouch = true;
             canJump = true;
+            canLay = true;
             usingHeavyObj = false;
             mouseSensitivity *= 3;
+        }
+
+        public void ResetCamRotation(){
+            _cameraRotation = Vector3.zero;
         }
 
         private void OnJump(InputAction.CallbackContext obj)
@@ -174,13 +260,43 @@ namespace Player
             isGrounded = false;
         }
 
+        public void ForceLay(){
+             _onLay();
+             _onLayCanceled();
+        }
+
+        void checkHeight(){
+            var origin = new Vector3(transform.position.x, isCrouching ? crouchCameraAnchor.position.y : layCameraAnchor.position.y, transform.position.z);
+            float distance = standHeight;
+
+            Debug.DrawRay(origin, Vector3.up * distance, Color.red);
+            if (Physics.Raycast(origin, Vector3.up, out _, distance, int.MaxValue, QueryTriggerInteraction.Ignore))
+            {
+                
+            }
+            else
+            {
+                Stand();
+            }
+        }
+
         private void FixedUpdate()
         {
+            if (isLaying){
+                camAnimator.speed = rb.velocity.magnitude * layingAnimKoeff;
+            }
+
+            if (wantToStand){
+                checkHeight();
+            }
+
             if (canMove)
             {
-                var speed = isSprinting && canSprint ? sprintSpeed : moveSpeed;
+                var speed = isSprinting && canSprint 
+                                        && stamina.Use(sprintStaminaUsage * Time.fixedDeltaTime) ? sprintSpeed : moveSpeed;
                 speed = Mathf.Lerp(speed, dashSpeed, Mathf.Max(0, _dashTime / dashTime));
                 speed = useCrouchSpeed && canCrouch ? crouchSpeed : speed;
+                speed = isLaying ? laySpeed : speed;
                 if (usingHeavyObj) speed = slowSpeed;
                 var dir = Control.Movement.Move.ReadValue<Vector2>() * (speed * Time.fixedDeltaTime);
                 var vel = transform.right * dir.x + transform.forward * dir.y;
@@ -260,6 +376,11 @@ namespace Player
             {
                 isGrounded = false;
             }
+        }
+
+        private void OnSprint()
+        {
+            stamina.Use(sprintStaminaUsage);
         }
     }
 }
