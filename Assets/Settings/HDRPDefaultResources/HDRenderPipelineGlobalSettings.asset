@@ -180,7 +180,10 @@ MonoBehaviour:
       - c32a6ebfdd0687843bd24f6394a5ff48
       - 9cf3bdce68884fcb9ee3887d2710096f
       - e054478bcf4c4774393b57694f02c8ef
+      - d3f9fa42f3c151b4dae9ae1ed9786fb9
       - b5c2c7894cd7662498d36ad84e3a67da
+      - 01b19f3a36b11f449a6fd4f1f673af61
+      - e11e200f4806f704099762680d3c4e70
       - 52e4b96e9c8bb7d40ad793bcd3aed134
       - 48fc8fa27b0334640b81baef8d02f6b1
       m_Values:
@@ -188,7 +191,10 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 443b993c43d373246959c76f3b7d63b3, type: 2}
       - {fileID: 11400000, guid: da6de087cec8fd5478836626c66d5521, type: 2}
       - {fileID: 11400000, guid: 8b2a584469feb6c4faf75145c2fe1776, type: 2}
+      - {fileID: 11400000, guid: 14444203b407f6544a80ea3cc6e4ab99, type: 2}
       - {fileID: 11400000, guid: d5dbbcc0f196c224493afb748ed91299, type: 2}
+      - {fileID: 11400000, guid: 7176bdb27950f21419a17b01967dcce3, type: 2}
+      - {fileID: 11400000, guid: 4ec47c4d13b642c48819a44a27b9edba, type: 2}
       - {fileID: 11400000, guid: 235d1019da2fd994aa320b6958755f61, type: 2}
       - {fileID: 11400000, guid: f09a1c4e6c557a049bd01a6d1bf6845c, type: 2}
     bakingSets:
@@ -196,7 +202,10 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 443b993c43d373246959c76f3b7d63b3, type: 2}
     - {fileID: 11400000, guid: da6de087cec8fd5478836626c66d5521, type: 2}
     - {fileID: 11400000, guid: 8b2a584469feb6c4faf75145c2fe1776, type: 2}
+    - {fileID: 11400000, guid: 14444203b407f6544a80ea3cc6e4ab99, type: 2}
     - {fileID: 11400000, guid: d5dbbcc0f196c224493afb748ed91299, type: 2}
+    - {fileID: 11400000, guid: 7176bdb27950f21419a17b01967dcce3, type: 2}
+    - {fileID: 11400000, guid: 4ec47c4d13b642c48819a44a27b9edba, type: 2}
     - {fileID: 11400000, guid: 4d779f516b74fda4aa2a23d2ef2acb66, type: 2}
     - {fileID: 11400000, guid: 67a2ed1f05ba8874ea16303ae1c8dfde, type: 2}
     - {fileID: 11400000, guid: 235d1019da2fd994aa320b6958755f61, type: 2}
@@ -229,7 +238,8 @@ MonoBehaviour:
       - e054478bcf4c4774393b57694f02c8ef
       - b5c2c7894cd7662498d36ad84e3a67da
       - 9cf3bdce68884fcb9ee3887d2710096f
-      m_Values: 0000010101
+      - d3f9fa42f3c151b4dae9ae1ed9786fb9
+      m_Values: 000001010100
   m_Version: 10
   m_ShaderStrippingSetting:
     m_Version: 0
