@@ -255,9 +255,9 @@ namespace Player
 
         private void OnJump(InputAction.CallbackContext obj)
         {
-            if (!canJump || !IsGrounded) return;
+            if (!canJump || !isGrounded) return;
             rb.AddForce(0f, jumpForce, 0f, ForceMode.VelocityChange);
-            IsGrounded = false;
+            isGrounded = false;
         }
 
         public void ForceLay(){
@@ -292,7 +292,7 @@ namespace Player
 
             if (canMove)
             {
-                var speed = IsSprinting && canSprint 
+                var speed = isSprinting && canSprint 
                                         && stamina.Use(sprintStaminaUsage * Time.fixedDeltaTime) ? sprintSpeed : moveSpeed;
                 speed = Mathf.Lerp(speed, dashSpeed, Mathf.Max(0, _dashTime / dashTime));
                 speed = useCrouchSpeed && canCrouch ? crouchSpeed : speed;
@@ -368,13 +368,13 @@ namespace Player
             if (Physics.Raycast(origin, direction, out _, distance, int.MaxValue, QueryTriggerInteraction.Ignore))
             {
                 Debug.DrawRay(origin, direction * distance, Color.red);
-                IsGrounded = true;
-                IsSprinting = scheduleSprint;
-                useCrouchSpeed = IsCrouching;
+                isGrounded = true;
+                isSprinting = scheduleSprint;
+                useCrouchSpeed = isCrouching;
             }
             else
             {
-                IsGrounded = false;
+                isGrounded = false;
             }
         }
 

@@ -52,7 +52,8 @@ public class CanonMove : MonoBehaviour
         }
     }
 
-    void Shoot(){
+    public void Shoot(){
+        readyToShoot = false;
         particles.gameObject.SetActive(true);
         particles.Play(true);
         canonAnim.enabled = true;
