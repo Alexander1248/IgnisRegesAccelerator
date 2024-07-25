@@ -16,12 +16,17 @@ public class FirstSceneManager : MonoBehaviour
     [SerializeField] private PlayableDirector wakeupCS;
     [SerializeField] private float wakeupSpeed;
 
+    [SerializeField] private GameObject playertrigger;
+    [SerializeField] private GameObject megaShip;
+    [SerializeField] private CanonMove canonMove;
+
     void Awake(){
         playerController.LockPlayer();
     }
 
     void Start(){
         wakeupCS.playableGraph.GetRootPlayable(0).SetSpeed(wakeupSpeed);
+        megaShip.SetActive(false);
     }
 
     public void playerAwake(){
@@ -36,9 +41,19 @@ public class FirstSceneManager : MonoBehaviour
         animatorFlash.Play("CanonExplosion", -1, 0);
         holeObj.SetActive(false);
         mainCS.Resume();
+        canonMove.ReleaseCanon();
     }
 
     public void WaitinHitMegaShip(){
         mainCS.Pause();
+    }
+
+    public void ActivateMainCS(){
+        megaShip.SetActive(true);
+        mainCS.Play();
+    }
+
+    public void WaitPlayerToExit(){
+        playertrigger.SetActive(true);
     }
 }
