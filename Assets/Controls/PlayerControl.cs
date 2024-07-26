@@ -71,6 +71,15 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Lay"",
+                    ""type"": ""Button"",
+                    ""id"": ""e48312ff-8764-40d5-a95e-32caf1b3c7bd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -170,6 +179,17 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
                     ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""64ef55cf-acb9-4dd0-adaa-7d617a1a100e"",
+                    ""path"": ""<Keyboard>/alt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Lay"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -482,6 +502,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_Movement_Sprint = m_Movement.FindAction("Sprint", throwIfNotFound: true);
         m_Movement_Dash = m_Movement.FindAction("Dash", throwIfNotFound: true);
         m_Movement_Crouch = m_Movement.FindAction("Crouch", throwIfNotFound: true);
+        m_Movement_Lay = m_Movement.FindAction("Lay", throwIfNotFound: true);
         // Interaction
         m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
         m_Interaction_Inventory = m_Interaction.FindAction("Inventory", throwIfNotFound: true);
@@ -563,6 +584,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_Movement_Sprint;
     private readonly InputAction m_Movement_Dash;
     private readonly InputAction m_Movement_Crouch;
+    private readonly InputAction m_Movement_Lay;
     public struct MovementActions
     {
         private @PlayerControl m_Wrapper;
@@ -572,6 +594,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Movement_Sprint;
         public InputAction @Dash => m_Wrapper.m_Movement_Dash;
         public InputAction @Crouch => m_Wrapper.m_Movement_Crouch;
+        public InputAction @Lay => m_Wrapper.m_Movement_Lay;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -596,6 +619,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Crouch.started += instance.OnCrouch;
             @Crouch.performed += instance.OnCrouch;
             @Crouch.canceled += instance.OnCrouch;
+            @Lay.started += instance.OnLay;
+            @Lay.performed += instance.OnLay;
+            @Lay.canceled += instance.OnLay;
         }
 
         private void UnregisterCallbacks(IMovementActions instance)
@@ -615,6 +641,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Crouch.started -= instance.OnCrouch;
             @Crouch.performed -= instance.OnCrouch;
             @Crouch.canceled -= instance.OnCrouch;
+            @Lay.started -= instance.OnLay;
+            @Lay.performed -= instance.OnLay;
+            @Lay.canceled -= instance.OnLay;
         }
 
         public void RemoveCallbacks(IMovementActions instance)
@@ -812,6 +841,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
+        void OnLay(InputAction.CallbackContext context);
     }
     public interface IInteractionActions
     {

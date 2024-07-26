@@ -131,8 +131,11 @@ namespace Player
             Control.Movement.Sprint.canceled += OnSprintCanceled;
             Control.Movement.Dash.performed += OnDash;
             
-            Control.Movement.Crouch.performed += OnLay;
-            Control.Movement.Crouch.canceled += OnLayCanceled;
+            Control.Movement.Crouch.performed += OnCrouch;
+            Control.Movement.Crouch.canceled += OnCrouchCanceled;
+            
+            Control.Movement.Lay.performed += OnLay;
+            Control.Movement.Lay.canceled += OnLayCanceled;
         }
 
         private void OnSprint(InputAction.CallbackContext obj)
