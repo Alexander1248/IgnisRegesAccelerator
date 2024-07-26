@@ -8,6 +8,7 @@ namespace Player.Interactables
         [SerializeField] private Quaternion doorForwardRotation; 
         [SerializeField] private Animator animator; 
         public Transform doorObj;
+        public Transform secondDoor; // for double doors
         private float _t;
         private float _startAngle;
         private float _endAngle;
@@ -91,6 +92,13 @@ namespace Player.Interactables
                 doorObj.localEulerAngles.x,
                 Mathf.LerpAngle(_startAngle, _endAngle, _t),
                 doorObj.localEulerAngles.z);
+
+            if (secondDoor != null){
+            secondDoor.localEulerAngles = new Vector3(
+                    secondDoor.localEulerAngles.x,
+                    Mathf.LerpAngle(-_startAngle, -_endAngle, _t),
+                    secondDoor.localEulerAngles.z);
+            }
 
             if (_t >= 1) _t = 0;
         }
