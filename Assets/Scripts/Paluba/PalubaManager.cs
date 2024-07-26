@@ -9,9 +9,11 @@ public class PalubaManager : MonoBehaviour
     [SerializeField] private PlayableDirector playableDirector;
     private Transform cam;
     [SerializeField] private  PlayerController playerController;
+    [SerializeField] private GameObject merc;
 
     void Start(){
         cam = playerController.getCamAnchor();
+        merc.SetActive(false);
     }
 
     public void StartCS(){

@@ -9,8 +9,7 @@ public class Yadro : MonoBehaviour
     [SerializeField] private float gravityYadro;
     private bool moveYadro;
     private Vector3 velocityYadro;
-    public FirstSceneManager firstSceneManager;
-    
+
     [SerializeField] private UnityEvent EventHit;
     [SerializeField] private UnityEvent AdditionalEventHit;
 

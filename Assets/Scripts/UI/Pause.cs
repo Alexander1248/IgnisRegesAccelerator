@@ -32,14 +32,21 @@ public class Pause : MonoBehaviour
     [SerializeField] private SettingsMenu settingsMenu;
     [SerializeField] private PlayerController playerController;
 
+    [SerializeField] private GameObject Ichecker;
+    private IChecker checker;
+
     private int currentSelected;
     private bool inControls;
     private int pressed = -1;
     private float timeScale;
 
-    void Update()
-    {
+    void Start(){
+        checker = Ichecker.GetComponent<IChecker>();
+    }
+
+    void Update(){
         if (Input.GetKeyUp(KeyCode.Escape)){
+            if (checker != null && checker.boolMethod()) return;
             PauseGame();
         }
     }
