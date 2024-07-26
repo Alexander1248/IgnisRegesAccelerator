@@ -239,7 +239,7 @@ MonoBehaviour:
       - b5c2c7894cd7662498d36ad84e3a67da
       - 9cf3bdce68884fcb9ee3887d2710096f
       - d3f9fa42f3c151b4dae9ae1ed9786fb9
-      m_Values: 000001010100
+      m_Values: 000001010000
   m_Version: 10
   m_ShaderStrippingSetting:
     m_Version: 0
