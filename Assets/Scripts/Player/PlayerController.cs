@@ -118,7 +118,7 @@ namespace Player
         public void UnlockCursor()
         {
             Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.None;
         }
         private void Awake()
         {
@@ -136,6 +136,10 @@ namespace Player
             
             Control.Movement.Lay.performed += OnLay;
             Control.Movement.Lay.canceled += OnLayCanceled;
+        }
+
+        void Start(){
+            mouseSensitivity =  PlayerPrefs.GetFloat("Sens", 0.15f);
         }
 
         private void OnSprint(InputAction.CallbackContext obj)
@@ -281,6 +285,10 @@ namespace Player
             {
                 Stand();
             }
+        }
+
+        public void CheckSettings(){
+            mouseSensitivity =  PlayerPrefs.GetFloat("Sens", 0.15f);
         }
 
         private void FixedUpdate()

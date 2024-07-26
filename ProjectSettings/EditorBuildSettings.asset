@@ -8,6 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/OutdoorsScene.unity
     guid: 8124e5870f4fd4c779e7a5f994e84ad1
+  - enabled: 1
+    path: Assets/Scenes/MENU.unity
+    guid: 37f7f66b835554c458926446012143de
+  - enabled: 1
+    path: Assets/Scenes/KOSTYAN_NETROGAT.unity
+    guid: 9cf3bdce68884fcb9ee3887d2710096f
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 040c92c242ab75644818531e7cae03e6,
       type: 2}
