@@ -16,6 +16,9 @@ namespace Items
         public LocalizedString Description => itemDescription;
         
         public abstract bool Use(Inventory inventory, int x, int y, GameObject player);
+
+        public virtual float Durability() => 1;
+        public virtual int Charges() => 0;
         
         public bool CanBePlaced(Inventory inventory, int x, int y)
         {
