@@ -12,14 +12,21 @@ public class Yadro : MonoBehaviour
 
     [SerializeField] private UnityEvent EventHit;
     [SerializeField] private UnityEvent AdditionalEventHit;
+    private MeshRenderer meshRenderer;
+
+    void Start(){
+        meshRenderer = GetComponent<MeshRenderer>();
+    }
 
     public void Activate(Vector3 yadroDirection) {
+        meshRenderer.enabled = true;
         transform.forward = yadroDirection;
         velocityYadro = transform.forward * speedYadro;
         moveYadro = true;
     }
 
     public void Stop(){
+        meshRenderer.enabled = false;
         moveYadro = false;
     }
 
@@ -34,9 +41,11 @@ public class Yadro : MonoBehaviour
     void OnTriggerEnter(Collider other){
         if (other.name == "HOLE"){
             EventHit.Invoke();
+            Stop();
         }
         else if (other.name == "HITABLE"){
             AdditionalEventHit.Invoke();
+            Stop();
         }
     }
 }

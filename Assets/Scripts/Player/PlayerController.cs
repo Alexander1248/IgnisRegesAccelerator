@@ -226,6 +226,7 @@ namespace Player
         }
 
         public void UseRailCanon(bool active){
+            rb.velocity = Vector3.zero;
             canSprint = active;
             canDash = active;
             canCrouch = active;
@@ -244,6 +245,7 @@ namespace Player
             mouseSensitivity /= 3;
         }
         public void releaseCanon(){
+            rb.velocity = Vector3.zero;
             canSprint = true;
             canDash = true;
             canCrouch = true;

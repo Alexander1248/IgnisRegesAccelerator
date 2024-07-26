@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/START/KOSTYAN_2.unity
     guid: e11e200f4806f704099762680d3c4e70
+  - enabled: 1
+    path: Assets/Scenes/PALUBA.unity
+    guid: d3f9fa42f3c151b4dae9ae1ed9786fb9
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 040c92c242ab75644818531e7cae03e6,
       type: 2}
