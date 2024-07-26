@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6464232432440122558}
   - component: {fileID: 7605911144106631661}
   - component: {fileID: 5087166552684907102}
+  - component: {fileID: 4469499936255235083}
   m_Layer: 0
   m_Name: Cube.001
   m_TagString: Interactable
@@ -124,8 +125,9 @@ MonoBehaviour:
   doorForwardRotation: {x: -0.70710677, y: 0, z: 0, w: 0.70710677}
   animator: {fileID: 0}
   doorObj: {fileID: 7839588649318644761}
+  secondDoor: {fileID: 0}
   locked: 0
-  lockedMessage: LOCKED
+  doorOpenAngle: 90
   openTip:
     m_TableReference:
       m_TableCollectionName: GUID:fe14867a5582c984eb6cb4250fb337cd
@@ -152,6 +154,22 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!208 &4469499936255235083
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2712992957737943951}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.006, y: 0.00001, z: 0.011000001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.006, y: 0, z: -0.006}
+  m_TimeToStationary: 0.5
 --- !u!1 &4234359881260697380
 GameObject:
   m_ObjectHideFlags: 0

@@ -37,10 +37,6 @@ public class LadderInteraction : MonoBehaviour
     }
 
     void Update(){
-        if (Input.GetKeyDown(KeyCode.Q)){
-            UseLadder();
-        }
-
         if (currentState == state.none) return;
 
         if (currentState == state.cameraSet){

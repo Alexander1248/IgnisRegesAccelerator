@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using Player;
+using UnityEngine.SceneManagement;
 
 public class FirstSceneManager : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class FirstSceneManager : MonoBehaviour
     [SerializeField] private GameObject playertrigger;
     [SerializeField] private GameObject megaShip;
     [SerializeField] private CanonMove canonMove;
+    
+    [SerializeField] private GameObject WalkieTalkie;
+    [SerializeField] private Coder coder;
+
+    [SerializeField] private Animator animatorFade;
 
     void Awake(){
         playerController.LockPlayer();
@@ -55,5 +61,21 @@ public class FirstSceneManager : MonoBehaviour
 
     public void WaitPlayerToExit(){
         playertrigger.SetActive(true);
+    }
+
+    public void PickUpWalkieTalkie(){
+        WalkieTalkie.SetActive(false);
+        coder.doNums();
+        // start dialogue
+    }
+
+    void loadNextScene(){
+        SceneManager.LoadScene("KOSTYAN_1");
+    }
+
+    public void EnterShip(){
+        animatorFade.enabled = true;
+        animatorFade.Play("FadeIn", -1, 0);
+        Invoke("loadNextScene", 3);
     }
 }
