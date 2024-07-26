@@ -316,7 +316,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ff00cd4e-c83f-4b1d-952f-8beac08a5f29"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": ""Tap"",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
@@ -327,7 +327,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""6593e66a-dd92-4c7d-90ef-c51e716e3806"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
@@ -338,7 +338,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""dcc72e0b-8c98-48d7-aa30-95e08c7f1f5b"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
@@ -349,7 +349,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""32447e96-ffb2-4f75-8794-7112efc98049"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": ""Tap"",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
