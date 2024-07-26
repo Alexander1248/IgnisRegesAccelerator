@@ -120,6 +120,13 @@ namespace Managers
                 }
             };
 
+            playerController.Control.Interaction.UseItem.performed += _ =>
+            {
+                if (!inInv) return;
+                if (inventory.UseItem(inv, ix, iy, playerController.gameObject))
+                    inventory.RemoveItem(inv, ix, iy);
+
+            };
             playerController.Control.Interaction.MoveItem.performed += _ =>
             {
                 if (!inInv)

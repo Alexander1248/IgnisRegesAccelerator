@@ -16,7 +16,7 @@ namespace Player.Interactables
         public MeshRenderer[] MeshesOutline => meshesOutline;
         public void Interact(PlayerInteract playerInteract)
         {
-            manager.AddItem(item);
+            manager.AddItem(Instantiate(item));
             Destroy(gameObject);
         }
     }
