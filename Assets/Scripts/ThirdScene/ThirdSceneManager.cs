@@ -83,6 +83,7 @@ public class ThirdSceneManager : MonoBehaviour
 
     public void EnterVent(){
         playerController.LockPlayer();
+        playerController.transform.localScale = new Vector3(0.5f, 1, 0.5f); // костыль
         startCamPos = cam.position;
         startCamRot = cam.rotation;
         saveAnchor = cam.localPosition;
@@ -90,10 +91,13 @@ public class ThirdSceneManager : MonoBehaviour
     }
 
     public void EnteredInVent(){
+        enterVentCS.Stop();
         playerController.UnlockPlayer();
-        playerController.ForceLay();
-        playerController.GetComponent<Rigidbody>().isKinematic = false;
         cam.localPosition = saveAnchor;
+        playerController.GetComponent<Rigidbody>().isKinematic = false;
+        playerController.transform.localScale = new Vector3(1, 1, 1); // костыль
+        playerController.ForceLay();
+        Debug.Log(cam.localPosition);
     }
 
     public void StartShooting(){

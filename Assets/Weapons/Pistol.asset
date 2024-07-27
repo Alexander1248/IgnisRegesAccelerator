@@ -17,6 +17,7 @@ MonoBehaviour:
   - {x: -1, y: 0}
   - {x: 0, y: 0}
   - {x: 1, y: 0}
+  uiPrefab: {fileID: 0}
   itemName:
     m_TableReference:
       m_TableCollectionName: 
@@ -35,8 +36,13 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  prefab: {fileID: 7089967681845487178, guid: 499083566ae00a24faea7002a87c19b1, type: 3}
+  prefab: {fileID: 7089967681845487178, guid: e6677dc83b6f18b4cb08a1f856869687, type: 3}
   isTwoHanded: 0
+  maxDistance: 100
+  damage: 10
+  rechargeTime: 0.3
+  cageSize: 3
+  reloadTime: 10
   references:
     version: 2
     RefIds: []

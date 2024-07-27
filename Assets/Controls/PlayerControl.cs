@@ -185,7 +185,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""64ef55cf-acb9-4dd0-adaa-7d617a1a100e"",
-                    ""path"": ""<Keyboard>/alt"",
+                    ""path"": ""<Keyboard>/z"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",

@@ -14,11 +14,12 @@ public class Yadro : MonoBehaviour
     [SerializeField] private UnityEvent AdditionalEventHit;
     private MeshRenderer meshRenderer;
 
-    void Start(){
+    void Awake(){
         meshRenderer = GetComponent<MeshRenderer>();
     }
 
     public void Activate(Vector3 yadroDirection) {
+        if (!meshRenderer) meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.enabled = true;
         transform.forward = yadroDirection;
         velocityYadro = transform.forward * speedYadro;
@@ -26,6 +27,7 @@ public class Yadro : MonoBehaviour
     }
 
     public void Stop(){
+        if (!meshRenderer) meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.enabled = false;
         moveYadro = false;
     }

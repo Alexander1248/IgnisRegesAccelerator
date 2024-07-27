@@ -14,7 +14,8 @@ namespace Player
         
         [SerializeField] private GameObject defaultVariant;
         [SerializeField] private Transform defaultCameraAnchor;
-        
+        [SerializeField] private Transform defaultCameraAnchorSAVE;
+
         [SerializeField] private GameObject crouchVariant;
         [SerializeField] private Transform crouchCameraAnchor;
 
@@ -81,6 +82,7 @@ namespace Player
         private RaycastHit hit;
         public PlayerControl Control { get; private set; }
 
+        [SerializeField] private Transform GUIObj;
 
         [SerializeField] private Animator camAnimator;
         [SerializeField] private AnimatorController animatorController;
@@ -89,6 +91,8 @@ namespace Player
         public Transform getCamAnchor(){
             return defaultCameraAnchor;
         }
+
+        public bool isLayingOrCrouch() => isLaying || isCrouching;
 
         public void LockPlayer()
         {
@@ -139,6 +143,7 @@ namespace Player
         }
 
         void Start(){
+            GUIObj.SetParent(null);
             mouseSensitivity =  PlayerPrefs.GetFloat("Sens", 0.15f);
         }
 
@@ -173,10 +178,11 @@ namespace Player
             wantToStand = false;
             isCrouching = true;
 
-            defaultVariant.SetActive(false);
             crouchVariant.SetActive(true);
+            cameraTransform.parent.parent.SetParent(crouchCameraAnchor); // currentAnchor.SetParent(other anchor)
+            cameraTransform.parent.parent.localPosition = Vector3.zero;
+            defaultVariant.SetActive(false);
             layVariant.SetActive(false);
-            cameraTransform.parent = crouchCameraAnchor;
         }
         private void OnCrouchCanceled(InputAction.CallbackContext obj)
         {
@@ -192,9 +198,10 @@ namespace Player
             isLaying = false;
 
             defaultVariant.SetActive(true);
+            cameraTransform.parent.parent.SetParent(defaultCameraAnchorSAVE);
+            cameraTransform.parent.parent.localPosition = Vector3.zero;
             crouchVariant.SetActive(false);
             layVariant.SetActive(false);
-            cameraTransform.parent = defaultCameraAnchor;
 
             camAnimator.runtimeAnimatorController = null;
             camAnimator.speed = 1;
@@ -210,13 +217,16 @@ namespace Player
             Debug.Log("Lay Start!");
             wantToStand = false;
             isLaying = true;
+            layVariant.SetActive(true);
+            cameraTransform.parent.parent.SetParent(layCameraAnchor);
+            cameraTransform.parent.parent.localPosition = Vector3.zero;
+            Debug.Log(cameraTransform.parent.parent);
+            Debug.Log(cameraTransform.parent.parent.localPosition);
             defaultVariant.SetActive(false);
             crouchVariant.SetActive(false);
-            layVariant.SetActive(true);
-            cameraTransform.parent = layCameraAnchor;
             camAnimator.enabled = true;
             camAnimator.runtimeAnimatorController = animatorController;
-            camAnimator.Play("LayingAnim", -1, 0);
+            camAnimator.Play("LayingAnim", 0, 0);
         }
         private void OnLayCanceled(InputAction.CallbackContext obj)
         {
@@ -256,6 +266,15 @@ namespace Player
             canLay = true;
             usingHeavyObj = false;
             mouseSensitivity *= 3;
+        }
+
+        public void AnimateCam(string animName){
+            if (!camAnimator.enabled){
+                camAnimator.enabled = true;
+                camAnimator.runtimeAnimatorController = animatorController;
+            }
+            camAnimator.speed = 1;
+            camAnimator.CrossFade(animName, 0.5f, 0, 0);
         }
 
         public void ResetCamRotation(){

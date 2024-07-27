@@ -30,10 +30,10 @@ public class LadderInteraction : MonoBehaviour
     private Quaternion startingAngle2;
 
     void Start(){
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        playerController = GameObject.Find("GamePlayer").GetComponent<PlayerController>();
         camAnchor = playerController.getCamAnchor();
         camAnimator = camAnchor.GetComponent<Animator>();
-        cam = camAnchor.GetChild(0);
+        cam = camAnchor.GetChild(0).GetChild(0);
     }
 
     void Update(){
@@ -83,6 +83,7 @@ public class LadderInteraction : MonoBehaviour
     }
 
     public void UseLadder(){
+        if (playerController.isLayingOrCrouch()) return;
         playerController.LockPlayer();
         if (playerController.transform.position.y <= transform.position.y){
             startPoint = points[0];
