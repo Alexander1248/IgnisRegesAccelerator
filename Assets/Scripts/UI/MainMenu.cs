@@ -29,6 +29,8 @@ public class MainMenu : MonoBehaviour
     private int pressed = -1;
 
     void Start(){
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         SelectButton(0);
     }
 
