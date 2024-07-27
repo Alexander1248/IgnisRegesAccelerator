@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using Player;
 using UnityEngine;
 
-public class CanonMove : MonoBehaviour
+public class CanonMove : MonoBehaviour, IChecker
 {
     public Transform canon;
-    [SerializeField] private PlayerController playerController;
+    private PlayerController playerController;
     private Transform player;
     [SerializeField] private float rotationSpeed;
-    private bool attached;
+    public bool attached;
 
     [SerializeField] private ParticleSystem particles;
     [SerializeField] private Animator canonAnim;
@@ -19,10 +19,12 @@ public class CanonMove : MonoBehaviour
     [SerializeField] private Transform yadroObj;
     [SerializeField] private Transform yadroSpawnPoint;
     private bool readyToShoot = true;
+    private bool releasedCanonByLastFrame;
     [SerializeField] private Yadro yadro;
 
     void Start(){
         //AttachCanon();
+        playerController = GameObject.Find("GamePlayer").GetComponent<PlayerController>();
         player = playerController.transform;
         resetYadro();
     }
@@ -38,6 +40,7 @@ public class CanonMove : MonoBehaviour
     }
 
     void Update(){
+        releasedCanonByLastFrame = false;
         if (!attached) return;
         canon.position = player.position;
         Vector3 newDirection = Vector3.RotateTowards(canon.forward, player.forward, rotationSpeed * Time.deltaTime, 0.0f);
@@ -47,7 +50,8 @@ public class CanonMove : MonoBehaviour
             readyToShoot = false;
             Shoot();
         }
-        if (Input.GetKeyDown(KeyCode.Escape)){
+        if (Input.GetKeyUp(KeyCode.Escape)){
+            releasedCanonByLastFrame = true;
             ReleaseCanon();
         }
     }
@@ -72,5 +76,9 @@ public class CanonMove : MonoBehaviour
         readyToShoot = true;
         yadro.Stop();
         yadroObj.gameObject.SetActive(false);
+    }
+
+    public bool boolMethod(){
+        return attached || releasedCanonByLastFrame;
     }
 }
