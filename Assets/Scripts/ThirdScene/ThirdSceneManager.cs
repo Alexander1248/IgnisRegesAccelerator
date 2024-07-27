@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Player;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class ThirdSceneManager : MonoBehaviour
 {
@@ -34,8 +35,12 @@ public class ThirdSceneManager : MonoBehaviour
     [SerializeField] private ParticleSystem[] multiexplosions;
     [SerializeField] private GameObject wallDestroyed;
 
+    [SerializeField] private Animator animatorFade;
+
     void Start(){
         cam = playerController.getCamAnchor();
+        animatorFade.enabled = true;
+        animatorFade.Play("FadeOut", 0, 0);
     }
 
     public void ExplodeVent(){
@@ -114,5 +119,14 @@ public class ThirdSceneManager : MonoBehaviour
         }
         fewCanons[k].Shoot();
         k++;
+    }
+
+    public void ExitToPaluba(){
+        animatorFade.enabled = true;
+        animatorFade.Play("FadeIn", 0, 0);
+        Invoke("loadNextLvl", 3);
+    }
+    void loadNextLvl(){
+        SceneManager.LoadScene("PALUBA");
     }
 }
