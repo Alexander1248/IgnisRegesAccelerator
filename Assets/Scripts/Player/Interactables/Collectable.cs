@@ -7,17 +7,21 @@ namespace Player.Interactables
 {
     public class Collectable : MonoBehaviour, IInteractable
     {
-        [SerializeField] private InventoryManager manager;
-        [Space]
         [SerializeField] private Item item;
         [SerializeField] private LocalizedString tipName;
         [SerializeField] private MeshRenderer[] meshesOutline;
         public LocalizedString TipName => tipName;
         public MeshRenderer[] MeshesOutline => meshesOutline;
+        
+        private InventoryManager manager;
+        private void Start()
+        {
+            manager = GameObject.FindGameObjectWithTag("Player").GetComponent<InventoryManager>();
+        }
         public void Interact(PlayerInteract playerInteract)
         {
-            manager.AddItem(Instantiate(item));
-            Destroy(gameObject);
+            if (manager.AddItem(Instantiate(item)))
+                Destroy(gameObject);
         }
     }
 }

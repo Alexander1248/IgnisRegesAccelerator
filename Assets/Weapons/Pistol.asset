@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   shape:
-  - {x: -1, y: 1}
-  - {x: -1, y: 0}
   - {x: 0, y: 0}
-  - {x: 1, y: 0}
+  - {x: 0, y: 1}
+  - {x: 1, y: 1}
+  - {x: 2, y: 1}
+  uiPrefab: {fileID: 6830977853837318397, guid: c2b2fc492162cea4dab225486c6c3a7a,
+    type: 3}
   itemName:
     m_TableReference:
       m_TableCollectionName: 
@@ -37,6 +39,11 @@ MonoBehaviour:
     m_LocalVariables: []
   prefab: {fileID: 7089967681845487178, guid: 499083566ae00a24faea7002a87c19b1, type: 3}
   isTwoHanded: 0
+  maxDistance: 100
+  damage: 10
+  rechargeTime: 0.3
+  cageSize: 3
+  reloadTime: 10
   references:
     version: 2
     RefIds: []

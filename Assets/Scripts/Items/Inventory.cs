@@ -20,6 +20,10 @@ namespace Items
             _items[new Vector2Int(x, y)] = item;
             return true;
         }
+        public bool CanPlace(int x, int y, Item item)
+        {
+            return item.CanBePlaced(this, x, y);
+        }
         public bool AddItem(Item item)
         {
             for (var y = 0; y < height; y++)

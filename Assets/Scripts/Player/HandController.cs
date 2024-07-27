@@ -20,10 +20,12 @@ namespace Player
 
         public void MainHandActive(bool active)
         {
+            if (_mainHandObj == null) return;
             _mainHandObj.SetActive(active);
         }
         public void SecondHandActive(bool active)
         {
+            if (_secondHandObj == null) return;
             _secondHandObj.SetActive(active);
         }
         private void Start()
@@ -62,7 +64,6 @@ namespace Player
             if (mainHand)
             {
                 mainHand.OnRelease(gameObject,_mainHandObj);
-                Destroy(mainHand);
             }
 
             var buff = mainHand;
@@ -81,7 +82,10 @@ namespace Player
         public Items.Weapon ClearSecondHand()
         {
             if (_secondHandObj) Destroy(_secondHandObj);
-            if (secondHand) Destroy(secondHand);
+            if (secondHand)
+            {
+                secondHand.OnRelease(gameObject,_secondHandObj);
+            }
             
             var buff = secondHand;
             secondHand = null;

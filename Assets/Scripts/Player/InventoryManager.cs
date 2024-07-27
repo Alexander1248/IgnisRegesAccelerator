@@ -22,6 +22,10 @@ namespace Managers
         {
             return inventories[id].AddItem(x, y, item);
         }
+        public bool CanPlace(int id, int x, int y, Item item)
+        {
+            return inventories[id].CanPlace(x, y, item);
+        }
         public bool AddItem(int id, Item item)
         {
             return inventories[id].AddItem(item);

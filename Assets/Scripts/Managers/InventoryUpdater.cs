@@ -18,15 +18,18 @@ namespace Managers
                     var obj = Instantiate(value.UIPrefab, gridContents[i]);
                     obj.name = $"Inv_Item_{i}_{key.x}_{key.y}";
                     var t = obj.GetComponent<RectTransform>();
-                    t.anchoredPosition = key * cell.rect.size;
+                    t.anchorMax = Vector2.zero;
+                    t.anchorMin = Vector2.zero;
+                    t.anchoredPosition = key * cell.rect.size + t.rect.size / 2;
                 }
             }
         }
 
         private void OnDisable()
         {
-            for (var i = 0; i < transform.childCount; i++)
-                Destroy(transform.GetChild(0));
+            foreach (var t in gridContents)
+                for (var j = 0; j < t.childCount; j++)
+                    Destroy(t.GetChild(0).gameObject);
         }
     }
 }
