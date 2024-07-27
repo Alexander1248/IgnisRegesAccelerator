@@ -10,6 +10,8 @@ namespace Player.Interactables
         [SerializeField] private Item item;
         [SerializeField] private LocalizedString tipName;
         [SerializeField] private MeshRenderer[] meshesOutline;
+        [SerializeField] private bool changeItemSecure;
+        [SerializeField] private bool securedItem;
         public LocalizedString TipName => tipName;
         public MeshRenderer[] MeshesOutline => meshesOutline;
         
@@ -20,8 +22,11 @@ namespace Player.Interactables
         }
         public void Interact(PlayerInteract playerInteract)
         {
-            if (manager.AddItem(Instantiate(item)))
+            var i = Instantiate(item);
+            if (changeItemSecure) i.secured = securedItem;
+            if (manager.AddItem(i))
                 Destroy(gameObject);
+            else Destroy(item);
         }
     }
 }

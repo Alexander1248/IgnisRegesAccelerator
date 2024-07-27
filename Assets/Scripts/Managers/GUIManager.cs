@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Items;
+using Items.Active;
 using Player;
 using Quests;
 using TMPro;
@@ -62,6 +64,24 @@ namespace Managers
 
         private void Start()
         {
+            playerController.Control.Interaction.UseHeal.performed += _ =>
+            {
+                try {
+                    var (id, pos) = inventory.Find(item => item is HealItem).First();
+                    if (inventory.UseItem(id, pos.x, pos.y, playerController.gameObject))
+                    {
+                        Destroy(inventory.RemoveItem(id, pos.x, pos.y));
+                        Destroy(gridContents[id].Find($"Inv_Item_{id}_{pos.x}_{pos.y}").gameObject);
+                    }
+                    else
+                    {
+                        var center = inventory.GetItemCenter(inv, ix, iy);
+                        if (center == null) return;
+                        inventory.DrawItem(inv, ix, iy, gridContents[inv]
+                            .Find($"Inv_Item_{inv}_{center.Value.x}_{center.Value.y}").GetComponent<RectTransform>());
+                    }
+                } catch(InvalidOperationException) {} 
+            };
             playerController.Control.Interaction.Journal.performed += _ =>
             {
                 if (journal.activeSelf)
@@ -127,7 +147,17 @@ namespace Managers
                 if (location != 0) return;
                 Debug.Log($"[Inventory]: Use {inv} {ix} {iy}");
                 if (inventory.UseItem(inv, ix, iy, playerController.gameObject))
-                    inventory.RemoveItem(inv, ix, iy);
+                {
+                    Destroy(inventory.RemoveItem(inv, ix, iy));
+                    Destroy(gridContents[inv].Find($"Inv_Item_{inv}_{ix}_{iy}").gameObject);
+                }
+                else
+                {
+                    var center = inventory.GetItemCenter(inv, ix, iy);
+                    if (center == null) return;
+                    inventory.DrawItem(inv, ix, iy, gridContents[inv]
+                        .Find($"Inv_Item_{inv}_{center.Value.x}_{center.Value.y}").GetComponent<RectTransform>());
+                }
 
             };
             playerController.Control.Interaction.MoveItem.performed += _ =>
@@ -218,8 +248,12 @@ namespace Managers
                         ReturnBack();
                         break;
                     default:
-                        Destroy(bufferedItem);
-                        Destroy(bufferedObject.gameObject);
+                        if (bufferedItem.secured) ReturnBack();
+                        else
+                        {
+                            Destroy(bufferedItem);
+                            Destroy(bufferedObject.gameObject);
+                        }
                         break;
                 }
                 bufferedItem = null;

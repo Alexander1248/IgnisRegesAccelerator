@@ -15,21 +15,17 @@ namespace Managers
             {
                 foreach (var (key, value) in manager[i])
                 {
+                    var objName = $"Inv_Item_{i}_{key.x}_{key.y}";
+                    if (gridContents[i].Find(objName) != null) continue;
                     var obj = Instantiate(value.UIPrefab, gridContents[i]);
-                    obj.name = $"Inv_Item_{i}_{key.x}_{key.y}";
+                    obj.name = objName;
                     var t = obj.GetComponent<RectTransform>();
                     t.anchorMax = Vector2.zero;
                     t.anchorMin = Vector2.zero;
                     t.anchoredPosition = key * cell.rect.size + t.rect.size / 2;
+                    value.Draw(t);
                 }
             }
-        }
-
-        private void OnDisable()
-        {
-            foreach (var t in gridContents)
-                for (var j = 0; j < t.childCount; j++)
-                    Destroy(t.GetChild(0).gameObject);
         }
     }
 }

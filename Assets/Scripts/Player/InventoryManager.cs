@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Items;
 using UnityEngine;
@@ -16,6 +17,10 @@ namespace Managers
         public bool UseItem(int id, int x, int y, GameObject player)
         {
             return inventories[id].UseItem(x, y, player);
+        }
+        public void DrawItem(int id, int x, int y, RectTransform transform)
+        {
+            inventories[id].DrawItem(x, y, transform);
         }
         
         public bool AddItem(int id, int x, int y, Item item)
@@ -57,6 +62,22 @@ namespace Managers
             var points = new List<Vector2Int>();
             foreach (var inventory in inventories)
                 points.AddRange(inventory.Find(item));
+            return points;
+        }
+        
+        public IEnumerable<Vector2Int> Find(int id, Predicate<Item> condition)
+        {
+            return inventories[id].Find(condition);
+        }
+        public IEnumerable<(int, Vector2Int)> Find(Predicate<Item> condition)
+        {
+            var points = new List<(int, Vector2Int)>();
+            for (var i = 0; i < inventories.Length; i++)
+            {
+                var inventory = inventories[i];
+                points.AddRange(inventory.Find(condition).Select(v => (i, v)));
+            }
+
             return points;
         }
     }
