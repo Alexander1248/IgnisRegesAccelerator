@@ -4321,6 +4321,8 @@ MonoBehaviour:
   - {fileID: 3974566900171668806}
   cell: {fileID: 5742193878097362120, guid: 3c0690ec7c2f8ac42a1f0b2f2bcd8d1a, type: 3}
   updater: {fileID: 4456343649136650296}
+  leftHand: {fileID: 7121910745949748572}
+  rightHand: {fileID: 4363573881680524202}
 --- !u!1 &8503542523627399500
 GameObject:
   m_ObjectHideFlags: 0

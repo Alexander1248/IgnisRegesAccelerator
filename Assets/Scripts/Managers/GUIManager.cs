@@ -51,12 +51,13 @@ namespace Managers
         [SerializeField] private RectTransform[] gridContents;
         [SerializeField] private RectTransform cell;
         [SerializeField] private InventoryUpdater updater;
+        [SerializeField] private RectTransform leftHand;
+        [SerializeField] private RectTransform rightHand;
 
         private Item bufferedItem;
         private RectTransform bufferedObject;
-        private int prevInv, prevIx, prevIy;
-        private int inv, ix, iy;
-        private bool inInv;
+        private int prevInv, prevIx, prevIy, prevLocation;
+        private int inv, ix, iy, location;
         
 
         private void Start()
@@ -122,41 +123,87 @@ namespace Managers
 
             playerController.Control.Interaction.UseItem.performed += _ =>
             {
-                if (!inInv) return;
+                if (location == 0) return;
                 if (inventory.UseItem(inv, ix, iy, playerController.gameObject))
                     inventory.RemoveItem(inv, ix, iy);
 
             };
             playerController.Control.Interaction.MoveItem.performed += _ =>
             {
-                if (!inInv)
+                prevLocation = location;
+                switch (location)
                 {
-                    bufferedItem = null;
-                    return;
-                }
-                bufferedItem = inventory.RemoveItem(inv, ix, iy);
-                prevInv = inv;
-                prevIx = ix;
-                prevIy = iy;
+                    case 1:
+                    {
+                        prevInv = inv;
+                        prevIx = ix;
+                        prevIy = iy;
+                        bufferedItem = inventory.RemoveItem(inv, ix, iy);
 
-                var center = inventory.GetItemCenter(inv, ix, iy);
-                bufferedObject = center.HasValue ? gridContents[inv]
-                        .Find($"Inv_Item_{inv}_{center.Value.x}_{center.Value.y}") as RectTransform : null;
+                        var center = inventory.GetItemCenter(inv, ix, iy);
+                        bufferedObject = center.HasValue
+                            ? gridContents[inv]
+                                .Find($"Inv_Item_{inv}_{center.Value.x}_{center.Value.y}").GetComponent<RectTransform>()
+                            : null;
+                        break;
+                    }
+                    case 2:
+                        bufferedItem = handController.ClearSecondHand();
+                        bufferedObject = rightHand.Find("Left_Hand_Item").GetComponent<RectTransform>();
+                        break;
+                    case 3:
+                        bufferedItem = handController.ClearMainHand();
+                        bufferedObject = rightHand.Find("Right_Hand_Item").GetComponent<RectTransform>();
+                        break;
+                    default:
+                        bufferedItem = null;
+                        break;
+                }
             };
             playerController.Control.Interaction.MoveItem.canceled += _ =>
             {
                 if (bufferedItem == null) return;
-                if (inInv)
+                if (location == 0)
                 {
                     if (inventory.AddItem(inv, ix, iy, bufferedItem))
                     {
+                        bufferedObject.name = $"Inv_Item_{inv}_{ix}_{iy}";
                         bufferedObject.anchoredPosition = new Vector2(ix, iy) * cell.rect.size;
                     }
-                    else
+                    else ReturnBack();
+                    
+                }
+                else if (location == 1)
+                {
+                    if (bufferedItem is Items.Weapon weapon && handController.SetSecondHand(weapon))
                     {
-                        inventory.AddItem(prevInv, prevIx, prevIy, bufferedItem);
-                        bufferedObject.anchoredPosition = new Vector2(prevIx, prevIy) * cell.rect.size;
+                        var factor = Mathf.Min(
+                            leftHand.rect.size.x / bufferedObject.rect.size.x, 
+                            leftHand.rect.size.y / bufferedObject.rect.size.y
+                        );
+                        var size = bufferedObject.rect.size * factor;
+                        var pos = (leftHand.rect.size - size) / 2;
+                        
+                        bufferedObject.name = "Left_Hand_Item";
+                        bufferedObject.anchoredPosition = pos;
                     }
+                    else ReturnBack();
+                }
+                else if (location == 2)
+                {
+                    if (bufferedItem is Items.Weapon weapon && handController.SetMainHand(weapon))
+                    {
+                        var factor = Mathf.Min(
+                            rightHand.rect.size.x / bufferedObject.rect.size.x, 
+                            rightHand.rect.size.y / bufferedObject.rect.size.y
+                        );
+                        var size = bufferedObject.rect.size * factor;
+                        var pos = (rightHand.rect.size - size) / 2;
+                        
+                        bufferedObject.name = "Right_Hand_Item";
+                        bufferedObject.anchoredPosition = pos;
+                    }
+                    else ReturnBack();
                 }
                 else
                 {
@@ -169,11 +216,47 @@ namespace Managers
             updater.gridContents = gridContents;
             updater.cell = cell;
         }
-        
+
+        private void ReturnBack()
+        {
+            switch (prevLocation)
+            {
+                case 0:
+                    inventory.AddItem(prevInv, prevIx, prevIy, bufferedItem);
+                    bufferedObject.anchoredPosition = new Vector2(prevIx, prevIy) * cell.rect.size;
+                    break;
+                case 1:
+                {
+                    handController.SetSecondHand(bufferedItem as Items.Weapon);
+                    var factor = Mathf.Min(
+                        leftHand.rect.size.x / bufferedObject.rect.size.x, 
+                        leftHand.rect.size.y / bufferedObject.rect.size.y
+                    );
+                    var size = bufferedObject.rect.size * factor;
+                    var pos = (leftHand.rect.size - size) / 2;
+                        
+                    bufferedObject.anchoredPosition = pos;
+                    break;
+                }
+                case 2:
+                {
+                    handController.SetMainHand(bufferedItem as Items.Weapon);
+                    var factor = Mathf.Min(
+                        rightHand.rect.size.x / bufferedObject.rect.size.x, 
+                        rightHand.rect.size.y / bufferedObject.rect.size.y
+                    );
+                    var size = bufferedObject.rect.size * factor;
+                    var pos = (rightHand.rect.size - size) / 2;
+                    bufferedObject.anchoredPosition = pos;
+                    break;
+                }
+            }
+        }
+
         public void FixedUpdate()
         {
             if (!inventoryGUI.activeInHierarchy) return;
-            inInv = false;
+            location = 0;
             var position = Input.mousePosition;
             for (var i = 0; i < gridContents.Length; i++)
             {
@@ -185,10 +268,10 @@ namespace Managers
                 inv = i;
                 ix = (int) point.x;
                 iy = (int) point.y;
-                inInv = true;
+                location = 1;
                 return;
             }
-            Debug.Log($"[Inventory]: {inInv} {inv} {ix} {iy}");
+            Debug.Log($"[Inventory]: {location} {inv} {ix} {iy}");
         }
 
         public void AddQuest(Quest quest)

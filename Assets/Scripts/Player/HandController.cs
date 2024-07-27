@@ -56,7 +56,7 @@ namespace Player
             return true;
         }
 
-        public void ClearMainHand()
+        public Items.Weapon ClearMainHand()
         {
             if (_mainHandObj) Destroy(_mainHandObj);
             if (mainHand)
@@ -64,7 +64,10 @@ namespace Player
                 mainHand.OnRelease(gameObject,_mainHandObj);
                 Destroy(mainHand);
             }
+
+            var buff = mainHand;
             mainHand = null;
+            return buff;
         }
         public bool SetSecondHand(Items.Weapon weapon)
         {
@@ -75,11 +78,14 @@ namespace Player
             if (secondHand) secondHand.OnEquip(gameObject,_secondHandObj);
             return true;
         }
-        public void ClearSecondHand()
+        public Items.Weapon ClearSecondHand()
         {
             if (_secondHandObj) Destroy(_secondHandObj);
             if (secondHand) Destroy(secondHand);
+            
+            var buff = secondHand;
             secondHand = null;
+            return buff;
         }
 
         private void OnMainHandActionPerformed(InputAction.CallbackContext obj)
