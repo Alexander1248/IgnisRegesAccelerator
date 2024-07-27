@@ -6,7 +6,7 @@ using UnityEngine;
 public class CanonMove : MonoBehaviour, IChecker
 {
     public Transform canon;
-    [SerializeField] private PlayerController playerController;
+    private PlayerController playerController;
     private Transform player;
     [SerializeField] private float rotationSpeed;
     public bool attached;
@@ -24,6 +24,7 @@ public class CanonMove : MonoBehaviour, IChecker
 
     void Start(){
         //AttachCanon();
+        playerController = GameObject.Find("GamePlayer").GetComponent<PlayerController>();
         player = playerController.transform;
         resetYadro();
     }

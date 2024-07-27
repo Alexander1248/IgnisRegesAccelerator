@@ -5,7 +5,7 @@ using Player;
 using UnityEngine.Splines;
 using Unity.Mathematics;
 
-public class CanonRails : MonoBehaviour
+public class CanonRails : MonoBehaviour, IChecker
 {
     [SerializeField] private SplineContainer splineContainer;
     private int splineIndex = 0;
@@ -15,9 +15,10 @@ public class CanonRails : MonoBehaviour
 
 
     [SerializeField] private Transform canon;
-    [SerializeField] private PlayerController playerController;
+    private PlayerController playerController;
     private Transform player;
     private bool attached;
+    private bool releasedCanonByLastFrame;
     [SerializeField] private ParticleSystem particles;
     [SerializeField] private Animator canonAnim;
     [SerializeField] private Animator animatorFlash;
@@ -34,6 +35,7 @@ public class CanonRails : MonoBehaviour
 
     void Start()
     {
+        playerController = GameObject.Find("GamePlayer").GetComponent<PlayerController>();
         spline = splineContainer.Splines[0];
         player = playerController.transform;
         resetYadro();
@@ -70,6 +72,10 @@ public class CanonRails : MonoBehaviour
         yadroObj.gameObject.SetActive(false);
     }
 
+    void clearFlag(){
+        releasedCanonByLastFrame = false;
+    }
+
     void Update()
     {
         if (!attached) return;
@@ -79,11 +85,13 @@ public class CanonRails : MonoBehaviour
             readyToShoot = false;
             Shoot();
         }
-        if (Input.GetKeyDown(KeyCode.Escape)){
-            ReleaseCanon();
-        }
         
         HandleInput();
+        if (Input.GetKeyDown(KeyCode.Escape)){
+            releasedCanonByLastFrame = true;
+            Invoke("clearFlag", 0.2f);
+            ReleaseCanon();
+        }
     }
 
     void HandleInput()
@@ -147,5 +155,9 @@ public class CanonRails : MonoBehaviour
         else {
             transform.position = splineContainer.transform.TransformPoint(nearest);
         }
+    }
+
+    public bool boolMethod(){
+        return attached || releasedCanonByLastFrame;
     }
 }

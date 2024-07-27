@@ -13,10 +13,14 @@ namespace Player
         [SerializeField] private Items.Weapon mainHand;
         [SerializeField] private Items.Weapon secondHand;
 
+        [SerializeField] private PlayerController playerController;
+
         private GameObject _mainHandObj;
         private bool _mainHandAdditionalPerformed;
         private GameObject _secondHandObj;
         private bool _secondHandAdditionalPerformed;
+
+        public PlayerController getPlayer() => playerController;
 
         public void MainHandActive(bool active)
         {

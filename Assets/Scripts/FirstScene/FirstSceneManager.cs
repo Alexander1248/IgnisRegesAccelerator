@@ -23,6 +23,7 @@ public class FirstSceneManager : MonoBehaviour
     
     [SerializeField] private GameObject WalkieTalkie;
     [SerializeField] private Coder coder;
+    [SerializeField] private GameObject[] rats;
 
     [SerializeField] private Animator animatorFade;
 
@@ -64,6 +65,7 @@ public class FirstSceneManager : MonoBehaviour
     }
 
     public void PickUpWalkieTalkie(){
+        for(int i = 0; i < rats.Length; i++) rats[i].SetActive(true);
         WalkieTalkie.SetActive(false);
         coder.doNums();
         // start dialogue
