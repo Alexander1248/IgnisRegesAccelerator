@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4649714358781072389}
   - component: {fileID: 1963357837106707168}
   - component: {fileID: 1662600186486574356}
+  - component: {fileID: 8140235645997185418}
+  - component: {fileID: 5008646715969962853}
   m_Layer: 0
   m_Name: pistol
   m_TagString: Untagged
@@ -87,6 +89,59 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8140235645997185418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2353617643234647215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accc5d5f85114988872ff5e95ff6099f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 0887a7b035c63f34c8d979f50efd6ba2, type: 2}
+  tipName:
+    m_TableReference:
+      m_TableCollectionName: GUID:fe14867a5582c984eb6cb4250fb337cd
+    m_TableEntryReference:
+      m_KeyId: 2881150808674304
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  meshesOutline:
+  - {fileID: 1662600186486574356}
+  - {fileID: 2749087932615939598}
+  - {fileID: 5946824147643482457}
+  changeItemSecurity: 0
+  securedItem: 0
+  references:
+    version: 2
+    RefIds: []
+--- !u!64 &5008646715969962853
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2353617643234647215}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5512361600001258384, guid: efa5acde86d5cc643856e5636db27dc8, type: 3}
 --- !u!1 &4559795310606816126
 GameObject:
   m_ObjectHideFlags: 0

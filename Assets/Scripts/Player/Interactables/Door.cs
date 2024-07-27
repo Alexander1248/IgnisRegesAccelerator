@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using Items.Active;
+using Managers;
+using UnityEngine;
 using UnityEngine.Localization;
 
 namespace Player.Interactables
@@ -15,6 +19,7 @@ namespace Player.Interactables
         private bool _opened;
 
         [SerializeField] private bool locked = true;
+        [SerializeField] private string code = "";
 
         private Transform _plr;
 
@@ -29,11 +34,16 @@ namespace Player.Interactables
         [SerializeField] private AudioClip[] clips;
 
 
+        private InventoryManager manager;
         private void Start()
         {
+            
             _plr = GameObject.FindGameObjectWithTag("Player").transform;
             if (!animator) 
                 Debug.LogWarning("Door without animator!");
+            
+            if (!GameObject.FindGameObjectsWithTag("Player").Any(obj => obj.TryGetComponent(out manager)))
+                throw new ArgumentException("Player with InventoryManager not found!");
         }
 
         private void OnDrawGizmos()
@@ -47,16 +57,26 @@ namespace Player.Interactables
         {
             if (locked)
             {
-                if (audioSource)
+                try
                 {
-                    audioSource.clip = clips[0];
-                    audioSource.Play();
+                    var (id, pos) = manager.Find(item =>
+                        item is KeyItem key && key.Code == code).First();
+                    manager.RemoveItem(id, pos.x, pos.y);
+                    locked = false;
                 }
+                catch (Exception)
+                {
+                    if (audioSource)
+                    {
+                        audioSource.clip = clips[0];
+                        audioSource.Play();
+                    }
 
-                if (!animator) return;
-                if (!animator.enabled) animator.enabled = true;
-                animator.CrossFade("LockedDoor", 0.1f, 0, 0);
-                return;
+                    if (!animator) return;
+                    if (!animator.enabled) animator.enabled = true;
+                    animator.CrossFade("LockedDoor", 0.1f, 0, 0);
+                    return;
+                }
             }
 
             if (animator) animator.enabled = false;

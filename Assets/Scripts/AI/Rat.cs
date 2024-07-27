@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Math;
+using Player;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Splines;
 
 public class Rat : MonoBehaviour
 {
@@ -13,6 +16,15 @@ public class Rat : MonoBehaviour
 
     [SerializeField] private float chanceAttak;
     [SerializeField] private float radiusAttack;
+    [Space]
+    [SerializeField] private CatmullRomSpline damageCurve;
+    [SerializeField] private float damage;
+    [SerializeField] private float damageCurveThickness;
+    [SerializeField] private float damageDelay;
+    
+    private RaycastHit[] hits;
+    private HashSet<GameObject> objects;
+    private bool canDamage = true;
     private bool iSeePlayer;
     private bool attacking;
     private Transform player;
@@ -27,6 +39,8 @@ public class Rat : MonoBehaviour
     void Start(){
         player = GameObject.Find("GamePlayer").transform;
         walkToRandPos();
+        objects = new HashSet<GameObject>();
+        hits = new RaycastHit[2];
     }
 
     void Update(){
@@ -60,6 +74,11 @@ public class Rat : MonoBehaviour
         }
     }
 
+    public void Reload()
+    {
+        canDamage = true;
+    }
+
     void tryAttck(){
         if (Random.value > chanceAttak || attacking) return;
 
@@ -74,6 +93,44 @@ public class Rat : MonoBehaviour
         jumpEnd = new Vector3(player.position.x, RatParent.position.y, player.position.z);
         jumpT = 0;
         jumping = true;
+        
+        if (!canDamage) return;
+        objects.Clear();
+        for (var i = 0; i < damageCurve.Count; i++)
+        {
+            var previousPoint = damageCurve.Get(i - 1);
+            for (var j = 1; j <= damageCurve.Segments; j++)
+            {
+                var t = j / (float)damageCurve.Segments;
+                var point = damageCurve.Compute(i, t);
+                var dir = point - previousPoint;
+                var count = Physics.SphereCastNonAlloc(
+                    previousPoint,
+                    damageCurveThickness,
+                    dir.normalized,
+                    hits,
+                    dir.magnitude);
+                for (var c = 0; c <= count; c++)
+                {
+                    if (hits[c].collider == null) continue;
+                    objects.Add(hits[c].collider.gameObject);
+                }
+
+                previousPoint = point;
+            }
+        }
+
+        foreach (var obj in objects)
+        {
+            Debug.Log("[Rat]:" + obj.name + " hit!");
+            if (obj.TryGetComponent(out Health health))
+                health.DealDamage(damage, transform.forward, 0);
+
+            if (obj.TryGetComponent(out HealthUpdater updater))
+                updater.DealDamage(damage, transform.forward, 0);
+            canDamage = false;
+            Invoke(nameof(Reload), damageDelay);
+        }
     }
     public void EndAttack_anim(){
         RatParent.position = AdjustPositionToNavMesh(jumpEnd);
