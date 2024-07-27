@@ -84,6 +84,12 @@ namespace Player
 
         [SerializeField] private Transform GUIObj;
 
+        [SerializeField] private AudioSource[] audioSource;
+        private int footK;
+        private float tStep;
+        [SerializeField] private float[] pitchK;
+        [SerializeField] private float SoundStepMultiplier;
+
         [SerializeField] private Animator camAnimator;
         [SerializeField] private AnimatorController animatorController;
         [SerializeField] private float layingAnimKoeff;
@@ -269,10 +275,10 @@ namespace Player
         }
 
         public void AnimateCam(string animName){
-            if (!camAnimator.enabled){
+            if (!camAnimator.enabled)
                 camAnimator.enabled = true;
+            if (camAnimator.runtimeAnimatorController == null)
                 camAnimator.runtimeAnimatorController = animatorController;
-            }
             camAnimator.speed = 1;
             camAnimator.CrossFade(animName, 0.5f, 0, 0);
         }
@@ -312,10 +318,24 @@ namespace Player
             mouseSensitivity =  PlayerPrefs.GetFloat("Sens", 0.15f);
         }
 
+        void playStep(){
+            if (!isGrounded) return;
+            footK++;
+            if (footK >= 2) footK = 0;
+            audioSource[footK].pitch = Random.Range(pitchK[0], pitchK[1]);
+            audioSource[footK].Play();
+        }
+
         private void FixedUpdate()
         {
             if (isLaying){
                 camAnimator.speed = rb.velocity.magnitude * layingAnimKoeff;
+            }
+
+            tStep += rb.velocity.magnitude * SoundStepMultiplier * Time.deltaTime;
+            if (tStep >= 1){
+                playStep();
+                tStep = 0;
             }
 
             if (wantToStand){

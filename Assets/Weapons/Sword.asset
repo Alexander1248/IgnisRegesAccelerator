@@ -40,7 +40,7 @@ MonoBehaviour:
   isTwoHanded: 0
   damageCurveThickness: 0.01
   damage: 30
-  delay: 1
+  delay: 0.5
   references:
     version: 2
     RefIds: []
