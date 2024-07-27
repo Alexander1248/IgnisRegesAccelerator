@@ -20,6 +20,10 @@ namespace Items
             _items[new Vector2Int(x, y)] = item;
             return true;
         }
+        public bool CanPlace(int x, int y, Item item)
+        {
+            return item.CanBePlaced(this, x, y);
+        }
         public bool AddItem(Item item)
         {
             for (var y = 0; y < height; y++)
@@ -32,6 +36,10 @@ namespace Items
         public IEnumerable<Vector2Int> Find(Item item)
         {
             return _items.Where(pair => pair.Value == item).Select(pair => pair.Key);
+        }
+        public IEnumerable<Vector2Int> Find(Predicate<Item> condition)
+        {
+            return _items.Where(pair => condition.Invoke(pair.Value)).Select(pair => pair.Key);
         }
 
         public Item RemoveItem(int x, int y)
@@ -65,6 +73,12 @@ namespace Items
         {
             var item = GetItem(x, y);
             return item != null && item.Use(this, x, y, player);
+        }
+        public void DrawItem(int x, int y, RectTransform transform)
+        {
+            var item = GetItem(x, y);
+            if (item == null) return;
+            item.Draw(transform);
         }
         
         public bool CellNotEmpty(int x, int y)

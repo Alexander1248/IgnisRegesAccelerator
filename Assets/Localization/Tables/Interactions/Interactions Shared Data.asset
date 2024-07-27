@@ -39,6 +39,10 @@ MonoBehaviour:
     m_Key: EnterShip
     m_Metadata:
       m_Items: []
+  - m_Id: 2881150808674304
+    m_Key: Pick up
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
