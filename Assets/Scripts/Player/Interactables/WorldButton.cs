@@ -15,7 +15,6 @@ namespace Player.Interactables
         [SerializeField] private MeshRenderer[] meshesOutline;
         public LocalizedString TipName => tipName;
         public MeshRenderer[] MeshesOutline => meshesOutline;
-        [SerializeField] private AudioSource audioSource;
         public void Interact(PlayerInteract playerInteract)
         {
             onClick.Invoke();  

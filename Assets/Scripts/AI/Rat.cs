@@ -23,6 +23,13 @@ public class Rat : MonoBehaviour
     private Vector3 jumpEnd;
     private float jumpT;
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip[] attackClips;
+    [SerializeField] private AudioClip hittedClip;
+    [SerializeField] private AudioSource walkSound;
+
+    private bool hitted;
+
 
     void Start(){
         player = GameObject.Find("GamePlayer").transform;
@@ -30,7 +37,12 @@ public class Rat : MonoBehaviour
     }
 
     void Update(){
-        if (!attacking) animator.speed = agent.velocity.magnitude * speedTransferKoeff;
+        if (!attacking){
+            if (agent.velocity.magnitude < 1) walkSound.Pause();
+            else if (!walkSound.isPlaying) walkSound.Play();
+            if (!hitted)
+                animator.speed = agent.velocity.magnitude * speedTransferKoeff;
+        }
         else{
             RatParent.forward = (new Vector3(player.position.x, RatParent.position.y, player.position.z) - RatParent.position).normalized;
         }
@@ -60,8 +72,37 @@ public class Rat : MonoBehaviour
         }
     }
 
+    void PlaySound(AudioClip clip){
+        audioSource.clip = clip;
+        audioSource.pitch = Random.Range(0.8f, 1.2f);
+        audioSource.Play();
+    }
+
+    public void getHitted(){
+        PlaySound(hittedClip);
+        if (!jumping){
+            hitted = true;
+            CancelInvoke("Unstun");
+            agent.ResetPath();
+            Invoke("Unstun", 1);
+            animator.speed = 1;
+            animator.CrossFade("RatHitted", 0.1f, 0, 0);
+            if (attacking){
+                jumping = false;
+                attacking = false;
+            }
+        }
+    }
+    void Unstun(){
+        hitted = false;
+        walkToRandPos();
+    }
+
     void tryAttck(){
-        if (Random.value > chanceAttak || attacking) return;
+        if (Random.value > chanceAttak || attacking || hitted) return;
+
+        PlaySound(attackClips[Random.Range(0, attackClips.Length)]);
+        walkSound.Pause();
 
         attacking = true;
         agent.ResetPath();
@@ -83,7 +124,7 @@ public class Rat : MonoBehaviour
     }
 
     void walkToRandPos(){
-        if (attacking) return;
+        if (attacking || hitted) return;
         animator.CrossFade("RatWalk", 0.15f);
 
         for(int i = 0; i < 10; i++){

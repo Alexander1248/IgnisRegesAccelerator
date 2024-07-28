@@ -9,6 +9,7 @@ public class SecondSceneManager : MonoBehaviour
     [SerializeField] private Animator animatorExplode;
     [SerializeField] private GameObject wall;
     [SerializeField] private Animator animatorFade;
+    [SerializeField] private AudioSource audioSource;
 
     void Awake(){
         animatorFade.enabled = true;
@@ -21,6 +22,7 @@ public class SecondSceneManager : MonoBehaviour
         explosion.Play(true);
         animatorExplode.enabled = true;
         animatorExplode.Play("CanonExplosion");
+        audioSource.Play();
     }
 
     public void NextLvl(){

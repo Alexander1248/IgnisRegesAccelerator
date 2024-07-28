@@ -19,7 +19,9 @@ namespace Weapon
 
         private ParticleSystem particleSystem;
         private Animator animator;
+        private Animator animatorLight;
         private PlayerController playerController;
+        private AudioSource audioSource;
 
 
         public float RechargeTime => rechargeTime;
@@ -32,6 +34,8 @@ namespace Weapon
             _manager = weapon.GetComponent<ReloadManager>();
             particleSystem = weapon.GetComponentInChildren<ParticleSystem>();
             animator = weapon.GetComponent<Animator>();
+            animatorLight = weapon.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Animator>();
+            audioSource = weapon.GetComponentInChildren<AudioSource>();
             if (user != null && user.TryGetComponent<HandController>(out HandController handController)){
                 playerController = handController.getPlayer();
             }
@@ -51,8 +55,10 @@ namespace Weapon
             if (animator != null){
                 if (!animator.enabled) animator.enabled = true;
                 animator.CrossFade("GunShoot", 0.5f, 0, 0);
+                animatorLight.Play("CanonExplosion", 0, 0);
             }
             if (playerController != null) playerController.AnimateCam("Cam_Shoot");
+            if (audioSource != null) audioSource.Play();
             
             Debug.Log("[Gun]: Shoot!");
             _count--;
