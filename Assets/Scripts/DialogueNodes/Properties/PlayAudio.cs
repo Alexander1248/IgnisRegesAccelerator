@@ -24,7 +24,7 @@ namespace DialogueNodes
         public override void OnDrawStart(Dialogue dialogue, Storyline node)
         { 
             if (stage != Stage.OnDrawStart) return;
-            if (dialogue.buffer["source"] is not AudioSource source)
+            if (dialogue.Data["source"] is not AudioSource source)
                 throw new ArgumentException("Type of field \"source\" is not AudioSource");
             source.clip = container.GetClip();
             source.Play();
