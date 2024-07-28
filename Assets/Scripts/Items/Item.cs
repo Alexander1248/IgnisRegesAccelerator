@@ -5,6 +5,7 @@ using UnityEngine.Localization;
 
 namespace Items
 {
+    
     public abstract class Item : ScriptableObject
     {
         [SerializeField] private Vector2Int[] shape;

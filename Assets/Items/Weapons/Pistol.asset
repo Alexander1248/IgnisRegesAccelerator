@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shape:
   - {x: 0, y: 0}
-  - {x: 0, y: 1}
-  - {x: 1, y: 1}
-  - {x: 2, y: 1}
+  - {x: 1, y: 0}
+  - {x: 2, y: 0}
   uiPrefab: {fileID: 6830977853837318397, guid: c2b2fc492162cea4dab225486c6c3a7a,
     type: 3}
   itemName:
@@ -38,7 +37,7 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   secured: 0
-  prefab: {fileID: 7089967681845487178, guid: 499083566ae00a24faea7002a87c19b1, type: 3}
+  prefab: {fileID: 7089967681845487178, guid: e6677dc83b6f18b4cb08a1f856869687, type: 3}
   isTwoHanded: 0
   maxDistance: 100
   damage: 10

@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4161986546209275729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc8867b2af034842b874de30232a275a, type: 3}
+  m_Name: Storyline
+  m_EditorClassIdentifier: 
+  guid: fa015d93f1fb00549a6964aa8f8bb7c2
+  nodePos: {x: 175.20001, y: 88.8}
+  next:
+    keys: 00000000
+    values:
+    - {fileID: 0}
+  textPlayer: {fileID: 0}
+  branchChooser: {fileID: 0}
+  properties: []
+  tag: 
+  delay: 1
+--- !u!114 &-3188393564242555258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a1cbaed40a4bed949609d423f3e720, type: 3}
+  m_Name: SmartSequentialTextDrawer
+  m_EditorClassIdentifier: 
+  guid: ba42ba11c7b176142ba487d76f5c0dd9
+  nodePos: {x: -32.00003, y: 12}
+  textContainer: {fileID: 4661414164252095893}
+  narrator: micro
+  symbolTime:
+    keys: 00000000
+    values:
+    - 0
+    - 0
+  defaultSymbolTime: 0.1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dc910af0e3446b0bda39e5ae3bb19ca, type: 3}
+  m_Name: Start
+  m_EditorClassIdentifier: 
+  roots:
+  - {fileID: 2531784999908200456}
+  nodes:
+  - {fileID: 2531784999908200456}
+  - {fileID: -3188393564242555258}
+  - {fileID: 4661414164252095893}
+  - {fileID: -4161986546209275729}
+--- !u!114 &2531784999908200456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad84465e128f45c9a2b8120b5d4d3fa3, type: 3}
+  m_Name: DialogueRoot
+  m_EditorClassIdentifier: 
+  guid: f59d1201bdc13df478be8e45527f6cf8
+  nodePos: {x: -21.417572, y: 89.12001}
+  next:
+    keys: 00000000
+    values:
+    - {fileID: -4161986546209275729}
+  textPlayer: {fileID: -3188393564242555258}
+  branchChooser: {fileID: 0}
+  properties: []
+  tag: 
+  delay: 1
+  rootName: 
+--- !u!114 &4661414164252095893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d774e111884ed6b9a458c484ced5f7, type: 3}
+  m_Name: UnityLocalizedContainer
+  m_EditorClassIdentifier: 
+  guid: b4544cc24c4051140a49ec2eb9b2c60d
+  nodePos: {x: -11.200073, y: -64.80002}
+  localizedString:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []

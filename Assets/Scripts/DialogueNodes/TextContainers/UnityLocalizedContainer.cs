@@ -9,6 +9,12 @@ namespace DialogueNodes
     public class UnityLocalizedContainer : TextContainer
     {
         [SerializeField] private LocalizedString localizedString;
+        public override AbstractNode Clone()
+        {
+            var node = Instantiate(this);
+            node.localizedString = localizedString;
+            return node;
+        }
         public override string GetText()
         {
             localizedString.RefreshString();

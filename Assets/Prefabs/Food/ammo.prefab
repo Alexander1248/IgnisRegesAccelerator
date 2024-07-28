@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 5934036821085838624}
   - component: {fileID: 2291537040003177590}
   - component: {fileID: 8067376833680747490}
+  - component: {fileID: 7356205031157848906}
   m_Layer: 0
   m_Name: ammo
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65
@@ -107,3 +108,32 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.02640215, y: 0.019999998, z: 0.008996041}
   m_Center: {x: -0.003201075, y: 3.9093912e-17, z: -0.0055019786}
+--- !u!114 &7356205031157848906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6136657920485134248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accc5d5f85114988872ff5e95ff6099f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 239c36185acad3945a00feb7a05a7f24, type: 2}
+  tipName:
+    m_TableReference:
+      m_TableCollectionName: GUID:fe14867a5582c984eb6cb4250fb337cd
+    m_TableEntryReference:
+      m_KeyId: 2881150808674304
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  meshesOutline:
+  - {fileID: 2291537040003177590}
+  changeItemSecurity: 0
+  securedItem: 0
+  references:
+    version: 2
+    RefIds: []
