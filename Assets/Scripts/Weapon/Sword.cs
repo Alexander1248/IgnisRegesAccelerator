@@ -16,7 +16,6 @@ namespace Weapon
         private Animator animator;
         private PlayerController playerController;
         
-        
         private RaycastHit[] hits;
         private HashSet<GameObject> objects;
         private CatmullRomSpline damageCurve;
@@ -52,39 +51,9 @@ namespace Weapon
                 animator.CrossFade("Sword", 0.5f, 0, 0);
             }
             if (playerController != null) playerController.AnimateCam("Cam_Sword");
-            for (var i = 0; i < damageCurve.Count; i++)
-            {
-                var previousPoint = damageCurve.Get(i - 1);
-                for (var j = 1; j <= damageCurve.Segments; j++)
-                {
-                    var t = j / (float)damageCurve.Segments;
-                    var point = damageCurve.Compute(i, t);
-                    var dir = point - previousPoint;
-                    var count = Physics.SphereCastNonAlloc(
-                        previousPoint,
-                        damageCurveThickness,
-                        dir.normalized,
-                        hits,
-                        dir.magnitude);
-                    for (var c = 0; c <= count; c++)
-                    {
-                        if (hits[c].collider == null) continue;
-                        objects.Add(hits[c].collider.gameObject);
-                    }
+            
+            //swordHelper.Attack();
 
-                    previousPoint = point;
-                }
-            }
-            
-            foreach (var obj in objects)
-            {
-                Debug.Log("[Sword]:" + obj.name + " hit!");
-                if (obj.TryGetComponent(out Health health))
-                    health.DealDamage(damage, user.transform.forward, 0);
-            
-                if (obj.TryGetComponent(out HealthUpdater updater))
-                    updater.DealDamage(damage, user.transform.forward, 0);
-            }
             _time = Time.realtimeSinceStartup;
         }
 

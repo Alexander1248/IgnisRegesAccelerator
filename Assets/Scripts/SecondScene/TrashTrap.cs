@@ -15,6 +15,9 @@ public class TrashTrap : MonoBehaviour
     [SerializeField] private Material[] materials;
 
     [SerializeField] private ParticleSystem[] trashParticles;
+    [SerializeField] private AudioSource audioSourceOpen;
+    [SerializeField] private AudioSource warning;
+    [SerializeField] private AudioSource trashSound;
 
     void Start(){
         Invoke("OpenMe", durationClosed + startDelay);
@@ -27,6 +30,7 @@ public class TrashTrap : MonoBehaviour
     }
 
     void LightsOn(){
+        if (warning) warning.Play();
         light.SetActive(true);
         meshRenderer.material = materials[1];
     }
@@ -37,16 +41,24 @@ public class TrashTrap : MonoBehaviour
 
     void OpenMe(){
         Invoke("CloseMe", durationOpen);
+        audioSourceOpen.pitch = Random.Range(0.9f, 1f);
+        audioSourceOpen.Play();
         if (!animator.enabled) animator.enabled = true;
         animator.CrossFade("TrapOpen", 0.1f);
-        if (trashParticles.Length > 0) trashParticles[0].Play(true);
+        if (trashParticles.Length > 0) {
+            trashSound.Play();
+            trashParticles[0].Play(true);
+        }
     }
 
     void CloseMe(){
         LightsOff();
+        audioSourceOpen.pitch = Random.Range(0.9f, 1f);
+        audioSourceOpen.Play();
         Invoke("OpenMe", durationClosed);
         Invoke("LightsOn", durationClosed - lightTime);
         if (!animator.enabled) animator.enabled = true;
         animator.CrossFade("TrapClose", 0.1f);
+        if (trashSound != null) trashSound.Stop();
     }
 }
