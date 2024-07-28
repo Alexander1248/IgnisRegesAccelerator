@@ -75,12 +75,10 @@ namespace Managers
                     }
                     else
                     {
-                        var center = inventory.GetItemCenter(inv, ix, iy);
-                        if (center == null) return;
-                        inventory.DrawItem(inv, ix, iy, gridContents[inv]
-                            .Find($"Inv_Item_{inv}_{center.Value.x}_{center.Value.y}").GetComponent<RectTransform>());
+                        inventory.DrawItem(id, pos.x, pos.y, gridContents[id]
+                            .Find($"Inv_Item_{id}_{pos.x}_{pos.y}").GetComponent<RectTransform>());
                     }
-                } catch(InvalidOperationException) {} 
+                } catch(Exception) {} 
             };
             playerController.Control.Interaction.Journal.performed += _ =>
             {
@@ -206,7 +204,8 @@ namespace Managers
                 {
                     case 0 when inventory.AddItem(inv, ix, iy, bufferedItem):
                         bufferedObject.name = $"Inv_Item_{inv}_{ix}_{iy}";
-                        bufferedObject.parent = gridContents[inv];
+                        bufferedObject.SetParent(gridContents[inv]);
+                        bufferedObject.anchorMax = bufferedObject.anchorMin = new Vector2(0f, 0f);
                         bufferedObject.anchoredPosition = new Vector2(ix, iy) * cell.rect.size
                                                           + bufferedObject.rect.size / 2;
                         break;
@@ -215,16 +214,10 @@ namespace Managers
                         break;
                     case 1 when bufferedItem is Items.Weapon weapon && handController.SetSecondHand(weapon):
                     {
-                        var factor = Mathf.Min(
-                            leftHand.rect.size.x / bufferedObject.rect.size.x, 
-                            leftHand.rect.size.y / bufferedObject.rect.size.y
-                        );
-                        var size = bufferedObject.rect.size * factor;
-                        var pos = (leftHand.rect.size - size) / 2;
-                        
                         bufferedObject.name = "Left_Hand_Item";
-                        bufferedObject.parent = leftHand;
-                        bufferedObject.anchoredPosition = pos + bufferedObject.rect.size / 2;
+                        bufferedObject.SetParent(leftHand);
+                        bufferedObject.anchorMax = bufferedObject.anchorMin = new Vector2(0.5f, 0.5f);
+                        bufferedObject.anchoredPosition = Vector2.zero;
                         break;
                     }
                     case 1:
@@ -232,16 +225,10 @@ namespace Managers
                         break;
                     case 2 when bufferedItem is Items.Weapon weapon && handController.SetMainHand(weapon):
                     {
-                        var factor = Mathf.Min(
-                            rightHand.rect.size.x / bufferedObject.rect.size.x, 
-                            rightHand.rect.size.y / bufferedObject.rect.size.y
-                        );
-                        var size = bufferedObject.rect.size * factor;
-                        var pos = (rightHand.rect.size - size) / 2;
-                        
                         bufferedObject.name = "Right_Hand_Item";
-                        bufferedObject.parent = rightHand;
-                        bufferedObject.anchoredPosition = pos + bufferedObject.rect.size / 2;
+                        bufferedObject.SetParent(rightHand);
+                        bufferedObject.anchorMax = bufferedObject.anchorMin = new Vector2(0.5f, 0.5f);
+                        bufferedObject.anchoredPosition = Vector2.zero;
                         break;
                     }
                     case 2:
@@ -273,38 +260,30 @@ namespace Managers
             {
                 case 0:
                     inventory.AddItem(prevInv, prevIx, prevIy, bufferedItem);
-                    bufferedObject.anchorMax = Vector2.zero;
-                    bufferedObject.anchorMin = Vector2.zero;
+                    bufferedObject.name = $"Inv_Item_{prevInv}_{prevIx}_{prevIy}";
+                    bufferedObject.SetParent(gridContents[prevInv]);
+                    bufferedObject.anchorMax = bufferedObject.anchorMin = new Vector2(0f, 0f);
                     bufferedObject.anchoredPosition = new Vector2(prevIx, prevIy) * cell.rect.size
                                                       + bufferedObject.rect.size / 2;
                     break;
                 case 1:
                 {
                     handController.SetSecondHand(bufferedItem as Items.Weapon);
-                    var factor = Mathf.Min(
-                        leftHand.rect.size.x / bufferedObject.rect.size.x, 
-                        leftHand.rect.size.y / bufferedObject.rect.size.y
-                    );
-                    var size = bufferedObject.rect.size * factor;
-                    var pos = (leftHand.rect.size - size) / 2;
                         
-                    bufferedObject.anchorMax = Vector2.zero;
-                    bufferedObject.anchorMin = Vector2.zero;
-                    bufferedObject.anchoredPosition = pos + bufferedObject.rect.size / 2;
+                    bufferedObject.name = "Left_Hand_Item";
+                    bufferedObject.SetParent(leftHand);
+                    bufferedObject.anchorMax = bufferedObject.anchorMin = new Vector2(0.5f, 0.5f);
+                    bufferedObject.anchoredPosition = Vector2.zero;
                     break;
                 }
                 case 2:
                 {
                     handController.SetMainHand(bufferedItem as Items.Weapon);
-                    var factor = Mathf.Min(
-                        rightHand.rect.size.x / bufferedObject.rect.size.x, 
-                        rightHand.rect.size.y / bufferedObject.rect.size.y
-                    );
-                    var size = bufferedObject.rect.size * factor;
-                    var pos = (rightHand.rect.size - size) / 2;
-                    bufferedObject.anchorMax = Vector2.zero;
-                    bufferedObject.anchorMin = Vector2.zero;
-                    bufferedObject.anchoredPosition = pos + bufferedObject.rect.size / 2;
+                    
+                    bufferedObject.name = "Right_Hand_Item";
+                    bufferedObject.SetParent(rightHand);
+                    bufferedObject.anchorMax = bufferedObject.anchorMin = new Vector2(0.5f, 0.5f);
+                    bufferedObject.anchoredPosition = Vector2.zero;
                     break;
                 }
             }
@@ -353,36 +332,25 @@ namespace Managers
             {
                 case 0 when inventory.CanPlace(inv, ix, iy, bufferedItem):
                     bufferedObject.name = $"Inv_Item_{inv}_{ix}_{iy}";
-                    bufferedObject.parent = gridContents[inv];
+                    bufferedObject.SetParent(gridContents[inv]);
+                    bufferedObject.anchorMax = bufferedObject.anchorMin = new Vector2(0f, 0f);
                     bufferedObject.anchoredPosition = new Vector2(ix, iy) * cell.rect.size
                                                       + bufferedObject.rect.size / 2;
                     break;
-                case 1:
+                case 1 when bufferedItem is Items.Weapon:
                 {
-                    var factor = Mathf.Min(
-                        leftHand.rect.size.x / bufferedObject.rect.size.x,
-                        leftHand.rect.size.y / bufferedObject.rect.size.y
-                    );
-                    var size = bufferedObject.rect.size * factor;
-                    var pos = (leftHand.rect.size - size) / 2;
-
                     bufferedObject.name = "Left_Hand_Item";
-                    bufferedObject.parent = leftHand;
-                    bufferedObject.anchoredPosition = pos + bufferedObject.rect.size / 2;
+                    bufferedObject.SetParent(leftHand);
+                    bufferedObject.anchorMax = bufferedObject.anchorMin = new Vector2(0.5f, 0.5f);
+                    bufferedObject.anchoredPosition = Vector2.zero;
                     break;
                 }
-                case 2:
+                case 2when bufferedItem is Items.Weapon:
                 {
-                    var factor = Mathf.Min(
-                        rightHand.rect.size.x / bufferedObject.rect.size.x,
-                        rightHand.rect.size.y / bufferedObject.rect.size.y
-                    );
-                    var size = bufferedObject.rect.size * factor;
-                    var pos = (rightHand.rect.size - size) / 2;
-
                     bufferedObject.name = "Right_Hand_Item";
-                    bufferedObject.parent = rightHand;
-                    bufferedObject.anchoredPosition = pos + bufferedObject.rect.size / 2;
+                    bufferedObject.SetParent(rightHand);
+                    bufferedObject.anchorMax = bufferedObject.anchorMin = new Vector2(0.5f, 0.5f);
+                    bufferedObject.anchoredPosition = Vector2.zero;
                     break;
                 }
             }

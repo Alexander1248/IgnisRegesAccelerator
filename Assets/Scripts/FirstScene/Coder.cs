@@ -103,7 +103,7 @@ public class Coder : MonoBehaviour
         obj.SetActive(true);
         obj.transform.localPosition = screenPoses[currentScreen];
 
-        if (code != null && code.Length != 4) return;
+        if (code == null || code == "" || code.Length != 4) return;
         bool ok = true;
         for(int i = 0; i < 4; i++){
             if (int.Parse(code[i].ToString()) != screenNums[i]){

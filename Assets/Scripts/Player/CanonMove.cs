@@ -22,6 +22,9 @@ public class CanonMove : MonoBehaviour, IChecker
     private bool releasedCanonByLastFrame;
     [SerializeField] private Yadro yadro;
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip[] clips;
+
     void Start(){
         //AttachCanon();
         playerController = GameObject.Find("GamePlayer").GetComponent<PlayerController>();
@@ -57,6 +60,8 @@ public class CanonMove : MonoBehaviour, IChecker
     }
 
     public void Shoot(){
+        audioSource.clip = clips[0];
+        audioSource.Play();
         readyToShoot = false;
         particles.gameObject.SetActive(true);
         particles.Play(true);
@@ -70,6 +75,12 @@ public class CanonMove : MonoBehaviour, IChecker
 
         yadro.Activate(yadroSpawnPoint.forward);
         Invoke("resetYadro", reloadKD);
+        Invoke("reloadAudio", reloadKD - 1f);
+    }
+
+    void reloadAudio(){
+        audioSource.clip = clips[1];
+        audioSource.Play();
     }
 
     void resetYadro(){

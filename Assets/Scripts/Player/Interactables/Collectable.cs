@@ -1,7 +1,10 @@
-﻿using Items;
+﻿using System;
+using System.Linq;
+using Items;
 using Managers;
 using UnityEngine;
 using UnityEngine.Localization;
+using UnityEngine.Serialization;
 
 namespace Player.Interactables
 {
@@ -10,7 +13,8 @@ namespace Player.Interactables
         [SerializeField] private Item item;
         [SerializeField] private LocalizedString tipName;
         [SerializeField] private MeshRenderer[] meshesOutline;
-        [SerializeField] private bool changeItemSecure;
+        [FormerlySerializedAs("changeItemSecure")]
+        [SerializeField] private bool changeItemSecurity;
         [SerializeField] private bool securedItem;
         public LocalizedString TipName => tipName;
         public MeshRenderer[] MeshesOutline => meshesOutline;
@@ -18,12 +22,13 @@ namespace Player.Interactables
         private InventoryManager manager;
         private void Start()
         {
-            manager = GameObject.FindGameObjectWithTag("Player").GetComponent<InventoryManager>();
+            if (!GameObject.FindGameObjectsWithTag("Player").Any(obj => obj.TryGetComponent(out manager)))
+                throw new ArgumentException("Player with InventoryManager not found!");
         }
         public void Interact(PlayerInteract playerInteract)
         {
             var i = Instantiate(item);
-            if (changeItemSecure) i.secured = securedItem;
+            if (changeItemSecurity) i.secured = securedItem;
             if (manager.AddItem(i))
                 Destroy(gameObject);
             else Destroy(item);

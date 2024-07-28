@@ -24,6 +24,11 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject[] menus;
 
     [SerializeField] private Animator fadeAnim;
+    
+    [SerializeField] private AudioSource audioSourceMusic;
+    private bool fadeOut;
+
+    [SerializeField] private AudioSource[] audioSourcesClicks;
 
     private int currentSelected;
     private int pressed = -1;
@@ -37,6 +42,7 @@ public class MainMenu : MonoBehaviour
 
     public void SelectButton(int id){
         //if (currentSelected == id) return;
+        if (currentSelected != id) audioSourcesClicks[0].Play();
         Deselect(currentSelected);
         currentSelected = id;
 
@@ -65,6 +71,7 @@ public class MainMenu : MonoBehaviour
 
     public void PressButton(int id){
         if (pressed != -1) return;
+        audioSourcesClicks[1].Play();
         pressed = id;
         buttons[pressed].parent.localScale = selectedScale * 1.1f * Vector3.one;
         Invoke("Press", 0.07f);
@@ -78,12 +85,14 @@ public class MainMenu : MonoBehaviour
         buttons[pressed].parent.localScale = selectedScale * Vector3.one;
         if (pressed == 0){
             // continue
+            fadeOut = true;
             fadeAnim.enabled = true;
             fadeAnim.Play("FadeIn", -1, 0);
             Invoke("loadGame", 1.5f);
         }
         else if (pressed == 1){
             // new game
+            fadeOut = true;
             fadeAnim.enabled = true;
             fadeAnim.Play("FadeIn", -1, 0);
             Invoke("loadGame", 1.5f);
@@ -115,5 +124,10 @@ public class MainMenu : MonoBehaviour
         }
 
         pressed = -1;
+    }
+
+    void Update(){
+        if (!fadeOut) return;
+        audioSourceMusic.volume -= Time.deltaTime;
     }
 }

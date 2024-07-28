@@ -40,6 +40,8 @@ public class Pause : MonoBehaviour
     private int pressed = -1;
     private float timeScale;
 
+    [SerializeField] private AudioSource[] audioSourcesClicks;
+
     void Start(){
         checker = Ichecker.GetComponent<IChecker>();
     }
@@ -77,6 +79,7 @@ public class Pause : MonoBehaviour
     }
 
     public void SelectButton(int id){
+        if (currentSelected != id) audioSourcesClicks[0].Play();
         Deselect(currentSelected);
         currentSelected = id;
 
@@ -105,6 +108,7 @@ public class Pause : MonoBehaviour
 
     public void PressButton(int id){
         if (pressed != -1) return;
+        audioSourcesClicks[1].Play();
         pressed = id;
         buttons[pressed].parent.localScale = selectedScale * 1.1f * Vector3.one;
         Invoke("Press", 0.07f * timeScale);

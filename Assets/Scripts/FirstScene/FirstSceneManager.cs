@@ -27,6 +27,11 @@ public class FirstSceneManager : MonoBehaviour
 
     [SerializeField] private Animator animatorFade;
 
+    [SerializeField] private AudioSource sirena;
+    [SerializeField] private AudioSource epic;
+    [SerializeField] private AudioSource explosionSound;
+    private bool holeExploded;
+
     void Awake(){
         playerController.LockPlayer();
     }
@@ -46,21 +51,25 @@ public class FirstSceneManager : MonoBehaviour
         megashipExplosion.Play(true);
         animatorFlash.enabled = true;
         animatorFlash.Play("CanonExplosion", -1, 0);
+        explosionSound.Play();
         holeObj.SetActive(false);
         mainCS.Resume();
+        holeExploded = true;
         canonMove.ReleaseCanon();
     }
 
     public void WaitinHitMegaShip(){
-        mainCS.Pause();
+        if (!holeExploded) mainCS.Pause();
     }
 
     public void ActivateMainCS(){
+        epic.Play();
         megaShip.SetActive(true);
         mainCS.Play();
     }
 
     public void WaitPlayerToExit(){
+        sirena.Play();
         playertrigger.SetActive(true);
     }
 

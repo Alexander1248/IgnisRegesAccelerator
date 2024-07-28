@@ -4,11 +4,19 @@ using System.Linq;
 using Items;
 using UnityEngine;
 
-namespace Managers
+namespace Player
 {
     public class InventoryManager : MonoBehaviour
     {
         [SerializeField] private Inventory[] inventories;
+
+        public void Initialize(Dictionary<Vector2Int, Item>[] items)
+        {
+            for (var i = 0; i < items.Length; i++)
+                foreach (var (pos, item) in items[i])
+                    inventories[i].AddItem(pos.x, pos.y, item);
+            
+        }
 
         public int Count => inventories.Length;
 

@@ -20,6 +20,8 @@ namespace AI.Enemies
         [SerializeField] private Transform weaponAnchor;
         [SerializeField] private Items.Weapon weapon;
 
+        [SerializeField] private Animator animator;
+
         
         
         private bool actionCompleted;
@@ -91,6 +93,7 @@ namespace AI.Enemies
                         enemyAI.Notify(new HashSet<EnemyAI>(),"rapprochement");
                     }
                     Debug.Log("[AI]:" + name + ": idle -> rapprochement");
+                    animator.CrossFade("WalkWithSword", 0.25f, 0, 0);
                     return true;
                 }
             );
@@ -109,6 +112,7 @@ namespace AI.Enemies
                         actionCompleted = false;
                         return false;
                     }
+                    animator.CrossFade("Idle", 0.25f, 0, 0);
                     Debug.DrawRay(transform.position, dir, Color.red, TargetUpdateRate);
                     return actionCompleted;
                 });
@@ -119,8 +123,14 @@ namespace AI.Enemies
                 {
                     if (Target == null) return false;
                     var b = Vector3.Distance(Target.transform.position, transform.position) < attackDistance;
-                    if (b) Debug.Log("[AI]:" + name + ": rapprochement -> attack");
-                    else Debug.Log("[AI]:" + name + ": attack -> rapprochement");
+                    if (b){
+                        Debug.Log("[AI]:" + name + ": rapprochement -> attack");
+                        animator.CrossFade("SwordAttack_1", 0.25f, 0, 0);
+                    }
+                    else {
+                        Debug.Log("[AI]:" + name + ": attack -> rapprochement");
+                        animator.CrossFade("WalkWithSword", 0.25f, 0, 0);
+                    }
                     return b;
                 });
             fsm.AddTriggerTransitionFromAny("rapprochement", "rapprochement");
