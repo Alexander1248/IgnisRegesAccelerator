@@ -252,6 +252,22 @@ namespace Managers
             updater.cell = cell;
         }
 
+        void Update(){ // похуй на эту новую систему ввода (абсолютно)
+            if (Input.GetKeyUp(KeyCode.Escape)){
+                if (inventoryGUI.activeSelf || journal.activeSelf)
+                {
+                    handController.MainHandActive(true);
+                    handController.SecondHandActive(true);
+                    playerController.UnlockPlayer();
+                    playerController.LockCursor();
+                    
+                    hud.SetActive(true);
+                    journal.SetActive(false);
+                    inventoryGUI.SetActive(false);
+                }
+            }
+        }
+
         private void ReturnBack()
         {
             if (!inventoryGUI.activeInHierarchy) return;

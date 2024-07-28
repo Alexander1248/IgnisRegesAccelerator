@@ -164,11 +164,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3115321963872256
-    m_Localized: Open the chest
+    m_Localized: Find the treasure
     m_Metadata:
       m_Items: []
   - m_Id: 3115322500743168
-    m_Localized: The rich
+    m_Localized: The treasure hunter
     m_Metadata:
       m_Items: []
   - m_Id: 3115325151543296

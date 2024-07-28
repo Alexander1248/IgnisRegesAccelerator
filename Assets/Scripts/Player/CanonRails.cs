@@ -39,6 +39,7 @@ public class CanonRails : MonoBehaviour, IChecker
     [SerializeField] private AudioSource fallAudio;
 
     [SerializeField] private Collider triggerInteract;
+    [SerializeField] private ThirdSceneManager thirdSceneManager;
 
     private bool stationary;
 
@@ -134,7 +135,12 @@ public class CanonRails : MonoBehaviour, IChecker
         var native = new NativeSpline(spline);
 
         Vector3 localPosition = splineContainer.transform.InverseTransformPoint(transform.position);
-        float3 nearestPoint = SplineUtility.GetNearestPoint(native, localPosition, out float3 nearest, out float t);
+        float3 nearestPoint = SplineUtility.GetNearestPoint(native, localPosition, out float3 nearest, out float t); // 0.42
+
+        if (splineIndex == 1 && t > 0.3f && !thirdSceneManager.wallIsBroken){
+            SplineUtility.Evaluate(spline, 0.3f, out float3 lp, out float3 lf, out float3 uv);
+            nearest = lp;
+        }
 
         transform.position = splineContainer.transform.TransformPoint(nearest);
 

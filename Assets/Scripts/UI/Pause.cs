@@ -32,6 +32,8 @@ public class Pause : MonoBehaviour
     [SerializeField] private SettingsMenu settingsMenu;
     [SerializeField] private PlayerController playerController;
 
+    [SerializeField] private GameObject inventory;
+    [SerializeField] private GameObject journal;
     [SerializeField] private GameObject Ichecker;
     private IChecker checker;
 
@@ -48,7 +50,7 @@ public class Pause : MonoBehaviour
 
     void Update(){
         if (Input.GetKeyUp(KeyCode.Escape)){
-            if (checker != null && checker.boolMethod()) return;
+            if (checker != null && checker.boolMethod() || inventory.activeSelf || journal.activeSelf) return;
             PauseGame();
         }
     }

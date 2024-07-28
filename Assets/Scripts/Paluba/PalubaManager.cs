@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Player;
+using Plugins.DialogueSystem.Scripts.DialogueGraph;
+using Quests;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
@@ -15,11 +17,25 @@ public class PalubaManager : MonoBehaviour
 
     [SerializeField] private Animator animatorFade;
 
+    [SerializeField] private WalkieTalkieUI walkieTalkieUI;
+    [SerializeField] private Dialogue dialogue;
+    private bool lastDialog;
+
+    [SerializeField] private QuestManager questManager;
+    [SerializeField] private Quest[] quests;
+    private bool foundChest;
+
     void Start(){
         animatorFade.enabled = true;
         animatorFade.Play("FadeOut", 0, 0);
         cam = playerController.getCamAnchor();
         merc.SetActive(false);
+        questManager.Add(quests[0]);
+    }
+    public void FindChest(){
+        if (foundChest) return;
+        foundChest = true;
+        questManager.Complete(quests[0]);
     }
 
     public void StartCS(){
@@ -31,9 +47,23 @@ public class PalubaManager : MonoBehaviour
         playableDirector.Play();
     }
 
+    public void DialogueEnd(){
+        if (lastDialog){
+            Invoke("loadMenu", 2);
+        }
+        walkieTalkieUI.DisableAnim();
+    }
+
+    public void StartDialogue(string name){
+        //dialogue.StopAll();
+        dialogue.StartDialogueNow(name);
+        walkieTalkieUI.ActivateAnim();
+    }
+
     public void EndGame(){
         animatorFade.Play("InstFade", 0, 0);
-        Invoke("loadMenu", 9);
+        StartDialogue("Dialog12");
+        lastDialog = true;
     }
 
     void loadMenu(){

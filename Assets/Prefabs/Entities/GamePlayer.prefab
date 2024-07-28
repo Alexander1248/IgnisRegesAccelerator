@@ -4315,6 +4315,8 @@ MonoBehaviour:
   fadeAnim: {fileID: 2115043057487090019}
   settingsMenu: {fileID: 139352143097820000}
   playerController: {fileID: 4452881529384946052}
+  inventory: {fileID: 9008392054164454537}
+  journal: {fileID: 848263507776128085}
   Ichecker: {fileID: 0}
   audioSourcesClicks:
   - {fileID: 1780324414349394610}
@@ -6320,8 +6322,8 @@ MonoBehaviour:
   controller: {fileID: 4452881529384946052}
   mainHandAnchor: {fileID: 7236162028178591884}
   secondHandAnchor: {fileID: 4744373889025575788}
-  mainHand: {fileID: 11400000, guid: c1737b6cb5719364e8f4faa3256f80ba, type: 2}
-  secondHand: {fileID: 11400000, guid: 0887a7b035c63f34c8d979f50efd6ba2, type: 2}
+  mainHand: {fileID: 0}
+  secondHand: {fileID: 0}
   playerController: {fileID: 4452881529384946052}
 --- !u!114 &8652104723655509147
 MonoBehaviour:
@@ -8137,17 +8139,23 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7290840710781376661, guid: 5137055a8f6131a47a05dc4504b64f6e,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 247187254252662300}
+      addedObject: {fileID: 5297357802248784128}
     - targetCorrespondingSourceObject: {fileID: 7290840710781376661, guid: 5137055a8f6131a47a05dc4504b64f6e,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5297357802248784128}
+      addedObject: {fileID: 247187254252662300}
     - targetCorrespondingSourceObject: {fileID: 7290840710781376661, guid: 5137055a8f6131a47a05dc4504b64f6e,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2053003038687031531}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5137055a8f6131a47a05dc4504b64f6e, type: 3}
+--- !u!1 &848263507776128085 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8207658468407850123, guid: 5137055a8f6131a47a05dc4504b64f6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8800832804633014494}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2237323858071119947 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7290840710781376661, guid: 5137055a8f6131a47a05dc4504b64f6e,
@@ -8196,6 +8204,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5472bb5d8e5344958abdd495fef77fd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &9008392054164454537 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 515356591183957079, guid: 5137055a8f6131a47a05dc4504b64f6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8800832804633014494}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &9158214831682267048 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 376707060758468470, guid: 5137055a8f6131a47a05dc4504b64f6e,

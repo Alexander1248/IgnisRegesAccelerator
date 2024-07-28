@@ -17,7 +17,8 @@ MonoBehaviour:
   - {x: 0, y: 1}
   - {x: 0, y: 2}
   - {x: 0, y: 3}
-  uiPrefab: {fileID: 0}
+  uiPrefab: {fileID: 6830977853837318397, guid: 48c94ac0ca5103e4abcb495236a3d6f2,
+    type: 3}
   itemName:
     m_TableReference:
       m_TableCollectionName: 
