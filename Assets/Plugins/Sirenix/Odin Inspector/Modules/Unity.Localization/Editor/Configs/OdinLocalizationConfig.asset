@@ -1,4 +1,4 @@
-﻿%YAML 1.1
+%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fc91909e6444cb29aacb664f2098c7e, type: 3}
   m_Name: OdinLocalizationConfig
   m_EditorClassIdentifier: 
-  recordUndosForAssetTableEntries: 1
   assetRowHeight: 128
   useSyntaxHighlighter: 1
   placeholderColor:
@@ -27,3 +26,4 @@ MonoBehaviour:
   scrollSpeed: 24
   invertMouseDragNavigation: 1
   mouseDragSpeed: 1
+  useCustomUndoHandlingForAssetCollections: 1
