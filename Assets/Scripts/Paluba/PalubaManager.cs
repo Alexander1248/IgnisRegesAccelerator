@@ -11,6 +11,7 @@ public class PalubaManager : MonoBehaviour
     private Transform cam;
     [SerializeField] private  PlayerController playerController;
     [SerializeField] private GameObject merc;
+    [SerializeField] private Collider trigegrInteract;
 
     [SerializeField] private Animator animatorFade;
 
@@ -22,7 +23,9 @@ public class PalubaManager : MonoBehaviour
     }
 
     public void StartCS(){
+        trigegrInteract.enabled = false;
         playerController.LockPlayer();
+        playerController.hideHands();
         cam.GetChild(0).GetChild(0).localEulerAngles = Vector3.zero;
         cam.SetParent(playableDirector.transform);
         playableDirector.Play();

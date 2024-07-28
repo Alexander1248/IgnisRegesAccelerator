@@ -56,8 +56,6 @@ namespace Player
             
             if (mainHandBuff) SetMainHand(mainHandBuff);
             if (secondHandBuff) SetSecondHand(secondHandBuff);
-            MainHandActive(false);
-            SecondHandActive(false);
         }
 
         public bool SetMainHand(Items.Weapon weapon)
