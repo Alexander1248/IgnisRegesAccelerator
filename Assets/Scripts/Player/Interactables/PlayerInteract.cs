@@ -45,7 +45,10 @@ namespace Player.Interactables
         private void Raycasting()
         {
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, Mathf.Infinity, layerMask))
+            {
+                Debug.DrawLine(cam.transform.position, _hit.point, Color.white, 0.1f);
                 CheckObject(_hit.transform.gameObject);
+            }
             else
             {
                 _idxInteract = -1;

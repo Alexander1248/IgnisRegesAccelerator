@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3821210383767896162}
   - component: {fileID: 2284165797211022156}
   - component: {fileID: 2227665192073297284}
+  - component: {fileID: 1470040930488366198}
   m_Layer: 0
   m_Name: healka
   m_TagString: Untagged
@@ -107,3 +108,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.011597953, y: 0.0064193923, z: 0.033372678}
   m_Center: {x: 0, y: 0, z: 0.010014453}
+--- !u!114 &1470040930488366198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4410785830258125680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accc5d5f85114988872ff5e95ff6099f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 13679ac40a226124ca500f1c9be6cc7a, type: 2}
+  tipName:
+    m_TableReference:
+      m_TableCollectionName: GUID:fe14867a5582c984eb6cb4250fb337cd
+    m_TableEntryReference:
+      m_KeyId: 2881150808674304
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  meshesOutline:
+  - {fileID: 2284165797211022156}
+  references:
+    version: 2
+    RefIds: []
