@@ -15,30 +15,144 @@ MonoBehaviour:
   m_TableCollectionName: Quests Part 1
   m_TableCollectionNameGuidString: 276648fc3c6ac3a40b1f73ee6d51b77d
   m_Entries:
-  - m_Id: 215230230327296
-    m_Key: RTEName
+  - m_Id: 3107969864859648
+    m_Key: Quest_1_Goal
     m_Metadata:
       m_Items: []
-  - m_Id: 215397360758784
-    m_Key: RTETask
+  - m_Id: 3107974923190272
+    m_Key: Quest_1_Name
     m_Metadata:
       m_Items: []
-  - m_Id: 215440570478592
-    m_Key: 'RTEDescription
-
-'
+  - m_Id: 3108011057119232
+    m_Key: Quest_1_Description
     m_Metadata:
       m_Items: []
-  - m_Id: 368362939772928
-    m_Key: TQName
+  - m_Id: 3109221499699200
+    m_Key: Quest_2_Goal
     m_Metadata:
       m_Items: []
-  - m_Id: 368401351208960
-    m_Key: TQTask
+  - m_Id: 3109545769730048
+    m_Key: Quest_2.1_Goal
     m_Metadata:
       m_Items: []
-  - m_Id: 368433198559232
-    m_Key: TQDesc
+  - m_Id: 3109559594156032
+    m_Key: Quest_2.2_Goal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3109562580500480
+    m_Key: Quest_2_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3109612207505408
+    m_Key: Quest_2_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3110213343543296
+    m_Key: Quest_3_Goal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3110217428795392
+    m_Key: Quest_3_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3110218938744832
+    m_Key: Quest_3_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3111027701219328
+    m_Key: Quest_4_Goal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3111031526424576
+    m_Key: Quest_4.1_Goal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3111038975508480
+    m_Key: Quest_4.2_Goal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3111042775547904
+    m_Key: Quest_4_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3111043304030208
+    m_Key: Quest_4_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3111962791936000
+    m_Key: Quest_5_Goal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3112008866365440
+    m_Key: Quest_5.1_Goal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3112012288917504
+    m_Key: Quest_5_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3112012792233984
+    m_Key: Quest_5_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3112766223450112
+    m_Key: Quest_6_Goal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3112767771148288
+    m_Key: Quest_6_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3112774410731520
+    m_Key: Quest_6_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3113431163240448
+    m_Key: Quest_7_Goal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3113432715132928
+    m_Key: Quest_7_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3113434090864640
+    m_Key: Quest_7_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3114014582538240
+    m_Key: Quest_8_Goal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3114015165546496
+    m_Key: Quest_8_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3114019045277696
+    m_Key: Quest_8_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3114722010628096
+    m_Key: Quest_9_Goal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3114722555887616
+    m_Key: Quest_9_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3114723055009792
+    m_Key: Quest_9_Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3115321963872256
+    m_Key: Quest_10_Goal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3115322500743168
+    m_Key: Quest_10_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3115325151543296
+    m_Key: Quest_10_Description
     m_Metadata:
       m_Items: []
   m_Metadata:
