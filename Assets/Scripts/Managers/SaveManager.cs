@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Items;
 using Player;
+using Plugins.DialogueSystem.Scripts.Utils;
 using UnityEditor;
 using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace Managers
         private static GameState _state;
         [SerializeField] private string path;
         [SerializeField] private string[] supportedVersions;
+        [SerializeField] private UDictionary<string, Item> items;
         [SerializeField] private InventoryManager manager;
         
         private void Start()
@@ -30,12 +32,7 @@ namespace Managers
             }
             manager.Initialize(state.inventories.Select(inventory => inventory.items.ToDictionary(
                 locations => new Vector2Int(locations.x, locations.y),
-                locations =>
-                {
-                    var o = ScriptableObject.CreateInstance(Type.GetType(locations.type));
-                    JsonUtility.FromJsonOverwrite(locations.data, o);
-                    return o as Items.Item;
-                }
+                locations => items[locations.item]
                 )).ToArray());
         }
 
@@ -51,7 +48,9 @@ namespace Managers
                 foreach (var (key, value) in manager[i])
                     inventories[i].items.Add(new ItemLocations
                     {
-                        data = JsonUtility.ToJson(value)
+                        x = key.x,
+                        y = key.y,
+                        item = items.Where(pair => pair.Value == value).Select(pair => pair.Key).First()
                     });
             }
 
@@ -87,17 +86,7 @@ namespace Managers
         {
             public int x;
             public int y;
-            public string type;
-            public string data;
-        }
-        [Serializable]
-        private class Item
-        { 
-            public Vector2Int[] shape;
-            public GameObject uiPrefab;
-            public LocalizedString itemName;
-            public LocalizedString itemDescription;
-            public bool secured;
+            public string item;
         }
     }
 }
