@@ -8,7 +8,7 @@ namespace Items.Active
     {
         [SerializeField] private string type;
         public string Type => type;
-        public override bool Use(Inventory inventory, int x, int y, GameObject player)
+        public override bool Use(Inventory inventory, int x, int y, GameObject player, AudioSource audioSource)
         {
             return false;
         }

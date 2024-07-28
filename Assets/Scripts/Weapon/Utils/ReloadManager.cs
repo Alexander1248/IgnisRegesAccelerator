@@ -43,6 +43,7 @@ namespace Weapon.Utils
                 manager.RemoveItem(id, pos.x, pos.y);
                 Invoke(nameof(EndReload), gun.ReloadTime);
                 IsReloading = true;
+                gun.AnimReload();
                 Debug.Log("[Gun]: Reloading...");
             } catch(Exception) {}
         }

@@ -1,5 +1,71 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8147468756802353920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f294a4b6a230406da9816632733bb67b, type: 3}
+  m_Name: PlayAudio
+  m_EditorClassIdentifier: 
+  guid: 482b4844d87fd9e4a9a03a676401ea84
+  nodePos: {x: -2172.6052, y: 2991.4478}
+  stage: 0
+  container: {fileID: 88916395290704807}
+--- !u!114 &-7843612497616746724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d774e111884ed6b9a458c484ced5f7, type: 3}
+  m_Name: UnityLocalizedContainer
+  m_EditorClassIdentifier: 
+  guid: f7140c1590809694799dc02b253beb7b
+  nodePos: {x: -2497.1052, y: 2403.0762}
+  localizedString:
+    m_TableReference:
+      m_TableCollectionName: GUID:42be36923b8c43c428456798864c0ef5
+    m_TableEntryReference:
+      m_KeyId: 12072574550016
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
+--- !u!114 &-4493744487610932958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc8867b2af034842b874de30232a275a, type: 3}
+  m_Name: Storyline
+  m_EditorClassIdentifier: 
+  guid: 00650088be15a8842b7b46abe05cd689
+  nodePos: {x: -1822.6051, y: 2919.4478}
+  next:
+    keys: 00000000
+    values:
+    - {fileID: 0}
+  textPlayer: {fileID: 6535686059672272068}
+  branchChooser: {fileID: 0}
+  properties:
+  - {fileID: -8147468756802353920}
+  tag: 
+  delay: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12,5 +78,219 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dc910af0e3446b0bda39e5ae3bb19ca, type: 3}
   m_Name: DiningRoom
   m_EditorClassIdentifier: 
-  roots: []
-  nodes: []
+  roots:
+  - {fileID: 1822699700234769804}
+  - {fileID: 993885500637964503}
+  nodes:
+  - {fileID: 367056063260970199}
+  - {fileID: 171218800937644015}
+  - {fileID: 1822699700234769804}
+  - {fileID: 6011278197518441746}
+  - {fileID: 6569292232269158158}
+  - {fileID: -7843612497616746724}
+  - {fileID: 993885500637964503}
+  - {fileID: -4493744487610932958}
+  - {fileID: -8147468756802353920}
+  - {fileID: 6535686059672272068}
+  - {fileID: 88916395290704807}
+  - {fileID: 3936979030915558449}
+--- !u!114 &88916395290704807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa2b60c3e68d4a43906c3a5a36497d44, type: 3}
+  m_Name: LocalizedAudioContainer
+  m_EditorClassIdentifier: 
+  guid: 8b69d61c3f488584889aa1bd06131c50
+  nodePos: {x: -2404.6052, y: 2991.4478}
+  clip:
+    m_TableReference:
+      m_TableCollectionName: GUID:b35c72ab7581a1a4c9be20d686511313
+    m_TableEntryReference:
+      m_KeyId: 8583861534720
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+--- !u!114 &171218800937644015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f294a4b6a230406da9816632733bb67b, type: 3}
+  m_Name: PlayAudio
+  m_EditorClassIdentifier: 
+  guid: d107cd692f4335d4087d44e977e169de
+  nodePos: {x: -2172.614, y: 2513.4302}
+  stage: 0
+  container: {fileID: 6569292232269158158}
+--- !u!114 &367056063260970199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc8867b2af034842b874de30232a275a, type: 3}
+  m_Name: Storyline
+  m_EditorClassIdentifier: 
+  guid: 0c54ae212699f0746a970eef54ca5edc
+  nodePos: {x: -1822.6138, y: 2441.4302}
+  next:
+    keys: 00000000
+    values:
+    - {fileID: 0}
+  textPlayer: {fileID: 6011278197518441746}
+  branchChooser: {fileID: 0}
+  properties:
+  - {fileID: 171218800937644015}
+  tag: 
+  delay: 1
+--- !u!114 &993885500637964503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad84465e128f45c9a2b8120b5d4d3fa3, type: 3}
+  m_Name: DialogueRoot
+  m_EditorClassIdentifier: 
+  guid: e1039b51543f7e043870ac53483f0f8d
+  nodePos: {x: -2189.6052, y: 2717.4478}
+  next:
+    keys: 00000000
+    values:
+    - {fileID: -4493744487610932958}
+  textPlayer: {fileID: 0}
+  branchChooser: {fileID: 0}
+  properties: []
+  tag: 
+  delay: 0
+  rootName: Dialog11
+--- !u!114 &1822699700234769804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad84465e128f45c9a2b8120b5d4d3fa3, type: 3}
+  m_Name: DialogueRoot
+  m_EditorClassIdentifier: 
+  guid: b02ac396ef3e27c40b2f93ce9fd50714
+  nodePos: {x: -2189.6404, y: 2239.4302}
+  next:
+    keys: 00000000
+    values:
+    - {fileID: 367056063260970199}
+  textPlayer: {fileID: 0}
+  branchChooser: {fileID: 0}
+  properties: []
+  tag: 
+  delay: 0
+  rootName: Dialog9
+--- !u!114 &3936979030915558449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d774e111884ed6b9a458c484ced5f7, type: 3}
+  m_Name: UnityLocalizedContainer
+  m_EditorClassIdentifier: 
+  guid: e7da66161e539f244998789c29701bbe
+  nodePos: {x: -2496.6052, y: 2881.4478}
+  localizedString:
+    m_TableReference:
+      m_TableCollectionName: GUID:42be36923b8c43c428456798864c0ef5
+    m_TableEntryReference:
+      m_KeyId: 12074113859584
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
+--- !u!114 &6011278197518441746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a1cbaed40a4bed949609d423f3e720, type: 3}
+  m_Name: SmartSequentialTextDrawer
+  m_EditorClassIdentifier: 
+  guid: 0b556a45b5f3feb4b9a0132db7350e49
+  nodePos: {x: -2292.6138, y: 2402.9302}
+  textContainer: {fileID: -7843612497616746724}
+  narrator: micro
+  symbolTime:
+    keys: 0000
+    values:
+    - 0
+  defaultSymbolTime: 0.1
+--- !u!114 &6535686059672272068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a1cbaed40a4bed949609d423f3e720, type: 3}
+  m_Name: SmartSequentialTextDrawer
+  m_EditorClassIdentifier: 
+  guid: cd4ee0dfc4ca7fc4fb510754fe8e7fab
+  nodePos: {x: -2292.6052, y: 2880.4478}
+  textContainer: {fileID: 3936979030915558449}
+  narrator: micro
+  symbolTime:
+    keys: 0000
+    values:
+    - 0
+  defaultSymbolTime: 0.1
+--- !u!114 &6569292232269158158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa2b60c3e68d4a43906c3a5a36497d44, type: 3}
+  m_Name: LocalizedAudioContainer
+  m_EditorClassIdentifier: 
+  guid: 6f77ba4bdb733734680add0745df73b0
+  nodePos: {x: -2404.6135, y: 2513.4302}
+  clip:
+    m_TableReference:
+      m_TableCollectionName: GUID:b35c72ab7581a1a4c9be20d686511313
+    m_TableEntryReference:
+      m_KeyId: 8571429617664
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
