@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Dialogs Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Dialogs
+  m_TableCollectionNameGuidString: 42be36923b8c43c428456798864c0ef5
+  m_Entries:
+  - m_Id: 21571600384
+    m_Key: RadioPriem_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1066016210944
+    m_Key: RadioPriem_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1807028092928
+    m_Key: RadioPriem_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1822765121536
+    m_Key: RadioPriem_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12044619513856
+    m_Key: RadioPriem_5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12048813817856
+    m_Key: RadioPriem_6
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12052039237632
+    m_Key: RadioPriem_7
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12057475055616
+    m_Key: RadioPriem_8
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12061199597568
+    m_Key: RadioPriem_9
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12062889902080
+    m_Key: RadioPriem_10
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12064236273664
+    m_Key: RadioPriem_11
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12065494564864
+    m_Key: RadioPriem_12
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12067138732032
+    m_Key: RadioPriem_13
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12071131709440
+    m_Key: RadioPriem_14
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12072574550016
+    m_Key: RadioPriem_15
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12074113859584
+    m_Key: RadioPriem_16
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12075628003328
+    m_Key: RadioPriem_17
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16282644938752
+    m_Key: FinalDemo
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 4021511700696268885
+  references:
+    version: 2
+    RefIds:
+    - rid: 4021511700696268885
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1722168341196
