@@ -10,6 +10,7 @@ namespace Items.Active
     {
         [SerializeField] private int amountPerRound;
         [SerializeField] private int rounds;
+        [SerializeField] private AudioClip sound;
         [FormerlySerializedAs("uses")] [SerializeField] private GameObject usesPrefab;
         private int used;
 
@@ -18,8 +19,11 @@ namespace Items.Active
             used = rounds;
         }
 
-        public override bool Use(Inventory inventory, int x, int y, GameObject player)
+        public override bool Use(Inventory inventory, int x, int y, GameObject player, AudioSource audioSource)
         {
+            Debug.Log(this);
+            audioSource.clip = sound;
+            audioSource.Play();
             var health = player.GetComponent<Health>();
             health.ChangeHealth(amountPerRound);
             used--;

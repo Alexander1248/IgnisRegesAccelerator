@@ -69,10 +69,10 @@ namespace Items
             return null;
         }
 
-        public bool UseItem(int x, int y, GameObject player)
+        public bool UseItem(int x, int y, GameObject player, AudioSource audioSource)
         {
             var item = GetItem(x, y);
-            return item != null && item.Use(this, x, y, player);
+            return item != null && item.Use(this, x, y, player, audioSource);
         }
         public void DrawItem(int x, int y, RectTransform transform)
         {

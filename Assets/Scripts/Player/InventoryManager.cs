@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using Items;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Player
 {
     public class InventoryManager : MonoBehaviour
     {
         [SerializeField] private Inventory[] inventories;
+        [SerializeField] private AudioSource takeItem;
+        [SerializeField] private AudioClip takeClip;
 
         public void Initialize(Dictionary<Vector2Int, Item>[] items)
         {
@@ -24,7 +27,7 @@ namespace Player
         
         public bool UseItem(int id, int x, int y, GameObject player)
         {
-            return inventories[id].UseItem(x, y, player);
+            return inventories[id].UseItem(x, y, player, takeItem);
         }
         public void DrawItem(int id, int x, int y, RectTransform transform)
         {
@@ -45,7 +48,13 @@ namespace Player
         }
         public bool AddItem(Item item)
         {
-            return inventories.Any(inventory => inventory.AddItem(item));
+            bool ok = inventories.Any(inventory => inventory.AddItem(item));
+            if (ok){
+                takeItem.clip = takeClip;
+                takeItem.pitch = Random.Range(0.8f, 1.2f);
+                takeItem.Play();
+            }
+            return ok;
         }
         
         public Item RemoveItem(int id, int x, int y)

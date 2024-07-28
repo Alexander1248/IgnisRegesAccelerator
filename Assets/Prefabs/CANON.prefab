@@ -303,7 +303,8 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  meshesOutline: []
+  meshesOutline:
+  - {fileID: 9144586326775222273}
   references:
     version: 2
     RefIds: []
@@ -10475,6 +10476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canon: {fileID: 8330614222265830243}
   rotationSpeed: 0.3
+  moveSpeed: 0
   attached: 0
   particles: {fileID: 1598301063024556046}
   canonAnim: {fileID: 3606163044045280670}
@@ -10487,6 +10489,7 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: 32c5f4c829a4388419c1d8fbc642da86, type: 3}
   - {fileID: 8300000, guid: 8ebc14547565d3247a059ce1b4dfaafa, type: 3}
+  triggerInteract: {fileID: 9176737460218480169}
 --- !u!1 &9217675955348976012
 GameObject:
   m_ObjectHideFlags: 0

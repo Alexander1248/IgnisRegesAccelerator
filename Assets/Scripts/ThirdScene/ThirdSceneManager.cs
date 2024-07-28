@@ -89,6 +89,7 @@ public class ThirdSceneManager : MonoBehaviour
     }
 
     public void EnterVent(){
+        triggerEnterVent.SetActive(false);
         playerController.LockPlayer();
         playerController.hideHands();
         playerController.transform.localScale = new Vector3(0.5f, 1, 0.5f); // костыль
