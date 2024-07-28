@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: SmartSequentialTextDrawer
   m_EditorClassIdentifier: 
   guid: b3eb5ddd8c2e3674187b73cf32da73b7
-  nodePos: {x: -3144.9993, y: 2625.9995}
+  nodePos: {x: 212.70499, y: 803.53503}
   textContainer: {fileID: 6681467561339416711}
   narrator: micro
   symbolTime:
     keys: 0000
     values:
     - 0
-  defaultSymbolTime: 0.1
+  defaultSymbolTime: 0.07
 --- !u!114 &-7945309825428002507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
   m_Name: Storyline
   m_EditorClassIdentifier: 
   guid: dc8439f5ef3cc4d4fb8d072a88065976
-  nodePos: {x: -2589.999, y: 2574.9995}
+  nodePos: {x: 767.7051, y: 752.53503}
   next:
     keys: 00000000
     values:
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: UnityLocalizedContainer
   m_EditorClassIdentifier: 
   guid: 0e6ffc2720f11c54fb5cc46782ebf31c
-  nodePos: {x: -3083.72, y: 2239}
+  nodePos: {x: 273.705, y: 416.535}
   localizedString:
     m_TableReference:
       m_TableCollectionName: GUID:42be36923b8c43c428456798864c0ef5
@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Name: DialogueRoot
   m_EditorClassIdentifier: 
   guid: c890b14c7af9bfa479fca48cfcf8b88e
-  nodePos: {x: -2760.9666, y: 2086.7678}
+  nodePos: {x: 596.70496, y: 264.535}
   next:
     keys: 00000000
     values:
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: LocalizedAudioContainer
   m_EditorClassIdentifier: 
   guid: 6371bbfd66ad8534b9ebdc95b09686c3
-  nodePos: {x: -3253.9988, y: 2723.9995}
+  nodePos: {x: 103.70499, y: 901.53503}
   clip:
     m_TableReference:
       m_TableCollectionName: GUID:b35c72ab7581a1a4c9be20d686511313
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: LocalizedAudioContainer
   m_EditorClassIdentifier: 
   guid: a98cfae39f518d64e9c22ed46dd6d710
-  nodePos: {x: -2975.9397, y: 2360.7678}
+  nodePos: {x: 381.705, y: 538.53503}
   clip:
     m_TableReference:
       m_TableCollectionName: GUID:b35c72ab7581a1a4c9be20d686511313
@@ -180,8 +180,9 @@ MonoBehaviour:
   m_Name: PlayAudio
   m_EditorClassIdentifier: 
   guid: e9af5d94fa379a9498f415065d025966
-  nodePos: {x: -3041.9993, y: 2723.9995}
+  nodePos: {x: 315.70505, y: 901.53503}
   stage: 0
+  dataName: source
   container: {fileID: -3544416323880891025}
 --- !u!114 &2785641382536685742
 MonoBehaviour:
@@ -196,8 +197,9 @@ MonoBehaviour:
   m_Name: PlayAudio
   m_EditorClassIdentifier: 
   guid: a04ad7e3b4443c24bbf002ff28b333de
-  nodePos: {x: -2743.9402, y: 2360.7678}
+  nodePos: {x: 613.70496, y: 538.53503}
   stage: 0
+  dataName: source
   container: {fileID: -2603782349977246579}
 --- !u!114 &3375268209008512129
 MonoBehaviour:
@@ -212,7 +214,7 @@ MonoBehaviour:
   m_Name: DialogueRoot
   m_EditorClassIdentifier: 
   guid: 5576db361e48fda46b1b186ce411189b
-  nodePos: {x: -2841.9993, y: 2500.4995}
+  nodePos: {x: 515.7051, y: 678.53503}
   next:
     keys: 00000000
     values:
@@ -236,14 +238,14 @@ MonoBehaviour:
   m_Name: SmartSequentialTextDrawer
   m_EditorClassIdentifier: 
   guid: 0406a0eda0a8b074abac19c7d990dde2
-  nodePos: {x: -2863.9397, y: 2250.2678}
+  nodePos: {x: 493.99994, y: 417}
   textContainer: {fileID: -7439594862067216453}
   narrator: micro
   symbolTime:
     keys: 0000
     values:
     - 0
-  defaultSymbolTime: 0.1
+  defaultSymbolTime: 0.06
 --- !u!114 &6673853848857869232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,7 +259,7 @@ MonoBehaviour:
   m_Name: Storyline
   m_EditorClassIdentifier: 
   guid: fe0add8e84eab254e8ab9bda6d9589de
-  nodePos: {x: -2393.9397, y: 2288.7678}
+  nodePos: {x: 963.70496, y: 466.53506}
   next:
     keys: 00000000
     values:
@@ -281,7 +283,7 @@ MonoBehaviour:
   m_Name: UnityLocalizedContainer
   m_EditorClassIdentifier: 
   guid: 7ea1bff0f4fb78345b2136a0907775d6
-  nodePos: {x: -3366.7683, y: 2626.0005}
+  nodePos: {x: -9.294983, y: 803.53503}
   localizedString:
     m_TableReference:
       m_TableCollectionName: GUID:42be36923b8c43c428456798864c0ef5

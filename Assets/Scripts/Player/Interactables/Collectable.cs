@@ -3,6 +3,7 @@ using System.Linq;
 using Items;
 using Managers;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Localization;
 using UnityEngine.Serialization;
 
@@ -18,6 +19,7 @@ namespace Player.Interactables
         [SerializeField] private bool securedItem;
         public LocalizedString TipName => tipName;
         public MeshRenderer[] MeshesOutline => meshesOutline;
+        [SerializeField] private UnityEvent onInteract;
         
         private InventoryManager manager;
         private void Start()
@@ -27,6 +29,7 @@ namespace Player.Interactables
         }
         public void Interact(PlayerInteract playerInteract)
         {
+            onInteract.Invoke();  
             var i = Instantiate(item);
             if (changeItemSecurity) i.secured = securedItem;
             if (manager.AddItem(i))
