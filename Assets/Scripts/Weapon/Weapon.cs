@@ -14,7 +14,7 @@ namespace Items
         public abstract void Action(GameObject user, GameObject weapon);
         public abstract void AdditionalActionPerformed(GameObject user, GameObject weapon);
         public abstract void AdditionalActionCanceled(GameObject user, GameObject weapon);
-        public abstract void AnimatorState(bool enadled);
+        public abstract void AnimatorState(bool enabled);
         
         public override bool Use(Inventory inventory, int x, int y, GameObject player, AudioSource audioSource)
         {

@@ -18,13 +18,15 @@ namespace AI.Enemies
         [SerializeField] private float attackDelay = 1;
         [SerializeField] private float attackDamage = 10;
         
-        [FormerlySerializedAs("eyes")] [SerializeField] private Transform head;
+        [FormerlySerializedAs("eyes")] 
+        [SerializeField] private Transform head;
         [SerializeField] private Transform weaponAnchor;
         [SerializeField] private Items.Weapon weapon;
 
         [SerializeField] private Animator animator;
 
         
+        [SerializeField] private Transform[] patrollingPath;
         
         private bool actionCompleted;
         private float viewCos;
@@ -53,6 +55,7 @@ namespace AI.Enemies
                 onLogic: _ =>
                 {
                     Debug.Log("[AI]:" + name + ": rapprochement");
+                    agent.enabled = true;
                     agent.SetDestination(targetPosition);
                     actionCompleted = agent.remainingDistance <= agent.stoppingDistance;
                 });
@@ -114,35 +117,40 @@ namespace AI.Enemies
                         actionCompleted = false;
                         return false;
                     }
-                    animator.CrossFade("Idle", 0.25f, 0, 0);
                     Debug.DrawRay(head.transform.position, dir, Color.red, TargetUpdateRate);
                     Debug.Log("[AI]:" + name + ": " + transition.from + "-> idle");
                     return actionCompleted;
-                });
-            fsm.AddTwoWayTransition(
+                },
+                afterTransition: _ => animator.CrossFade("Idle", 0.25f, 0, 0));
+            var oldARState = false;
+            fsm.AddTransition(
                 "rapprochement",
                 "attack",
                 _ =>
                 {
                     if (Target == null) return false;
+                    var b = Vector3.Distance(Target.transform.position, head.transform.position) > attackDistance;
+                    if (b) return false;
+                    Debug.Log("[AI]:" + name + ": rapprochement -> attack");
+                    agent.enabled = false;
+                    return true;
+                });
+            fsm.AddTransition(
+                "attack",
+                "rapprochement",
+                _ =>
+                {
+                    if (Target == null) return false;
                     var b = Vector3.Distance(Target.transform.position, head.transform.position) < attackDistance;
-                    if (b){
-                        Debug.Log("[AI]:" + name + ": rapprochement -> attack");
-                        actionCompleted = false;
-                    }
-                    else {
-                        Debug.Log("[AI]:" + name + ": attack -> rapprochement");
-                        animator.CrossFade("Walking With Shopping Bag", 0.25f, 0, 0);
-                        actionCompleted = true;
-                    }
-                    return b;
+                    if (b) return false;
+                    Debug.Log("[AI]:" + name + ": attack -> rapprochement");
+                    animator.CrossFade("Walking With Shopping Bag", 0.25f, 0, 0);
+                    return true;
                 });
             fsm.AddTriggerTransitionFromAny("rapprochement", "rapprochement");
-            
-            
             return fsm;
         }
-
+        
         public override void Notify(HashSet<EnemyAI> notified, string type)
         {
             notified.Add(this);
@@ -171,18 +179,19 @@ namespace AI.Enemies
             var fsm = new StateMachine();
             
             fsm.AddState("attack", 
-                onEnter: _ => animator.CrossFade("Stable Sword Inward Slash", 0.25f, 0, 0),
+                onEnter: _ => 
+                    animator.CrossFade("Stable Sword Inward Slash", 0.25f, 0, 0),
                 onLogic: _ =>
                 {
                     Debug.Log("[AI]:" + name + ": attack");
                     weapon.Action(gameObject, weaponObj);
-                    fsm.RequestStateChange("wait", true);
-                },
-                onExit: _ => animator.CrossFade("Idle", 0.25f, 0, 0));
+                });
             
-            fsm.AddState("wait", onLogic: _ => Debug.Log("[AI]:" + name + ": wait"));
-            fsm.AddTransition(new TransitionAfter("wait", "attack", attackDelay));
-            fsm.AddTransition(new TransitionAfter("attack", "wait", attackDelay));
+            fsm.AddState("wait",
+                onEnter: _ => animator.CrossFade("Stable Sword Idle", 0.25f, 0, 0),
+                onLogic: _ => Debug.Log("[AI]:" + name + ": wait"));
+            fsm.AddTransition(new TransitionAfter("wait", "attack", attackDelay * 0.5f));
+            fsm.AddTransition(new TransitionAfter("attack", "wait", attackDelay * 0.5f));
             
             fsm.SetStartState("attack");
             return fsm;
@@ -194,6 +203,17 @@ namespace AI.Enemies
                 {
                     Debug.Log("[AI]:" + name + ": idle");
                 });
+        }
+
+        public void Death()
+        {
+            FSM.RequestExit(true);
+            animator.CrossFade("Dying", 0.25f, 0, 0);
+            Invoke(nameof(Destroy), 10f);
+        }
+        public void Destroy()
+        {
+            Destroy(gameObject);
         }
     }
 }
