@@ -53,10 +53,12 @@ public class CanonRails : MonoBehaviour, IChecker
     public void AttachCanon(){
         attached = true;
         playerController.UseRailCanon(false);
+        playerController.hideHands();
     }
 
     public void ReleaseCanon(){
         playerController.UseRailCanon(true);
+        playerController.ShowHands();
         attached = false;
     }
 

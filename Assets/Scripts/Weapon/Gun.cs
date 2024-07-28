@@ -98,5 +98,12 @@ namespace Weapon
         {
             
         }
+
+        public override void AnimatorState(bool _enadled)
+        {
+            if (animator != null){
+                animator.enabled = _enadled;
+            }
+        }
     }
 }
