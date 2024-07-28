@@ -27,7 +27,10 @@ namespace AI.Enemies
 
         
         [SerializeField] private Transform[] patrollingPath;
-        
+        [SerializeField] private float patrollingMinTime;
+        [SerializeField] private float patrollingMaxTime;
+
+        private int patrollingIndex;
         private bool actionCompleted;
         private float viewCos;
         private Vector3 targetPosition;
@@ -120,8 +123,7 @@ namespace AI.Enemies
                     Debug.DrawRay(head.transform.position, dir, Color.red, TargetUpdateRate);
                     Debug.Log("[AI]:" + name + ": " + transition.from + "-> idle");
                     return actionCompleted;
-                },
-                afterTransition: _ => animator.CrossFade("Idle", 0.25f, 0, 0));
+                });
             var oldARState = false;
             fsm.AddTransition(
                 "rapprochement",
@@ -198,12 +200,38 @@ namespace AI.Enemies
         }
         private StateBase<string> IdleState()
         {
-            return new State(
-                onLogic: _ =>
+            var fsm = new StateMachine();
+            
+            fsm.AddState("patrolling",
+                onEnter: _ =>
                 {
-                    Debug.Log("[AI]:" + name + ": idle");
+                    if (patrollingPath.Length <= 0) return;
+                    patrollingIndex++;
+                    if (patrollingIndex >= patrollingPath.Length) 
+                        patrollingIndex -= patrollingPath.Length;
+                    targetPosition = patrollingPath[patrollingIndex].position;
+                    animator.CrossFade("Walking", 0.25f, 0, 0);
+                    agent.enabled = true;
+                    agent.SetDestination(targetPosition);
+                    Debug.Log("[AI]:" + name + ": patrolling");
                 });
+            fsm.AddState("look around",
+                onEnter: _ =>
+                {
+                    Debug.Log("[AI]:" + name + ": look around");
+                    agent.enabled = false;
+                    animator.CrossFade("Look Around", 0.25f, 0, 0);
+                });
+            fsm.AddTransition(
+                "patrolling", 
+                "look around",
+                condition: _ => agent.remainingDistance <= agent.stoppingDistance);
+            fsm.AddTransition(new TransitionAfter("look around", "patrolling", 4.467f));
+            
+            fsm.SetStartState("patrolling");
+            return fsm;
         }
+
 
         public void Death()
         {
