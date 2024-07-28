@@ -42,6 +42,10 @@ MonoBehaviour:
     m_Localized: Enter the ship
     m_Metadata:
       m_Items: []
+  - m_Id: 2881150808674304
+    m_Localized: Pick Up
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -304,10 +304,16 @@ MonoBehaviour:
   defaultCameraAnchor: {fileID: 4824292225055434441}
   crouchVariant: {fileID: 905817008794089184}
   crouchCameraAnchor: {fileID: 3316391453487763424}
+  layVariant: {fileID: 0}
+  layCameraAnchor: {fileID: 0}
+  standHeight: 0
   canMove: 1
   moveSpeed: 300
+  slowSpeed: 50
   canCrouch: 1
   crouchSpeed: 150
+  canLay: 1
+  laySpeed: 50
   canSprint: 1
   sprintSpeed: 600
   sprintStaminaUsage: 10
@@ -326,6 +332,9 @@ MonoBehaviour:
   mouseSensitivity: 1
   maxLookAngle: 60
   cameraDistance: 0
+  camAnimator: {fileID: 0}
+  animatorController: {fileID: 0}
+  layingAnimKoeff: 0
 --- !u!54 &2855578134536222987
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -824,8 +833,8 @@ MonoBehaviour:
   controller: {fileID: 1768154435841710300}
   mainHandAnchor: {fileID: 4001748048819113153}
   secondHandAnchor: {fileID: 1767741374950252414}
-  mainHand: {fileID: 11400000, guid: 0887a7b035c63f34c8d979f50efd6ba2, type: 2}
-  secondHand: {fileID: 11400000, guid: 0887a7b035c63f34c8d979f50efd6ba2, type: 2}
+  mainHand: {fileID: 0}
+  secondHand: {fileID: 0}
 --- !u!114 &3492740750612508650
 MonoBehaviour:
   m_ObjectHideFlags: 0

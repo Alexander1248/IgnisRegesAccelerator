@@ -9,15 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb73dcc42d4447d18397e2d15141f052, type: 3}
-  m_Name: Sword
+  m_Script: {fileID: 11500000, guid: fb004e81a9f84fa88e827b0ebfa58d8d, type: 3}
+  m_Name: Heal
   m_EditorClassIdentifier: 
   shape:
-  - {x: 0, y: 2}
-  - {x: 0, y: 1}
   - {x: 0, y: 0}
-  - {x: 0, y: -1}
-  uiPrefab: {fileID: 0}
+  uiPrefab: {fileID: 6830977853837318397, guid: bc2c67f0c56376f40a4e3ce557166019,
+    type: 3}
   itemName:
     m_TableReference:
       m_TableCollectionName: 
@@ -36,11 +34,10 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  prefab: {fileID: 2735788763720291774, guid: 1dd851eaca267a0458b2a15f3d3f22f3, type: 3}
-  isTwoHanded: 0
-  damageCurveThickness: 0.01
-  damage: 30
-  delay: 0.5
+  amountPerRound: 30
+  rounds: 3
+  usesPrefab: {fileID: 3917008350429150413, guid: 6163e40ac48b7b3479b807639e97f50a,
+    type: 3}
   references:
     version: 2
     RefIds: []

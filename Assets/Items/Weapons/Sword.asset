@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a2da468a9f94ae0ba34fdf57aa77f91, type: 3}
-  m_Name: Pistol
+  m_Script: {fileID: 11500000, guid: cb73dcc42d4447d18397e2d15141f052, type: 3}
+  m_Name: Sword
   m_EditorClassIdentifier: 
   shape:
-  - {x: -1, y: 1}
-  - {x: -1, y: 0}
   - {x: 0, y: 0}
-  - {x: 1, y: 0}
+  - {x: 0, y: 1}
+  - {x: 0, y: 2}
+  - {x: 0, y: 3}
   uiPrefab: {fileID: 0}
   itemName:
     m_TableReference:
@@ -36,13 +36,12 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  prefab: {fileID: 7089967681845487178, guid: e6677dc83b6f18b4cb08a1f856869687, type: 3}
+  secured: 0
+  prefab: {fileID: 2735788763720291774, guid: 218bceeae6e3ff84cba447762c9ce4f0, type: 3}
   isTwoHanded: 0
-  maxDistance: 100
-  damage: 10
-  rechargeTime: 0.3
-  cageSize: 3
-  reloadTime: 10
+  damageCurveThickness: 0.01
+  damage: 30
+  delay: 0.5
   references:
     version: 2
     RefIds: []
