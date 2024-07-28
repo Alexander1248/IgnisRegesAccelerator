@@ -77,6 +77,7 @@ public class LadderInteraction : MonoBehaviour
                 camAnchor.localPosition = cameraPositionInPlayer;
                 camAnchor.localEulerAngles = Vector3.zero;
                 playerController.UnlockPlayer();
+                playerController.ShowHands();
                 t = 0;
             }
         }
@@ -84,6 +85,7 @@ public class LadderInteraction : MonoBehaviour
 
     public void UseLadder(){
         if (playerController.isLayingOrCrouch()) return;
+        playerController.hideHands();
         playerController.LockPlayer();
         if (playerController.transform.position.y <= transform.position.y){
             startPoint = points[0];
