@@ -32,6 +32,44 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 42be36923b8c43c428456798864c0ef5
+    m_Address: Assets/Localization/Tables/Dialogs Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b35c72ab7581a1a4c9be20d686511313
+    m_Address: Assets/Localization/Tables/AudioDialogs Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b6447b209df930e4c85f490a7f257700
+    m_Address: "1\u044D\u0444\u0444\u0435\u043A\u0442\u044B"
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Locale-ru
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5df80f8c029b9e84ab4208019e63276c
+    m_Address: "2\u044D\u0444\u0444\u0435\u043A\u0442\u044B"
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Locale-ru
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 45d0e3f0fac27754c97919dd75c028e7
+    m_Address: "3\u044D\u0444"
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Locale-ru
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 17963027b70c187469709e835bbbc745
+    m_Address: "4\u044D\u0444"
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Locale-ru
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 089dd481bb7f09c4fb4d7199806d5bcb, type: 2}
   m_SchemaSet:
