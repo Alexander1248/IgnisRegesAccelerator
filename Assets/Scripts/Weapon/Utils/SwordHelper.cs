@@ -12,7 +12,7 @@ public class SwordHelper : MonoBehaviour
     [SerializeField] private AudioSource hitSound;
     [SerializeField] private AudioClip[] hitClips;
 
-    [SerializeField] private bool canIDamagePlayer;
+    public bool canIDamagePlayer;
 
     [SerializeField] private Transform swordSpline;
     

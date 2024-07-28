@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityHFSM;
 
 namespace AI.Enemies
@@ -17,13 +18,19 @@ namespace AI.Enemies
         [SerializeField] private float attackDelay = 1;
         [SerializeField] private float attackDamage = 10;
         
+        [FormerlySerializedAs("eyes")] 
+        [SerializeField] private Transform head;
         [SerializeField] private Transform weaponAnchor;
         [SerializeField] private Items.Weapon weapon;
 
         [SerializeField] private Animator animator;
 
         
-        
+        [SerializeField] private Transform[] patrollingPath;
+        [SerializeField] private float patrollingMinTime;
+        [SerializeField] private float patrollingMaxTime;
+
+        private int patrollingIndex;
         private bool actionCompleted;
         private float viewCos;
         private Vector3 targetPosition;
@@ -39,6 +46,7 @@ namespace AI.Enemies
             weapon = Instantiate(weapon);
             weaponObj = Instantiate(weapon.Prefab, weaponAnchor);
             weapon.OnEquip(gameObject, weaponObj);
+            weaponObj.GetComponent<SwordHelper>().canIDamagePlayer = true;
         }
 
         protected override StateMachine InitStateMachine()
@@ -50,6 +58,7 @@ namespace AI.Enemies
                 onLogic: _ =>
                 {
                     Debug.Log("[AI]:" + name + ": rapprochement");
+                    agent.enabled = true;
                     agent.SetDestination(targetPosition);
                     actionCompleted = agent.remainingDistance <= agent.stoppingDistance;
                 });
@@ -64,36 +73,36 @@ namespace AI.Enemies
                     var dst = float.MaxValue; 
                     foreach (var tObj in controller.Targets)
                     {
-                        var dir = tObj.transform.position - transform.position;
+                        var dir = tObj.transform.position - head.transform.position;
                         if (dir.magnitude < viewDistance
                             && Vector3.Dot(dir.normalized, transform.forward) > viewCos
-                            && Physics.Raycast(transform.position, dir.normalized, dir.magnitude))
+                            && Physics.Raycast(head.transform.position, dir.normalized, dir.magnitude))
                         {
                             if (dir.magnitude < dst)
                             {
                                 Target = tObj;
                                 dst = dir.magnitude;
                             }
-                            Debug.DrawRay(transform.position, dir, Color.green, TargetUpdateRate);
+                            Debug.DrawRay(head.transform.position, dir, Color.green, TargetUpdateRate);
                         }
-                        else Debug.DrawRay(transform.position, dir, Color.red, TargetUpdateRate);
+                        else Debug.DrawRay(head.transform.position, dir, Color.red, TargetUpdateRate);
                     }
 
                     if (Target == null) return false;
                     targetPosition = Target.transform.position;
-                    transform.forward = (targetPosition - transform.position).normalized;
+                    transform.forward = (targetPosition - head.transform.position).normalized;
                     actionCompleted = false;
                     // Notify nearest
                     _nearEnemies.Clear();
-                    Location.FindNearestBwd(transform.position, notificationRadius, _nearEnemies);
+                    Location.FindNearestBwd(head.transform.position, notificationRadius, _nearEnemies);
                     foreach (var enemyAI in _nearEnemies)
                     {
                         enemyAI.Target = Target;
-                        Debug.DrawLine(transform.position, enemyAI.transform.position, Color.blue, 1);
+                        Debug.DrawLine(head.transform.position, enemyAI.transform.position, Color.blue, 1);
                         enemyAI.Notify(new HashSet<EnemyAI>(),"rapprochement");
                     }
                     Debug.Log("[AI]:" + name + ": idle -> rapprochement");
-                    animator.CrossFade("WalkWithSword", 0.25f, 0, 0);
+                    animator.CrossFade("Walking With Shopping Bag", 0.25f, 0, 0);
                     return true;
                 }
             );
@@ -101,44 +110,49 @@ namespace AI.Enemies
                 transition =>
                 {
                     if (Target == null) return actionCompleted;
-                    Debug.Log("[AI]:" + name + ": " + transition.from + "-> idle");
-                    var dir = Target.transform.position - transform.position;
+                    var dir = Target.transform.position - head.transform.position;
                     if (dir.magnitude < viewDistance
                         && Vector3.Dot(dir.normalized, transform.forward) > viewCos
-                        && Physics.Raycast(transform.position, dir.normalized, dir.magnitude))
+                        && Physics.Raycast(head.transform.position, dir.normalized, dir.magnitude))
                     {
-                        Debug.DrawRay(transform.position, dir, Color.green, TargetUpdateRate);
+                        Debug.DrawRay(head.transform.position, dir, Color.green, TargetUpdateRate);
                         targetPosition = Target.transform.position;
                         actionCompleted = false;
                         return false;
                     }
-                    animator.CrossFade("Idle", 0.25f, 0, 0);
-                    Debug.DrawRay(transform.position, dir, Color.red, TargetUpdateRate);
+                    Debug.DrawRay(head.transform.position, dir, Color.red, TargetUpdateRate);
+                    Debug.Log("[AI]:" + name + ": " + transition.from + "-> idle");
                     return actionCompleted;
                 });
-            fsm.AddTwoWayTransition(
+            var oldARState = false;
+            fsm.AddTransition(
                 "rapprochement",
                 "attack",
                 _ =>
                 {
                     if (Target == null) return false;
-                    var b = Vector3.Distance(Target.transform.position, transform.position) < attackDistance;
-                    if (b){
-                        Debug.Log("[AI]:" + name + ": rapprochement -> attack");
-                        animator.CrossFade("SwordAttack_1", 0.25f, 0, 0);
-                    }
-                    else {
-                        Debug.Log("[AI]:" + name + ": attack -> rapprochement");
-                        animator.CrossFade("WalkWithSword", 0.25f, 0, 0);
-                    }
-                    return b;
+                    var b = Vector3.Distance(Target.transform.position, head.transform.position) > attackDistance;
+                    if (b) return false;
+                    Debug.Log("[AI]:" + name + ": rapprochement -> attack");
+                    agent.enabled = false;
+                    return true;
+                });
+            fsm.AddTransition(
+                "attack",
+                "rapprochement",
+                _ =>
+                {
+                    if (Target == null) return false;
+                    var b = Vector3.Distance(Target.transform.position, head.transform.position) < attackDistance;
+                    if (b) return false;
+                    Debug.Log("[AI]:" + name + ": attack -> rapprochement");
+                    animator.CrossFade("Walking With Shopping Bag", 0.25f, 0, 0);
+                    return true;
                 });
             fsm.AddTriggerTransitionFromAny("rapprochement", "rapprochement");
-            
-            
             return fsm;
         }
-
+        
         public override void Notify(HashSet<EnemyAI> notified, string type)
         {
             notified.Add(this);
@@ -157,7 +171,7 @@ namespace AI.Enemies
             foreach (var enemyAI in _nearEnemies.Where(enemyAI => !notified.Contains(enemyAI)))
             {
                 enemyAI.Target = Target;
-                Debug.DrawLine(transform.position, enemyAI.transform.position, Color.blue, TargetUpdateRate);
+                Debug.DrawLine(head.transform.position, enemyAI.transform.position, Color.blue, TargetUpdateRate);
                 enemyAI.Notify(notified, type);
             }
         }
@@ -167,25 +181,67 @@ namespace AI.Enemies
             var fsm = new StateMachine();
             
             fsm.AddState("attack", 
+                onEnter: _ => 
+                    animator.CrossFade("Stable Sword Inward Slash", 0.25f, 0, 0),
                 onLogic: _ =>
                 {
+                    Debug.Log("[AI]:" + name + ": attack");
                     weapon.Action(gameObject, weaponObj);
-                    fsm.RequestStateChange("wait");
                 });
-            fsm.AddState("wait");
             
-            fsm.AddTransition(new TransitionAfter("wait", "attack", attackDelay));
+            fsm.AddState("wait",
+                onEnter: _ => animator.CrossFade("Stable Sword Idle", 0.25f, 0, 0),
+                onLogic: _ => Debug.Log("[AI]:" + name + ": wait"));
+            fsm.AddTransition(new TransitionAfter("wait", "attack", attackDelay * 0.5f));
+            fsm.AddTransition(new TransitionAfter("attack", "wait", attackDelay * 0.5f));
             
             fsm.SetStartState("attack");
             return fsm;
         }
         private StateBase<string> IdleState()
         {
-            return new State(
-                onLogic: _ =>
+            var fsm = new StateMachine();
+            
+            fsm.AddState("patrolling",
+                onEnter: _ =>
                 {
-                    Debug.Log("[AI]:" + name + ": idle");
+                    if (patrollingPath.Length <= 0) return;
+                    patrollingIndex++;
+                    if (patrollingIndex >= patrollingPath.Length) 
+                        patrollingIndex -= patrollingPath.Length;
+                    targetPosition = patrollingPath[patrollingIndex].position;
+                    animator.CrossFade("Walking", 0.25f, 0, 0);
+                    agent.enabled = true;
+                    agent.SetDestination(targetPosition);
+                    Debug.Log("[AI]:" + name + ": patrolling");
                 });
+            fsm.AddState("look around",
+                onEnter: _ =>
+                {
+                    Debug.Log("[AI]:" + name + ": look around");
+                    agent.enabled = false;
+                    animator.CrossFade("Look Around", 0.25f, 0, 0);
+                });
+            fsm.AddTransition(
+                "patrolling", 
+                "look around",
+                condition: _ => agent.remainingDistance <= agent.stoppingDistance);
+            fsm.AddTransition(new TransitionAfter("look around", "patrolling", 4.467f));
+            
+            fsm.SetStartState("patrolling");
+            return fsm;
+        }
+
+
+        public void Death()
+        {
+            FSM.RequestExit(true);
+            animator.CrossFade("Dying", 0.25f, 0, 0);
+            Invoke(nameof(Destroy), 10f);
+        }
+        public void Destroy()
+        {
+            Destroy(gameObject);
         }
     }
 }

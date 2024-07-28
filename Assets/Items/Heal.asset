@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb004e81a9f84fa88e827b0ebfa58d8d, type: 3}
   m_Name: Heal
   m_EditorClassIdentifier: 
+  id: heal
   shape:
   - {x: 0, y: 0}
   uiPrefab: {fileID: 6830977853837318397, guid: bc2c67f0c56376f40a4e3ce557166019,

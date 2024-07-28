@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be40540e1b6140f0bd37c51d08844f3a, type: 3}
+  m_Script: {fileID: 11500000, guid: c23f6f4d0ad04434972641475d919b8f, type: 3}
   m_Name: Yadro
   m_EditorClassIdentifier: 
+  id: yadro
   shape:
   - {x: 0, y: 0}
   - {x: 0, y: 1}
@@ -38,6 +39,7 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   secured: 0
+  type: cannon
   references:
     version: 2
     RefIds: []

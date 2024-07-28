@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb73dcc42d4447d18397e2d15141f052, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
+  id: sword
   shape:
   - {x: 0, y: 0}
   - {x: 0, y: 1}

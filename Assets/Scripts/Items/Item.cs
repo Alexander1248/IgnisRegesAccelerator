@@ -8,12 +8,14 @@ namespace Items
     
     public abstract class Item : ScriptableObject
     {
+        [SerializeField] private string id;
         [SerializeField] private Vector2Int[] shape;
         [SerializeField] private GameObject uiPrefab;
         [SerializeField] private LocalizedString itemName;
         [SerializeField] private LocalizedString itemDescription;
         public bool secured;
 
+        public string ID => id;
         public GameObject UIPrefab => uiPrefab;
         public LocalizedString Name => itemName;
         public LocalizedString Description => itemDescription;
