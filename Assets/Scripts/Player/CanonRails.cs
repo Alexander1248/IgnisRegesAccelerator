@@ -38,6 +38,8 @@ public class CanonRails : MonoBehaviour, IChecker
 
     [SerializeField] private AudioSource fallAudio;
 
+    [SerializeField] private Collider triggerInteract;
+
     private bool stationary;
 
     void Start()
@@ -51,12 +53,16 @@ public class CanonRails : MonoBehaviour, IChecker
     }
 
     public void AttachCanon(){
+        triggerInteract.enabled = false;
         attached = true;
         playerController.UseRailCanon(false);
+        playerController.hideHands();
     }
 
     public void ReleaseCanon(){
+        triggerInteract.enabled = true;
         playerController.UseRailCanon(true);
+        playerController.ShowHands();
         attached = false;
     }
 

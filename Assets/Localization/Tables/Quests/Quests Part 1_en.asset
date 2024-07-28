@@ -18,28 +18,162 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 215230230327296
-    m_Localized: Road to end
+  - m_Id: 3107969864859648
+    m_Localized: Pick up walkie-talkie
     m_Metadata:
       m_Items: []
-  - m_Id: 215440570478592
-    m_Localized: bdjfjdjhfjhsjfhdhf
+  - m_Id: 3108011057119232
+    m_Localized: My sleep was disturbed by an agitated voice from the walkie-talkie.
+      What happened that they call me at night? I told you in human language not
+      to switch to my frequency at such and such hours. Well, in any case, I need
+      to answer, if it's something urgent.
     m_Metadata:
       m_Items: []
-  - m_Id: 215397360758784
-    m_Localized: Go to level end
+  - m_Id: 3107974923190272
+    m_Localized: Intrusive call
     m_Metadata:
       m_Items: []
-  - m_Id: 368362939772928
-    m_Localized: Test
+  - m_Id: 3109545769730048
+    m_Localized: Find the code
     m_Metadata:
       m_Items: []
-  - m_Id: 368401351208960
-    m_Localized: 'Task '
+  - m_Id: 3109559594156032
+    m_Localized: Insert the code
     m_Metadata:
       m_Items: []
-  - m_Id: 368433198559232
-    m_Localized: Description
+  - m_Id: 3109221499699200
+    m_Localized: Go up to the computer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3109562580500480
+    m_Localized: Pirate Dreams
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3109612207505408
+    m_Localized: Am I really in a dream? The Baron of the Floating Islands himself
+      is not far from me in the endless fog, where his flotilla is unlikely to come
+      to the rescue. This is the perfect time to storm! It remains only to figure
+      out exactly where it is, thanks to the electronics that I found on the ruins
+      of the followers of the Gitz.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3110213343543296
+    m_Localized: Blow up the hull
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3110217428795392
+    m_Localized: Pirates of the Misty Clouds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3110218938744832
+    m_Localized: And here is the Baron's ship itself! It's time to use an old cannon,
+      destroying the weak part of the hull. The main thing is not to screw up!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3111027701219328
+    m_Localized: Infiltrate the ship
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3111031526424576
+    m_Localized: Pick up a gun
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3111038975508480
+    m_Localized: Eliminate the guard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3111042775547904
+    m_Localized: Assault from the skies
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3111043304030208
+    m_Localized: The passage is open! All that remains is to board the ship, and
+      if everything goes as it should, then I will leave here as the richest pirate
+      on the Islands!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3111962791936000
+    m_Localized: Find the key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3112008866365440
+    m_Localized: Open the door
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3112012288917504
+    m_Localized: Open sesame!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3112012792233984
+    m_Localized: Phew, the guards here gave me a bad time , but I'm not a fool. It
+      remains only to figure out how to go further. Should I try to use this cannon
+      on this target?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3112766223450112
+    m_Localized: Get to the next floor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3112767771148288
+    m_Localized: One thousand and one steps
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3112774410731520
+    m_Localized: Judging by the structure of the ship, there is a staircase around
+      the corner where the guard stands. I must somehow manage to run through the
+      garbage collectors and get quickly to the staircase.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3113431163240448
+    m_Localized: Investigate the rails
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3113432715132928
+    m_Localized: Rails, rails, sleepers, sleepers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3113434090864640
+    m_Localized: The doors are blocked. The only way here is to find where do the
+      rails lead.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3114014582538240
+    m_Localized: Get through the ventilation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3114015165546496
+    m_Localized: Die Hard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3114019045277696
+    m_Localized: Let me tell you how much I HATE to climb through the vents.  It's
+      narrow, cold and stinks.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3114722010628096
+    m_Localized: Climb on deck
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3114722555887616
+    m_Localized: Thousands of shots
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3114723055009792
+    m_Localized: And once again everything is closed and blocked... Maybe try pulling
+      that dangling cord in the armory?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3115321963872256
+    m_Localized: Open the chest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3115322500743168
+    m_Localized: The rich
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3115325151543296
+    m_Localized: I'm just one step away from becoming rich! All that remains is to
+      get to his vault, and I may never work again!
     m_Metadata:
       m_Items: []
   references:

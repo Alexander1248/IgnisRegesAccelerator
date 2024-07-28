@@ -21,7 +21,7 @@ namespace Items
         public LocalizedString Description => itemDescription;
 
 
-        public abstract bool Use(Inventory inventory, int x, int y, GameObject player);
+        public abstract bool Use(Inventory inventory, int x, int y, GameObject player, AudioSource audioSource);
 
         public virtual void Draw(RectTransform rect) { }
 

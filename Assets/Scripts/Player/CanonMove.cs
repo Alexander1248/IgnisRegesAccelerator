@@ -9,6 +9,7 @@ public class CanonMove : MonoBehaviour, IChecker
     private PlayerController playerController;
     private Transform player;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private float moveSpeed;
     public bool attached;
 
     [SerializeField] private ParticleSystem particles;
@@ -25,6 +26,10 @@ public class CanonMove : MonoBehaviour, IChecker
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip[] clips;
 
+    [SerializeField] private BoxCollider triggerInteract;
+
+    //[SerializeField] private Rigidbody rb;
+
     void Start(){
         //AttachCanon();
         playerController = GameObject.Find("GamePlayer").GetComponent<PlayerController>();
@@ -34,18 +39,29 @@ public class CanonMove : MonoBehaviour, IChecker
 
     public void AttachCanon(){
         attached = true;
+        triggerInteract.enabled = false;
+        //rb.isKinematic = false;
         playerController.useCanon();
+        playerController.hideHands();
     }
 
     public void ReleaseCanon(){
+        //rb.isKinematic = true;
+        triggerInteract.enabled = true;
         playerController.releaseCanon();
+        playerController.ShowHands();
         attached = false;
     }
 
+
     void Update(){
+        //rb.MovePosition(transform.position + (player.position-transform.position) * Time.deltaTime * moveSpeed);
         releasedCanonByLastFrame = false;
         if (!attached) return;
         canon.position = player.position;
+        //rb.AddForce((player.position-transform.position) * Time.deltaTime * moveSpeed, ForceMode.VelocityChange);
+        //rb.MovePosition(transform.position + (player.position-canon.position) * Time.deltaTime * rotationSpeed);
+        //rb.AddForce((player.position-transform.position).normalized * Time.deltaTime * rotationSpeed, ForceMode.VelocityChange);
         Vector3 newDirection = Vector3.RotateTowards(canon.forward, player.forward, rotationSpeed * Time.deltaTime, 0.0f);
         canon.rotation = Quaternion.LookRotation(newDirection);
 

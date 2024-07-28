@@ -19,6 +19,7 @@ public class SettingsMenu : MonoBehaviour
     public void UpdateSlider(){
         sensSlider.value = InverseLerp(PlayerPrefs.GetFloat("Sens"), minSens, maxSens);
         volumeSlider.value = PlayerPrefs.GetFloat("PlayerVolume");
+        audioMixer.SetFloat("Volume", Mathf.Log10(volumeSlider.value)*20);
     }
 
     public void SetSens(){

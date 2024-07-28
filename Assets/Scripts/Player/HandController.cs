@@ -24,11 +24,17 @@ namespace Player
 
         public void MainHandActive(bool active)
         {
+            if (!mainHand) return;
+            mainHand.AnimatorState(false);
+
             if (_mainHandObj == null) return;
             _mainHandObj.SetActive(active);
         }
         public void SecondHandActive(bool active)
         {
+            if (!secondHand) return;
+            secondHand.AnimatorState(false);
+
             if (_secondHandObj == null) return;
             _secondHandObj.SetActive(active);
         }

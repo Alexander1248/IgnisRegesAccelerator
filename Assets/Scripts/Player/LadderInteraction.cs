@@ -29,6 +29,8 @@ public class LadderInteraction : MonoBehaviour
     private Quaternion startingAngle;
     private Quaternion startingAngle2;
 
+    [SerializeField] private GameObject triggerInteract;
+
     void Start(){
         playerController = GameObject.Find("GamePlayer").GetComponent<PlayerController>();
         camAnchor = playerController.getCamAnchor();
@@ -77,6 +79,8 @@ public class LadderInteraction : MonoBehaviour
                 camAnchor.localPosition = cameraPositionInPlayer;
                 camAnchor.localEulerAngles = Vector3.zero;
                 playerController.UnlockPlayer();
+                playerController.ShowHands();
+                triggerInteract.SetActive(true);
                 t = 0;
             }
         }
@@ -84,6 +88,8 @@ public class LadderInteraction : MonoBehaviour
 
     public void UseLadder(){
         if (playerController.isLayingOrCrouch()) return;
+        triggerInteract.SetActive(false);
+        playerController.hideHands();
         playerController.LockPlayer();
         if (playerController.transform.position.y <= transform.position.y){
             startPoint = points[0];

@@ -47,7 +47,7 @@ public class Rat : MonoBehaviour
         player = GameObject.Find("GamePlayer").transform;
         walkToRandPos();
         objects = new HashSet<GameObject>();
-        hits = new RaycastHit[2];
+        hits = new RaycastHit[16];
     }
 
     void Update(){
@@ -127,14 +127,10 @@ public class Rat : MonoBehaviour
         agent.ResetPath();
         animator.speed = 1;
         animator.CrossFade("RatJump", 0.15f);
+        canDamage = true;
     }
 
-    public void Jump_anim(){
-        jumpStart = RatParent.position;
-        jumpEnd = new Vector3(player.position.x, RatParent.position.y, player.position.z);
-        jumpT = 0;
-        jumping = true;
-        
+    public void DealDamage_anim(){
         if (!canDamage) return;
         objects.Clear();
         for (var i = 0; i < damageCurve.Count; i++)
@@ -151,7 +147,8 @@ public class Rat : MonoBehaviour
                     dir.normalized,
                     hits,
                     dir.magnitude);
-                for (var c = 0; c <= count; c++)
+                
+                for (var c = 0; c < count; c++)
                 {
                     if (hits[c].collider == null) continue;
                     objects.Add(hits[c].collider.gameObject);
@@ -163,6 +160,7 @@ public class Rat : MonoBehaviour
 
         foreach (var obj in objects)
         {
+            if (obj.CompareTag("Rat")) continue;
             Debug.Log("[Rat]:" + obj.name + " hit!");
             if (obj.TryGetComponent(out Health health))
                 health.DealDamage(damage, transform.forward, 0);
@@ -170,8 +168,15 @@ public class Rat : MonoBehaviour
             if (obj.TryGetComponent(out HealthUpdater updater))
                 updater.DealDamage(damage, transform.forward, 0);
             canDamage = false;
-            Invoke(nameof(Reload), damageDelay);
+            //Invoke(nameof(Reload), damageDelay);
         }
+    }
+
+    public void Jump_anim(){
+        jumpStart = RatParent.position;
+        jumpEnd = new Vector3(player.position.x, RatParent.position.y, player.position.z);
+        jumpT = 0;
+        jumping = true;
     }
     public void EndAttack_anim(){
         RatParent.position = AdjustPositionToNavMesh(jumpEnd);
