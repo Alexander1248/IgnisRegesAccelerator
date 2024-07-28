@@ -24,11 +24,17 @@ namespace Player
 
         public void MainHandActive(bool active)
         {
+            if (!mainHand) return;
+            mainHand.AnimatorState(false);
+
             if (_mainHandObj == null) return;
             _mainHandObj.SetActive(active);
         }
         public void SecondHandActive(bool active)
         {
+            if (!secondHand) return;
+            secondHand.AnimatorState(false);
+
             if (_secondHandObj == null) return;
             _secondHandObj.SetActive(active);
         }
@@ -50,6 +56,8 @@ namespace Player
             
             if (mainHandBuff) SetMainHand(mainHandBuff);
             if (secondHandBuff) SetSecondHand(secondHandBuff);
+            MainHandActive(false);
+            SecondHandActive(false);
         }
 
         public bool SetMainHand(Items.Weapon weapon)

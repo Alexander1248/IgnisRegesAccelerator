@@ -35,10 +35,12 @@ public class CanonMove : MonoBehaviour, IChecker
     public void AttachCanon(){
         attached = true;
         playerController.useCanon();
+        playerController.hideHands();
     }
 
     public void ReleaseCanon(){
         playerController.releaseCanon();
+        playerController.ShowHands();
         attached = false;
     }
 

@@ -94,11 +94,22 @@ namespace Player
         private float SoundStepMultiplierSAVE;
         [SerializeField] private AudioClip[] ventClips;
         [SerializeField] private AudioClip woodClip;
-        private bool inVent;
+        private bool inVent; // костыль, удалить после показа
 
         [SerializeField] private Animator camAnimator;
         [SerializeField] private AnimatorController animatorController;
         [SerializeField] private float layingAnimKoeff;
+        
+        [SerializeField] private HandController handController;
+
+        public void hideHands(){
+            handController.MainHandActive(false);
+            handController.SecondHandActive(false);
+        }
+        public void ShowHands(){
+            handController.MainHandActive(true);
+            handController.SecondHandActive(true);
+        }
 
         public Transform getCamAnchor(){
             return defaultCameraAnchor;
@@ -205,6 +216,7 @@ namespace Player
         }
 
         void Stand(){
+            if (inVent) return;
             Debug.Log("Stand!");
             wantToStand = false;
             isCrouching = false;
@@ -327,7 +339,8 @@ namespace Player
             mouseSensitivity =  PlayerPrefs.GetFloat("Sens", 0.15f);
         }
 
-        public void ExitVent(){
+        public void ExitVent(){ // костыль
+            ShowHands();
             SoundStepMultiplier = SoundStepMultiplierSAVE;
             inVent = false;
         }

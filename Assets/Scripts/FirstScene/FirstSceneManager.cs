@@ -31,9 +31,18 @@ public class FirstSceneManager : MonoBehaviour
     [SerializeField] private AudioSource epic;
     [SerializeField] private AudioSource explosionSound;
     private bool holeExploded;
+    private bool playerAwaked;
+    [SerializeField] private Transform awakePos;
 
     void Awake(){
+        playerController.GetComponent<Rigidbody>().isKinematic = true;
+
         playerController.LockPlayer();
+    }
+
+    void Update(){
+        if (playerAwaked) return;
+        playerController.transform.position = awakePos.position;
     }
 
     void Start(){
@@ -42,7 +51,9 @@ public class FirstSceneManager : MonoBehaviour
     }
 
     public void playerAwake(){
+        playerController.GetComponent<Rigidbody>().isKinematic = false;
         playerController.UnlockPlayer();
+        playerAwaked = true;
         eyeBlinks.SetActive(false);
     }
 
