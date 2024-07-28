@@ -41,7 +41,8 @@ AudioSource:
   m_GameObject: {fileID: 451994706473282743}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 115694a7425d281449706badbd1d763a,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 1f218a58e6e58cc4e88cf3cb6dd8711e, type: 3}
   m_Resource: {fileID: 8300000, guid: 1f218a58e6e58cc4e88cf3cb6dd8711e, type: 3}
   m_PlayOnAwake: 0
@@ -239,6 +240,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 91f110952d9f7c644a66f5e4409d6b16, type: 3}
   - {fileID: 8300000, guid: 16cd2af7a970e974489bb1d037608c18, type: 3}
   canIDamagePlayer: 0
+  swordSpline: {fileID: 3782961810991138333}
 --- !u!1 &3458184281112649769
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,7 +514,8 @@ AudioSource:
   m_GameObject: {fileID: 9072477896931533013}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 115694a7425d281449706badbd1d763a,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: a04d751bce94bf04d8338cf859669c68, type: 3}
   m_Resource: {fileID: 8300000, guid: a04d751bce94bf04d8338cf859669c68, type: 3}
   m_PlayOnAwake: 0

@@ -89,6 +89,12 @@ namespace Player
         private float tStep;
         [SerializeField] private float[] pitchK;
         [SerializeField] private float SoundStepMultiplier;
+        
+        [SerializeField] private float SoundStepMultiplierVENT;
+        private float SoundStepMultiplierSAVE;
+        [SerializeField] private AudioClip[] ventClips;
+        [SerializeField] private AudioClip woodClip;
+        private bool inVent;
 
         [SerializeField] private Animator camAnimator;
         [SerializeField] private AnimatorController animatorController;
@@ -149,6 +155,7 @@ namespace Player
         }
 
         void Start(){
+            SoundStepMultiplierSAVE = SoundStepMultiplier;
             GUIObj.SetParent(null);
             mouseSensitivity =  PlayerPrefs.GetFloat("Sens", 0.15f);
         }
@@ -295,6 +302,8 @@ namespace Player
         }
 
         public void ForceLay(){
+            SoundStepMultiplier = SoundStepMultiplierVENT;
+            inVent = true;
              _onLay();
              _onLayCanceled();
         }
@@ -318,11 +327,18 @@ namespace Player
             mouseSensitivity =  PlayerPrefs.GetFloat("Sens", 0.15f);
         }
 
+        public void ExitVent(){
+            SoundStepMultiplier = SoundStepMultiplierSAVE;
+            inVent = false;
+        }
+
         void playStep(){
             if (!isGrounded) return;
             footK++;
             if (footK >= 2) footK = 0;
             audioSource[footK].pitch = Random.Range(pitchK[0], pitchK[1]);
+            if (inVent) audioSource[footK].clip = ventClips[Random.Range(0, ventClips.Length)];
+            else audioSource[footK].clip = woodClip;
             audioSource[footK].Play();
         }
 

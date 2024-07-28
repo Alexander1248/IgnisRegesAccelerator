@@ -149,8 +149,10 @@ MonoBehaviour:
   meshesOutline:
   - {fileID: 6464232432440122558}
   - {fileID: 2570039846350028364}
-  audioSource: {fileID: 0}
-  clips: []
+  audioSource: {fileID: 7477950928371600390}
+  clips:
+  - {fileID: 8300000, guid: 078fd5b6faf6dd743b2cce8fa5add9de, type: 3}
+  - {fileID: 8300000, guid: 14c9cec33f0f992499d8c41f3e3c12cb, type: 3}
   references:
     version: 2
     RefIds: []
@@ -219,7 +221,7 @@ GameObject:
   - component: {fileID: 4012560347763595497}
   m_Layer: 0
   m_Name: Cube.003
-  m_TagString: Interactable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65
@@ -254,7 +256,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6290867545421064231}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -308,7 +310,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.0023914613, y: 0.0026036447, z: 0.0005555403}
   m_Center: {x: -0.009443073, y: -0.0000000018626451, z: -0.005873207}
@@ -699,9 +701,10 @@ AudioSource:
   m_GameObject: {fileID: 8968505079266131228}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 86e1ef7d6e2f3ac478ff6c8fc7fc808a, type: 3}
-  m_Resource: {fileID: 8300000, guid: 86e1ef7d6e2f3ac478ff6c8fc7fc808a, type: 3}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 115694a7425d281449706badbd1d763a,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 14c9cec33f0f992499d8c41f3e3c12cb, type: 3}
+  m_Resource: {fileID: 8300000, guid: 14c9cec33f0f992499d8c41f3e3c12cb, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

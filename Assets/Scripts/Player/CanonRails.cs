@@ -31,6 +31,13 @@ public class CanonRails : MonoBehaviour, IChecker
     [SerializeField] private Yadro yadro;
     [SerializeField] private Vector3 StationaryPos;
 
+    [SerializeField] private AudioSource audioSourceRails;
+
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip[] clips;
+
+    [SerializeField] private AudioSource fallAudio;
+
     private bool stationary;
 
     void Start()
@@ -39,6 +46,8 @@ public class CanonRails : MonoBehaviour, IChecker
         spline = splineContainer.Splines[0];
         player = playerController.transform;
         resetYadro();
+        audioSourceRails.Play();
+        audioSourceRails.Pause();
     }
 
     public void AttachCanon(){
@@ -52,6 +61,8 @@ public class CanonRails : MonoBehaviour, IChecker
     }
 
     void Shoot(){
+        audioSource.clip = clips[0];
+        audioSource.Play();
         particles.gameObject.SetActive(true);
         particles.Play(true);
         canonAnim.enabled = true;
@@ -64,6 +75,12 @@ public class CanonRails : MonoBehaviour, IChecker
 
         yadro.Activate(yadroSpawnPoint.forward);
         Invoke("resetYadro", reloadKD);
+        Invoke("reloadAudio", reloadKD - 1f);
+    }
+
+    void reloadAudio(){
+        audioSource.clip = clips[1];
+        audioSource.Play();
     }
 
     void resetYadro(){
@@ -78,7 +95,10 @@ public class CanonRails : MonoBehaviour, IChecker
 
     void Update()
     {
-        if (!attached) return;
+        if (!attached){
+            if (audioSourceRails.isPlaying) audioSourceRails.Pause();
+            return;
+        }
         player.position = canon.position;
 
         if (Input.GetMouseButtonDown(0) && readyToShoot){
@@ -102,6 +122,7 @@ public class CanonRails : MonoBehaviour, IChecker
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, StaticRotationSpeed * Time.deltaTime);
             //transform.rotation = Quaternion.RotateTowards(transform.rotation, player.rotation, StaticRotationSpeed * Time.deltaTime);
             //transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+            if (audioSourceRails.isPlaying) audioSourceRails.Pause();
             return;
         }
         var native = new NativeSpline(spline);
@@ -125,13 +146,19 @@ public class CanonRails : MonoBehaviour, IChecker
         if (Input.GetKey(KeyCode.W)){
             //rb.AddForce(-transform.forward * moveSpeed, ForceMode.VelocityChange);
             transform.position += -transform.forward * moveSpeed * Time.deltaTime;
+            if (!audioSourceRails.isPlaying) audioSourceRails.UnPause();
         }
         else if (Input.GetKey(KeyCode.S)){
             //rb.AddForce(transform.forward * moveSpeed, ForceMode.VelocityChange);
             transform.position += transform.forward * moveSpeed * Time.deltaTime;
+            if (!audioSourceRails.isPlaying) audioSourceRails.UnPause();
+        }
+        else{
+            audioSourceRails.Pause();
         }
 
         if (splineIndex == 1 && t >= 0.9f) {
+            fallAudio.Play();
             stationary = true;
             return;
         }

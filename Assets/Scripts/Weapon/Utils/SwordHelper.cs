@@ -13,6 +13,8 @@ public class SwordHelper : MonoBehaviour
     [SerializeField] private AudioClip[] hitClips;
 
     [SerializeField] private bool canIDamagePlayer;
+
+    [SerializeField] private Transform swordSpline;
     
     private RaycastHit[] hits;
     private HashSet<GameObject> objects;
@@ -24,6 +26,7 @@ public class SwordHelper : MonoBehaviour
         damageCurve = GetComponentInChildren<CatmullRomSpline>();
         if (damageCurve == null && damageCurve.Count < 1)
             throw new NullReferenceException("Damage curve error!");
+        swordSpline.SetParent(transform.parent);
     }
 
 
