@@ -1,6 +1,8 @@
-﻿using Plugins.DialogueSystem.Scripts.DialogueGraph;
+﻿using System.Linq;
+using Plugins.DialogueSystem.Scripts.DialogueGraph;
 using Plugins.DialogueSystem.Scripts.DialogueGraph.Attributes;
 using Plugins.DialogueSystem.Scripts.DialogueGraph.Nodes;
+using Sirenix.Utilities;
 using UnityEngine;
 
 namespace DialogueNodes.TextPlayers
@@ -21,7 +23,11 @@ namespace DialogueNodes.TextPlayers
         {
             var node = Instantiate(this);
             node.narrator = narrator;
-            node.curve = curve;
+            node.curve = new AnimationCurve(curve.keys.Select(keyframe => new Keyframe(
+                keyframe.time, keyframe.value,
+                keyframe.inTangent, keyframe.outTangent,
+                keyframe.inWeight, keyframe.outWeight
+            )).ToArray());
             return node;
         }
 

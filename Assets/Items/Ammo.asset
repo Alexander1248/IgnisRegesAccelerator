@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c23f6f4d0ad04434972641475d919b8f, type: 3}
   m_Name: Ammo
   m_EditorClassIdentifier: 
+  id: pistol_ammo
   shape:
   - {x: 0, y: 0}
   uiPrefab: {fileID: 6830977853837318397, guid: 646135b25b4ae1047b4f336963c3d29b,

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityHFSM;
 
 namespace AI.Enemies
@@ -17,6 +18,7 @@ namespace AI.Enemies
         [SerializeField] private float attackDelay = 1;
         [SerializeField] private float attackDamage = 10;
         
+        [FormerlySerializedAs("eyes")] [SerializeField] private Transform head;
         [SerializeField] private Transform weaponAnchor;
         [SerializeField] private Items.Weapon weapon;
 
@@ -39,6 +41,7 @@ namespace AI.Enemies
             weapon = Instantiate(weapon);
             weaponObj = Instantiate(weapon.Prefab, weaponAnchor);
             weapon.OnEquip(gameObject, weaponObj);
+            weaponObj.GetComponent<SwordHelper>().canIDamagePlayer = true;
         }
 
         protected override StateMachine InitStateMachine()
@@ -64,36 +67,36 @@ namespace AI.Enemies
                     var dst = float.MaxValue; 
                     foreach (var tObj in controller.Targets)
                     {
-                        var dir = tObj.transform.position - transform.position;
+                        var dir = tObj.transform.position - head.transform.position;
                         if (dir.magnitude < viewDistance
                             && Vector3.Dot(dir.normalized, transform.forward) > viewCos
-                            && Physics.Raycast(transform.position, dir.normalized, dir.magnitude))
+                            && Physics.Raycast(head.transform.position, dir.normalized, dir.magnitude))
                         {
                             if (dir.magnitude < dst)
                             {
                                 Target = tObj;
                                 dst = dir.magnitude;
                             }
-                            Debug.DrawRay(transform.position, dir, Color.green, TargetUpdateRate);
+                            Debug.DrawRay(head.transform.position, dir, Color.green, TargetUpdateRate);
                         }
-                        else Debug.DrawRay(transform.position, dir, Color.red, TargetUpdateRate);
+                        else Debug.DrawRay(head.transform.position, dir, Color.red, TargetUpdateRate);
                     }
 
                     if (Target == null) return false;
                     targetPosition = Target.transform.position;
-                    transform.forward = (targetPosition - transform.position).normalized;
+                    transform.forward = (targetPosition - head.transform.position).normalized;
                     actionCompleted = false;
                     // Notify nearest
                     _nearEnemies.Clear();
-                    Location.FindNearestBwd(transform.position, notificationRadius, _nearEnemies);
+                    Location.FindNearestBwd(head.transform.position, notificationRadius, _nearEnemies);
                     foreach (var enemyAI in _nearEnemies)
                     {
                         enemyAI.Target = Target;
-                        Debug.DrawLine(transform.position, enemyAI.transform.position, Color.blue, 1);
+                        Debug.DrawLine(head.transform.position, enemyAI.transform.position, Color.blue, 1);
                         enemyAI.Notify(new HashSet<EnemyAI>(),"rapprochement");
                     }
                     Debug.Log("[AI]:" + name + ": idle -> rapprochement");
-                    animator.CrossFade("WalkWithSword", 0.25f, 0, 0);
+                    animator.CrossFade("Walking With Shopping Bag", 0.25f, 0, 0);
                     return true;
                 }
             );
@@ -101,19 +104,19 @@ namespace AI.Enemies
                 transition =>
                 {
                     if (Target == null) return actionCompleted;
-                    Debug.Log("[AI]:" + name + ": " + transition.from + "-> idle");
-                    var dir = Target.transform.position - transform.position;
+                    var dir = Target.transform.position - head.transform.position;
                     if (dir.magnitude < viewDistance
                         && Vector3.Dot(dir.normalized, transform.forward) > viewCos
-                        && Physics.Raycast(transform.position, dir.normalized, dir.magnitude))
+                        && Physics.Raycast(head.transform.position, dir.normalized, dir.magnitude))
                     {
-                        Debug.DrawRay(transform.position, dir, Color.green, TargetUpdateRate);
+                        Debug.DrawRay(head.transform.position, dir, Color.green, TargetUpdateRate);
                         targetPosition = Target.transform.position;
                         actionCompleted = false;
                         return false;
                     }
                     animator.CrossFade("Idle", 0.25f, 0, 0);
-                    Debug.DrawRay(transform.position, dir, Color.red, TargetUpdateRate);
+                    Debug.DrawRay(head.transform.position, dir, Color.red, TargetUpdateRate);
+                    Debug.Log("[AI]:" + name + ": " + transition.from + "-> idle");
                     return actionCompleted;
                 });
             fsm.AddTwoWayTransition(
@@ -122,14 +125,15 @@ namespace AI.Enemies
                 _ =>
                 {
                     if (Target == null) return false;
-                    var b = Vector3.Distance(Target.transform.position, transform.position) < attackDistance;
+                    var b = Vector3.Distance(Target.transform.position, head.transform.position) < attackDistance;
                     if (b){
                         Debug.Log("[AI]:" + name + ": rapprochement -> attack");
-                        animator.CrossFade("SwordAttack_1", 0.25f, 0, 0);
+                        actionCompleted = false;
                     }
                     else {
                         Debug.Log("[AI]:" + name + ": attack -> rapprochement");
-                        animator.CrossFade("WalkWithSword", 0.25f, 0, 0);
+                        animator.CrossFade("Walking With Shopping Bag", 0.25f, 0, 0);
+                        actionCompleted = true;
                     }
                     return b;
                 });
@@ -157,7 +161,7 @@ namespace AI.Enemies
             foreach (var enemyAI in _nearEnemies.Where(enemyAI => !notified.Contains(enemyAI)))
             {
                 enemyAI.Target = Target;
-                Debug.DrawLine(transform.position, enemyAI.transform.position, Color.blue, TargetUpdateRate);
+                Debug.DrawLine(head.transform.position, enemyAI.transform.position, Color.blue, TargetUpdateRate);
                 enemyAI.Notify(notified, type);
             }
         }
@@ -167,14 +171,18 @@ namespace AI.Enemies
             var fsm = new StateMachine();
             
             fsm.AddState("attack", 
+                onEnter: _ => animator.CrossFade("Stable Sword Inward Slash", 0.25f, 0, 0),
                 onLogic: _ =>
                 {
+                    Debug.Log("[AI]:" + name + ": attack");
                     weapon.Action(gameObject, weaponObj);
-                    fsm.RequestStateChange("wait");
-                });
-            fsm.AddState("wait");
+                    fsm.RequestStateChange("wait", true);
+                },
+                onExit: _ => animator.CrossFade("Idle", 0.25f, 0, 0));
             
+            fsm.AddState("wait", onLogic: _ => Debug.Log("[AI]:" + name + ": wait"));
             fsm.AddTransition(new TransitionAfter("wait", "attack", attackDelay));
+            fsm.AddTransition(new TransitionAfter("attack", "wait", attackDelay));
             
             fsm.SetStartState("attack");
             return fsm;

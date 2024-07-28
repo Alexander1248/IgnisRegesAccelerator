@@ -3292,6 +3292,12 @@ MonoBehaviour:
   maxLookAngle: 60
   cameraDistance: 0
   GUIObj: {fileID: 2237323858071119947}
+  audioSource: []
+  pitchK: []
+  SoundStepMultiplier: 0
+  SoundStepMultiplierVENT: 0
+  ventClips: []
+  woodClip: {fileID: 0}
   camAnimator: {fileID: 8147472817093459042}
   animatorController: {fileID: 9100000, guid: d29d89a1b76b4714bb63628355f8c5d5, type: 2}
   layingAnimKoeff: 1
@@ -3513,8 +3519,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: save.dat
-  format: 1
   supportedVersions: []
+  items:
+  - {fileID: 11400000, guid: 0887a7b035c63f34c8d979f50efd6ba2, type: 2}
+  - {fileID: 11400000, guid: c1737b6cb5719364e8f4faa3256f80ba, type: 2}
+  - {fileID: 11400000, guid: 239c36185acad3945a00feb7a05a7f24, type: 2}
+  - {fileID: 11400000, guid: 4821a4de7f3fa4746bb834799ae3181c, type: 2}
+  - {fileID: 11400000, guid: 13679ac40a226124ca500f1c9be6cc7a, type: 2}
+  - {fileID: 11400000, guid: 81a951fc2d3af9940a97d354459d5f11, type: 2}
   manager: {fileID: 3293934430835994864}
 --- !u!1 &4775706244062280396
 GameObject:
@@ -3763,6 +3775,7 @@ MonoBehaviour:
   settingsMenu: {fileID: 139352143097820000}
   playerController: {fileID: 4452881529384946052}
   Ichecker: {fileID: 0}
+  audioSourcesClicks: []
 --- !u!114 &139352143097820000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3776,6 +3789,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensSlider: {fileID: 5429498941973663536}
+  volumeSlider: {fileID: 0}
+  audioMixer: {fileID: 0}
 --- !u!1 &5749099376969341569
 GameObject:
   m_ObjectHideFlags: 0

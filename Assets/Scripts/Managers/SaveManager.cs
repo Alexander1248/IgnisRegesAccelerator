@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using Items;
 using Player;
-using Plugins.DialogueSystem.Scripts.Utils;
 using UnityEngine;
 
 namespace Managers
@@ -14,7 +13,7 @@ namespace Managers
         private static GameState _state;
         [SerializeField] private string path;
         [SerializeField] private string[] supportedVersions;
-        [SerializeField] private UDictionary<string, Item> items;
+        [SerializeField] private List<Item> items;
         [SerializeField] private InventoryManager manager;
         
         private void Start()
@@ -29,8 +28,8 @@ namespace Managers
             }
             manager.Initialize(state.inventories.Select(inventory => inventory.items.ToDictionary(
                 locations => new Vector2Int(locations.x, locations.y),
-                locations => items[locations.item]
-                )).ToArray());
+                locations => items.First(item => item.ID == locations.id)
+            )).ToArray());
         }
 
         public void Save()
@@ -47,7 +46,7 @@ namespace Managers
                     {
                         x = key.x,
                         y = key.y,
-                        item = items.Where(pair => pair.Value == value).Select(pair => pair.Key).First()
+                        id = value.ID
                     });
             }
 
@@ -83,7 +82,7 @@ namespace Managers
         {
             public int x;
             public int y;
-            public string item;
+            public string id;
         }
     }
 }

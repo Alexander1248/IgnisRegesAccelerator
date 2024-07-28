@@ -1,4 +1,5 @@
-﻿using Player;
+﻿using System;
+using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -43,6 +44,24 @@ namespace Items.Active
                 transform.parent = null;
                 Destroy(transform.gameObject);
             }
+        }
+
+        protected bool Equals(HealItem other)
+        {
+            return base.Equals(other) && amountPerRound == other.amountPerRound && rounds == other.rounds && used == other.used;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((HealItem)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(base.GetHashCode(), amountPerRound, rounds, usesPrefab, used);
         }
     }
 }

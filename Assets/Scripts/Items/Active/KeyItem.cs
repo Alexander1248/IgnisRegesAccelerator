@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Items.Active
@@ -12,6 +13,24 @@ namespace Items.Active
         public override bool Use(Inventory inventory, int x, int y, GameObject player)
         {
             return false;
+        }
+
+        protected bool Equals(KeyItem other)
+        {
+            return base.Equals(other) && code == other.code;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((KeyItem)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(base.GetHashCode(), code);
         }
     }
 }

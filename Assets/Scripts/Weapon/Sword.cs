@@ -12,7 +12,7 @@ namespace Weapon
         [SerializeField] private float damageCurveThickness;
         [SerializeField] private float damage = 10;
         [SerializeField] private float delay = 1;
-
+        
         private Animator animator;
         private PlayerController playerController;
         
