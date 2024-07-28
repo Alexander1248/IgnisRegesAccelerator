@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a016fd3a89f4a21a7c8401966d3ed85, type: 3}
   m_Name: Door Key
   m_EditorClassIdentifier: 
+  id: door_key
   shape:
   - {x: 0, y: 0}
   uiPrefab: {fileID: 6830977853837318397, guid: 1b401653968434c48b3cdc32b78e8d4f,
@@ -35,7 +36,7 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   secured: 1
-  key: 12345
+  code: 12345
   references:
     version: 2
     RefIds: []

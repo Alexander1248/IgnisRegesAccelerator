@@ -1988,19 +1988,11 @@ MonoBehaviour:
   m_Value: 0.81
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 139352143097820000}
-        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
-        m_MethodName: changeVolume
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: [{m_Target: {fileID: 139352143097820000}, m_TargetAssemblyTypeName: 'SettingsMenu,
+            Assembly-CSharp', m_MethodName: changeVolume, m_Mode: 1, m_Arguments: {
+            m_ObjectArgument: {fileID: 0}, m_ObjectArgumentAssemblyTypeName: 'UnityEngine.Object,
+              UnityEngine', m_IntArgument: 0, m_FloatArgument: 0, m_StringArgument: '',
+            m_BoolArgument: 0}, m_CallState: 2}]
 --- !u!1 &1766995624635847718
 GameObject:
   m_ObjectHideFlags: 0
@@ -3835,12 +3827,12 @@ MonoBehaviour:
   pitchK:
   - 0.7
   - 1
-  SoundStepMultiplier: 0.4
-  SoundStepMultiplierVENT: 1
+  SoundStepMultiplier: 0
+  SoundStepMultiplierVENT: 0
   ventClips:
   - {fileID: 8300000, guid: 7057fcf6fb08f104f9a053990ee5f8ae, type: 3}
   - {fileID: 8300000, guid: 6d372dd1aea419a4fbca6e1451034c8f, type: 3}
-  woodClip: {fileID: 8300000, guid: e6572a2065220524bafe6814cdf082ba, type: 3}
+  woodClip: {fileID: 0, guid: e6572a2065220524bafe6814cdf082ba, type: 3}
   camAnimator: {fileID: 8147472817093459042}
   animatorController: {fileID: 9100000, guid: d29d89a1b76b4714bb63628355f8c5d5, type: 2}
   layingAnimKoeff: 1
@@ -4068,6 +4060,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: save.dat
   supportedVersions: []
+  items:
+  - {fileID: 11400000, guid: 0887a7b035c63f34c8d979f50efd6ba2, type: 2}
+  - {fileID: 11400000, guid: c1737b6cb5719364e8f4faa3256f80ba, type: 2}
+  - {fileID: 11400000, guid: 239c36185acad3945a00feb7a05a7f24, type: 2}
+  - {fileID: 11400000, guid: 4821a4de7f3fa4746bb834799ae3181c, type: 2}
+  - {fileID: 11400000, guid: 13679ac40a226124ca500f1c9be6cc7a, type: 2}
+  - {fileID: 11400000, guid: 81a951fc2d3af9940a97d354459d5f11, type: 2}
   manager: {fileID: 3293934430835994864}
 --- !u!1 &4775706244062280396
 GameObject:
@@ -4332,8 +4331,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensSlider: {fileID: 5429498941973663536}
-  volumeSlider: {fileID: 1277065160984670451}
-  audioMixer: {fileID: 24100000, guid: 115694a7425d281449706badbd1d763a, type: 2}
+  volumeSlider: {fileID: 0}
+  audioMixer: {fileID: 0, guid: 115694a7425d281449706badbd1d763a, type: 2}
 --- !u!1 &5641045691926097525
 GameObject:
   m_ObjectHideFlags: 0

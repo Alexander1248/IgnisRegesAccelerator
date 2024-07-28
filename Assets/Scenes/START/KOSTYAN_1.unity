@@ -11346,7 +11346,7 @@ MonoBehaviour:
   animatorExplode: {fileID: 25665334}
   wall: {fileID: 1191370690}
   animatorFade: {fileID: 876357952}
-  audioSource: {fileID: 724916039}
+  audioSource: {fileID: 0}
 --- !u!4 &77554150
 Transform:
   m_ObjectHideFlags: 0
