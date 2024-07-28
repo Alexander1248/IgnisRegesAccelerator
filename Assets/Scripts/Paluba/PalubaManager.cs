@@ -30,7 +30,7 @@ public class PalubaManager : MonoBehaviour
 
     public void EndGame(){
         animatorFade.Play("InstFade", 0, 0);
-        Invoke("loadMenu", 3);
+        Invoke("loadMenu", 9);
     }
 
     void loadMenu(){

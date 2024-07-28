@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1470040930488366198}
   m_Layer: 0
   m_Name: healka
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65
@@ -132,6 +132,8 @@ MonoBehaviour:
     m_LocalVariables: []
   meshesOutline:
   - {fileID: 2284165797211022156}
+  changeItemSecure: 0
+  securedItem: 0
   references:
     version: 2
     RefIds: []

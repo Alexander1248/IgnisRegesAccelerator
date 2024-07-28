@@ -209,6 +209,24 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""MoveItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""7854f730-b7ee-45f8-95ec-12f26727af62"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Use Item"",
+                    ""type"": ""Button"",
+                    ""id"": ""a4b01388-97c8-4943-8876-574b7bf54d96"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Use"",
                     ""type"": ""Button"",
                     ""id"": ""4c1bb1f5-1d58-4c8e-bc77-56124e4c3140"",
@@ -254,15 +272,6 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Use Heal"",
-                    ""type"": ""Button"",
-                    ""id"": ""6cff6fbc-2a41-4ef6-812f-d6f83a1bacc5"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Journal"",
                     ""type"": ""Button"",
                     ""id"": ""07c17097-fb38-45a5-9456-4990085685d0"",
@@ -272,18 +281,18 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""MoveItem"",
+                    ""name"": ""Use Heal"",
                     ""type"": ""Button"",
-                    ""id"": ""7854f730-b7ee-45f8-95ec-12f26727af62"",
+                    ""id"": ""6cff6fbc-2a41-4ef6-812f-d6f83a1bacc5"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Use Item"",
+                    ""name"": ""Reload"",
                     ""type"": ""Button"",
-                    ""id"": ""a4b01388-97c8-4943-8876-574b7bf54d96"",
+                    ""id"": ""8acd94f7-944e-432c-8f7d-9685900434c4"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -349,22 +358,11 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""32447e96-ffb2-4f75-8794-7112efc98049"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": ""Tap"",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
                     ""action"": ""Second Hand Action"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c9b803f2-acb0-4a39-b8e3-699edb662702"",
-                    ""path"": ""<Keyboard>/h"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse and Keyboard"",
-                    ""action"": ""Use Heal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -376,6 +374,17 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
                     ""action"": ""Journal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9b803f2-acb0-4a39-b8e3-699edb662702"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Use Heal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -398,6 +407,17 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
                     ""action"": ""Use Item"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b11e8b9d-466d-4f1e-81b9-bdf927646d07"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -506,15 +526,16 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         // Interaction
         m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
         m_Interaction_Inventory = m_Interaction.FindAction("Inventory", throwIfNotFound: true);
+        m_Interaction_MoveItem = m_Interaction.FindAction("MoveItem", throwIfNotFound: true);
+        m_Interaction_UseItem = m_Interaction.FindAction("Use Item", throwIfNotFound: true);
         m_Interaction_Use = m_Interaction.FindAction("Use", throwIfNotFound: true);
         m_Interaction_MainHandAction = m_Interaction.FindAction("Main Hand Action", throwIfNotFound: true);
         m_Interaction_MainHandAddtitonalAction = m_Interaction.FindAction("Main Hand Addtitonal Action", throwIfNotFound: true);
         m_Interaction_SecondHandAction = m_Interaction.FindAction("Second Hand Action", throwIfNotFound: true);
         m_Interaction_SecondHandAddtitonalAction = m_Interaction.FindAction("Second Hand Addtitonal Action", throwIfNotFound: true);
-        m_Interaction_UseHeal = m_Interaction.FindAction("Use Heal", throwIfNotFound: true);
         m_Interaction_Journal = m_Interaction.FindAction("Journal", throwIfNotFound: true);
-        m_Interaction_MoveItem = m_Interaction.FindAction("MoveItem", throwIfNotFound: true);
-        m_Interaction_UseItem = m_Interaction.FindAction("Use Item", throwIfNotFound: true);
+        m_Interaction_UseHeal = m_Interaction.FindAction("Use Heal", throwIfNotFound: true);
+        m_Interaction_Reload = m_Interaction.FindAction("Reload", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Move = m_Camera.FindAction("Move", throwIfNotFound: true);
@@ -666,29 +687,31 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Interaction;
     private List<IInteractionActions> m_InteractionActionsCallbackInterfaces = new List<IInteractionActions>();
     private readonly InputAction m_Interaction_Inventory;
+    private readonly InputAction m_Interaction_MoveItem;
+    private readonly InputAction m_Interaction_UseItem;
     private readonly InputAction m_Interaction_Use;
     private readonly InputAction m_Interaction_MainHandAction;
     private readonly InputAction m_Interaction_MainHandAddtitonalAction;
     private readonly InputAction m_Interaction_SecondHandAction;
     private readonly InputAction m_Interaction_SecondHandAddtitonalAction;
-    private readonly InputAction m_Interaction_UseHeal;
     private readonly InputAction m_Interaction_Journal;
-    private readonly InputAction m_Interaction_MoveItem;
-    private readonly InputAction m_Interaction_UseItem;
+    private readonly InputAction m_Interaction_UseHeal;
+    private readonly InputAction m_Interaction_Reload;
     public struct InteractionActions
     {
         private @PlayerControl m_Wrapper;
         public InteractionActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
         public InputAction @Inventory => m_Wrapper.m_Interaction_Inventory;
+        public InputAction @MoveItem => m_Wrapper.m_Interaction_MoveItem;
+        public InputAction @UseItem => m_Wrapper.m_Interaction_UseItem;
         public InputAction @Use => m_Wrapper.m_Interaction_Use;
         public InputAction @MainHandAction => m_Wrapper.m_Interaction_MainHandAction;
         public InputAction @MainHandAddtitonalAction => m_Wrapper.m_Interaction_MainHandAddtitonalAction;
         public InputAction @SecondHandAction => m_Wrapper.m_Interaction_SecondHandAction;
         public InputAction @SecondHandAddtitonalAction => m_Wrapper.m_Interaction_SecondHandAddtitonalAction;
-        public InputAction @UseHeal => m_Wrapper.m_Interaction_UseHeal;
         public InputAction @Journal => m_Wrapper.m_Interaction_Journal;
-        public InputAction @MoveItem => m_Wrapper.m_Interaction_MoveItem;
-        public InputAction @UseItem => m_Wrapper.m_Interaction_UseItem;
+        public InputAction @UseHeal => m_Wrapper.m_Interaction_UseHeal;
+        public InputAction @Reload => m_Wrapper.m_Interaction_Reload;
         public InputActionMap Get() { return m_Wrapper.m_Interaction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -701,6 +724,12 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Inventory.started += instance.OnInventory;
             @Inventory.performed += instance.OnInventory;
             @Inventory.canceled += instance.OnInventory;
+            @MoveItem.started += instance.OnMoveItem;
+            @MoveItem.performed += instance.OnMoveItem;
+            @MoveItem.canceled += instance.OnMoveItem;
+            @UseItem.started += instance.OnUseItem;
+            @UseItem.performed += instance.OnUseItem;
+            @UseItem.canceled += instance.OnUseItem;
             @Use.started += instance.OnUse;
             @Use.performed += instance.OnUse;
             @Use.canceled += instance.OnUse;
@@ -716,18 +745,15 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @SecondHandAddtitonalAction.started += instance.OnSecondHandAddtitonalAction;
             @SecondHandAddtitonalAction.performed += instance.OnSecondHandAddtitonalAction;
             @SecondHandAddtitonalAction.canceled += instance.OnSecondHandAddtitonalAction;
-            @UseHeal.started += instance.OnUseHeal;
-            @UseHeal.performed += instance.OnUseHeal;
-            @UseHeal.canceled += instance.OnUseHeal;
             @Journal.started += instance.OnJournal;
             @Journal.performed += instance.OnJournal;
             @Journal.canceled += instance.OnJournal;
-            @MoveItem.started += instance.OnMoveItem;
-            @MoveItem.performed += instance.OnMoveItem;
-            @MoveItem.canceled += instance.OnMoveItem;
-            @UseItem.started += instance.OnUseItem;
-            @UseItem.performed += instance.OnUseItem;
-            @UseItem.canceled += instance.OnUseItem;
+            @UseHeal.started += instance.OnUseHeal;
+            @UseHeal.performed += instance.OnUseHeal;
+            @UseHeal.canceled += instance.OnUseHeal;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
         }
 
         private void UnregisterCallbacks(IInteractionActions instance)
@@ -735,6 +761,12 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Inventory.started -= instance.OnInventory;
             @Inventory.performed -= instance.OnInventory;
             @Inventory.canceled -= instance.OnInventory;
+            @MoveItem.started -= instance.OnMoveItem;
+            @MoveItem.performed -= instance.OnMoveItem;
+            @MoveItem.canceled -= instance.OnMoveItem;
+            @UseItem.started -= instance.OnUseItem;
+            @UseItem.performed -= instance.OnUseItem;
+            @UseItem.canceled -= instance.OnUseItem;
             @Use.started -= instance.OnUse;
             @Use.performed -= instance.OnUse;
             @Use.canceled -= instance.OnUse;
@@ -750,18 +782,15 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @SecondHandAddtitonalAction.started -= instance.OnSecondHandAddtitonalAction;
             @SecondHandAddtitonalAction.performed -= instance.OnSecondHandAddtitonalAction;
             @SecondHandAddtitonalAction.canceled -= instance.OnSecondHandAddtitonalAction;
-            @UseHeal.started -= instance.OnUseHeal;
-            @UseHeal.performed -= instance.OnUseHeal;
-            @UseHeal.canceled -= instance.OnUseHeal;
             @Journal.started -= instance.OnJournal;
             @Journal.performed -= instance.OnJournal;
             @Journal.canceled -= instance.OnJournal;
-            @MoveItem.started -= instance.OnMoveItem;
-            @MoveItem.performed -= instance.OnMoveItem;
-            @MoveItem.canceled -= instance.OnMoveItem;
-            @UseItem.started -= instance.OnUseItem;
-            @UseItem.performed -= instance.OnUseItem;
-            @UseItem.canceled -= instance.OnUseItem;
+            @UseHeal.started -= instance.OnUseHeal;
+            @UseHeal.performed -= instance.OnUseHeal;
+            @UseHeal.canceled -= instance.OnUseHeal;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
         }
 
         public void RemoveCallbacks(IInteractionActions instance)
@@ -846,15 +875,16 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     public interface IInteractionActions
     {
         void OnInventory(InputAction.CallbackContext context);
+        void OnMoveItem(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
         void OnMainHandAction(InputAction.CallbackContext context);
         void OnMainHandAddtitonalAction(InputAction.CallbackContext context);
         void OnSecondHandAction(InputAction.CallbackContext context);
         void OnSecondHandAddtitonalAction(InputAction.CallbackContext context);
-        void OnUseHeal(InputAction.CallbackContext context);
         void OnJournal(InputAction.CallbackContext context);
-        void OnMoveItem(InputAction.CallbackContext context);
-        void OnUseItem(InputAction.CallbackContext context);
+        void OnUseHeal(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

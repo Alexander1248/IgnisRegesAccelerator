@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 4021054366211302911}
   - component: {fileID: 8586691084108852193}
   - component: {fileID: 7237465395376647412}
+  - component: {fileID: 7056877051699147192}
   m_Layer: 0
   m_Name: Icosphere
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65
@@ -108,6 +109,35 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 289301614986012343, guid: b06525ca45e749b4082f05744ad7f138, type: 3}
+--- !u!114 &7056877051699147192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3271214090629345346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accc5d5f85114988872ff5e95ff6099f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 81a951fc2d3af9940a97d354459d5f11, type: 2}
+  tipName:
+    m_TableReference:
+      m_TableCollectionName: GUID:fe14867a5582c984eb6cb4250fb337cd
+    m_TableEntryReference:
+      m_KeyId: 2881150808674304
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  meshesOutline:
+  - {fileID: 8586691084108852193}
+  changeItemSecure: 0
+  securedItem: 0
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &3594304836080884120
 GameObject:
   m_ObjectHideFlags: 0

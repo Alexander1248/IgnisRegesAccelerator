@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 456729726969381513}
   - component: {fileID: 3890029458049893692}
   - component: {fileID: 7843246176691078802}
+  - component: {fileID: 6744177741165385847}
   m_Layer: 0
   m_Name: key
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65
@@ -107,3 +108,32 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.022676852, y: 0.058156725, z: 0.0039206953}
   m_Center: {x: 0, y: -0.00028747407, z: 0.0004375317}
+--- !u!114 &6744177741165385847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857161926199134949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accc5d5f85114988872ff5e95ff6099f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 4821a4de7f3fa4746bb834799ae3181c, type: 2}
+  tipName:
+    m_TableReference:
+      m_TableCollectionName: GUID:fe14867a5582c984eb6cb4250fb337cd
+    m_TableEntryReference:
+      m_KeyId: 2881150808674304
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  meshesOutline:
+  - {fileID: 3890029458049893692}
+  changeItemSecurity: 0
+  securedItem: 0
+  references:
+    version: 2
+    RefIds: []

@@ -37,11 +37,11 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   secured: 0
-  prefab: {fileID: 2735788763720291774, guid: 218bceeae6e3ff84cba447762c9ce4f0, type: 3}
+  prefab: {fileID: 2735788763720291774, guid: 1dd851eaca267a0458b2a15f3d3f22f3, type: 3}
   isTwoHanded: 0
   damageCurveThickness: 0.01
   damage: 30
-  delay: 1
+  delay: 0.5
   references:
     version: 2
     RefIds: []
