@@ -1,4 +1,5 @@
 ﻿using System;
+using Player;
 using UnityEngine;
 
 namespace Managers
@@ -13,6 +14,14 @@ namespace Managers
         {
             for (var i = 0; i < manager.Count; i++)
             {
+                for (var j = 0; j < gridContents[i].childCount; j++)
+                {
+                    var o = gridContents[i].GetChild(j);
+                    var parts = o.name.Replace($"Inv_Item_{i}_", "").Split("_");
+                    if (manager.GetItem(i, int.Parse(parts[0]), int.Parse(parts[1])) == null)
+                        Destroy(o.gameObject);
+                }
+
                 foreach (var (key, value) in manager[i])
                 {
                     var objName = $"Inv_Item_{i}_{key.x}_{key.y}";

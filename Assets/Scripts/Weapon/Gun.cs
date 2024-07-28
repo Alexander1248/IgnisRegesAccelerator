@@ -1,5 +1,6 @@
 ﻿using Player;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Weapon.Utils;
 
 namespace Weapon
@@ -36,15 +37,23 @@ namespace Weapon
             animator = weapon.GetComponent<Animator>();
             animatorLight = weapon.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Animator>();
             audioSource = weapon.GetComponentInChildren<AudioSource>();
-            if (user != null && user.TryGetComponent<HandController>(out HandController handController)){
+            if (user != null && user.TryGetComponent(out HandController handController)){
                 playerController = handController.getPlayer();
+                playerController.Control.Interaction.Reload.performed += StartReload;
             }
             _manager.gun = this;
         }
 
         public override void OnRelease(GameObject user, GameObject weapon)
         {
-            
+            if (playerController != null)
+                playerController.Control.Interaction.Reload.performed -= StartReload;
+                
+        }
+
+        private void StartReload(InputAction.CallbackContext callbackContext)
+        {
+            _manager.Reload();
         }
 
         public override void Action(GameObject user, GameObject weapon)
@@ -63,7 +72,7 @@ namespace Weapon
             Debug.Log("[Gun]: Shoot!");
             _count--;
             if (_count <= 0)
-                _manager.Reload();
+                _manager.Lock();
             else
                 _manager.Recharge();
             

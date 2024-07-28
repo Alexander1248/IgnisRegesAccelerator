@@ -2,6 +2,7 @@
 using System.Linq;
 using Items.Active;
 using Managers;
+using Player;
 using UnityEngine;
 
 namespace Weapon.Utils
@@ -10,6 +11,7 @@ namespace Weapon.Utils
     {
         public Gun gun;
         public bool IsCanShoot { get; private set; } = true;
+        public bool IsReloading { get; private set; } = false;
  
         private InventoryManager manager;
         private void Start()
@@ -28,23 +30,27 @@ namespace Weapon.Utils
             IsCanShoot = true;
             Debug.Log("[Gun]: Recharge completed!");
         }
-        
+        public void Lock()
+        {
+            IsCanShoot = false;
+        }
         public void Reload()
         {
-            Debug.Log("[Gun]: Reloading...");
-            IsCanShoot = false;
             try
             {
                 var (id, pos) = manager.Find(item =>
                     item is AmmoItem ammo && ammo.Type.ToLowerInvariant() == "pistol").First();
                 manager.RemoveItem(id, pos.x, pos.y);
                 Invoke(nameof(EndReload), gun.ReloadTime);
+                IsReloading = true;
+                Debug.Log("[Gun]: Reloading...");
             } catch(Exception) {}
         }
         private void EndReload()
         {
             gun.Reload();
             IsCanShoot = true;
+            IsReloading = false;
             Debug.Log("[Gun]: Reload completed!");
         }
     }

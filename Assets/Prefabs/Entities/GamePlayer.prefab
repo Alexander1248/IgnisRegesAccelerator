@@ -3216,6 +3216,7 @@ GameObject:
   - component: {fileID: 71911836981493119}
   - component: {fileID: 3293934430835994864}
   - component: {fileID: 6068392080123648781}
+  - component: {fileID: 2966538063882396170}
   m_Layer: 0
   m_Name: GamePlayer
   m_TagString: Player
@@ -3499,6 +3500,22 @@ MonoBehaviour:
   regenStartDelay: 10
   regenCooldown: 0.1
   regenAmount: 0.3
+--- !u!114 &2966538063882396170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4765519331391711751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2b82d1d8ee3415e8fb2c503e6ffcdde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  path: save.dat
+  format: 1
+  supportedVersions: []
+  manager: {fileID: 3293934430835994864}
 --- !u!1 &4775706244062280396
 GameObject:
   m_ObjectHideFlags: 0
