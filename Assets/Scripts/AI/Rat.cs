@@ -25,7 +25,7 @@ public class Rat : MonoBehaviour
 
 
     void Start(){
-        player = GameObject.Find("Player").transform;
+        player = GameObject.Find("GamePlayer").transform;
         walkToRandPos();
     }
 

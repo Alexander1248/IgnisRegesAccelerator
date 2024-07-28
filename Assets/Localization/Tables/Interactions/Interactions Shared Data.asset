@@ -27,6 +27,22 @@ MonoBehaviour:
     m_Key: Press
     m_Metadata:
       m_Items: []
+  - m_Id: 2584751896203264
+    m_Key: Take
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2600773701275648
+    m_Key: Use
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2610721197854720
+    m_Key: EnterShip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2881150808674304
+    m_Key: Pick up
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

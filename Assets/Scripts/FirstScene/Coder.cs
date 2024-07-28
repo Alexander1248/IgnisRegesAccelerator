@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Player.Interactables;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 
 public class Coder : MonoBehaviour
 {
@@ -30,9 +31,10 @@ public class Coder : MonoBehaviour
     [SerializeField] private FirstSceneManager firstSceneManager;
 
 
-    void Start(){
+    public void doNums(){
         generateCode();
     }
+
     void generateCode(){
         code = "";
         for(int i = 0; i < 4; i++){
@@ -87,15 +89,6 @@ public class Coder : MonoBehaviour
             if (screenNums[currentScreen] < 0) screenNums[currentScreen] = 9;
         }
 
-        bool ok = true;
-        for(int i = 0; i < 4; i++){
-            if (int.Parse(code[i].ToString()) != screenNums[i]){
-                ok = false;
-                break;
-            }
-        }
-        if (ok) correctCode();
-
         GameObject obj = NumPrefsPC.Where(x => x.name.Contains(screenNums[currentScreen].ToString()) && !x.activeSelf).FirstOrDefault();
         if (obj == null){
             GameObject reference = NumPrefsPC.Where(x => x.name.Contains(screenNums[currentScreen].ToString())).First();
@@ -109,6 +102,16 @@ public class Coder : MonoBehaviour
         screenNums_obj[currentScreen] = obj;
         obj.SetActive(true);
         obj.transform.localPosition = screenPoses[currentScreen];
+
+        if (code != null && code.Length != 4) return;
+        bool ok = true;
+        for(int i = 0; i < 4; i++){
+            if (int.Parse(code[i].ToString()) != screenNums[i]){
+                ok = false;
+                break;
+            }
+        }
+        if (ok) correctCode();
     }
 
     void correctCode(){

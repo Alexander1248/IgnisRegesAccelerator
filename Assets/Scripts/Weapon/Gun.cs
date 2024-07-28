@@ -17,6 +17,11 @@ namespace Weapon
         private ReloadManager _manager;
         private int _count;
 
+        private ParticleSystem particleSystem;
+        private Animator animator;
+        private PlayerController playerController;
+
+
         public float RechargeTime => rechargeTime;
         public float ReloadTime => reloadTime;
 
@@ -25,6 +30,11 @@ namespace Weapon
         {
             _count = cageSize;
             _manager = weapon.GetComponent<ReloadManager>();
+            particleSystem = weapon.GetComponentInChildren<ParticleSystem>();
+            animator = weapon.GetComponent<Animator>();
+            if (user != null && user.TryGetComponent<HandController>(out HandController handController)){
+                playerController = handController.getPlayer();
+            }
             _manager.gun = this;
         }
 
@@ -36,6 +46,13 @@ namespace Weapon
         public override void Action(GameObject user, GameObject weapon)
         {
             if (!_manager.IsCanShoot) return;
+
+            particleSystem.Play(true);
+            if (animator != null){
+                if (!animator.enabled) animator.enabled = true;
+                animator.CrossFade("GunShoot", 0.5f, 0, 0);
+            }
+            if (playerController != null) playerController.AnimateCam("Cam_Shoot");
             
             Debug.Log("[Gun]: Shoot!");
             _count--;

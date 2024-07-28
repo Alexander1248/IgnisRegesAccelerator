@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Lay",
+                    "type": "Button",
+                    "id": "e48312ff-8764-40d5-a95e-32caf1b3c7bd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -150,6 +159,17 @@
                     "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "64ef55cf-acb9-4dd0-adaa-7d617a1a100e",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "Lay",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -237,6 +257,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Use Item",
+                    "type": "Button",
+                    "id": "a4b01388-97c8-4943-8876-574b7bf54d96",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -265,7 +294,7 @@
                 {
                     "name": "",
                     "id": "ff00cd4e-c83f-4b1d-952f-8beac08a5f29",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "Tap",
                     "processors": "",
                     "groups": "Mouse and Keyboard",
@@ -276,7 +305,7 @@
                 {
                     "name": "",
                     "id": "6593e66a-dd92-4c7d-90ef-c51e716e3806",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "Hold",
                     "processors": "",
                     "groups": "Mouse and Keyboard",
@@ -287,7 +316,7 @@
                 {
                     "name": "",
                     "id": "dcc72e0b-8c98-48d7-aa30-95e08c7f1f5b",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "Hold",
                     "processors": "",
                     "groups": "Mouse and Keyboard",
@@ -298,7 +327,7 @@
                 {
                     "name": "",
                     "id": "32447e96-ffb2-4f75-8794-7112efc98049",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "Tap",
                     "processors": "",
                     "groups": "Mouse and Keyboard",
@@ -336,6 +365,17 @@
                     "processors": "",
                     "groups": "Mouse and Keyboard",
                     "action": "MoveItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cef34893-88dd-4eff-97d1-5f29b6135083",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "Use Item",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

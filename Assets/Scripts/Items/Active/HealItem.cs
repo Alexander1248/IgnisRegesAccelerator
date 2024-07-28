@@ -1,0 +1,48 @@
+﻿using Player;
+using UnityEngine;
+using UnityEngine.Serialization;
+
+namespace Items.Active
+{
+    
+    [CreateAssetMenu(menuName = "Items/Heal")]
+    public class HealItem : Item
+    {
+        [SerializeField] private int amountPerRound;
+        [SerializeField] private int rounds;
+        [FormerlySerializedAs("uses")] [SerializeField] private GameObject usesPrefab;
+        private int used;
+
+        private void Awake()
+        {
+            used = rounds;
+        }
+
+        public override bool Use(Inventory inventory, int x, int y, GameObject player)
+        {
+            var health = player.GetComponent<Health>();
+            health.ChangeHealth(amountPerRound);
+            used--;
+            return used <= 0;
+        }
+
+        public override void Draw(RectTransform rect)
+        {
+            while (rect.childCount < used)
+            {
+                var o = Instantiate(usesPrefab, rect);
+                var t = o.GetComponent<RectTransform>();
+                t.anchorMax = t.anchorMin = new Vector2(1, 0);
+                t.sizeDelta = rect.rect.size * new Vector2(0.1f, 0.1f);
+                t.anchoredPosition = rect.rect.size * new Vector2(-0.1f, 0.1f * (1 + rect.childCount));
+            }
+
+            while (rect.childCount > used)
+            {
+                var transform = rect.GetChild(rect.childCount - 1);
+                transform.parent = null;
+                Destroy(transform.gameObject);
+            }
+        }
+    }
+}

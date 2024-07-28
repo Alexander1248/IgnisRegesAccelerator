@@ -71,6 +71,15 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Lay"",
+                    ""type"": ""Button"",
+                    ""id"": ""e48312ff-8764-40d5-a95e-32caf1b3c7bd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,17 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""64ef55cf-acb9-4dd0-adaa-7d617a1a100e"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Lay"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -259,6 +279,15 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Use Item"",
+                    ""type"": ""Button"",
+                    ""id"": ""a4b01388-97c8-4943-8876-574b7bf54d96"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -287,7 +316,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ff00cd4e-c83f-4b1d-952f-8beac08a5f29"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": ""Tap"",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
@@ -298,7 +327,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""6593e66a-dd92-4c7d-90ef-c51e716e3806"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
@@ -309,7 +338,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""dcc72e0b-8c98-48d7-aa30-95e08c7f1f5b"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
@@ -320,7 +349,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""32447e96-ffb2-4f75-8794-7112efc98049"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": ""Tap"",
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
@@ -358,6 +387,17 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Mouse and Keyboard"",
                     ""action"": ""MoveItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cef34893-88dd-4eff-97d1-5f29b6135083"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Use Item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -462,6 +502,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_Movement_Sprint = m_Movement.FindAction("Sprint", throwIfNotFound: true);
         m_Movement_Dash = m_Movement.FindAction("Dash", throwIfNotFound: true);
         m_Movement_Crouch = m_Movement.FindAction("Crouch", throwIfNotFound: true);
+        m_Movement_Lay = m_Movement.FindAction("Lay", throwIfNotFound: true);
         // Interaction
         m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
         m_Interaction_Inventory = m_Interaction.FindAction("Inventory", throwIfNotFound: true);
@@ -473,6 +514,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         m_Interaction_UseHeal = m_Interaction.FindAction("Use Heal", throwIfNotFound: true);
         m_Interaction_Journal = m_Interaction.FindAction("Journal", throwIfNotFound: true);
         m_Interaction_MoveItem = m_Interaction.FindAction("MoveItem", throwIfNotFound: true);
+        m_Interaction_UseItem = m_Interaction.FindAction("Use Item", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Move = m_Camera.FindAction("Move", throwIfNotFound: true);
@@ -542,6 +584,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_Movement_Sprint;
     private readonly InputAction m_Movement_Dash;
     private readonly InputAction m_Movement_Crouch;
+    private readonly InputAction m_Movement_Lay;
     public struct MovementActions
     {
         private @PlayerControl m_Wrapper;
@@ -551,6 +594,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Movement_Sprint;
         public InputAction @Dash => m_Wrapper.m_Movement_Dash;
         public InputAction @Crouch => m_Wrapper.m_Movement_Crouch;
+        public InputAction @Lay => m_Wrapper.m_Movement_Lay;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -575,6 +619,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Crouch.started += instance.OnCrouch;
             @Crouch.performed += instance.OnCrouch;
             @Crouch.canceled += instance.OnCrouch;
+            @Lay.started += instance.OnLay;
+            @Lay.performed += instance.OnLay;
+            @Lay.canceled += instance.OnLay;
         }
 
         private void UnregisterCallbacks(IMovementActions instance)
@@ -594,6 +641,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @Crouch.started -= instance.OnCrouch;
             @Crouch.performed -= instance.OnCrouch;
             @Crouch.canceled -= instance.OnCrouch;
+            @Lay.started -= instance.OnLay;
+            @Lay.performed -= instance.OnLay;
+            @Lay.canceled -= instance.OnLay;
         }
 
         public void RemoveCallbacks(IMovementActions instance)
@@ -624,6 +674,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_Interaction_UseHeal;
     private readonly InputAction m_Interaction_Journal;
     private readonly InputAction m_Interaction_MoveItem;
+    private readonly InputAction m_Interaction_UseItem;
     public struct InteractionActions
     {
         private @PlayerControl m_Wrapper;
@@ -637,6 +688,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         public InputAction @UseHeal => m_Wrapper.m_Interaction_UseHeal;
         public InputAction @Journal => m_Wrapper.m_Interaction_Journal;
         public InputAction @MoveItem => m_Wrapper.m_Interaction_MoveItem;
+        public InputAction @UseItem => m_Wrapper.m_Interaction_UseItem;
         public InputActionMap Get() { return m_Wrapper.m_Interaction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -673,6 +725,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @MoveItem.started += instance.OnMoveItem;
             @MoveItem.performed += instance.OnMoveItem;
             @MoveItem.canceled += instance.OnMoveItem;
+            @UseItem.started += instance.OnUseItem;
+            @UseItem.performed += instance.OnUseItem;
+            @UseItem.canceled += instance.OnUseItem;
         }
 
         private void UnregisterCallbacks(IInteractionActions instance)
@@ -704,6 +759,9 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
             @MoveItem.started -= instance.OnMoveItem;
             @MoveItem.performed -= instance.OnMoveItem;
             @MoveItem.canceled -= instance.OnMoveItem;
+            @UseItem.started -= instance.OnUseItem;
+            @UseItem.performed -= instance.OnUseItem;
+            @UseItem.canceled -= instance.OnUseItem;
         }
 
         public void RemoveCallbacks(IInteractionActions instance)
@@ -783,6 +841,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
+        void OnLay(InputAction.CallbackContext context);
     }
     public interface IInteractionActions
     {
@@ -795,6 +854,7 @@ public partial class @PlayerControl: IInputActionCollection2, IDisposable
         void OnUseHeal(InputAction.CallbackContext context);
         void OnJournal(InputAction.CallbackContext context);
         void OnMoveItem(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

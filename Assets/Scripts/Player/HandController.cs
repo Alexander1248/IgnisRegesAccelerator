@@ -13,17 +13,23 @@ namespace Player
         [SerializeField] private Items.Weapon mainHand;
         [SerializeField] private Items.Weapon secondHand;
 
+        [SerializeField] private PlayerController playerController;
+
         private GameObject _mainHandObj;
         private bool _mainHandAdditionalPerformed;
         private GameObject _secondHandObj;
         private bool _secondHandAdditionalPerformed;
 
+        public PlayerController getPlayer() => playerController;
+
         public void MainHandActive(bool active)
         {
+            if (_mainHandObj == null) return;
             _mainHandObj.SetActive(active);
         }
         public void SecondHandActive(bool active)
         {
+            if (_secondHandObj == null) return;
             _secondHandObj.SetActive(active);
         }
         private void Start()
@@ -56,15 +62,17 @@ namespace Player
             return true;
         }
 
-        public void ClearMainHand()
+        public Items.Weapon ClearMainHand()
         {
             if (_mainHandObj) Destroy(_mainHandObj);
             if (mainHand)
             {
                 mainHand.OnRelease(gameObject,_mainHandObj);
-                Destroy(mainHand);
             }
+
+            var buff = mainHand;
             mainHand = null;
+            return buff;
         }
         public bool SetSecondHand(Items.Weapon weapon)
         {
@@ -75,11 +83,17 @@ namespace Player
             if (secondHand) secondHand.OnEquip(gameObject,_secondHandObj);
             return true;
         }
-        public void ClearSecondHand()
+        public Items.Weapon ClearSecondHand()
         {
             if (_secondHandObj) Destroy(_secondHandObj);
-            if (secondHand) Destroy(secondHand);
+            if (secondHand)
+            {
+                secondHand.OnRelease(gameObject,_secondHandObj);
+            }
+            
+            var buff = secondHand;
             secondHand = null;
+            return buff;
         }
 
         private void OnMainHandActionPerformed(InputAction.CallbackContext obj)

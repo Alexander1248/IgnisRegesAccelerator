@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Player;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class ThirdSceneManager : MonoBehaviour
 {
@@ -34,8 +35,12 @@ public class ThirdSceneManager : MonoBehaviour
     [SerializeField] private ParticleSystem[] multiexplosions;
     [SerializeField] private GameObject wallDestroyed;
 
+    [SerializeField] private Animator animatorFade;
+
     void Start(){
         cam = playerController.getCamAnchor();
+        animatorFade.enabled = true;
+        animatorFade.Play("FadeOut", 0, 0);
     }
 
     public void ExplodeVent(){
@@ -78,6 +83,7 @@ public class ThirdSceneManager : MonoBehaviour
 
     public void EnterVent(){
         playerController.LockPlayer();
+        playerController.transform.localScale = new Vector3(0.5f, 1, 0.5f); // костыль
         startCamPos = cam.position;
         startCamRot = cam.rotation;
         saveAnchor = cam.localPosition;
@@ -85,10 +91,13 @@ public class ThirdSceneManager : MonoBehaviour
     }
 
     public void EnteredInVent(){
+        enterVentCS.Stop();
         playerController.UnlockPlayer();
-        playerController.ForceLay();
-        playerController.GetComponent<Rigidbody>().isKinematic = false;
         cam.localPosition = saveAnchor;
+        playerController.GetComponent<Rigidbody>().isKinematic = false;
+        playerController.transform.localScale = new Vector3(1, 1, 1); // костыль
+        playerController.ForceLay();
+        Debug.Log(cam.localPosition);
     }
 
     public void StartShooting(){
@@ -114,5 +123,14 @@ public class ThirdSceneManager : MonoBehaviour
         }
         fewCanons[k].Shoot();
         k++;
+    }
+
+    public void ExitToPaluba(){
+        animatorFade.enabled = true;
+        animatorFade.Play("FadeIn", 0, 0);
+        Invoke("loadNextLvl", 3);
+    }
+    void loadNextLvl(){
+        SceneManager.LoadScene("PALUBA");
     }
 }

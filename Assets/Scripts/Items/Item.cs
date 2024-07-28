@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -10,13 +11,17 @@ namespace Items
         [SerializeField] private GameObject uiPrefab;
         [SerializeField] private LocalizedString itemName;
         [SerializeField] private LocalizedString itemDescription;
+        public bool secured;
 
         public GameObject UIPrefab => uiPrefab;
         public LocalizedString Name => itemName;
         public LocalizedString Description => itemDescription;
-        
+
+
         public abstract bool Use(Inventory inventory, int x, int y, GameObject player);
-        
+
+        public virtual void Draw(RectTransform rect) { }
+
         public bool CanBePlaced(Inventory inventory, int x, int y)
         {
             return !shape.Any(points => inventory.CellNotEmpty(points.x + x, points.y + y));
