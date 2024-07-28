@@ -187,6 +187,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "MoveItem",
+                    "type": "Button",
+                    "id": "7854f730-b7ee-45f8-95ec-12f26727af62",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Use Item",
+                    "type": "Button",
+                    "id": "a4b01388-97c8-4943-8876-574b7bf54d96",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Use",
                     "type": "Button",
                     "id": "4c1bb1f5-1d58-4c8e-bc77-56124e4c3140",
@@ -232,15 +250,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Use Heal",
-                    "type": "Button",
-                    "id": "6cff6fbc-2a41-4ef6-812f-d6f83a1bacc5",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Journal",
                     "type": "Button",
                     "id": "07c17097-fb38-45a5-9456-4990085685d0",
@@ -250,18 +259,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MoveItem",
+                    "name": "Use Heal",
                     "type": "Button",
-                    "id": "7854f730-b7ee-45f8-95ec-12f26727af62",
+                    "id": "6cff6fbc-2a41-4ef6-812f-d6f83a1bacc5",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Use Item",
+                    "name": "Reload",
                     "type": "Button",
-                    "id": "a4b01388-97c8-4943-8876-574b7bf54d96",
+                    "id": "8acd94f7-944e-432c-8f7d-9685900434c4",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -337,23 +346,23 @@
                 },
                 {
                     "name": "",
-                    "id": "c9b803f2-acb0-4a39-b8e3-699edb662702",
-                    "path": "<Keyboard>/h",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse and Keyboard",
-                    "action": "Use Heal",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "ff109b7b-b927-4dde-a34e-ca6b48da6e5c",
                     "path": "<Keyboard>/j",
                     "interactions": "",
                     "processors": "",
                     "groups": "Mouse and Keyboard",
                     "action": "Journal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c9b803f2-acb0-4a39-b8e3-699edb662702",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "Use Heal",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -376,6 +385,17 @@
                     "processors": "",
                     "groups": "Mouse and Keyboard",
                     "action": "Use Item",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b11e8b9d-466d-4f1e-81b9-bdf927646d07",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

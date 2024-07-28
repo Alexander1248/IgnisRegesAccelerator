@@ -25203,6 +25203,18 @@ MonoBehaviour:
   playerEnter:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797878943}
+        m_TargetAssemblyTypeName: Managers.SaveManager, Assembly-CSharp
+        m_MethodName: Save
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 77554149}
         m_TargetAssemblyTypeName: SecondSceneManager, Assembly-CSharp
         m_MethodName: NextLvl
@@ -59234,6 +59246,16 @@ PrefabInstance:
       propertyPath: locked
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5087166552684907102, guid: 5f0752ae221776e4194ce53014460f24,
+        type: 3}
+      propertyPath: code
+      value: 12345
+      objectReference: {fileID: 0}
+    - target: {fileID: 5087166552684907102, guid: 5f0752ae221776e4194ce53014460f24,
+        type: 3}
+      propertyPath: locked
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7305886919877687200, guid: 5f0752ae221776e4194ce53014460f24,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -61680,6 +61702,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2353617643234647215, guid: 499083566ae00a24faea7002a87c19b1,
+        type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     - target: {fileID: 7089967681845487178, guid: 499083566ae00a24faea7002a87c19b1,
         type: 3}
       propertyPath: m_Name
@@ -61689,6 +61716,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 8140235645997185418, guid: 499083566ae00a24faea7002a87c19b1,
+        type: 3}
+      propertyPath: securedItem
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8140235645997185418, guid: 499083566ae00a24faea7002a87c19b1,
+        type: 3}
+      propertyPath: changeItemSecurity
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -68023,6 +68060,11 @@ PrefabInstance:
       propertyPath: Ichecker
       value: 
       objectReference: {fileID: 352756051}
+    - target: {fileID: 4452881529384946052, guid: 6921bf98667988446bd7500515acabcd,
+        type: 3}
+      propertyPath: mouseSensitivity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4765519331391711751, guid: 6921bf98667988446bd7500515acabcd,
         type: 3}
       propertyPath: m_Name
@@ -79331,6 +79373,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e8e593abd41156499e60fda0bd1f871, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1797878943 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2966538063882396170, guid: 6921bf98667988446bd7500515acabcd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1607594349}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2b82d1d8ee3415e8fb2c503e6ffcdde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1798620809
