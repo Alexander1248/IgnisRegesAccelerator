@@ -34,7 +34,7 @@ namespace Managers
                 {
                     var o = ScriptableObject.CreateInstance(Type.GetType(locations.type));
                     JsonUtility.FromJsonOverwrite(locations.data, o);
-                    return o as Item;
+                    return o as Items.Item;
                 }
                 )).ToArray());
         }
