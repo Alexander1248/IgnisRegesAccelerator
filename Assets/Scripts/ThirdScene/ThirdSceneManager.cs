@@ -37,6 +37,10 @@ public class ThirdSceneManager : MonoBehaviour
 
     [SerializeField] private Animator animatorFade;
 
+    [SerializeField] private AudioSource[] wallAndVentAudio;
+    [SerializeField] private AudioSource[] multiExplosionAudio;
+    [SerializeField] private AudioSource metalCrash;
+
     void Start(){
         cam = playerController.getCamAnchor();
         animatorFade.enabled = true;
@@ -49,8 +53,10 @@ public class ThirdSceneManager : MonoBehaviour
         explodeVentCS.Play();
         explosion.gameObject.SetActive(true);
         explosion.Play(true);
+        wallAndVentAudio[1].Play();
         animatorExplode.enabled = true;
         animatorExplode.Play("CanonExplosion");
+        metalCrash.Play();
     }
 
     public void ExplodeWall(){
@@ -59,6 +65,7 @@ public class ThirdSceneManager : MonoBehaviour
         explosionWALL.Play(true);
         animatorExplodeWALL.enabled = true;
         animatorExplodeWALL.Play("CanonExplosion");
+        wallAndVentAudio[0].Play();
     }
 
     void Update(){
@@ -113,6 +120,7 @@ public class ThirdSceneManager : MonoBehaviour
         }
         multiexplosions[k2].gameObject.SetActive(true);
         multiexplosions[k2].Play(true);
+        multiExplosionAudio[k2].Play();
         k2++;
     }
 
