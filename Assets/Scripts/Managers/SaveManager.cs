@@ -5,10 +5,7 @@ using System.Linq;
 using Items;
 using Player;
 using Plugins.DialogueSystem.Scripts.Utils;
-using UnityEditor;
-using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
-using UnityEngine.Localization;
 
 namespace Managers
 {
