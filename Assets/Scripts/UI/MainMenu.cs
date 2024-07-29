@@ -1,5 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Managers;
+using Plugins.DialogueSystem.Scripts.Utils;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -29,6 +33,10 @@ public class MainMenu : MonoBehaviour
     private bool fadeOut;
 
     [SerializeField] private AudioSource[] audioSourcesClicks;
+    
+    [Space]
+    [SerializeField] private string savePath;
+    [SerializeField] private UDictionary<string, string> sceneEntries;
 
     private int currentSelected;
     private int pressed = -1;
@@ -37,6 +45,8 @@ public class MainMenu : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         SelectButton(0);
+        if (!File.Exists(savePath)) 
+            buttons[0].parent.gameObject.SetActive(false);
     }
 
 
@@ -80,6 +90,12 @@ public class MainMenu : MonoBehaviour
     void loadGame(){
         SceneManager.LoadScene("KOSTYAN_NETROGAT");
     }
+    void continueGame(){
+        if (!File.Exists(savePath)) return;
+        var state = JsonUtility.FromJson<SaveManager.GameState>(File.ReadAllText(savePath));
+        if (state.supportedVersions.All(version => Application.version != version)) return;
+        SceneManager.LoadScene(sceneEntries[state.entryPoint]);
+    }
 
     void Press(){
         buttons[pressed].parent.localScale = selectedScale * Vector3.one;
@@ -88,7 +104,7 @@ public class MainMenu : MonoBehaviour
             fadeOut = true;
             fadeAnim.enabled = true;
             fadeAnim.Play("FadeIn", -1, 0);
-            Invoke("loadGame", 1.5f);
+            Invoke("continueGame", 1.5f);
         }
         else if (pressed == 1){
             // new game

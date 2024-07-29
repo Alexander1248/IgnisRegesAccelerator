@@ -84,7 +84,7 @@ namespace Managers
             stamina.Initialize(state.stamina);
         }
 
-        public void Save()
+        public void Save(string entryPoint)
         {
             var inventories = new Inventory[inventoryManager.Count];
             for (var i = 0; i < inventories.Length; i++)
@@ -109,7 +109,8 @@ namespace Managers
                 inventories = inventories,
                 quests = questManager.Quests.Select(tuple => new QuestData(tuple.Item1, tuple.Item2)).ToList(),
                 hp = health.HP,
-                stamina = stamina.Value
+                stamina = stamina.Value,
+                entryPoint = entryPoint
             };
             _state.selectedQuest = questManager.SelectedQuest ? questManager.SelectedQuest.ID : null;
 
@@ -134,9 +135,10 @@ namespace Managers
         
         
         [Serializable]
-        private class GameState
+        public class GameState
         {
             public string[] supportedVersions;
+            public string entryPoint;
             public Inventory[] inventories;
             public ItemData mainHand;
             public ItemData secondHand;
@@ -147,12 +149,12 @@ namespace Managers
         }
         
         [Serializable]
-        private class Inventory
+        public class Inventory
         {
             public List<ItemData> items;
         }
         [Serializable]
-        private class ItemData
+        public class ItemData
         {
             public int x;
             public int y;
@@ -175,7 +177,7 @@ namespace Managers
             }
         }
         [Serializable]
-        private class QuestData
+        public class QuestData
         {
             public string id;
             public bool completed;
