@@ -76,7 +76,7 @@ public class SecondSceneManager : MonoBehaviour
     }
 
     void loadNextLvl(){
-        saveManager.Save();
+        saveManager.Save("KOSTYAN_2");
         SceneManager.LoadScene("KOSTYAN_2");
     }
 }

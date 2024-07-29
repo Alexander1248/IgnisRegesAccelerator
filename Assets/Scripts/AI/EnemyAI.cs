@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityHFSM;
@@ -36,5 +37,9 @@ namespace AI
 
         public abstract void Notify(HashSet<EnemyAI> enemyAis, string type);
 
+        private void OnDestroy()
+        {
+            controller.Remove(this);
+        }
     }
 }

@@ -191,7 +191,7 @@ public class ThirdSceneManager : MonoBehaviour
         Invoke("loadNextLvl", 3);
     }
     void loadNextLvl(){
-        saveManager.Save();
+        saveManager.Save("PALUBA");
         SceneManager.LoadScene("PALUBA");
     }
 }
