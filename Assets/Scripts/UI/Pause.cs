@@ -45,7 +45,7 @@ public class Pause : MonoBehaviour
     [SerializeField] private AudioSource[] audioSourcesClicks;
 
     void Start(){
-        checker = Ichecker.GetComponent<IChecker>();
+        if (Ichecker != null)checker = Ichecker.GetComponent<IChecker>();
     }
 
     void Update(){
