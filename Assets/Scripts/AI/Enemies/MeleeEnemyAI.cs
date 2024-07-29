@@ -13,6 +13,7 @@ namespace AI.Enemies
         
         [SerializeField] private float viewAngle = 60;
         [SerializeField] private float viewDistance = 10;
+        [SerializeField] private float sensitivityDistance = 3;
         [SerializeField] private bool retranslateNotification = true;
         [Space]
         [SerializeField] private float attackDistance = 1;
@@ -69,6 +70,17 @@ namespace AI.Enemies
                     agent.SetDestination(targetPosition);
                     actionCompleted = agent.remainingDistance <= agent.stoppingDistance;
                 });
+            fsm.AddState(
+                "searching",
+                onLogic: _ =>
+                {
+                    Debug.Log("[AI]:" + name + ": searching");
+                    agent.enabled = true;
+                    agent.SetDestination(targetPosition);
+                    actionCompleted = false;
+                    if (agent.remainingDistance <= agent.stoppingDistance)
+                        targetPosition = Target.transform.position;
+                });
             fsm.AddState("attack", AttackState());
             fsm.AddState("attention", AttentionState());
             fsm.AddState("Withdrawing Sword");
@@ -93,7 +105,7 @@ namespace AI.Enemies
                 return true;
 
             });
-            fsm.AddTransition("rapprochement", "attention",
+            fsm.AddTransition("rapprochement", "searching",
                 transition =>
                 {
                     if (Target == null) return false;
@@ -103,17 +115,36 @@ namespace AI.Enemies
                         && Vector3.Dot(dir.normalized, head.transform.forward) > viewCos
                         && Physics.Raycast(head.transform.position, dir.normalized, out hit, dir.magnitude))
                     {
-                        if (hit.collider.gameObject.CompareTag("Player")){
+                        var contains = false;
+                        var t = hit.collider.transform;
+                        while (t != null)
+                        {
+                            if (controller.Targets.Contains(t.gameObject))
+                            {
+                                contains = true;
+                                break;
+                            }
+                            t = t.parent;
+                        }
+                        if (contains){
                             Debug.DrawRay(head.transform.position, dir, Color.green, TargetUpdateRate);
                             targetPosition = Target.transform.position;
                             actionCompleted = false;
                             return false;
                         }
                     }
+                    if (dir.magnitude < sensitivityDistance)
+                    {
+                        Debug.DrawRay(head.transform.position, dir, Color.green, TargetUpdateRate);
+                        targetPosition = Target.transform.position;
+                        actionCompleted = false;
+                        return false;
+                    }
                     Debug.DrawRay(head.transform.position, dir, Color.red, TargetUpdateRate);
                     Debug.Log("[AI]:" + name + ": " + transition.from + "-> idle");
                     return actionCompleted;
                 });
+            fsm.AddTransition(new TransitionAfter("searching", "attention", 1));
             fsm.AddTransition(new TransitionAfter("attention", "Sheathing Sword", attentionTime, 
                 afterTransition: _ =>
                 {
@@ -163,26 +194,42 @@ namespace AI.Enemies
             foreach (var tObj in controller.Targets)
             {
                 var dir = tObj.transform.position - head.transform.position;
-                RaycastHit hit;
                 if (dir.magnitude < viewDistance
                     && Vector3.Dot(dir.normalized, head.transform.forward) > viewCos
-                    && Physics.Raycast(head.transform.position, dir.normalized, out hit, dir.magnitude))
+                    && Physics.Raycast(head.transform.position, dir.normalized, out var hit, dir.magnitude))
                 {
-                    if (hit.collider.gameObject.CompareTag("Player")){
-                        if (dir.magnitude < dst)
+                    var contains = false;
+                    var t = hit.collider.transform;
+                    while (t != null)
+                    {
+                        if (controller.Targets.Contains(t.gameObject))
                         {
-                            target = tObj;
-                            dst = dir.magnitude;
+                            contains = true;
+                            break;
                         }
-                        Debug.DrawRay(head.transform.position, dir, Color.green, TargetUpdateRate);
+                        t = t.parent;
                     }
+                    if (contains && dir.magnitude < dst)
+                    {
+                        target = tObj;
+                        dst = dir.magnitude;
+                    }
+                    Debug.DrawRay(head.transform.position, dir, Color.green, TargetUpdateRate);
+                }
+                else if (dir.magnitude < sensitivityDistance)
+                {
+                    if (dir.magnitude < dst)
+                    {
+                        target = tObj;
+                        dst = dir.magnitude;
+                    }
+                    Debug.DrawRay(head.transform.position, dir, Color.green, TargetUpdateRate);
                 }
                 else Debug.DrawRay(head.transform.position, dir, Color.red, TargetUpdateRate);
             }
 
             if (target == null) return false;
             targetPosition = target.transform.position;
-            transform.forward = (targetPosition - head.transform.position).normalized;
             actionCompleted = false;
             // Notify nearest
             if (source)
