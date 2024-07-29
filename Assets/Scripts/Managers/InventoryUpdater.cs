@@ -9,6 +9,8 @@ namespace Managers
         [HideInInspector] public InventoryManager manager;
         [HideInInspector] public RectTransform[] gridContents;
         [HideInInspector] public RectTransform cell;
+        [HideInInspector] public RectTransform leftHand;
+        [HideInInspector] public RectTransform rightHand;
 
         private void OnEnable()
         {
@@ -34,6 +36,28 @@ namespace Managers
                     t.anchoredPosition = key * cell.rect.size + t.rect.size / 2;
                     value.Draw(t);
                 }
+            }
+
+            var handController = manager.GetHandController();
+            if (!handController.IsSecondHandEmpty && leftHand.Find("Left_Hand_Item") == null)
+            {
+                var secondHand = handController.GetSecondHand();
+                var obj = Instantiate(secondHand.UIPrefab, leftHand);
+                obj.name = "Left_Hand_Item";
+                var t = obj.GetComponent<RectTransform>();
+                t.anchorMax = t.anchorMin = new Vector2(0.5f, 0.5f);
+                t.anchoredPosition = Vector2.zero;
+                secondHand.Draw(t);
+            }
+            if (!handController.IsMainHandEmpty && rightHand.Find("Right_Hand_Item") == null)
+            {
+                var mainHand = handController.GetMainHand();
+                var obj = Instantiate(mainHand.UIPrefab, rightHand);
+                obj.name = "Right_Hand_Item";
+                var t = obj.GetComponent<RectTransform>();
+                t.anchorMax = t.anchorMin = new Vector2(0.5f, 0.5f);
+                t.anchoredPosition = Vector2.zero;
+                mainHand.Draw(t);
             }
         }
     }

@@ -229,6 +229,8 @@ namespace Managers
             updater.manager = inventory;
             updater.gridContents = gridContents;
             updater.cell = cell;
+            updater.rightHand = rightHand;
+            updater.leftHand = leftHand;
         }
 
         void OpenInventory(){
