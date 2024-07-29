@@ -62,7 +62,7 @@ namespace Managers
                 item.secured = state.secondHand.secured;
                 item.lockedInInventory = state.secondHand.lockedInInventory;
                 item.LoadState(Convert.FromBase64String(state.secondHand.data));
-                handController.SetMainHand(item as Items.Weapon);
+                handController.SetSecondHand(item as Items.Weapon);
             }
 
             foreach (var quest in state.quests)
