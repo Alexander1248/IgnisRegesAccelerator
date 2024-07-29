@@ -25,6 +25,11 @@ namespace Managers
         [SerializeField] private Stamina stamina;
 
         [SerializeField] private bool saveToFile;
+
+        public static void ClearState()
+        {
+            _state = null;
+        }
         
         private void Start()
         {
