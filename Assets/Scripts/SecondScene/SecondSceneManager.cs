@@ -48,9 +48,9 @@ public class SecondSceneManager : MonoBehaviour
     }
 
     public void CompleteQuest(int id){
+        Debug.Log("ID:" +id);
         if (id == 0){
             gunTaken = true;
-            return;
         }
         questManager.Complete(quests[id]);
     }

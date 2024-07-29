@@ -72,7 +72,13 @@ namespace Managers
                 if (quest.completed) 
                     questManager.Complete(q);
             }
-            questManager.Select(state.selectedQuest);
+
+            for (var i = 0; i < questManager.Count; i++)
+            {
+                if (questManager[i].ID != state.selectedQuest) continue;
+                questManager.Select(i);
+                break;
+            }
             
             health.Initialize(state.hp);
             stamina.Initialize(state.stamina);
@@ -104,7 +110,7 @@ namespace Managers
                 quests = questManager.Quests.Select(tuple => new QuestData(tuple.Item1, tuple.Item2)).ToList(),
                 hp = health.HP,
                 stamina = stamina.Value,
-                selectedQuest = questManager.Find(questManager.SelectedQuest)
+                selectedQuest = questManager.SelectedQuest.ID
             };
 
             if (mainHand)
@@ -135,7 +141,7 @@ namespace Managers
             public ItemData mainHand;
             public ItemData secondHand;
             public List<QuestData> quests;
-            public int selectedQuest;
+            public string selectedQuest;
             public float hp;
             public float stamina;
         }

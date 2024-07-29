@@ -62204,7 +62204,7 @@ PrefabInstance:
     - target: {fileID: 8140235645997185418, guid: 499083566ae00a24faea7002a87c19b1,
         type: 3}
       propertyPath: changeItemSecurity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8140235645997185418, guid: 499083566ae00a24faea7002a87c19b1,
         type: 3}
