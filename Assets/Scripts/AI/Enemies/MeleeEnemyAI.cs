@@ -98,14 +98,17 @@ namespace AI.Enemies
                 {
                     if (Target == null) return false;
                     var dir = Target.transform.position - head.transform.position;
+                    RaycastHit hit;
                     if (dir.magnitude < viewDistance
                         && Vector3.Dot(dir.normalized, head.transform.forward) > viewCos
-                        && Physics.Raycast(head.transform.position, dir.normalized, dir.magnitude))
+                        && Physics.Raycast(head.transform.position, dir.normalized, out hit, dir.magnitude))
                     {
-                        Debug.DrawRay(head.transform.position, dir, Color.green, TargetUpdateRate);
-                        targetPosition = Target.transform.position;
-                        actionCompleted = false;
-                        return false;
+                        if (hit.collider.gameObject.CompareTag("Player")){
+                            Debug.DrawRay(head.transform.position, dir, Color.green, TargetUpdateRate);
+                            targetPosition = Target.transform.position;
+                            actionCompleted = false;
+                            return false;
+                        }
                     }
                     Debug.DrawRay(head.transform.position, dir, Color.red, TargetUpdateRate);
                     Debug.Log("[AI]:" + name + ": " + transition.from + "-> idle");
@@ -160,16 +163,19 @@ namespace AI.Enemies
             foreach (var tObj in controller.Targets)
             {
                 var dir = tObj.transform.position - head.transform.position;
+                RaycastHit hit;
                 if (dir.magnitude < viewDistance
                     && Vector3.Dot(dir.normalized, head.transform.forward) > viewCos
-                    && Physics.Raycast(head.transform.position, dir.normalized, dir.magnitude))
+                    && Physics.Raycast(head.transform.position, dir.normalized, out hit, dir.magnitude))
                 {
-                    if (dir.magnitude < dst)
-                    {
-                        target = tObj;
-                        dst = dir.magnitude;
+                    if (hit.collider.gameObject.CompareTag("Player")){
+                        if (dir.magnitude < dst)
+                        {
+                            target = tObj;
+                            dst = dir.magnitude;
+                        }
+                        Debug.DrawRay(head.transform.position, dir, Color.green, TargetUpdateRate);
                     }
-                    Debug.DrawRay(head.transform.position, dir, Color.green, TargetUpdateRate);
                 }
                 else Debug.DrawRay(head.transform.position, dir, Color.red, TargetUpdateRate);
             }
@@ -354,7 +360,8 @@ namespace AI.Enemies
         {
             FSM.RequestExit(true);
             animator.CrossFade("Dying", 0.25f, 0, 0);
-            Invoke(nameof(Destroy), 10f);
+            //Invoke(nameof(Destroy), 1f);
+            Destroy(gameObject);
         }
         public void Destroy()
         {

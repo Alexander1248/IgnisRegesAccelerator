@@ -41,7 +41,7 @@ MonoBehaviour:
   secured: 0
   prefab: {fileID: 2735788763720291774, guid: 1dd851eaca267a0458b2a15f3d3f22f3, type: 3}
   isTwoHanded: 0
-  damageCurveThickness: 0.01
+  damageCurveThickness: 1
   damage: 30
   delay: 0.5
   references:
