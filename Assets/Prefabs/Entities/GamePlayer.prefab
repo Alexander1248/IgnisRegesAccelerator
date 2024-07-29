@@ -4260,7 +4260,7 @@ MonoBehaviour:
   questManager: {fileID: 8882101170260104817}
   health: {fileID: 71911836981493119}
   stamina: {fileID: 6068392080123648781}
-  saveToFile: 1
+  saveToFile: 0
 --- !u!1 &4775706244062280396
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,6 +21,7 @@ namespace Player
         public void Initialize(float value)
         {
             this.value = value;
+            onChange.Invoke(value, max);
         }
 
         public bool Use(float delta)

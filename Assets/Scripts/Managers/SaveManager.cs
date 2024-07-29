@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Items;
 using Player;
 using Quests;
@@ -41,7 +43,7 @@ namespace Managers
                     var item = Instantiate(items.First(item => item.ID == locations.id));
                     item.secured = locations.secured;
                     item.lockedInInventory = locations.lockedInInventory;
-                    item.LoadState(locations.data);
+                    item.LoadState(Convert.FromBase64String(locations.data));
                     return item;
                 })).ToArray());
             
@@ -51,7 +53,7 @@ namespace Managers
                 var item = Instantiate(items.First(item => item.ID == state.mainHand.id));
                 item.secured = state.mainHand.secured;
                 item.lockedInInventory = state.mainHand.lockedInInventory;
-                item.LoadState(state.mainHand.data);
+                item.LoadState(Convert.FromBase64String(state.mainHand.data));
                 handController.SetMainHand(item as Items.Weapon);
             }
             if (state.secondHand != null)
@@ -59,7 +61,7 @@ namespace Managers
                 var item = Instantiate(items.First(item => item.ID == state.secondHand.id));
                 item.secured = state.secondHand.secured;
                 item.lockedInInventory = state.secondHand.lockedInInventory;
-                item.LoadState(state.secondHand.data);
+                item.LoadState(Convert.FromBase64String(state.secondHand.data));
                 handController.SetMainHand(item as Items.Weapon);
             }
 
@@ -70,6 +72,8 @@ namespace Managers
                 if (quest.completed) 
                     questManager.Complete(q);
             }
+            questManager.Select(state.selectedQuest);
+            
             health.Initialize(state.hp);
             stamina.Initialize(state.stamina);
         }
@@ -85,7 +89,8 @@ namespace Managers
                 };
                 foreach (var (key, value) in inventoryManager[i])
                     inventories[i].items.Add(new ItemData(
-                        key.x, key.y, value.ID, value.secured, value.lockedInInventory, value.SaveState()
+                        key.x, key.y, value.ID, value.secured, 
+                        value.lockedInInventory, Convert.ToBase64String(value.SaveState())
                     ));
             }
 
@@ -98,8 +103,20 @@ namespace Managers
                 inventories = inventories,
                 quests = questManager.Quests.Select(tuple => new QuestData(tuple.Item1, tuple.Item2)).ToList(),
                 hp = health.HP,
-                stamina = stamina.Value
+                stamina = stamina.Value,
+                selectedQuest = questManager.Find(questManager.SelectedQuest)
             };
+
+            if (mainHand)
+                _state.mainHand = new ItemData(0, 0, mainHand.ID, mainHand.secured,
+                    mainHand.lockedInInventory, Convert.ToBase64String(mainHand.SaveState()));
+            else _state.mainHand = null;
+            if (secondHand)
+                _state.secondHand = new ItemData(0, 0, secondHand.ID, secondHand.secured, 
+                    secondHand.lockedInInventory, Convert.ToBase64String(secondHand.SaveState()));
+            else _state.secondHand = null;
+            
+            if (!saveToFile) return;
             File.WriteAllText(path, JsonUtility.ToJson(_state));
         }
 
@@ -118,6 +135,7 @@ namespace Managers
             public ItemData mainHand;
             public ItemData secondHand;
             public List<QuestData> quests;
+            public int selectedQuest;
             public float hp;
             public float stamina;
         }

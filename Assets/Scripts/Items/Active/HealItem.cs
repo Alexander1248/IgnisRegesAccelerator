@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -33,13 +34,14 @@ namespace Items.Active
 
         public override void Draw(RectTransform rect)
         {
+            var size = Mathf.Min(rect.rect.size.x, rect.rect.size.y);
             while (rect.childCount < used)
             {
                 var o = Instantiate(usesPrefab, rect);
                 var t = o.GetComponent<RectTransform>();
                 t.anchorMax = t.anchorMin = new Vector2(1, 0);
-                t.sizeDelta = rect.rect.size * new Vector2(0.1f, 0.1f);
-                t.anchoredPosition = rect.rect.size * new Vector2(-0.1f, 0.1f * (1 + rect.childCount));
+                t.sizeDelta = new Vector2(0.1f, 0.1f) * size;
+                t.anchoredPosition = new Vector2(-0.1f, 0.1f * rect.childCount) * size;
             }
 
             while (rect.childCount > used)
@@ -66,6 +68,22 @@ namespace Items.Active
         public override int GetHashCode()
         {
             return HashCode.Combine(base.GetHashCode(), amountPerRound, rounds, usesPrefab, used);
+        }
+
+        public override byte[] SaveState()
+        {
+            using var stream = new MemoryStream();
+            stream.Write(BitConverter.GetBytes(amountPerRound));
+            stream.Write(BitConverter.GetBytes(rounds));
+            stream.Write(BitConverter.GetBytes(used));
+            return stream.ToArray();
+        }
+
+        public override void LoadState(byte[] data)
+        {
+            amountPerRound = BitConverter.ToInt32(data, 0);
+            rounds = BitConverter.ToInt32(data, sizeof(int));
+            used = BitConverter.ToInt32(data, sizeof(int) << 1);
         }
     }
 }

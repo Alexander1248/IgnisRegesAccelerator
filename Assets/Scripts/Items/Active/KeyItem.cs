@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -31,6 +32,15 @@ namespace Items.Active
         public override int GetHashCode()
         {
             return HashCode.Combine(base.GetHashCode(), code);
+        }
+        public override byte[] SaveState()
+        {
+            return Encoding.UTF8.GetBytes(code);
+        }
+
+        public override void LoadState(byte[] data)
+        {
+            code = Encoding.UTF8.GetString(data);
         }
     }
 }
