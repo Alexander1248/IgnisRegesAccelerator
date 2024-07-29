@@ -3,6 +3,7 @@ using System.Linq;
 using Items.Active;
 using Managers;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Localization;
 
 namespace Player.Interactables
@@ -32,6 +33,8 @@ namespace Player.Interactables
 
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip[] clips;
+
+        [SerializeField] private UnityEvent onInteract;
 
 
         private InventoryManager manager;
@@ -78,6 +81,7 @@ namespace Player.Interactables
                     return;
                 }
             }
+            onInteract.Invoke();  
 
             if (animator) animator.enabled = false;
             if (audioSource)
