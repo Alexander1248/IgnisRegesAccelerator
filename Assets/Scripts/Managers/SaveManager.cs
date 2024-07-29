@@ -72,6 +72,8 @@ namespace Managers
                 if (quest.completed) 
                     questManager.Complete(q);
             }
+            questManager.Select(state.selectedQuest);
+            
             health.Initialize(state.hp);
             stamina.Initialize(state.stamina);
         }
@@ -101,7 +103,8 @@ namespace Managers
                 inventories = inventories,
                 quests = questManager.Quests.Select(tuple => new QuestData(tuple.Item1, tuple.Item2)).ToList(),
                 hp = health.HP,
-                stamina = stamina.Value
+                stamina = stamina.Value,
+                selectedQuest = questManager.Find(questManager.SelectedQuest)
             };
 
             if (mainHand)
@@ -132,6 +135,7 @@ namespace Managers
             public ItemData mainHand;
             public ItemData secondHand;
             public List<QuestData> quests;
+            public int selectedQuest;
             public float hp;
             public float stamina;
         }
