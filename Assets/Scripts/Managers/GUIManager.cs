@@ -40,7 +40,7 @@ namespace Managers
         [SerializeField] private TMP_Text questText;
         [SerializeField] private GameObject questPrefab;
         [SerializeField] private GameObject divider;
-        [SerializeField] private Button select;
+        [SerializeField] private GameObject select;
 
         private int selectedQuestIndex;
         private QuestItem selectedQuestItem;
@@ -84,58 +84,22 @@ namespace Managers
             {
                 if (journal.activeSelf)
                 {
-                    handController.MainHandActive(true);
-                    handController.SecondHandActive(true);
-                    playerController.UnlockPlayer();
-                    playerController.LockCursor();
-                    
-                    hud.SetActive(true);
-                    journal.SetActive(false);
-                    inventoryGUI.SetActive(false);
+                    HideAll();
                 }
                 else
                 {
-                    handController.MainHandActive(false);
-                    handController.SecondHandActive(false);
-                    playerController.LockPlayer();
-                    playerController.UnlockCursor();
-                    
-                    journal.SetActive(true);
-                    hud.SetActive(false);
-                    inventoryGUI.SetActive(false);
-                    if (selectedQuestItem) Select(selectedQuestItem.quest);
-                    else
-                    {
-                        select.gameObject.SetActive(false);
-                        questName.text = "";
-                        questTask.text = "";
-                        questText.text = "";
-                    }
+                    OpenJournal();
                 }
             };
             playerController.Control.Interaction.Inventory.performed += _ =>
             {
-                if (inventoryGUI.activeSelf)
+                if (inventoryGUI.activeSelf || journal.activeSelf)
                 {
-                    handController.MainHandActive(true);
-                    handController.SecondHandActive(true);
-                    playerController.UnlockPlayer();
-                    playerController.LockCursor();
-                    
-                    hud.SetActive(true);
-                    journal.SetActive(false);
-                    inventoryGUI.SetActive(false);
+                    HideAll();
                 }
                 else
                 {
-                    handController.MainHandActive(false);
-                    handController.SecondHandActive(false);
-                    playerController.LockPlayer();
-                    playerController.UnlockCursor();
-                    
-                    inventoryGUI.SetActive(true);
-                    journal.SetActive(false);
-                    hud.SetActive(false);
+                    OpenInventory();
                 }
             };
 
@@ -252,18 +216,63 @@ namespace Managers
             updater.cell = cell;
         }
 
+        void OpenInventory(){
+            handController.MainHandActive(false);
+            handController.SecondHandActive(false);
+            playerController.LockPlayer();
+            playerController.UnlockCursor();
+            
+            inventoryGUI.SetActive(true);
+            journal.SetActive(false);
+            hud.SetActive(false);
+        }
+
+        void HideAll(){
+            handController.MainHandActive(true);
+            handController.SecondHandActive(true);
+            playerController.UnlockPlayer();
+            playerController.LockCursor();
+            
+            hud.SetActive(true);
+            journal.SetActive(false);
+            inventoryGUI.SetActive(false);
+        }
+
+        void OpenJournal(){
+            handController.MainHandActive(false);
+            handController.SecondHandActive(false);
+            playerController.LockPlayer();
+            playerController.UnlockCursor();
+            
+            journal.SetActive(true);
+            hud.SetActive(false);
+            inventoryGUI.SetActive(false);
+            if (selectedQuestItem) Select(selectedQuestItem.quest);
+            else
+            {
+                if (questManager.Count == 0)
+                {
+                    select.SetActive(false);
+                    questName.text = "";
+                    questTask.text = "";
+                    questText.text = "";
+                }
+                else Select(questManager[0]);
+            }
+        }
+
+        public void UIButtons(int id){
+            if (id == 0){ // joyrnal
+                OpenJournal();
+            }
+            else if (id == 1) OpenInventory();
+        }
+
         void Update(){ // похуй на эту новую систему ввода (абсолютно)
             if (Input.GetKeyUp(KeyCode.Escape)){
                 if (inventoryGUI.activeSelf || journal.activeSelf)
                 {
-                    handController.MainHandActive(true);
-                    handController.SecondHandActive(true);
-                    playerController.UnlockPlayer();
-                    playerController.LockCursor();
-                    
-                    hud.SetActive(true);
-                    journal.SetActive(false);
-                    inventoryGUI.SetActive(false);
+                    HideAll();
                 }
             }
         }
@@ -388,13 +397,13 @@ namespace Managers
             if (questManager.IsCompleted(quest))
             {
                 selectedQuestIndex = -1;
-                select.gameObject.SetActive(false);
+                select.SetActive(false);
                 selectedQuestItem = completed[quest].GetComponent<QuestItem>();
             }
             else
             {
                 selectedQuestIndex = questManager.Find(quest);
-                select.gameObject.SetActive(true);
+                select.SetActive(true);
                 selectedQuestItem = quests[quest].GetComponent<QuestItem>();
             }
             questName.text = quest.Name.GetLocalizedString();

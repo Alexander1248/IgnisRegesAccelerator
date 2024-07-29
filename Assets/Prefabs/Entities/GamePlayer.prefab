@@ -1988,11 +1988,19 @@ MonoBehaviour:
   m_Value: 0.81
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: [{m_Target: {fileID: 139352143097820000}, m_TargetAssemblyTypeName: 'SettingsMenu,
-            Assembly-CSharp', m_MethodName: changeVolume, m_Mode: 1, m_Arguments: {
-            m_ObjectArgument: {fileID: 0}, m_ObjectArgumentAssemblyTypeName: 'UnityEngine.Object,
-              UnityEngine', m_IntArgument: 0, m_FloatArgument: 0, m_StringArgument: '',
-            m_BoolArgument: 0}, m_CallState: 2}]
+      m_Calls:
+      - m_Target: {fileID: 139352143097820000}
+        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_MethodName: changeVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1766995624635847718
 GameObject:
   m_ObjectHideFlags: 0
@@ -3832,7 +3840,7 @@ MonoBehaviour:
   ventClips:
   - {fileID: 8300000, guid: 7057fcf6fb08f104f9a053990ee5f8ae, type: 3}
   - {fileID: 8300000, guid: 6d372dd1aea419a4fbca6e1451034c8f, type: 3}
-  woodClip: {fileID: 0, guid: e6572a2065220524bafe6814cdf082ba, type: 3}
+  woodClip: {fileID: 0}
   camAnimator: {fileID: 8147472817093459042}
   animatorController: {fileID: 9100000, guid: d29d89a1b76b4714bb63628355f8c5d5, type: 2}
   layingAnimKoeff: 1
@@ -4333,8 +4341,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensSlider: {fileID: 5429498941973663536}
-  volumeSlider: {fileID: 0}
-  audioMixer: {fileID: 0, guid: 115694a7425d281449706badbd1d763a, type: 2}
+  volumeSlider: {fileID: 1277065160984670451}
+  audioMixer: {fileID: 24100000, guid: 115694a7425d281449706badbd1d763a, type: 2}
 --- !u!1 &5641045691926097525
 GameObject:
   m_ObjectHideFlags: 0
@@ -5319,7 +5327,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6352340746178693839}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
