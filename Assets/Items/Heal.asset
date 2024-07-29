@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb004e81a9f84fa88e827b0ebfa58d8d, type: 3}
   m_Name: Heal
   m_EditorClassIdentifier: 
+  id: heal
   shape:
   - {x: 0, y: 0}
+  - {x: 0, y: 1}
   uiPrefab: {fileID: 6830977853837318397, guid: bc2c67f0c56376f40a4e3ce557166019,
     type: 3}
   itemName:
@@ -34,8 +36,11 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  secured: 0
+  lockedInInventory: 0
   amountPerRound: 30
   rounds: 3
+  sound: {fileID: 8300000, guid: 65c25ffe5c68d22429581849261b2462, type: 3}
   usesPrefab: {fileID: 3917008350429150413, guid: 6163e40ac48b7b3479b807639e97f50a,
     type: 3}
   references:

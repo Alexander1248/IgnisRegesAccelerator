@@ -56,8 +56,6 @@ namespace Player
             
             if (mainHandBuff) SetMainHand(mainHandBuff);
             if (secondHandBuff) SetSecondHand(secondHandBuff);
-            MainHandActive(false);
-            SecondHandActive(false);
         }
 
         public bool SetMainHand(Items.Weapon weapon)
@@ -69,6 +67,17 @@ namespace Player
             if (mainHand) mainHand.OnEquip(gameObject,_mainHandObj);
             return true;
         }
+        public Items.Weapon GetMainHand()
+        {
+            return mainHand;
+        }
+        public Items.Weapon GetSecondHand()
+        {
+            return secondHand;
+        }
+
+        public bool IsMainHandEmpty => mainHand == null;
+        public bool IsSecondHandEmpty => secondHand == null;
 
         public Items.Weapon ClearMainHand()
         {

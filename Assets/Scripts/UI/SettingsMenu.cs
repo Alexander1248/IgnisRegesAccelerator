@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
@@ -19,6 +20,7 @@ public class SettingsMenu : MonoBehaviour
     public void UpdateSlider(){
         sensSlider.value = InverseLerp(PlayerPrefs.GetFloat("Sens"), minSens, maxSens);
         volumeSlider.value = PlayerPrefs.GetFloat("PlayerVolume");
+        audioMixer.SetFloat("Volume", Mathf.Log10(volumeSlider.value)*20);
     }
 
     public void SetSens(){
@@ -29,6 +31,11 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetFloat("PlayerVolume", volumeSlider.value);
 
         audioMixer.SetFloat("Volume", Mathf.Log10(volumeSlider.value)*20);
+    }
+
+    public void setLanguage(int index)
+    {
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[index];
     }
 
     public static float InverseLerp(float value, float min, float max)

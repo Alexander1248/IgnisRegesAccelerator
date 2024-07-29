@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Items;
 using Player;
-using UnityEditor;
-using UnityEditor.Localization.Plugins.XLIFF.V20;
+using Quests;
 using UnityEngine;
-using UnityEngine.Localization;
+using UnityEngine.Serialization;
 
 namespace Managers
 {
@@ -16,7 +17,14 @@ namespace Managers
         private static GameState _state;
         [SerializeField] private string path;
         [SerializeField] private string[] supportedVersions;
-        [SerializeField] private InventoryManager manager;
+        [SerializeField] private List<Item> items;
+        [SerializeField] private List<Quest> quests;
+        [FormerlySerializedAs("manager")] [SerializeField] private InventoryManager inventoryManager;
+        [SerializeField] private QuestManager questManager;
+        [SerializeField] private Health health;
+        [SerializeField] private Stamina stamina;
+
+        [SerializeField] private bool saveToFile;
         
         private void Start()
         {
@@ -28,38 +36,87 @@ namespace Managers
                 state = JsonUtility.FromJson<GameState>(File.ReadAllText(path));
                 if (state.supportedVersions.All(version => Application.version != version)) return;
             }
-            manager.Initialize(state.inventories.Select(inventory => inventory.items.ToDictionary(
+            inventoryManager.Initialize(state.inventories.Select(inventory => inventory.items.ToDictionary(
                 locations => new Vector2Int(locations.x, locations.y),
                 locations =>
                 {
-                    var o = ScriptableObject.CreateInstance(Type.GetType(locations.type));
-                    JsonUtility.FromJsonOverwrite(locations.data, o);
-                    return o as Items.Item;
-                }
-                )).ToArray());
+                    var item = Instantiate(items.First(item => item.ID == locations.id));
+                    item.secured = locations.secured;
+                    item.lockedInInventory = locations.lockedInInventory;
+                    item.LoadState(Convert.FromBase64String(locations.data));
+                    return item;
+                })).ToArray());
+            
+            var handController = inventoryManager.GetHandController();
+            if (state.mainHand != null)
+            {
+                var item = Instantiate(items.First(item => item.ID == state.mainHand.id));
+                item.secured = state.mainHand.secured;
+                item.lockedInInventory = state.mainHand.lockedInInventory;
+                item.LoadState(Convert.FromBase64String(state.mainHand.data));
+                handController.SetMainHand(item as Items.Weapon);
+            }
+            if (state.secondHand != null)
+            {
+                var item = Instantiate(items.First(item => item.ID == state.secondHand.id));
+                item.secured = state.secondHand.secured;
+                item.lockedInInventory = state.secondHand.lockedInInventory;
+                item.LoadState(Convert.FromBase64String(state.secondHand.data));
+                handController.SetMainHand(item as Items.Weapon);
+            }
+
+            foreach (var quest in state.quests)
+            {
+                var q = quests.First(item => item.ID == quest.id);
+                questManager.Add(q);
+                if (quest.completed) 
+                    questManager.Complete(q);
+            }
+            questManager.Select(state.selectedQuest);
+            
+            health.Initialize(state.hp);
+            stamina.Initialize(state.stamina);
         }
 
         public void Save()
         {
-            var inventories = new Inventory[manager.Count];
+            var inventories = new Inventory[inventoryManager.Count];
             for (var i = 0; i < inventories.Length; i++)
             {
                 inventories[i] = new Inventory
                 {
-                    items = new List<ItemLocations>()
+                    items = new List<ItemData>()
                 };
-                foreach (var (key, value) in manager[i])
-                    inventories[i].items.Add(new ItemLocations
-                    {
-                        data = JsonUtility.ToJson(value)
-                    });
+                foreach (var (key, value) in inventoryManager[i])
+                    inventories[i].items.Add(new ItemData(
+                        key.x, key.y, value.ID, value.secured, 
+                        value.lockedInInventory, Convert.ToBase64String(value.SaveState())
+                    ));
             }
 
+            var handController = inventoryManager.GetHandController();
+            var mainHand = handController.GetMainHand();
+            var secondHand = handController.GetSecondHand();
             _state = new GameState
             {
                 supportedVersions = supportedVersions.Append(Application.version).ToArray(),
-                inventories = inventories
+                inventories = inventories,
+                quests = questManager.Quests.Select(tuple => new QuestData(tuple.Item1, tuple.Item2)).ToList(),
+                hp = health.HP,
+                stamina = stamina.Value,
+                selectedQuest = questManager.Find(questManager.SelectedQuest)
             };
+
+            if (mainHand)
+                _state.mainHand = new ItemData(0, 0, mainHand.ID, mainHand.secured,
+                    mainHand.lockedInInventory, Convert.ToBase64String(mainHand.SaveState()));
+            else _state.mainHand = null;
+            if (secondHand)
+                _state.secondHand = new ItemData(0, 0, secondHand.ID, secondHand.secured, 
+                    secondHand.lockedInInventory, Convert.ToBase64String(secondHand.SaveState()));
+            else _state.secondHand = null;
+            
+            if (!saveToFile) return;
             File.WriteAllText(path, JsonUtility.ToJson(_state));
         }
 
@@ -75,29 +132,54 @@ namespace Managers
         {
             public string[] supportedVersions;
             public Inventory[] inventories;
+            public ItemData mainHand;
+            public ItemData secondHand;
+            public List<QuestData> quests;
+            public int selectedQuest;
+            public float hp;
+            public float stamina;
         }
         
         [Serializable]
         private class Inventory
         {
-            public List<ItemLocations> items;
+            public List<ItemData> items;
         }
         [Serializable]
-        private class ItemLocations
+        private class ItemData
         {
             public int x;
             public int y;
-            public string type;
+            public string id;
+            public bool secured;
+            public bool lockedInInventory;
             public string data;
+            public ItemData(int x, int y, string id, bool secured, bool lockedInInventory, string data)
+            {
+                this.x = x;
+                this.y = y;
+                this.id = id;
+                this.secured = secured;
+                this.lockedInInventory = lockedInInventory;
+                this.data = data;
+            }
+
+            public ItemData()
+            {
+            }
         }
         [Serializable]
-        private class Item
-        { 
-            public Vector2Int[] shape;
-            public GameObject uiPrefab;
-            public LocalizedString itemName;
-            public LocalizedString itemDescription;
-            public bool secured;
+        private class QuestData
+        {
+            public string id;
+            public bool completed;
+
+            public QuestData(string id, bool completed)
+            {
+                this.id = id;
+                this.completed = completed;
+            }
+            public QuestData() { }
         }
     }
 }

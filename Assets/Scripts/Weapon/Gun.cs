@@ -94,9 +94,20 @@ namespace Weapon
             // c.delay = 10;
         }
 
+        public void AnimReload(){
+            if (animator != null){
+                if (!animator.enabled) animator.enabled = true;
+                animator.CrossFade("GunReload", 0.1f, 0, 0);
+            }
+        }
+
         public void Reload()
         {
             _count = cageSize;
+            if (animator != null){
+                if (!animator.enabled) animator.enabled = true;
+                animator.CrossFade("GunRelaodBack", 0.1f, 0, 0);
+            }
         }
         public override void AdditionalActionPerformed(GameObject user, GameObject weapon)
         {
@@ -108,10 +119,10 @@ namespace Weapon
             
         }
 
-        public override void AnimatorState(bool _enadled)
+        public override void AnimatorState(bool enabled)
         {
             if (animator != null){
-                animator.enabled = _enadled;
+                animator.enabled = enabled;
             }
         }
     }

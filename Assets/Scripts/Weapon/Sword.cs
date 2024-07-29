@@ -12,7 +12,7 @@ namespace Weapon
         [SerializeField] private float damageCurveThickness;
         [SerializeField] private float damage = 10;
         [SerializeField] private float delay = 1;
-
+        
         private Animator animator;
         private PlayerController playerController;
         
@@ -67,10 +67,10 @@ namespace Weapon
             
         }
 
-        public override void AnimatorState(bool _enadled)
+        public override void AnimatorState(bool enabled)
         {
             if (animator != null){
-                animator.enabled = _enadled;
+                animator.enabled = enabled;
             }
         }
     }

@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using Player;
+using Plugins.DialogueSystem.Scripts.DialogueGraph;
+using Quests;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
@@ -41,10 +44,45 @@ public class ThirdSceneManager : MonoBehaviour
     [SerializeField] private AudioSource[] multiExplosionAudio;
     [SerializeField] private AudioSource metalCrash;
 
+    [SerializeField] private Dialogue dialogue;
+
+    [SerializeField] private WalkieTalkieUI walkieTalkieUI;
+    [SerializeField] private QuestManager questManager;
+    [SerializeField] private Quest[] quests;
+
+    [SerializeField] private GameObject[] enemies;
+
+    private bool lastPhrase;
+
+    public bool wallIsBroken;
+
+    [SerializeField] private SaveManager saveManager;
+
     void Start(){
         cam = playerController.getCamAnchor();
         animatorFade.enabled = true;
         animatorFade.Play("FadeOut", 0, 0);
+        StartDialogue("Dialog9");
+        questManager.Add(quests[0]);
+    }
+
+    public void AddNewQuest(int id){
+        questManager.Add(quests[id]);
+    }
+    public void CompleteQuest(int id){
+        questManager.Complete(quests[id]);
+    }
+
+    public void StartDialogue(string name){
+        //dialogue.StopAll();
+        dialogue.StartDialogueNow(name);
+        walkieTalkieUI.ActivateAnim();
+        if (name == "Dialog11") lastPhrase = true;
+    }
+
+    public void DialogEnded(){
+        walkieTalkieUI.DisableAnim();
+        if (lastPhrase) questManager.Add(quests[1]);
     }
 
     public void ExplodeVent(){
@@ -60,6 +98,8 @@ public class ThirdSceneManager : MonoBehaviour
     }
 
     public void ExplodeWall(){
+        wallIsBroken = true;
+        ventTrigger.SetActive(true);
         wall.SetActive(false);
         explosionWALL.gameObject.SetActive(true);
         explosionWALL.Play(true);
@@ -69,6 +109,15 @@ public class ThirdSceneManager : MonoBehaviour
     }
 
     void Update(){
+        bool allDied = true;
+        for(int i = 0; i < enemies.Length; i++){
+            if (enemies[i] != null) allDied = false;
+        }
+        if (allDied && !lastPhrase){
+            dialogue.StartDialogueNow("Dialog11");
+            lastPhrase = true;
+        }
+
         if (!startCS) return;
         t += Time.deltaTime;
         cam.position = Vector3.Lerp(startCamPos, pointCS.position, t);
@@ -89,6 +138,8 @@ public class ThirdSceneManager : MonoBehaviour
     }
 
     public void EnterVent(){
+        questManager.Complete(quests[1]);
+        triggerEnterVent.SetActive(false);
         playerController.LockPlayer();
         playerController.hideHands();
         playerController.transform.localScale = new Vector3(0.5f, 1, 0.5f); // костыль
@@ -140,6 +191,7 @@ public class ThirdSceneManager : MonoBehaviour
         Invoke("loadNextLvl", 3);
     }
     void loadNextLvl(){
+        saveManager.Save();
         SceneManager.LoadScene("PALUBA");
     }
 }

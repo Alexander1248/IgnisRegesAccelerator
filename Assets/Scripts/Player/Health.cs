@@ -22,12 +22,20 @@ namespace Player
         [SerializeField] private float autoHealAmount = 3;
 
         [SerializeField] private AudioSource soundOnDamage;
+        [SerializeField] private AudioSource soundOnDeath;
 
         [SerializeField] private MilkShake.ShakePreset preset;
 
         [SerializeField] private ParticleSystem blood;
+        [SerializeField] private ParticleSystem deathParticles;
 
-
+        public float HP => hp;
+        public void Initialize(float value)
+        {
+            hp = value;
+            onHealthChange.Invoke(hp, maxHP);
+            
+        }
         private bool player;
 
         private void Start()
@@ -52,7 +60,7 @@ namespace Player
             }
 
             if (blood){
-                blood.transform.position = _buff;
+                //blood.transform.position = _buff;
                 if (point != null)
                 {
                     _buff = blood.transform.position;
@@ -88,6 +96,12 @@ namespace Player
             {
                 onHealthChange.Invoke(hp, maxHP);
                 return;
+            }
+            if (deathParticles != null){
+                deathParticles.transform.SetParent(null);
+                deathParticles.Play(true);
+                soundOnDeath.Play();
+                Destroy(deathParticles.gameObject, 3);
             }
             onDeath.Invoke();
         }

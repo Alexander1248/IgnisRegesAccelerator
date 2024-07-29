@@ -336,7 +336,7 @@
                 {
                     "name": "",
                     "id": "32447e96-ffb2-4f75-8794-7112efc98049",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "Tap",
                     "processors": "",
                     "groups": "Mouse and Keyboard",

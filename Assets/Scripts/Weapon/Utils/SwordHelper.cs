@@ -12,7 +12,7 @@ public class SwordHelper : MonoBehaviour
     [SerializeField] private AudioSource hitSound;
     [SerializeField] private AudioClip[] hitClips;
 
-    [SerializeField] private bool canIDamagePlayer;
+    public bool canIDamagePlayer;
 
     [SerializeField] private Transform swordSpline;
     
@@ -60,6 +60,7 @@ public class SwordHelper : MonoBehaviour
         foreach (var obj in objects)
         {
             if (!canIDamagePlayer && obj.CompareTag("Player")) continue;
+            else if (canIDamagePlayer && obj.CompareTag("Enemy")) continue;
             Debug.Log("[Sword]:" + obj.name + " hit!");
             if (obj.TryGetComponent(out Health health))
             {

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,6 +21,9 @@ namespace Quests
         public Quest this[int index] => _quests[index];
         public int Count => _quests.Count;
         public Quest SelectedQuest { get; private set; }
+
+        public IEnumerable<(string, bool)> Quests => 
+            _quests.Select(quest => (quest.ID, false)).AppendWith(_completedQuests.Select(quest => (quest.ID, true)));
         
         public void Add(Quest quest)
         {
@@ -67,6 +72,10 @@ namespace Quests
         }
         public void Complete(Quest quest)
         {
+            if (Find(quest) == -1){
+                Debug.LogError("NO SUCH QUEST!");
+                return;
+            }
             Complete(Find(quest));
         }
         public void Abort(Quest quest)

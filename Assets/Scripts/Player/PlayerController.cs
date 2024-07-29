@@ -386,6 +386,13 @@ namespace Player
                 rb.AddForce(vel, ForceMode.VelocityChange);
                 _dashTime -= Time.fixedDeltaTime;
             }
+            else { // этот костыль нужен чтобы игрок не скользил когда он не может двигаться
+                var dir = Vector3.zero;
+                var vel = transform.right * dir.x + transform.forward * dir.y;
+                vel.x -= rb.velocity.x;
+                vel.z -= rb.velocity.z;
+                rb.AddForce(vel, ForceMode.VelocityChange);
+            }
 
             if(cameraCanMove)
             {

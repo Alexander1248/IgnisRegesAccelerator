@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2da468a9f94ae0ba34fdf57aa77f91, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
+  id: pistol
   shape:
   - {x: 0, y: 0}
   - {x: 1, y: 0}

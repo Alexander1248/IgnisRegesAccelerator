@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.Playables;
 using Player;
 using UnityEngine.SceneManagement;
+using Plugins.DialogueSystem.Scripts.DialogueGraph;
+using Quests;
+using Managers;
 
 public class FirstSceneManager : MonoBehaviour
 {
@@ -34,6 +37,22 @@ public class FirstSceneManager : MonoBehaviour
     private bool playerAwaked;
     [SerializeField] private Transform awakePos;
 
+    [SerializeField] private Dialogue dialogue;
+    [SerializeField] private AudioSource worldRadio;
+    [SerializeField] private GameObject zonePC;
+    private bool afterThisEnablePCZone;
+
+    [SerializeField] private WalkieTalkieUI walkieTalkieUI;
+
+    [SerializeField] private QuestManager questManager;
+    [SerializeField] private Quest[] quests;
+
+    [SerializeField] private GameObject zoneCode;
+
+    [SerializeField] private SaveManager saveManager;
+
+    private int currentDialogue = 1;
+
     void Awake(){
         playerController.GetComponent<Rigidbody>().isKinematic = true;
 
@@ -48,6 +67,8 @@ public class FirstSceneManager : MonoBehaviour
     void Start(){
         wakeupCS.playableGraph.GetRootPlayable(0).SetSpeed(wakeupSpeed);
         megaShip.SetActive(false);
+        dialogue.StartDialogueNow("Dialog1");
+        questManager.Add(quests[0]);
     }
 
     public void playerAwake(){
@@ -58,6 +79,9 @@ public class FirstSceneManager : MonoBehaviour
     }
 
     public void MegaShipGotHitted(){
+        dialogue.StartDialogueNow("Dialog6");
+        currentDialogue = 6;
+        walkieTalkieUI.ActivateAnim();
         megashipExplosion.gameObject.SetActive(true);
         megashipExplosion.Play(true);
         animatorFlash.enabled = true;
@@ -67,6 +91,7 @@ public class FirstSceneManager : MonoBehaviour
         mainCS.Resume();
         holeExploded = true;
         canonMove.ReleaseCanon();
+        questManager.Complete(quests[3]);
     }
 
     public void WaitinHitMegaShip(){
@@ -82,16 +107,70 @@ public class FirstSceneManager : MonoBehaviour
     public void WaitPlayerToExit(){
         sirena.Play();
         playertrigger.SetActive(true);
+        dialogue.StartDialogueNow("Dialog5");
+        currentDialogue = 5;
+        walkieTalkieUI.ActivateAnim();
+        questManager.Complete(quests[2]);
     }
 
     public void PickUpWalkieTalkie(){
-        for(int i = 0; i < rats.Length; i++) rats[i].SetActive(true);
         WalkieTalkie.SetActive(false);
-        coder.doNums();
+        worldRadio.Stop();
+        dialogue.StopAll();
+        dialogue.StartDialogueNow("Dialog2");
+        currentDialogue = 2;
+        walkieTalkieUI.ActivateAnim();
+        afterThisEnablePCZone = true;
+        questManager.Complete(quests[0]);
         // start dialogue
     }
 
+    public void StartDialogue(string name){
+        //dialogue.StopAll();
+        dialogue.StartDialogueNow(name);
+        char a = name[name.Length - 1];
+        int.TryParse(a + "", out currentDialogue);
+        walkieTalkieUI.ActivateAnim();
+    }
+
+    public void CompleteQuest(int id){
+        questManager.Complete(quests[id]);
+    }
+
+    public void DialogEnded(){
+        walkieTalkieUI.DisableAnim();
+
+        if (currentDialogue == 2){
+            questManager.Add(quests[1]); // подняться к пк
+        }
+        else if (currentDialogue == 3){
+            questManager.Add(quests[2]); // найти код
+            zoneCode.SetActive(true);
+        }
+        else if (currentDialogue == 5){
+            questManager.Add(quests[3]); // взорвать
+        }
+        else if (currentDialogue == 6){
+            questManager.Add(quests[4]); // проникнуть
+        }
+
+        if (!afterThisEnablePCZone) return;
+        afterThisEnablePCZone = false;
+        zonePC.SetActive(true);
+    }
+
+    public void ZonePCActivate(){
+        zonePC.SetActive(false);
+        dialogue.StartDialogueNow("Dialog3");
+        currentDialogue = 3;
+        walkieTalkieUI.ActivateAnim();
+        for(int i = 0; i < rats.Length; i++) rats[i].SetActive(true);
+        coder.doNums();
+        questManager.Complete(quests[1]);
+    }
+
     void loadNextScene(){
+        saveManager.Save();
         SceneManager.LoadScene("KOSTYAN_1");
     }
 
