@@ -4093,10 +4093,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 71e1122ee103c004e8e637844ff93408, type: 2}
   - {fileID: 11400000, guid: a63859ca6ba32f54fa4e1bf934eb7b9d, type: 2}
   inventoryManager: {fileID: 3293934430835994864}
-  questManager: {fileID: 8882101170260104817}
-  health: {fileID: 71911836981493119}
-  stamina: {fileID: 6068392080123648781}
-  saveToFile: 1
+  questManager: {fileID: 0}
+  health: {fileID: 0}
+  stamina: {fileID: 0}
 --- !u!1 &4775706244062280396
 GameObject:
   m_ObjectHideFlags: 0
