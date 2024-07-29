@@ -4218,7 +4218,7 @@ MonoBehaviour:
         m_CallState: 2
   regenStartDelay: 10
   regenCooldown: 0.1
-  regenAmount: 0.3
+  regenAmount: 0.6
 --- !u!114 &2966538063882396170
 MonoBehaviour:
   m_ObjectHideFlags: 0
