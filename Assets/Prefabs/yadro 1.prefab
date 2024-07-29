@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 5019264581378993962}
   m_Layer: 0
   m_Name: Icosphere
-  m_TagString: Interactable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7154527547432885397}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: accc5d5f85114988872ff5e95ff6099f, type: 3}
   m_Name: 
@@ -168,6 +168,11 @@ MonoBehaviour:
   - {fileID: 8431243673838314560}
   changeItemSecurity: 0
   securedItem: 0
+  changeItemLock: 0
+  lockedItem: 0
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []
   references:
     version: 2
     RefIds: []

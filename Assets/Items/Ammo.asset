@@ -15,6 +15,7 @@ MonoBehaviour:
   id: pistol_ammo
   shape:
   - {x: 0, y: 0}
+  - {x: 1, y: 0}
   uiPrefab: {fileID: 6830977853837318397, guid: 646135b25b4ae1047b4f336963c3d29b,
     type: 3}
   itemName:
@@ -36,6 +37,7 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   secured: 0
+  lockedInInventory: 0
   type: pistol
   references:
     version: 2

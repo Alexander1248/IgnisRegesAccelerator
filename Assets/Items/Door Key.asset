@@ -15,6 +15,7 @@ MonoBehaviour:
   id: door_key
   shape:
   - {x: 0, y: 0}
+  - {x: 1, y: 0}
   uiPrefab: {fileID: 6830977853837318397, guid: 1b401653968434c48b3cdc32b78e8d4f,
     type: 3}
   itemName:
@@ -36,6 +37,7 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   secured: 1
+  lockedInInventory: 0
   code: 12345
   references:
     version: 2

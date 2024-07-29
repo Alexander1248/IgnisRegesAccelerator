@@ -34,13 +34,14 @@ namespace Items.Active
 
         public override void Draw(RectTransform rect)
         {
+            var size = Mathf.Min(rect.rect.size.x, rect.rect.size.y);
             while (rect.childCount < used)
             {
                 var o = Instantiate(usesPrefab, rect);
                 var t = o.GetComponent<RectTransform>();
                 t.anchorMax = t.anchorMin = new Vector2(1, 0);
-                t.sizeDelta = rect.rect.size * new Vector2(0.1f, 0.1f);
-                t.anchoredPosition = rect.rect.size * new Vector2(-0.1f, 0.1f * (1 + rect.childCount));
+                t.sizeDelta = new Vector2(0.1f, 0.1f) * size;
+                t.anchoredPosition = new Vector2(-0.1f, 0.1f * rect.childCount) * size;
             }
 
             while (rect.childCount > used)
