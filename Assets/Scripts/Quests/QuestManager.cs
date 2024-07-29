@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -23,7 +22,7 @@ namespace Quests
         public Quest SelectedQuest { get; private set; }
 
         public IEnumerable<(string, bool)> Quests => 
-            _quests.Select(quest => (quest.ID, false)).AppendWith(_completedQuests.Select(quest => (quest.ID, true)));
+            _quests.Select(quest => (quest.ID, false)).Concat(_completedQuests.Select(quest => (quest.ID, true)));
         
         public void Add(Quest quest, bool replaceSelected = true)
         {

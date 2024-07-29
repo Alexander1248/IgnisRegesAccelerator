@@ -1,4 +1,3 @@
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
@@ -97,7 +96,7 @@ namespace Player
         private bool inVent; // костыль, удалить после показа
 
         [SerializeField] private Animator camAnimator;
-        [SerializeField] private AnimatorController animatorController;
+        [SerializeField] private RuntimeAnimatorController  animatorController;
         [SerializeField] private float layingAnimKoeff;
         
         [SerializeField] private HandController handController;
