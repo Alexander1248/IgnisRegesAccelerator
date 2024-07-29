@@ -39,7 +39,7 @@ namespace Managers
             }
 
             var handController = manager.GetHandController();
-            if (leftHand.Find("Left_Hand_Item") == null)
+            if (!handController.IsSecondHandEmpty && leftHand.Find("Left_Hand_Item") == null)
             {
                 var secondHand = handController.GetSecondHand();
                 var obj = Instantiate(secondHand.UIPrefab, leftHand);
@@ -49,7 +49,7 @@ namespace Managers
                 t.anchoredPosition = Vector2.zero;
                 secondHand.Draw(t);
             }
-            if (rightHand.Find("Right_Hand_Item") == null)
+            if (!handController.IsMainHandEmpty && rightHand.Find("Right_Hand_Item") == null)
             {
                 var mainHand = handController.GetMainHand();
                 var obj = Instantiate(mainHand.UIPrefab, rightHand);
