@@ -25,11 +25,11 @@ namespace Quests
         public IEnumerable<(string, bool)> Quests => 
             _quests.Select(quest => (quest.ID, false)).AppendWith(_completedQuests.Select(quest => (quest.ID, true)));
         
-        public void Add(Quest quest)
+        public void Add(Quest quest, bool replaceSelected = true)
         {
             _quests.Add(quest);
             onQuestAdded.Invoke(quest);
-            if (SelectedQuest != null) return;
+            if (!(replaceSelected || SelectedQuest == null)) return;
             
             SelectedQuest = quest;
             onSelectedChanged.Invoke(SelectedQuest);

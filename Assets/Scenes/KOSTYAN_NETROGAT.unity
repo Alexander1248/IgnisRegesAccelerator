@@ -45312,7 +45312,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7464115005426522011, guid: 06274ea4f1da8794f85674eff33d903e,
         type: 3}
+      propertyPath: lockedItem
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7464115005426522011, guid: 06274ea4f1da8794f85674eff33d903e,
+        type: 3}
       propertyPath: securedItem
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7464115005426522011, guid: 06274ea4f1da8794f85674eff33d903e,
+        type: 3}
+      propertyPath: changeItemLock
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7464115005426522011, guid: 06274ea4f1da8794f85674eff33d903e,
+        type: 3}
+      propertyPath: changeItemSecurity
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
