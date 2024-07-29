@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using Plugins.DialogueSystem.Scripts.DialogueGraph;
 using Quests;
 using UnityEngine;
@@ -22,6 +23,8 @@ public class SecondSceneManager : MonoBehaviour
     private bool gunTaken;
 
     private int currentDialogue = 1;
+
+    [SerializeField] private SaveManager saveManager;
 
     void Awake(){
         animatorFade.enabled = true;
@@ -73,6 +76,7 @@ public class SecondSceneManager : MonoBehaviour
     }
 
     void loadNextLvl(){
+        saveManager.Save();
         SceneManager.LoadScene("KOSTYAN_2");
     }
 }
