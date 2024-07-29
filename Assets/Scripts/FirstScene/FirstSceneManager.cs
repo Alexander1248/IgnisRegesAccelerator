@@ -6,6 +6,7 @@ using Player;
 using UnityEngine.SceneManagement;
 using Plugins.DialogueSystem.Scripts.DialogueGraph;
 using Quests;
+using Managers;
 
 public class FirstSceneManager : MonoBehaviour
 {
@@ -47,6 +48,8 @@ public class FirstSceneManager : MonoBehaviour
     [SerializeField] private Quest[] quests;
 
     [SerializeField] private GameObject zoneCode;
+
+    [SerializeField] private SaveManager saveManager;
 
     private int currentDialogue = 1;
 
@@ -167,6 +170,7 @@ public class FirstSceneManager : MonoBehaviour
     }
 
     void loadNextScene(){
+        saveManager.Save();
         SceneManager.LoadScene("KOSTYAN_1");
     }
 

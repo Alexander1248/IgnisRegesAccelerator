@@ -11355,6 +11355,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 53ef3ffc09b36144f8aa2e2a6e51b161, type: 2}
   - {fileID: 11400000, guid: ca77cff35b533754e917d3787659bf96, type: 2}
   - {fileID: 11400000, guid: c3a4d5198f1f78e49a674cb586498ff9, type: 2}
+  saveManager: {fileID: 1797878943}
 --- !u!4 &77554150
 Transform:
   m_ObjectHideFlags: 0

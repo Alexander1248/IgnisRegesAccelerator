@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using Player;
 using Plugins.DialogueSystem.Scripts.DialogueGraph;
 using Quests;
@@ -54,6 +55,8 @@ public class ThirdSceneManager : MonoBehaviour
     private bool lastPhrase;
 
     public bool wallIsBroken;
+
+    [SerializeField] private SaveManager saveManager;
 
     void Start(){
         cam = playerController.getCamAnchor();
@@ -188,6 +191,7 @@ public class ThirdSceneManager : MonoBehaviour
         Invoke("loadNextLvl", 3);
     }
     void loadNextLvl(){
+        saveManager.Save();
         SceneManager.LoadScene("PALUBA");
     }
 }
