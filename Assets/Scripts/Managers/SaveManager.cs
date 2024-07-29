@@ -21,6 +21,8 @@ namespace Managers
         [SerializeField] private QuestManager questManager;
         [SerializeField] private Health health;
         [SerializeField] private Stamina stamina;
+
+        [SerializeField] private bool saveToFile;
         
         private void Start()
         {
@@ -36,12 +38,31 @@ namespace Managers
                 locations => new Vector2Int(locations.x, locations.y),
                 locations =>
                 {
-                    var item = items.First(item => item.ID == locations.id);
+                    var item = Instantiate(items.First(item => item.ID == locations.id));
                     item.secured = locations.secured;
                     item.lockedInInventory = locations.lockedInInventory;
+                    item.LoadState(locations.data);
                     return item;
                 })).ToArray());
             
+            var handController = inventoryManager.GetHandController();
+            if (state.mainHand != null)
+            {
+                var item = Instantiate(items.First(item => item.ID == state.mainHand.id));
+                item.secured = state.mainHand.secured;
+                item.lockedInInventory = state.mainHand.lockedInInventory;
+                item.LoadState(state.mainHand.data);
+                handController.SetMainHand(item as Items.Weapon);
+            }
+            if (state.secondHand != null)
+            {
+                var item = Instantiate(items.First(item => item.ID == state.secondHand.id));
+                item.secured = state.secondHand.secured;
+                item.lockedInInventory = state.secondHand.lockedInInventory;
+                item.LoadState(state.secondHand.data);
+                handController.SetMainHand(item as Items.Weapon);
+            }
+
             foreach (var quest in state.quests)
             {
                 var q = quests.First(item => item.ID == quest.id);
@@ -64,11 +85,13 @@ namespace Managers
                 };
                 foreach (var (key, value) in inventoryManager[i])
                     inventories[i].items.Add(new ItemData(
-                        key.x, key.y, value.ID, value.secured, value.lockedInInventory
+                        key.x, key.y, value.ID, value.secured, value.lockedInInventory, value.SaveState()
                     ));
             }
-            
 
+            var handController = inventoryManager.GetHandController();
+            var mainHand = handController.GetMainHand();
+            var secondHand = handController.GetSecondHand();
             _state = new GameState
             {
                 supportedVersions = supportedVersions.Append(Application.version).ToArray(),
@@ -77,6 +100,17 @@ namespace Managers
                 hp = health.HP,
                 stamina = stamina.Value
             };
+
+            if (mainHand)
+                _state.mainHand = new ItemData(0, 0, mainHand.ID, mainHand.secured,
+                    mainHand.lockedInInventory, mainHand.SaveState());
+            else _state.mainHand = null;
+            if (secondHand)
+                _state.secondHand = new ItemData(0, 0, secondHand.ID, secondHand.secured, 
+                    secondHand.lockedInInventory, secondHand.SaveState());
+            else _state.secondHand = null;
+            
+            if (!saveToFile) return;
             File.WriteAllText(path, JsonUtility.ToJson(_state));
         }
 
@@ -92,6 +126,8 @@ namespace Managers
         {
             public string[] supportedVersions;
             public Inventory[] inventories;
+            public ItemData mainHand;
+            public ItemData secondHand;
             public List<QuestData> quests;
             public float hp;
             public float stamina;
@@ -110,13 +146,15 @@ namespace Managers
             public string id;
             public bool secured;
             public bool lockedInInventory;
-            public ItemData(int x, int y, string id, bool secured, bool lockedInInventory)
+            public string data;
+            public ItemData(int x, int y, string id, bool secured, bool lockedInInventory, string data)
             {
                 this.x = x;
                 this.y = y;
                 this.id = id;
                 this.secured = secured;
                 this.lockedInInventory = lockedInInventory;
+                this.data = data;
             }
 
             public ItemData()

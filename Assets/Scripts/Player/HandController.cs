@@ -67,6 +67,14 @@ namespace Player
             if (mainHand) mainHand.OnEquip(gameObject,_mainHandObj);
             return true;
         }
+        public Items.Weapon GetMainHand()
+        {
+            return mainHand;
+        }
+        public Items.Weapon GetSecondHand()
+        {
+            return secondHand;
+        }
 
         public bool IsMainHandEmpty => mainHand == null;
         public bool IsSecondHandEmpty => secondHand == null;
