@@ -37,7 +37,7 @@ namespace Player.Interactables
             var i = Instantiate(item);
             if (changeItemSecurity) i.secured = securedItem;
             if (changeItemLock) i.lockedInInventory = lockedItem;
-            if (item is Items.Weapon weapon)
+            if (i is Items.Weapon weapon)
             {
                 if (handController.IsMainHandEmpty && handController.SetMainHand(weapon))
                 {
@@ -52,7 +52,7 @@ namespace Player.Interactables
             }
             if (manager.AddItem(i))
                 Destroy(gameObject);
-            else Destroy(item);
+            else Destroy(i);
         }
     }
 }

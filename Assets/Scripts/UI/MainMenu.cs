@@ -88,6 +88,7 @@ public class MainMenu : MonoBehaviour
     }
 
     void loadGame(){
+        File.Delete(savePath);
         SceneManager.LoadScene("KOSTYAN_NETROGAT");
     }
     void continueGame(){
