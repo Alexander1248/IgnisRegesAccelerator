@@ -33,6 +33,7 @@ namespace AI.Enemies
 
         [SerializeField] private float attentionTime = 30;
         [SerializeField] private float attentionMovementStepRadius = 10;
+        [SerializeField] private AudioSource notify;
 
         private int patrollingIndex;
         private bool actionCompleted;
@@ -97,7 +98,7 @@ namespace AI.Enemies
                     if (Target == null) return false;
                     var dir = Target.transform.position - head.transform.position;
                     if (dir.magnitude < viewDistance
-                        && Vector3.Dot(dir.normalized, transform.forward) > viewCos
+                        && Vector3.Dot(dir.normalized, head.transform.forward) > viewCos
                         && Physics.Raycast(head.transform.position, dir.normalized, dir.magnitude))
                     {
                         Debug.DrawRay(head.transform.position, dir, Color.green, TargetUpdateRate);
@@ -159,7 +160,7 @@ namespace AI.Enemies
             {
                 var dir = tObj.transform.position - head.transform.position;
                 if (dir.magnitude < viewDistance
-                    && Vector3.Dot(dir.normalized, transform.forward) > viewCos
+                    && Vector3.Dot(dir.normalized, head.transform.forward) > viewCos
                     && Physics.Raycast(head.transform.position, dir.normalized, dir.magnitude))
                 {
                     if (dir.magnitude < dst)
@@ -177,6 +178,7 @@ namespace AI.Enemies
             transform.forward = (targetPosition - head.transform.position).normalized;
             actionCompleted = false;
             // Notify nearest
+            if (notify) notify.Play();
             _nearEnemies.Clear();
             Location.FindNearestBwd(head.transform.position, notificationRadius, _nearEnemies);
             foreach (var enemyAI in _nearEnemies)
