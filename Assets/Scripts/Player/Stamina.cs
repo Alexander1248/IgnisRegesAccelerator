@@ -13,9 +13,14 @@ namespace Player
         [SerializeField] private float regenCooldown = 1;
         [SerializeField] private float regenAmount = 10;
 
+        public float Value => value;
         private void Start()
         {
             value = max;
+        }
+        public void Initialize(float value)
+        {
+            this.value = value;
         }
 
         public bool Use(float delta)

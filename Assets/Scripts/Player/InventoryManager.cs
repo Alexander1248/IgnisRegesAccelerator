@@ -9,6 +9,7 @@ namespace Player
 {
     public class InventoryManager : MonoBehaviour
     {
+        [SerializeField] private HandController controller;
         [SerializeField] private Inventory[] inventories;
         [SerializeField] private AudioSource takeItem;
         [SerializeField] private AudioClip takeClip;
@@ -96,6 +97,11 @@ namespace Player
             }
 
             return points;
+        }
+
+        public HandController GetHandController()
+        {
+            return controller;
         }
     }
 }

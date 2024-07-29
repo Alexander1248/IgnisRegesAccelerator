@@ -137,6 +137,11 @@ namespace Managers
                         var center = inventory.GetItemCenter(inv, ix, iy);
                         bufferedItem = inventory.RemoveItem(inv, ix, iy);
                         if (bufferedItem == null) break;
+                        if (bufferedItem.lockedInInventory)
+                        {
+                            inventory.AddItem(inv, ix, iy, bufferedItem);
+                            break;
+                        }
 
                         bufferedObject = center.HasValue
                             ? gridContents[inv]
@@ -147,11 +152,21 @@ namespace Managers
                     case 1:
                         bufferedItem = handController.ClearSecondHand();
                         if (bufferedItem == null) break;
+                        if (bufferedItem.lockedInInventory)
+                        {
+                            handController.SetSecondHand(bufferedItem as Items.Weapon);
+                            break;
+                        }
                         bufferedObject = leftHand.Find("Left_Hand_Item").GetComponent<RectTransform>();
                         break;
                     case 2:
                         bufferedItem = handController.ClearMainHand();
                         if (bufferedItem == null) break;
+                        if (bufferedItem.lockedInInventory)
+                        {
+                            handController.SetMainHand(bufferedItem as Items.Weapon);
+                            break;
+                        }
                         bufferedObject = rightHand.Find("Right_Hand_Item").GetComponent<RectTransform>();
                         break;
                     default:
