@@ -4093,9 +4093,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 71e1122ee103c004e8e637844ff93408, type: 2}
   - {fileID: 11400000, guid: a63859ca6ba32f54fa4e1bf934eb7b9d, type: 2}
   inventoryManager: {fileID: 3293934430835994864}
-  questManager: {fileID: 8882101170260104817}
-  health: {fileID: 71911836981493119}
-  stamina: {fileID: 6068392080123648781}
+  questManager: {fileID: 0}
+  health: {fileID: 0}
+  stamina: {fileID: 0}
 --- !u!1 &4775706244062280396
 GameObject:
   m_ObjectHideFlags: 0
@@ -6368,11 +6368,11 @@ MonoBehaviour:
   cam: {fileID: 3660656928917926404}
   layerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 247
   tagsInteract:
   - Interactable
   tagsLook: []
-  distInteract: 5
+  distInteract: 3
   outlineMat: {fileID: 2100000, guid: b7ad33e09bebe9d4c988bb323a48642e, type: 2}
   UITip: {fileID: 3732357554630654183}
   textTipButton: {fileID: 6345764070607039600}

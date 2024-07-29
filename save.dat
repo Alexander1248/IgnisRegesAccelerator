@@ -1,0 +1,1 @@
+{"supportedVersions":["0.1.0"],"inventories":[{"items":[{"x":1,"y":0,"id":"heal","secured":false,"lockedInInventory":false}]},{"items":[]},{"items":[]},{"items":[]}],"quests":[{"id":"q6","completed":false},{"id":"q5","completed":true}],"hp":30.0,"stamina":70.80044555664063}
