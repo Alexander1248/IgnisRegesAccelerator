@@ -88,7 +88,6 @@ public class MainMenu : MonoBehaviour
     }
 
     void loadGame(){
-        File.Delete(savePath);
         SceneManager.LoadScene("KOSTYAN_NETROGAT");
     }
     void continueGame(){
@@ -112,6 +111,7 @@ public class MainMenu : MonoBehaviour
             fadeOut = true;
             fadeAnim.enabled = true;
             fadeAnim.Play("FadeIn", -1, 0);
+            File.Delete(savePath);
             Invoke("loadGame", 1.5f);
         }
         else if (pressed == 2){
