@@ -114,7 +114,7 @@ public class CanonRails : MonoBehaviour, IChecker
         }
         
         HandleInput();
-        if (Input.GetKeyDown(KeyCode.Escape)){
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E)){
             releasedCanonByLastFrame = true;
             Invoke("clearFlag", 0.2f);
             ReleaseCanon();
