@@ -109,9 +109,9 @@ namespace Managers
                 inventories = inventories,
                 quests = questManager.Quests.Select(tuple => new QuestData(tuple.Item1, tuple.Item2)).ToList(),
                 hp = health.HP,
-                stamina = stamina.Value,
-                selectedQuest = questManager.SelectedQuest.ID
+                stamina = stamina.Value
             };
+            _state.selectedQuest = questManager.SelectedQuest ? questManager.SelectedQuest.ID : null;
 
             if (mainHand)
                 _state.mainHand = new ItemData(0, 0, mainHand.ID, mainHand.secured,
