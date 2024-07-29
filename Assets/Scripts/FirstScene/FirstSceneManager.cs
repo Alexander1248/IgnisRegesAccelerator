@@ -170,7 +170,7 @@ public class FirstSceneManager : MonoBehaviour
     }
 
     void loadNextScene(){
-        saveManager.Save();
+        saveManager.Save("KOSTYAN_1");
         SceneManager.LoadScene("KOSTYAN_1");
     }
 

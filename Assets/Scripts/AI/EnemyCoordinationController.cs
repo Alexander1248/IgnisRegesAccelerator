@@ -14,6 +14,10 @@ namespace AI
         {
             Enemies.Add(enemy);
         }
+        public void Remove(EnemyAI enemy)
+        {
+            Enemies.Remove(enemy);
+        }
 
         public void FindNearest(Vector3 position, float radius, List<EnemyAI> result)
         {
