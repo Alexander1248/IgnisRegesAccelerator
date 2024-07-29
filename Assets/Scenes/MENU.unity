@@ -2094,6 +2094,7 @@ MonoBehaviour:
   m_Script: {fileID: 1509901040}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Entries: []
 --- !u!4 &300317655
 Transform:
   m_ObjectHideFlags: 19
@@ -2316,6 +2317,7 @@ MonoBehaviour:
   m_Script: {fileID: 1549758278}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Entries: []
 --- !u!4 &327196544
 Transform:
   m_ObjectHideFlags: 19
@@ -3404,6 +3406,7 @@ MonoBehaviour:
   m_Script: {fileID: 1524833476}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Entries: []
 --- !u!4 &524038532
 Transform:
   m_ObjectHideFlags: 19
@@ -11585,6 +11588,16 @@ MonoBehaviour:
   audioSourcesClicks:
   - {fileID: 1213757042}
   - {fileID: 1874706439}
+  savePath: save.dat
+  sceneEntries:
+    keys:
+    - KOSTYAN_1
+    - KOSTYAN_2
+    - PALUBA
+    values:
+    - KOSTYAN_1
+    - KOSTYAN_2
+    - PALUBA
 --- !u!4 &1094344988
 Transform:
   m_ObjectHideFlags: 0

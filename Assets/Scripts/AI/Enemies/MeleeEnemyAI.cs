@@ -405,9 +405,10 @@ namespace AI.Enemies
 
         public void Death()
         {
-            FSM.RequestExit(true);
-            animator.CrossFade("Dying", 0.25f, 0, 0);
+            // FSM.RequestExit(true);
+            // animator.CrossFade("Dying", 0.25f, 0, 0);
             //Invoke(nameof(Destroy), 1f);
+            
             Destroy(gameObject);
         }
         public void Destroy()

@@ -74,7 +74,7 @@ public class PalubaManager : MonoBehaviour
     }
 
     void loadMenu(){
-        saveManager.Save();
+        saveManager.Clear();
         SceneManager.LoadScene("MENU");
     }
 }
