@@ -33,7 +33,8 @@ namespace AI.Enemies
 
         [SerializeField] private float attentionTime = 30;
         [SerializeField] private float attentionMovementStepRadius = 10;
-        [SerializeField] private AudioSource notify;
+        [SerializeField] private AudioSource source;
+        [SerializeField] private AudioClip[] notifySounds;
 
         private int patrollingIndex;
         private bool actionCompleted;
@@ -178,7 +179,11 @@ namespace AI.Enemies
             transform.forward = (targetPosition - head.transform.position).normalized;
             actionCompleted = false;
             // Notify nearest
-            if (notify) notify.Play();
+            if (source)
+            {
+                source.clip = notifySounds[Random.Range(0, notifySounds.Length)];
+                source.Play();
+            }
             _nearEnemies.Clear();
             Location.FindNearestBwd(head.transform.position, notificationRadius, _nearEnemies);
             foreach (var enemyAI in _nearEnemies)
@@ -337,7 +342,7 @@ namespace AI.Enemies
             fsm.AddTransition(
                 "patrolling", 
                 "look around",
-                condition: _ => agent.remainingDistance <= agent.stoppingDistance);
+                condition: _ => patrollingPath.Length <= 0 || agent.remainingDistance <= agent.stoppingDistance);
             fsm.AddTransition(new TransitionAfter("look around", "patrolling", 4.467f));
             
             fsm.SetStartState("patrolling");
