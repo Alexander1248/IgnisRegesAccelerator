@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using UnityEngine;
 
 namespace Items.Active
@@ -30,6 +31,16 @@ namespace Items.Active
         public override int GetHashCode()
         {
             return HashCode.Combine(base.GetHashCode(), type);
+        }
+
+        public override byte[] SaveState()
+        {
+            return Encoding.UTF8.GetBytes(type);
+        }
+
+        public override void LoadState(byte[] data)
+        {
+            type = Encoding.UTF8.GetString(data);
         }
         // TODO: Частичное использование патронов и отображение в инвентаре
     }
