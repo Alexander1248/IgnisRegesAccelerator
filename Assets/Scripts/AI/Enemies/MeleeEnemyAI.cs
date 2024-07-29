@@ -245,7 +245,6 @@ namespace AI.Enemies
                 Debug.DrawLine(head.transform.position, enemyAI.transform.position, Color.blue, 1);
                 enemyAI.Notify(new HashSet<EnemyAI>(),"rapprochement");
             }
-            Debug.Log("[AI]:" + name + ": idle -> rapprochement");
             return true;
         }
 
