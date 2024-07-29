@@ -4011,6 +4011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07ac4fad543f4981ae3baad02b022e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 606104816173592484}
   inventories:
   - width: 8
     height: 4
@@ -4075,7 +4076,26 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4821a4de7f3fa4746bb834799ae3181c, type: 2}
   - {fileID: 11400000, guid: 13679ac40a226124ca500f1c9be6cc7a, type: 2}
   - {fileID: 11400000, guid: 81a951fc2d3af9940a97d354459d5f11, type: 2}
-  manager: {fileID: 3293934430835994864}
+  quests:
+  - {fileID: 11400000, guid: 065d31eb4859d054c9f4947d1a90335a, type: 2}
+  - {fileID: 11400000, guid: dc090759d729dce43a573e96323f1ab0, type: 2}
+  - {fileID: 11400000, guid: 99145481d205ee844a437e863b00961c, type: 2}
+  - {fileID: 11400000, guid: a154c9f6ff4efef4aac7c2929d3c4d27, type: 2}
+  - {fileID: 11400000, guid: 2f74ac2940e3192469910472b3e12d1e, type: 2}
+  - {fileID: 11400000, guid: 8eeb83a427784f947af896d770f64749, type: 2}
+  - {fileID: 11400000, guid: 53ef3ffc09b36144f8aa2e2a6e51b161, type: 2}
+  - {fileID: 11400000, guid: c167cff531278d943aff6949446574f1, type: 2}
+  - {fileID: 11400000, guid: ca77cff35b533754e917d3787659bf96, type: 2}
+  - {fileID: 11400000, guid: a3c6869fe974d1e47bb090b0ad615317, type: 2}
+  - {fileID: 11400000, guid: c3a4d5198f1f78e49a674cb586498ff9, type: 2}
+  - {fileID: 11400000, guid: 61cffa138ceccd34cb747be69bec22dd, type: 2}
+  - {fileID: 11400000, guid: bed500573ebbe764cb58a60391fab23a, type: 2}
+  - {fileID: 11400000, guid: 71e1122ee103c004e8e637844ff93408, type: 2}
+  - {fileID: 11400000, guid: a63859ca6ba32f54fa4e1bf934eb7b9d, type: 2}
+  inventoryManager: {fileID: 3293934430835994864}
+  questManager: {fileID: 0}
+  health: {fileID: 0}
+  stamina: {fileID: 0}
 --- !u!1 &4775706244062280396
 GameObject:
   m_ObjectHideFlags: 0

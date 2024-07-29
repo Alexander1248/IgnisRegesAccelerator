@@ -68,6 +68,9 @@ namespace Player
             return true;
         }
 
+        public bool IsMainHandEmpty => mainHand == null;
+        public bool IsSecondHandEmpty => secondHand == null;
+
         public Items.Weapon ClearMainHand()
         {
             if (_mainHandObj) Destroy(_mainHandObj);
