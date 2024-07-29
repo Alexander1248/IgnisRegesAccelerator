@@ -60,6 +60,7 @@ public class SwordHelper : MonoBehaviour
         foreach (var obj in objects)
         {
             if (!canIDamagePlayer && obj.CompareTag("Player")) continue;
+            else if (canIDamagePlayer && obj.CompareTag("Enemy")) continue;
             Debug.Log("[Sword]:" + obj.name + " hit!");
             if (obj.TryGetComponent(out Health health))
             {
