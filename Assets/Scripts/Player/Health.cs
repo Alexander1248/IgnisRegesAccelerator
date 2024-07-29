@@ -29,7 +29,11 @@ namespace Player
         [SerializeField] private ParticleSystem blood;
         [SerializeField] private ParticleSystem deathParticles;
 
-
+        public float HP => hp;
+        public void Initialize(float value)
+        {
+            hp = value;
+        }
         private bool player;
 
         private void Start()

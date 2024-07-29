@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Localization;
+using UnityEngine.Serialization;
 
 namespace Items
 {
@@ -14,6 +15,7 @@ namespace Items
         [SerializeField] private LocalizedString itemName;
         [SerializeField] private LocalizedString itemDescription;
         public bool secured;
+        [FormerlySerializedAs("lockInInventory")] public bool lockedInInventory = false;
 
         public string ID => id;
         public GameObject UIPrefab => uiPrefab;
