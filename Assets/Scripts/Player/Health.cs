@@ -33,6 +33,8 @@ namespace Player
         public void Initialize(float value)
         {
             hp = value;
+            onHealthChange.Invoke(hp, maxHP);
+            
         }
         private bool player;
 
