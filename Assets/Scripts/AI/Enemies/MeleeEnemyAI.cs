@@ -295,7 +295,7 @@ namespace AI.Enemies
                 onEnter: _ =>
                 {
                     weaponObj.SetActive(true);
-                    animator.CrossFade("Stable Sword Inward Slash", 0.25f, 0, 0)
+                    animator.CrossFade("Stable Sword Inward Slash", 0.25f, 0, 0);
                 },
                 onLogic: _ =>
                 {
