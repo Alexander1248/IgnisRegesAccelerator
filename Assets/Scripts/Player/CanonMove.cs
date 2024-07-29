@@ -69,7 +69,7 @@ public class CanonMove : MonoBehaviour, IChecker
             readyToShoot = false;
             Shoot();
         }
-        if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E)){
+        if (Input.GetKeyUp(KeyCode.Escape)){
             releasedCanonByLastFrame = true;
             ReleaseCanon();
         }
