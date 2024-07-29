@@ -100,17 +100,6 @@ namespace Managers
                 hp = health.HP,
                 stamina = stamina.Value
             };
-
-            if (mainHand)
-                _state.mainHand = new ItemData(0, 0, mainHand.ID, mainHand.secured,
-                    mainHand.lockedInInventory, mainHand.SaveState());
-            else _state.mainHand = null;
-            if (secondHand)
-                _state.secondHand = new ItemData(0, 0, secondHand.ID, secondHand.secured, 
-                    secondHand.lockedInInventory, secondHand.SaveState());
-            else _state.secondHand = null;
-            
-            if (!saveToFile) return;
             File.WriteAllText(path, JsonUtility.ToJson(_state));
         }
 

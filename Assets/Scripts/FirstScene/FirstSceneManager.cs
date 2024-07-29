@@ -6,6 +6,7 @@ using Player;
 using UnityEngine.SceneManagement;
 using Plugins.DialogueSystem.Scripts.DialogueGraph;
 using Quests;
+using Managers;
 
 public class FirstSceneManager : MonoBehaviour
 {
@@ -46,6 +47,10 @@ public class FirstSceneManager : MonoBehaviour
     [SerializeField] private QuestManager questManager;
     [SerializeField] private Quest[] quests;
 
+    [SerializeField] private GameObject zoneCode;
+
+    [SerializeField] private SaveManager saveManager;
+
     private int currentDialogue = 1;
 
     void Awake(){
@@ -75,7 +80,6 @@ public class FirstSceneManager : MonoBehaviour
 
     public void MegaShipGotHitted(){
         dialogue.StartDialogueNow("Dialog6");
-        questManager.Complete(quests[3]);
         currentDialogue = 6;
         walkieTalkieUI.ActivateAnim();
         megashipExplosion.gameObject.SetActive(true);
@@ -87,6 +91,7 @@ public class FirstSceneManager : MonoBehaviour
         mainCS.Resume();
         holeExploded = true;
         canonMove.ReleaseCanon();
+        questManager.Complete(quests[3]);
     }
 
     public void WaitinHitMegaShip(){
@@ -103,9 +108,9 @@ public class FirstSceneManager : MonoBehaviour
         sirena.Play();
         playertrigger.SetActive(true);
         dialogue.StartDialogueNow("Dialog5");
-        questManager.Complete(quests[2]);
         currentDialogue = 5;
         walkieTalkieUI.ActivateAnim();
+        questManager.Complete(quests[2]);
     }
 
     public void PickUpWalkieTalkie(){
@@ -114,9 +119,9 @@ public class FirstSceneManager : MonoBehaviour
         dialogue.StopAll();
         dialogue.StartDialogueNow("Dialog2");
         currentDialogue = 2;
-        questManager.Complete(quests[0]);
         walkieTalkieUI.ActivateAnim();
         afterThisEnablePCZone = true;
+        questManager.Complete(quests[0]);
         // start dialogue
     }
 
@@ -140,6 +145,7 @@ public class FirstSceneManager : MonoBehaviour
         }
         else if (currentDialogue == 3){
             questManager.Add(quests[2]); // найти код
+            zoneCode.SetActive(true);
         }
         else if (currentDialogue == 5){
             questManager.Add(quests[3]); // взорвать
@@ -154,16 +160,17 @@ public class FirstSceneManager : MonoBehaviour
     }
 
     public void ZonePCActivate(){
-        questManager.Complete(quests[1]);
         zonePC.SetActive(false);
         dialogue.StartDialogueNow("Dialog3");
         currentDialogue = 3;
         walkieTalkieUI.ActivateAnim();
         for(int i = 0; i < rats.Length; i++) rats[i].SetActive(true);
         coder.doNums();
+        questManager.Complete(quests[1]);
     }
 
     void loadNextScene(){
+        saveManager.Save();
         SceneManager.LoadScene("KOSTYAN_1");
     }
 
