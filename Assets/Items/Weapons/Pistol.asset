@@ -38,10 +38,11 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   secured: 0
+  lockedInInventory: 0
   prefab: {fileID: 7089967681845487178, guid: e6677dc83b6f18b4cb08a1f856869687, type: 3}
   isTwoHanded: 0
   maxDistance: 100
-  damage: 10
+  damage: 30
   rechargeTime: 0.3
   cageSize: 3
   reloadTime: 10
