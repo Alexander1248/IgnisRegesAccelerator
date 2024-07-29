@@ -435,7 +435,7 @@ Transform:
   m_GameObject: {fileID: 38579715}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 15.917719, y: 10.476147, z: -0.1623216}
+  m_LocalPosition: {x: 15.917723, y: 10.476147, z: -0.1623216}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10798,7 +10798,7 @@ Transform:
   m_GameObject: {fileID: 315273270}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 14.059687, y: 6.493118, z: -0.16232163}
+  m_LocalPosition: {x: 14.05969, y: 6.493118, z: -0.16232163}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14218,7 +14218,7 @@ Transform:
   m_GameObject: {fileID: 495599690}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 21.815493, y: 17.586039, z: 0.29956728}
+  m_LocalPosition: {x: 21.815496, y: 17.586039, z: 0.29956728}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -37164,6 +37164,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1485201252 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2966538063882396170, guid: 6921bf98667988446bd7500515acabcd,
+    type: 3}
+  m_PrefabInstance: {fileID: 83192052}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350390985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2b82d1d8ee3415e8fb2c503e6ffcdde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1486386040
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43740,7 +43752,7 @@ Transform:
   m_GameObject: {fileID: 1861351364}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -13.937153, y: 13.13451, z: 1.1037736}
+  m_LocalPosition: {x: -13.937157, y: 13.13451, z: 1.1037736}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45463,6 +45475,7 @@ MonoBehaviour:
   - {fileID: 748964112}
   - {fileID: 1890503368}
   - {fileID: 2147221259}
+  saveManager: {fileID: 1485201252}
 --- !u!4 &2010172879
 Transform:
   m_ObjectHideFlags: 0

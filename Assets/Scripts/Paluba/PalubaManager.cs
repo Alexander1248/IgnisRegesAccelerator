@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using Player;
 using Plugins.DialogueSystem.Scripts.DialogueGraph;
 using Quests;
@@ -27,7 +28,9 @@ public class PalubaManager : MonoBehaviour
 
     [SerializeField] private GameObject[] enemies;
 
-    void Start(){
+    [SerializeField] private SaveManager saveManager;
+
+     void Start(){
         animatorFade.enabled = true;
         animatorFade.Play("FadeOut", 0, 0);
         cam = playerController.getCamAnchor();
@@ -71,6 +74,7 @@ public class PalubaManager : MonoBehaviour
     }
 
     void loadMenu(){
+        saveManager.Save();
         SceneManager.LoadScene("MENU");
     }
 }
