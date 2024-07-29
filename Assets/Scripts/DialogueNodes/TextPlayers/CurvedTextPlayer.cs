@@ -2,7 +2,6 @@
 using Plugins.DialogueSystem.Scripts.DialogueGraph;
 using Plugins.DialogueSystem.Scripts.DialogueGraph.Attributes;
 using Plugins.DialogueSystem.Scripts.DialogueGraph.Nodes;
-using Sirenix.Utilities;
 using UnityEngine;
 
 namespace DialogueNodes.TextPlayers
