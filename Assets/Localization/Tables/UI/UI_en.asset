@@ -22,6 +22,54 @@ MonoBehaviour:
     m_Localized: Select
     m_Metadata:
       m_Items: []
+  - m_Id: 3149850016944128
+    m_Localized: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3152445708111872
+    m_Localized: New Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3152716257497088
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3152867650899968
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3153014380236800
+    m_Localized: Controls
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3153153467551744
+    m_Localized: Sensitivity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3153306727419904
+    m_Localized: Master Sound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3153481663451136
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3154709260734464
+    m_Localized: Quests
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3155057501212672
+    m_Localized: Journal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3155289802739712
+    m_Localized: Inventory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3157398027702272
+    m_Localized: Pause
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
