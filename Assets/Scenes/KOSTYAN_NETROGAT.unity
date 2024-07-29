@@ -17185,7 +17185,6 @@ MonoBehaviour:
   m_Script: {fileID: 1509901040}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Entries: []
 --- !u!4 &300317655
 Transform:
   m_ObjectHideFlags: 19
@@ -17537,7 +17536,6 @@ MonoBehaviour:
   m_Script: {fileID: 1549758278}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Entries: []
 --- !u!4 &327196544
 Transform:
   m_ObjectHideFlags: 19
@@ -17915,17 +17913,17 @@ PrefabInstance:
     - target: {fileID: 3977308754070699321, guid: 25bbea0ac937753448c325c5e608079c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.866
+      value: -0.777
       objectReference: {fileID: 0}
     - target: {fileID: 3977308754070699321, guid: 25bbea0ac937753448c325c5e608079c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.148
+      value: -2.261
       objectReference: {fileID: 0}
     - target: {fileID: 3977308754070699321, guid: 25bbea0ac937753448c325c5e608079c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.224
+      value: 10.256
       objectReference: {fileID: 0}
     - target: {fileID: 3977308754070699321, guid: 25bbea0ac937753448c325c5e608079c,
         type: 3}
@@ -24235,7 +24233,6 @@ MonoBehaviour:
   m_Script: {fileID: 1524833476}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Entries: []
 --- !u!4 &524038532
 Transform:
   m_ObjectHideFlags: 19
@@ -70125,7 +70122,7 @@ Transform:
   m_GameObject: {fileID: 1861351364}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -13.939182, y: 13.13451, z: 1.1037731}
+  m_LocalPosition: {x: -13.939201, y: 13.13451, z: 1.1037731}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74525,16 +74522,6 @@ PrefabInstance:
         type: 3}
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PlayerDied
-      objectReference: {fileID: 0}
-    - target: {fileID: 606104816173592484, guid: 6921bf98667988446bd7500515acabcd,
-        type: 3}
-      propertyPath: mainHand
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 606104816173592484, guid: 6921bf98667988446bd7500515acabcd,
-        type: 3}
-      propertyPath: secondHand
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 632660830800060454, guid: 6921bf98667988446bd7500515acabcd,
         type: 3}

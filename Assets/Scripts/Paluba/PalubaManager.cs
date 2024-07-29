@@ -25,6 +25,8 @@ public class PalubaManager : MonoBehaviour
     [SerializeField] private Quest[] quests;
     private bool foundChest;
 
+    [SerializeField] private GameObject[] enemies;
+
     void Start(){
         animatorFade.enabled = true;
         animatorFade.Play("FadeOut", 0, 0);
@@ -45,6 +47,8 @@ public class PalubaManager : MonoBehaviour
         cam.GetChild(0).GetChild(0).localEulerAngles = Vector3.zero;
         cam.SetParent(playableDirector.transform);
         playableDirector.Play();
+
+        for(int i = 0; i < enemies.Length; i++) if(enemies[i] != null) Destroy(enemies[i]);
     }
 
     public void DialogueEnd(){

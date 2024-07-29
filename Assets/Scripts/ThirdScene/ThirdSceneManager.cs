@@ -49,6 +49,8 @@ public class ThirdSceneManager : MonoBehaviour
     [SerializeField] private QuestManager questManager;
     [SerializeField] private Quest[] quests;
 
+    [SerializeField] private GameObject[] enemies;
+
     private bool lastPhrase;
 
     public bool wallIsBroken;
@@ -104,6 +106,15 @@ public class ThirdSceneManager : MonoBehaviour
     }
 
     void Update(){
+        bool allDied = true;
+        for(int i = 0; i < enemies.Length; i++){
+            if (enemies[i] != null) allDied = false;
+        }
+        if (allDied && !lastPhrase){
+            dialogue.StartDialogueNow("Dialog11");
+            lastPhrase = true;
+        }
+
         if (!startCS) return;
         t += Time.deltaTime;
         cam.position = Vector3.Lerp(startCamPos, pointCS.position, t);
