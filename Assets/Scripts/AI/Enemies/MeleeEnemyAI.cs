@@ -245,7 +245,6 @@ namespace AI.Enemies
                 Debug.DrawLine(head.transform.position, enemyAI.transform.position, Color.blue, 1);
                 enemyAI.Notify(new HashSet<EnemyAI>(),"rapprochement");
             }
-            Debug.Log("[AI]:" + name + ": idle -> rapprochement");
             return true;
         }
 
@@ -290,10 +289,13 @@ namespace AI.Enemies
         private StateBase<string> AttackState()
         {
             var fsm = new StateMachine();
-            
-            fsm.AddState("attack", 
-                onEnter: _ => 
-                    animator.CrossFade("Stable Sword Inward Slash", 0.25f, 0, 0),
+
+            fsm.AddState("attack",
+                onEnter: _ =>
+                {
+                    weaponObj.SetActive(true);
+                    animator.CrossFade("Stable Sword Inward Slash", 0.25f, 0, 0);
+                },
                 onLogic: _ =>
                 {
                     Debug.Log("[AI]:" + name + ": attack");

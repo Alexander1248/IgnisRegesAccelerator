@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using Player;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class LadderInteraction : MonoBehaviour
@@ -13,7 +9,7 @@ public class LadderInteraction : MonoBehaviour
     private int endIndex;
     [SerializeField] private Transform[] playerExitPoints;
     [SerializeField] private float duration;
-    [SerializeField] private AnimatorController animatorController;
+    [SerializeField] private RuntimeAnimatorController  animatorController;
     private PlayerController playerController;
     private Vector3 cameraPositionInPlayer;
     private Transform camAnchor;
