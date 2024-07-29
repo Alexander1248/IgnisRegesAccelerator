@@ -26,8 +26,8 @@ namespace Items
         public abstract bool Use(Inventory inventory, int x, int y, GameObject player, AudioSource audioSource);
 
         public virtual void Draw(RectTransform rect) { }
-        public virtual string SaveState() { return ""; }
-        public virtual void LoadState(string json) { }
+        public virtual byte[] SaveState() { return Array.Empty<byte>(); }
+        public virtual void LoadState(byte[] data) { }
 
         public bool CanBePlaced(Inventory inventory, int x, int y)
         {
