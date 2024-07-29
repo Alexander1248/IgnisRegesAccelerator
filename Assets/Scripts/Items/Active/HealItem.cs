@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -66,6 +67,22 @@ namespace Items.Active
         public override int GetHashCode()
         {
             return HashCode.Combine(base.GetHashCode(), amountPerRound, rounds, usesPrefab, used);
+        }
+
+        public override byte[] SaveState()
+        {
+            using var stream = new MemoryStream();
+            stream.Write(BitConverter.GetBytes(amountPerRound));
+            stream.Write(BitConverter.GetBytes(rounds));
+            stream.Write(BitConverter.GetBytes(used));
+            return stream.ToArray();
+        }
+
+        public override void LoadState(byte[] data)
+        {
+            amountPerRound = BitConverter.ToInt32(data, 0);
+            rounds = BitConverter.ToInt32(data, sizeof(int));
+            used = BitConverter.ToInt32(data, sizeof(int) << 1);
         }
     }
 }

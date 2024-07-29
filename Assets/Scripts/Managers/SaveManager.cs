@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using Items;
 using Player;
 using Quests;
@@ -41,7 +43,7 @@ namespace Managers
                     var item = Instantiate(items.First(item => item.ID == locations.id));
                     item.secured = locations.secured;
                     item.lockedInInventory = locations.lockedInInventory;
-                    item.LoadState(locations.data);
+                    item.LoadState(Convert.FromBase64String(locations.data));
                     return item;
                 })).ToArray());
             
@@ -51,7 +53,7 @@ namespace Managers
                 var item = Instantiate(items.First(item => item.ID == state.mainHand.id));
                 item.secured = state.mainHand.secured;
                 item.lockedInInventory = state.mainHand.lockedInInventory;
-                item.LoadState(state.mainHand.data);
+                item.LoadState(Convert.FromBase64String(state.mainHand.data));
                 handController.SetMainHand(item as Items.Weapon);
             }
             if (state.secondHand != null)
@@ -59,7 +61,7 @@ namespace Managers
                 var item = Instantiate(items.First(item => item.ID == state.secondHand.id));
                 item.secured = state.secondHand.secured;
                 item.lockedInInventory = state.secondHand.lockedInInventory;
-                item.LoadState(state.secondHand.data);
+                item.LoadState(Convert.FromBase64String(state.secondHand.data));
                 handController.SetMainHand(item as Items.Weapon);
             }
 
@@ -85,7 +87,8 @@ namespace Managers
                 };
                 foreach (var (key, value) in inventoryManager[i])
                     inventories[i].items.Add(new ItemData(
-                        key.x, key.y, value.ID, value.secured, value.lockedInInventory, value.SaveState()
+                        key.x, key.y, value.ID, value.secured, 
+                        value.lockedInInventory, Convert.ToBase64String(value.SaveState())
                     ));
             }
 
@@ -103,11 +106,11 @@ namespace Managers
 
             if (mainHand)
                 _state.mainHand = new ItemData(0, 0, mainHand.ID, mainHand.secured,
-                    mainHand.lockedInInventory, mainHand.SaveState());
+                    mainHand.lockedInInventory, Convert.ToBase64String(mainHand.SaveState()));
             else _state.mainHand = null;
             if (secondHand)
                 _state.secondHand = new ItemData(0, 0, secondHand.ID, secondHand.secured, 
-                    secondHand.lockedInInventory, secondHand.SaveState());
+                    secondHand.lockedInInventory, Convert.ToBase64String(secondHand.SaveState()));
             else _state.secondHand = null;
             
             if (!saveToFile) return;
