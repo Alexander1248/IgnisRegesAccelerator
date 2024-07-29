@@ -21,6 +21,8 @@ namespace Managers
         [SerializeField] private QuestManager questManager;
         [SerializeField] private Health health;
         [SerializeField] private Stamina stamina;
+
+        [SerializeField] private bool saveToFile;
         
         private void Start()
         {
@@ -77,6 +79,7 @@ namespace Managers
                 hp = health.HP,
                 stamina = stamina.Value
             };
+            if (!saveToFile) return;
             File.WriteAllText(path, JsonUtility.ToJson(_state));
         }
 

@@ -72,6 +72,10 @@ namespace Quests
         }
         public void Complete(Quest quest)
         {
+            if (Find(quest) == -1){
+                Debug.LogError("NO SUCH QUEST!");
+                return;
+            }
             Complete(Find(quest));
         }
         public void Abort(Quest quest)
