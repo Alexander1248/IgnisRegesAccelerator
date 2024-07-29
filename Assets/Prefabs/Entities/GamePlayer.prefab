@@ -6578,7 +6578,7 @@ MonoBehaviour:
   tagsInteract:
   - Interactable
   tagsLook: []
-  distInteract: 3
+  distInteract: 4
   outlineMat: {fileID: 2100000, guid: b7ad33e09bebe9d4c988bb323a48642e, type: 2}
   UITip: {fileID: 3732357554630654183}
   textTipButton: {fileID: 6345764070607039600}
